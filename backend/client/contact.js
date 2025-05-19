@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
-    const apiUrl = '/api/contact';
+    const apiUrl = 'https://sorbo-api-production.up.railway.app/api/contact';
 
     if (contactForm) {
         // Fonction pour gérer les champs dynamiques en fonction du sujet sélectionné
