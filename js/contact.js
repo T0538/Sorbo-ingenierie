@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             const subject = formData.get('subject');
             
+            // Convertir FormData en objet JSON
+            const jsonData = {};
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+            
             // Afficher un indicateur de chargement
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
@@ -22,8 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Envoyer les données à l'API
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    body: formData,
+                    body: JSON.stringify(jsonData),
                     headers: {
+                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     }
                 });
@@ -50,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div style="margin-top: 30px; padding: 15px; background-color: #f9f9f9; border-radius: 5px; text-align: left;">
                             <h4 style="margin-bottom: 10px;">Récapitulatif de votre demande:</h4>
                             <p><strong>Sujet:</strong> ${getSubjectText(subject)}</p>
-                            <p><strong>Nom:</strong> ${formData.get('name')}</p>
-                            <p><strong>Email:</strong> ${formData.get('email')}</p>
-                            <p><strong>Message:</strong> ${formData.get('message')}</p>
+                            <p><strong>Nom:</strong> ${jsonData.name}</p>
+                            <p><strong>Email:</strong> ${jsonData.email}</p>
+                            <p><strong>Message:</strong> ${jsonData.message}</p>
                         </div>
                     </div>
                 `;
