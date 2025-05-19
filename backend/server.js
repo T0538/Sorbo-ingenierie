@@ -20,7 +20,10 @@ const app = express();
 // Configuration CORS plus spécifique
 const corsOptions = {
   origin: function (origin, callback) {
-    const allowedOrigins = [process.env.FRONTEND_URL]; // URL de votre Netlify
+    const allowedOrigins = [
+      process.env.FRONTEND_URL, 
+      'https://sorbo-ingenierie.netlify.app'
+    ]; // URL de votre Netlify
     // Autoriser les requêtes sans "origin" (comme les requêtes de Postman ou curl en local)
     // ou si l'origine est dans la liste des origines autorisées
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
