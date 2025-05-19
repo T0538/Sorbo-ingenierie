@@ -6,7 +6,7 @@ const colors = require('colors');
 dotenv.config();
 
 // Configuration de base
-const API_URL = process.env.API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.API_URL || 'https://sorbo-api-production.up.railway.app/api/';
 let token = null; // Token JWT pour les routes protégées
 
 // Fonction pour afficher le résultat d'un test
