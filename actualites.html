@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités | Sorbo-Ingénierie</title>
+    
+    <!-- Méta-tags pour l'optimisation des performances -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Préchargement des ressources critiques -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="preload" href="js/script.js" as="script">
+    
+    <!-- Feuilles de style -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .news-hero {
+            background-color: #333; /* Couleur de fond par défaut en attendant le chargement de l'image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: background-image 0.5s ease-in-out;
+        }
+        
+        .news-hero.loaded {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        }
+        
+        .news-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 1;
+        }
+        
+        .news-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .news-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            margin-top: 20px;
+        }
+        
+        .hero-btn:hover {
+            background-color: transparent;
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: #777;
+            line-height: 1.6;
+        }
+        
+        .blog-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(209, 0, 0, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .blog-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .blog-category {
+            padding: 12px 25px;
+            background-color: #f0f0f0;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .blog-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-category.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .blog-post {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-post:hover .blog-image img {
+            transform: scale(1.1);
+        }
+        
+        .blog-category-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+            z-index: 2;
+        }
+        
+        .blog-content {
+            padding: 30px;
+            position: relative;
+        }
+        
+        .blog-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .blog-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .blog-post:hover .blog-title {
+            color: var(--primary-color);
+        }
+        
+        .blog-post:hover .blog-title::after {
+            width: 100%;
+        }
+        
+        .blog-author {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .blog-author i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .reading-time {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            color: #888;
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            background-color: #f5f5f5;
+            border-radius: 20px;
+        }
+        
+        .reading-time i {
+            margin-right: 6px;
+            color: var(--primary-color);
+        }
+        
+        .article-reading-time {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 15px;
+            background-color: #f5f5f5;
+            border-radius: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .article-reading-time i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .blog-excerpt {
+            margin-bottom: 25px;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-bg);
+        }
+        
+        .blog-date {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .read-more:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .sidebar {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+        
+        .popular-categories {
+            margin-bottom: 40px;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-list li {
+            margin-bottom: 10px;
+        }
+        
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background-color: #f5f5f5;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #444;
+        }
+        
+        .category-list a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .category-count {
+            background-color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-list a:hover .category-count {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .newsletter {
+            margin-top: 40px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px 0 0 30px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .newsletter-input:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .newsletter-btn {
+            padding: 0 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        .newsletter-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(209, 0, 0, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .newsletter-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .newsletter-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+        
+        .newsletter-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Styles pour les notifications push */
+        .notification-container {
+            display: flex;
+            align-items: center;
+            margin-top: 25px;
+            justify-content: center;
+        }
+        
+        .notification-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .notification-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(209, 0, 0, 0.2);
+        }
+        
+        .notification-btn i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .notification-btn.subscribed {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .notification-btn.subscribed:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+        }
+        
+        .notification-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .notification-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .notification-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+        
+        .notification-modal.active .notification-box {
+            transform: translateY(0);
+        }
+        
+        .notification-box h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+        
+        .notification-box p {
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .notification-box .icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .notification-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .notification-allow, .notification-deny {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .notification-allow {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .notification-allow:hover {
+            background-color: #c00000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .notification-deny {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        
+        .notification-deny:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .notification-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        .notification-status.enabled {
+            background-color: #e6f7e6;
+            color: #388e3c;
+        }
+        
+        .notification-status.disabled {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        /* Styles pour les commentaires */
+        .comments-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .comments-section h3 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .comments-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .comment-form {
+            margin-bottom: 30px;
+        }
+        
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .comment-form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(209, 0, 0, 0.1);
+            outline: none;
+        }
+        
+        .comment-form-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .comment-form input {
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .comment-form input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(209, 0, 0, 0.1);
+            outline: none;
+        }
+        
+        .comment-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .comment-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(209, 0, 0, 0.2);
+        }
+        
+        .comments-list {
+            margin-top: 30px;
+        }
+        
+        .comment {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        
+        .comment:hover {
+            background-color: #f9f9f9;
+            transform: translateX(5px);
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .comment-date {
+            color: #888;
+        }
+        
+        .comment-content {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .comment-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .comment-like, .comment-reply {
+            background: none;
+            border: none;
+            color: #777;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .comment-like:hover, .comment-reply:hover {
+            color: var(--primary-color);
+        }
+        
+        .comment-like.active {
+            color: var(--primary-color);
+        }
+        
+        .no-comments {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .comments-count {
+            background-color: var(--primary-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        }
+        
+        .comments-toggle {
+            display: inline-flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .comments-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        .comments-toggle i {
+            margin-right: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .comments-toggle.active i {
+            transform: rotate(180deg);
+        }
+        
+        .article-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .article-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .article-container {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        
+        .article-modal.active .article-container {
+            transform: translateY(0);
+        }
+        
+        .article-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .article-close:hover {
+            transform: rotate(90deg);
+        }
+        
+        /* Styles pour le contenu des articles */
+        .article-header {
+            margin-bottom: 30px;
+        }
+        
+        .article-category {
+            display: inline-block;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            line-height: 1.2;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 20px;
+            color: #777;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        
+        .article-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .article-author::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .article-date {
+            display: flex;
+            align-items: center;
+        }
+        
+        .article-date::before {
+            content: '\f133';
+            font-family: 'Font Awesome 5 Free';
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .article-featured-image {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-featured-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .article-body {
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+        }
+        
+        .article-body p {
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .comment-form-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-container {
+                padding: 20px;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        /* Styles pour le bouton "Charger plus" */
+        .load-more-container {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        
+        .load-more-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 35px;
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .load-more-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.2);
+        }
+        
+        .load-more-btn i {
+            margin-right: 10px;
+        }
+        
+        .load-more-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .load-more-btn.loading i {
+            animation: spin 1.5s linear infinite;
+        }
+        
+        .hidden-post {
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 992px) {
+            .news-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .news-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .news-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .blog-posts {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-categories {
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                scrollbar-width: thin;
+                -ms-overflow-style: none;
+            }
+            
+            .blog-categories::-webkit-scrollbar {
+                height: 4px;
+            }
+            
+            .blog-categories::-webkit-scrollbar-thumb {
+                background-color: rgba(209, 0, 0, 0.3);
+                border-radius: 4px;
+            }
+            
+            .blog-category {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            
+            .no-results {
+                padding: 30px 15px;
+            }
+            
+            .comment-form-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Styles pour le lazy loading des images */
+        .lazy-image {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .lazy-image.loaded {
+            opacity: 1;
+        }
+        
+        .blog-image {
+            position: relative;
+            background-color: #f0f0f0;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .blog-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        .blog-image.loaded::before {
+            display: none;
+        }
+        
+        /* Styles pour la barre de recherche */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .search-form {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            padding: 5px;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+        
+        .search-form:focus-within {
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.15);
+            border-color: rgba(209, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1rem;
+            background: transparent;
+            outline: none;
+            color: #444;
+        }
+        
+        .search-input::placeholder {
+            color: #aaa;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 5px;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .search-results {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 500;
+            color: #555;
+            position: relative;
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .search-results .highlight {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .search-reset {
+            display: none;
+            margin-left: 15px;
+            color: #666;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-reset.active {
+            display: inline-block;
+        }
+        
+        .search-reset:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            color: #888;
+            font-style: italic;
+            width: 100%;
+            grid-column: 1 / -1;
+            border: 2px dashed #eee;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .no-results i {
+            display: block;
+            font-size: 2.5rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li><a href="contact.html">Contactez-nous</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="rendez-vous.html">Rendez-vous</a></li>
+                            <li><a href="evenements.html">Événements</a></li>
+                            <li><a href="actualites.html" class="active">Actualités</a></li>
+                            <li><a href="acheter-formations.html">Acheter nos formations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="news-hero">
+        <div class="container" data-aos="fade-up" data-aos-duration="1000">
+            <h1>Actualités</h1>
+            <p>Découvrez les dernières nouvelles et événements de Sorbo-Ingénierie</p>
+            <a href="#blog" class="hero-btn">Voir nos articles</a>
+        </div>
+    </section>
+
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nos dernières actualités</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Restez informé des dernières nouvelles et tendances dans le domaine du génie civil</p>
+            
+            <!-- Barre de recherche -->
+            <div class="search-container" data-aos="fade-up" data-aos-delay="120">
+                <form class="search-form" id="searchForm">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Rechercher des articles par mots-clés..." aria-label="Rechercher des articles">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                        Rechercher
+                    </button>
+                </form>
+                <div class="search-results" id="searchResults">
+                    <span id="resultCount"></span>
+                    <button class="search-reset" id="resetSearch">
+                        <i class="fas fa-times"></i> Réinitialiser
+                    </button>
+                </div>
+            </div>
+            
+            <div class="blog-categories" data-aos="fade-up" data-aos-delay="150">
+                <div class="blog-category active" data-filter="tous">Tous</div>
+                <div class="blog-category" data-filter="voyager">Voyager</div>
+                <div class="blog-category" data-filter="actualites">Actualités</div>
+                <div class="blog-category" data-filter="success-stories">Success Stories</div>
+                <div class="blog-category" data-filter="formation">Formation</div>
+                <div class="blog-category" data-filter="logiciels">Logiciels</div>
+            </div>
+
+            <div class="blog-posts">
+                <!-- Message quand aucun ru00e9sultat de filtrage -->
+                <div class="no-results">
+                    <i class="fas fa-search"></i>
+                    <p>Aucun article ne correspond u00e0 cette catu00e9gorie.</p>
+                    <p>Veuillez su00e9lectionner une autre catu00e9gorie ou revenir u00e0 "Tous".</p>
+                </div>
+
+                <div class="blog-post" data-aos="fade-up" data-aos-delay="200" data-category="formation">
+                    <div class="blog-image">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1517026575980-3e1e2dedeac4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80&fm=webp" type="image/webp">
+                            <img src="https://images.unsplash.com/photo-1517026575980-3e1e2dedeac4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Formation Covadis" class="lazy-image" loading="lazy" fetchpriority="low">
+                        </picture>
+                        <div class="blog-category-tag">Formation</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Formation Covadis</h3>
+                        <div class="blog-author">
+                            <i class="fas fa-user-circle"></i> kevinyameogo01@gmail.com
+                        </div>
+                        <div class="reading-time">
+                            <i class="far fa-clock"></i> <span class="time-value">4 min de lecture</span>
+                        </div>
+                        <div class="blog-excerpt">
+                            <p>Formation sur le logiciel Covadis pour la Société Ivoirienne de Construction : une révolution technologique pour le génie civil. Dans un secteur en pleine mutation, où la précision et l'efficacité des...</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">11 mai 2025</div>
+                            <a href="#" class="read-more">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-post" data-aos="fade-up" data-aos-delay="300" data-category="formation">
+                    <div class="blog-image">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80&fm=webp" type="image/webp">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Formation SETEC" class="lazy-image" loading="lazy" fetchpriority="low">
+                        </picture>
+                        <div class="blog-category-tag">Formation</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Formation SETEC</h3>
+                        <div class="blog-author">
+                            <i class="fas fa-user-circle"></i> kevinyameogo01@gmail.com
+                        </div>
+                        <div class="reading-time">
+                            <i class="far fa-clock"></i> <span class="time-value">5 min de lecture</span>
+                        </div>
+                        <div class="blog-excerpt">
+                            <p>Formation sur les logiciels d'ingénierie de l'eau pour SETEC Afrique. Dans un environnement où la gestion des ressources hydriques est devenue un enjeu stratégique majeur, SETEC Afrique met en œuvre un...</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">11 mai 2025</div>
+                            <a href="#" class="read-more">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-post" data-aos="fade-up" data-aos-delay="400" data-category="actualites">
+                    <div class="blog-image">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80&fm=webp" type="image/webp">
+                            <img src="https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Début de formation" class="lazy-image" loading="lazy" fetchpriority="low">
+                        </picture>
+                        <div class="blog-category-tag">Actualités</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Début de formation le 20/12/2025</h3>
+                        <div class="blog-author">
+                            <i class="fas fa-user-circle"></i> sorbo.ingenierie@gmail.com
+                        </div>
+                        <div class="reading-time">
+                            <i class="far fa-clock"></i> <span class="time-value">3 min de lecture</span>
+                        </div>
+                        <div class="blog-excerpt">
+                            <p>Sorbo-Ingénierie annonce le début d'une nouvelle session de formation pour les professionnels du génie civil. Cette formation portera sur les dernières méthodes et outils utilisés dans le secteur...</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">15 juin 2025</div>
+                            <a href="#" class="read-more">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Articles cachés qui seront chargés en cliquant sur "Charger plus" -->
+                <div class="blog-post hidden-post" data-category="actualites">
+                    <div class="blog-image">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80&fm=webp" type="image/webp">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Nouveaux partenariats" class="lazy-image" loading="lazy" fetchpriority="low">
+                        </picture>
+                        <div class="blog-category-tag">Actualités</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Nouveaux partenariats pour Sorbo-Ingénierie</h3>
+                        <div class="blog-author">
+                            <i class="fas fa-user-circle"></i> sorbo.ingenierie@gmail.com
+                        </div>
+                        <div class="reading-time">
+                            <i class="far fa-clock"></i> <span class="time-value">6 min de lecture</span>
+                        </div>
+                        <div class="blog-excerpt">
+                            <p>Sorbo-Ingénierie est fier d'annoncer la signature de nouveaux partenariats stratégiques avec des acteurs majeurs du secteur du BTP en Afrique de l'Ouest. Ces collaborations permettront d'élargir...</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">3 juillet 2025</div>
+                            <a href="#" class="read-more">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-post hidden-post" data-category="success-stories">
+                    <div class="blog-image">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80&fm=webp" type="image/webp">
+                            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Success story" class="lazy-image" loading="lazy" fetchpriority="low">
+                        </picture>
+                        <div class="blog-category-tag">Success Stories</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Success Story : Le pont de Yamoussoukro</h3>
+                        <div class="blog-author">
+                            <i class="fas fa-user-circle"></i> sorbo.ingenierie@gmail.com
+                        </div>
+                        <div class="reading-time">
+                            <i class="far fa-clock"></i> <span class="time-value">7 min de lecture</span>
+                        </div>
+                        <div class="blog-excerpt">
+                            <p>Découvrez comment les ingénieurs formés par Sorbo-Ingénierie ont contribué à la réalisation du nouveau pont de Yamoussoukro, un ouvrage d'art majeur qui facilite les déplacements de milliers de personnes...</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">22 juin 2025</div>
+                            <a href="#" class="read-more">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-post hidden-post" data-category="logiciels">
+                    <div class="blog-image">
+                        <picture>
+                            <source srcset="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80&fm=webp" type="image/webp">
+                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Nouvelle version logiciel" class="lazy-image" loading="lazy" fetchpriority="low">
+                        </picture>
+                        <div class="blog-category-tag">Logiciels</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Sortie de la nouvelle version de notre logiciel phare</h3>
+                        <div class="blog-author">
+                            <i class="fas fa-user-circle"></i> equipe.dev@sorbo-ingenierie.ci
+                        </div>
+                        <div class="reading-time">
+                            <i class="far fa-clock"></i> <span class="time-value">4 min de lecture</span>
+                        </div>
+                        <div class="blog-excerpt">
+                            <p>Notre équipe de développement est heureuse d'annoncer la sortie de la version 3.5 de notre logiciel de modélisation hydraulique. Cette mise à jour majeure apporte de nombreuses fonctionnalités...</p>
+                        </div>
+                        <div class="blog-meta">
+                            <div class="blog-date">10 juillet 2025</div>
+                            <a href="#" class="read-more">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton "Charger plus" -->
+            <div class="load-more-container" data-aos="fade-up" data-aos-delay="100">
+                <button class="load-more-btn" id="loadMoreBtn">
+                    <i class="fas fa-plus-circle"></i>
+                    Charger plus d'articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal d'article avec système de commentaires -->
+    <div class="article-modal" id="articleModal">
+        <button class="article-close" id="articleClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="article-container">
+            <div class="article-content">
+                <!-- Le contenu de l'article sera injecté ici dynamiquement -->
+            </div>
+            
+            <div class="comments-section">
+                <h3>Commentaires <span class="comments-count" id="commentsCount">0</span></h3>
+                
+                <form class="comment-form" id="commentForm">
+                    <textarea name="comment" id="commentText" placeholder="Partagez votre avis sur cet article..." required></textarea>
+                    <div class="comment-form-info">
+                        <input type="text" name="name" id="commentName" placeholder="Votre nom" required>
+                        <input type="email" name="email" id="commentEmail" placeholder="Votre email" required>
+                    </div>
+                    <button type="submit" class="comment-submit">
+                        <i class="fas fa-paper-plane"></i> Publier le commentaire
+                    </button>
+                </form>
+                
+                <div class="comments-list" id="commentsList">
+                    <div class="no-comments" id="noComments">
+                        Soyez le premier à commenter cet article !
+                    </div>
+                    <!-- Les commentaires seront injectés ici dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up">
+                <h2>Restez informé des dernières actualités</h2>
+                <p>Abonnez-vous à notre newsletter pour recevoir nos dernières actualités et offres</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Votre adresse email" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn">S'abonner</button>
+                </form>
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        S'abonner aux notifications
+                    </button>
+                    <span class="notification-status" id="notificationStatus"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de notification -->
+    <div class="notification-modal" id="notificationModal">
+        <div class="notification-box">
+            <div class="icon"><i class="fas fa-bell"></i></div>
+            <h3>Activer les notifications</h3>
+            <p>Recevez une notification chaque fois qu'un nouvel article ou une nouvelle formation est publiée par Sorbo-Ingénierie.</p>
+            <div class="notification-actions">
+                <button class="notification-allow" id="notificationAllow">
+                    <i class="fas fa-check"></i> Autoriser
+                </button>
+                <button class="notification-deny" id="notificationDeny">
+                    Pas maintenant
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sorbo - Ingénierie</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Nous suivre</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © Sorbo - Ingénierie</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script>
+        // Initialisation de AOS uniquement après le chargement complet de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vérifier si la page est déjà chargée
+            if (document.readyState === 'complete') {
+                initAOS();
+            } else {
+                window.addEventListener('load', initAOS);
+            }
+            
+            function initAOS() {
+                AOS.init({
+                    offset: 120,
+                    duration: 800,
+                    easing: 'ease-out',
+                    once: true,
+                    disable: 'mobile' // Désactiver sur mobile pour de meilleures performances
+                });
+            }
+            
+            // Fonctionnalité des filtres de catégories de blog
+            const categories = document.querySelectorAll('.blog-category');
+            
+            categories.forEach(category => {
+                category.addEventListener('click', function() {
+                    // Retirer la classe active de toutes les catégories
+                    categories.forEach(cat => cat.classList.remove('active'));
+                    
+                    // Ajouter la classe active à la catégorie cliquée
+                    this.classList.add('active');
+                    
+                    // Filtrer les articles en fonction de la catégorie sélectionnée
+                    const filterValue = this.getAttribute('data-filter');
+                    filterArticles(filterValue);
+                });
+            });
+            
+            // Fonction pour filtrer les articles par catégorie
+            function filterArticles(category) {
+                const articles = document.querySelectorAll('.blog-post');
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                const noResults = document.querySelector('.no-results');
+                const hiddenArticles = Array.from(document.querySelectorAll('.hidden-post')); // Sauvegarder les articles qui étaient initialement cachés
+                
+                // Masquer le message "Aucun résultat" par défaut
+                if (noResults) {
+                    noResults.style.display = 'none';
+                }
+                
+                // Si 'tous' est sélectionné, restaurer l'état initial
+                if (category === 'tous') {
+                    // Restaurer les classes hidden-post
+                    hiddenArticles.forEach(article => {
+                        article.classList.add('hidden-post');
+                    });
+                    
+                    articles.forEach(article => {
+                        if (article.classList.contains('hidden-post')) {
+                            article.style.display = 'none';
+                            article.style.opacity = '0';
+                        } else {
+                            article.style.display = 'block';
+                            article.style.opacity = '1';
+                        }
+                    });
+                    
+                    // Réinitialiser l'index pour "Charger plus"
+                    currentIndex = 0;
+                    
+                    // Afficher le bouton "Charger plus" s'il y a des articles cachés
+                    if (loadMoreBtn && hiddenArticles.length > 0) {
+                        loadMoreBtn.style.display = 'inline-flex';
+                    }
+                } 
+                // Sinon, filtrer par catégorie
+                else {
+                    // Masquer tous les articles d'abord
+                    articles.forEach(article => {
+                        article.style.display = 'none';
+                    });
+                    
+                    // Afficher les articles correspondant à la catégorie sélectionnée
+                    const filteredArticles = document.querySelectorAll(`.blog-post[data-category="${category}"]`);
+                    
+                    // Afficher le message "Aucun résultat" si aucun article ne correspond
+                    if (filteredArticles.length === 0 && noResults) {
+                        noResults.style.display = 'block';
+                    }
+                    
+                    filteredArticles.forEach(article => {
+                        // Afficher l'article tout en conservant son état initial (hidden-post ou non)
+                        article.style.display = 'block';
+                        article.style.opacity = '1';
+                    });
+                    
+                    // Masquer le bouton "Charger plus" lors d'un filtrage spécifique
+                    if (loadMoreBtn) {
+                        loadMoreBtn.style.display = 'none';
+                    }
+                }
+                
+                // Animer les articles visibles pour une meilleure expérience utilisateur
+                setTimeout(() => {
+                    const visibleArticles = document.querySelectorAll('.blog-post[style*="display: block"]');
+                    visibleArticles.forEach((article, index) => {
+                        setTimeout(() => {
+                            article.style.opacity = '1';
+                        }, index * 100);
+                    });
+                }, 50);
+            }
+            
+            // Lazy loading de l'image d'arrière-plan du hero
+            const heroSection = document.querySelector('.news-hero');
+            const heroImage = new Image();
+            heroImage.src = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80';
+            
+            heroImage.onload = function() {
+                heroSection.classList.add('loaded');
+            };
+            
+            // Lazy loading des images avec Intersection Observer
+            if ('IntersectionObserver' in window) {
+                const lazyImages = document.querySelectorAll('.lazy-image');
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            
+                            // Une fois l'image chargée, ajouter la classe 'loaded'
+                            img.addEventListener('load', () => {
+                                img.classList.add('loaded');
+                                img.parentElement.classList.add('loaded');
+                            });
+                            
+                            // Si l'image n'a pas l'attribut loading="lazy" pour un navigateur qui ne le prend pas en charge
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.01
+                });
+                
+                lazyImages.forEach(img => {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas Intersection Observer
+                const lazyImages = document.querySelectorAll('.lazy-image');
+                lazyImages.forEach(img => {
+                    img.classList.add('loaded');
+                    img.parentElement.classList.add('loaded');
+                });
+            }
+            
+            // Fonctionnalité "Charger plus" d'articles
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            const hiddenPosts = document.querySelectorAll('.hidden-post');
+            let currentIndex = 0;
+            const postsPerLoad = 2; // Nombre d'articles à charger par clic
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    this.classList.add('loading');
+                    this.innerHTML = '<i class="fas fa-spinner"></i> Chargement...';
+                    
+                    // Simuler un temps de chargement pour montrer l'animation
+                    setTimeout(() => {
+                        // Calculer le nombre d'articles à afficher dans ce lot
+                        const endIndex = Math.min(currentIndex + postsPerLoad, hiddenPosts.length);
+                        
+                        // Boucle pour afficher les articles cachés
+                        for (let i = currentIndex; i < endIndex; i++) {
+                            hiddenPosts[i].style.display = 'block';
+                            
+                            // Ajouter un délai progressif pour l'animation
+                            setTimeout(() => {
+                                hiddenPosts[i].style.opacity = '1';
+                                
+                                // Initialiser l'Intersection Observer pour les nouvelles images chargées
+                                const newLazyImages = hiddenPosts[i].querySelectorAll('.lazy-image');
+                                if (window.imageObserver) {
+                                    newLazyImages.forEach(img => {
+                                        window.imageObserver.observe(img);
+                                    });
+                                }
+                            }, (i - currentIndex) * 200);
+                        }
+                        
+                        // Mettre à jour l'index actuel
+                        currentIndex = endIndex;
+                        
+                        // Réinitialiser le bouton
+                        this.classList.remove('loading');
+                        this.innerHTML = '<i class="fas fa-plus-circle"></i> Charger plus d\'articles';
+                        
+                        // Masquer le bouton s'il n'y a plus d'articles à charger
+                        if (currentIndex >= hiddenPosts.length) {
+                            this.style.display = 'none';
+                        }
+                    }, 1000); // Délai simulé de 1 seconde
+                });
+            }
+
+            // Fonctionnalité de recherche d'articles
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const resultCount = document.getElementById('resultCount');
+            const resetSearch = document.getElementById('resetSearch');
+            const blogPosts = document.querySelectorAll('.blog-post');
+            
+            // Ajouter des attributs data-content à chaque article pour faciliter la recherche
+            blogPosts.forEach(post => {
+                const title = post.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = post.querySelector('.blog-excerpt').textContent.toLowerCase();
+                const category = post.querySelector('.blog-category-tag').textContent.toLowerCase();
+                const author = post.querySelector('.blog-author').textContent.toLowerCase();
+                
+                // Concaténer tout le contenu pour la recherche
+                const content = `${title} ${category} ${excerpt} ${author}`;
+                post.setAttribute('data-content', content);
+            });
+            
+            // Fonction de recherche
+            function performSearch(query) {
+                if (!query || query.trim() === '') {
+                    resetSearchResults();
+                    return;
+                }
+                
+                query = query.toLowerCase().trim();
+                let matchCount = 0;
+                
+                // Ru00e9initialiser tout filtrage par catu00e9gorie
+                const categories = document.querySelectorAll('.blog-category');
+                categories.forEach(cat => cat.classList.remove('active'));
+                document.querySelector('.blog-category[data-filter="tous"]').classList.add('active');
+                
+                // Parcourir tous les articles (y compris hidden-post)
+                const blogPosts = document.querySelectorAll('.blog-post');
+                blogPosts.forEach(post => {
+                    const content = post.getAttribute('data-content');
+                    
+                    // Vu00e9rifier si le contenu de l'article contient la requu00eate de recherche
+                    if (content && content.includes(query)) {
+                        post.style.display = 'block';
+                        post.style.opacity = '1';
+                        
+                        matchCount++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+                
+                // Afficher les ru00e9sultats de recherche
+                searchResults.classList.add('active');
+                resetSearch.classList.add('active');
+                
+                if (matchCount > 0) {
+                    resultCount.innerHTML = `<span class="highlight">${matchCount}</span> article${matchCount > 1 ? 's' : ''} trouvu00e9${matchCount > 1 ? 's' : ''} pour "<span class="highlight">${query}</span>"`;
+                } else {
+                    resultCount.innerHTML = `Aucun ru00e9sultat trouvu00e9 pour "<span class="highlight">${query}</span>". Essayez d'autres mots-clu00e9s.`;
+                }
+                
+                // Cacher le bouton "Charger plus" pendant la recherche
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                if (loadMoreBtn) {
+                    loadMoreBtn.style.display = 'none';
+                }
+                
+                // Masquer le message "Aucun résultat" de filtrage
+                const noResults = document.querySelector('.no-results');
+                if (noResults) {
+                    noResults.style.display = 'none';
+                }
+            }
+            
+            // Fonction pour mettre en évidence les termes recherchés (optionnel)
+            function highlightText(post, query) {
+                // Cette fonction pourrait être développée pour surligner les termes recherchés
+                // dans le texte des articles. Pour la simplicité, nous ne l'implémentons pas.
+            }
+            
+            // Fonction pour réinitialiser la recherche
+            function resetSearchResults() {
+                searchResults.classList.remove('active');
+                resetSearch.classList.remove('active');
+                
+                // Obtenir la catu00e9gorie actuellement su00e9lectionnu00e9e
+                const activeCategory = document.querySelector('.blog-category.active');
+                const currentFilter = activeCategory ? activeCategory.getAttribute('data-filter') : 'tous';
+                
+                // Appliquer le filtre de catu00e9gorie actuel
+                filterArticles(currentFilter);
+            }
+            
+            // Événement de soumission du formulaire
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    performSearch(searchInput.value);
+                });
+            }
+            
+            // Événement de réinitialisation de la recherche
+            if (resetSearch) {
+                resetSearch.addEventListener('click', function() {
+                    searchInput.value = '';
+                    resetSearchResults();
+                });
+            }
+            
+            // Recherche en temps réel (décommenter pour activer)
+            // if (searchInput) {
+            //     searchInput.addEventListener('input', function() {
+            //         performSearch(this.value);
+            //     });
+            // }
+            
+            // Gestion des notifications push
+            const notificationBtn = document.getElementById('notificationBtn');
+            const notificationModal = document.getElementById('notificationModal');
+            const notificationAllow = document.getElementById('notificationAllow');
+            const notificationDeny = document.getElementById('notificationDeny');
+            const notificationStatus = document.getElementById('notificationStatus');
+            
+            // Variable pour stocker la clé publique VAPID (à remplacer par votre vraie clé)
+            const applicationServerPublicKey = 'BPAuIIZjCVBb36lvEaA95wj9wW6S2xXM0CZO7u1foBkQkMBVCQGQynqbLJ5sGl3oEwxUGAFq_-SrE7pkdvtmcN0';
+            
+            // Enregistrement du Service Worker
+            function registerServiceWorker() {
+                if ('serviceWorker' in navigator && 'PushManager' in window) {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('Service Worker enregistré avec succès:', registration);
+                            initializeNotifications(registration);
+                        })
+                        .catch(error => {
+                            console.error('Échec d\'enregistrement du Service Worker:', error);
+                            updateNotificationStatus('disabled');
+                        });
+                } else {
+                    console.error('Les notifications push ne sont pas supportées par ce navigateur');
+                    updateNotificationStatus('disabled');
+                }
+            }
+            
+            // Initialiser les notifications
+            function initializeNotifications(registration) {
+                // Vérifier si l'utilisateur est déjà abonné
+                registration.pushManager.getSubscription()
+                    .then(subscription => {
+                        const isSubscribed = !(subscription === null);
+                        
+                        // Mettre à jour l'interface utilisateur
+                        if (isSubscribed) {
+                            console.log('L\'utilisateur est abonné aux notifications');
+                            updateSubscriptionUI(true);
+                        } else {
+                            console.log('L\'utilisateur n\'est pas abonné aux notifications');
+                            updateSubscriptionUI(false);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la vérification de l\'abonnement:', error);
+                    });
+            }
+            
+            // Mettre à jour l'interface utilisateur en fonction de l'état de l'abonnement
+            function updateSubscriptionUI(isSubscribed) {
+                if (notificationBtn) {
+                    if (isSubscribed) {
+                        notificationBtn.classList.add('subscribed');
+                        notificationBtn.innerHTML = '<i class="fas fa-bell"></i> Notifications activées';
+                        updateNotificationStatus('enabled');
+                    } else {
+                        notificationBtn.classList.remove('subscribed');
+                        notificationBtn.innerHTML = '<i class="fas fa-bell"></i> S\'abonner aux notifications';
+                        updateNotificationStatus('');
+                    }
+                }
+            }
+            
+            // Mettre à jour l'indicateur d'état des notifications
+            function updateNotificationStatus(status) {
+                if (notificationStatus) {
+                    if (status === 'enabled') {
+                        notificationStatus.classList.add('enabled');
+                        notificationStatus.classList.remove('disabled');
+                        notificationStatus.textContent = 'Activées';
+                    } else if (status === 'disabled') {
+                        notificationStatus.classList.remove('enabled');
+                        notificationStatus.classList.add('disabled');
+                        notificationStatus.textContent = 'Non supportées';
+                    } else {
+                        notificationStatus.classList.remove('enabled');
+                        notificationStatus.classList.remove('disabled');
+                        notificationStatus.textContent = '';
+                    }
+                }
+            }
+            
+            // Conversion d'une clé publique en tableau d'octets
+            function urlB64ToUint8Array(base64String) {
+                const padding = '='.repeat((4 - base64String.length % 4) % 4);
+                const base64 = (base64String + padding)
+                    .replace(/\-/g, '+')
+                    .replace(/_/g, '/');
+                
+                const rawData = window.atob(base64);
+                const outputArray = new Uint8Array(rawData.length);
+                
+                for (let i = 0; i < rawData.length; ++i) {
+                    outputArray[i] = rawData.charCodeAt(i);
+                }
+                return outputArray;
+            }
+            
+            // S'abonner aux notifications push
+            function subscribeUser() {
+                if ('serviceWorker' in navigator && 'PushManager' in window) {
+                    navigator.serviceWorker.ready.then(registration => {
+                        const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+                        
+                        registration.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: applicationServerKey
+                        })
+                        .then(subscription => {
+                            console.log('Utilisateur abonné avec succès:', JSON.stringify(subscription));
+                            updateSubscriptionUI(true);
+                            
+                            // Ici, vous devriez envoyer l'abonnement à votre serveur
+                            // sendSubscriptionToServer(subscription);
+                            
+                            // Simuler une notification de bienvenue
+                            showWelcomeNotification(registration);
+                        })
+                        .catch(error => {
+                            console.error('Échec d\'abonnement:', error);
+                            updateSubscriptionUI(false);
+                        });
+                    });
+                }
+            }
+            
+            // Afficher une notification de bienvenue
+            function showWelcomeNotification(registration) {
+                const options = {
+                    body: 'Merci de vous être abonné aux notifications de Sorbo-Ingénierie! Vous serez informé des dernières actualités.',
+                    icon: '/images/logo.png',
+                    badge: '/images/logo.png',
+                    data: {
+                        url: '/actualites.html'
+                    },
+                    vibrate: [100, 50, 100],
+                    tag: 'welcome-notification'
+                };
+                
+                registration.showNotification('Bienvenue chez Sorbo-Ingénierie!', options);
+            }
+            
+            // Désabonner l'utilisateur
+            function unsubscribeUser() {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.ready.then(registration => {
+                        registration.pushManager.getSubscription()
+                            .then(subscription => {
+                                if (subscription) {
+                                    // Désabonner l'utilisateur
+                                    return subscription.unsubscribe();
+                                }
+                            })
+                            .then(() => {
+                                console.log('Utilisateur désabonné avec succès');
+                                updateSubscriptionUI(false);
+                                
+                                // Ici, vous devriez informer votre serveur que l'utilisateur s'est désabonné
+                                // deleteSubscriptionFromServer();
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors du désabonnement:', error);
+                            });
+                    });
+                }
+            }
+            
+            // Gérer le clic sur le bouton de notification
+            if (notificationBtn) {
+                notificationBtn.addEventListener('click', function() {
+                    if (Notification.permission === 'granted') {
+                        // Si l'utilisateur est déjà abonné, le désabonner, sinon l'abonner
+                        if (this.classList.contains('subscribed')) {
+                            unsubscribeUser();
+                        } else {
+                            subscribeUser();
+                        }
+                    } else {
+                        // Afficher la boîte de dialogue de permission
+                        notificationModal.classList.add('active');
+                    }
+                });
+            }
+            
+            // Gérer le clic sur le bouton "Autoriser" de la boîte de dialogue
+            if (notificationAllow) {
+                notificationAllow.addEventListener('click', function() {
+                    notificationModal.classList.remove('active');
+                    
+                    // Demander la permission pour les notifications
+                    Notification.requestPermission().then(permission => {
+                        if (permission === 'granted') {
+                            subscribeUser();
+                        } else {
+                            console.log('Permission refusée pour les notifications');
+                        }
+                    });
+                });
+            }
+            
+            // Gérer le clic sur le bouton "Pas maintenant" de la boîte de dialogue
+            if (notificationDeny) {
+                notificationDeny.addEventListener('click', function() {
+                    notificationModal.classList.remove('active');
+                });
+            }
+            
+            // Fermer la boîte de dialogue en cliquant à l'extérieur
+            if (notificationModal) {
+                notificationModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Vérifier les permissions existantes et initialiser le Service Worker
+            if (Notification.permission === 'granted') {
+                registerServiceWorker();
+            } else if (Notification.permission !== 'denied') {
+                registerServiceWorker();
+            } else {
+                updateNotificationStatus('disabled');
+                console.log('Les notifications ont été précédemment refusées');
+            }
+            
+            // Système de commentaires
+            const articleModal = document.getElementById('articleModal');
+            const articleClose = document.getElementById('articleClose');
+            const articleContent = document.querySelector('.article-content');
+            const commentForm = document.getElementById('commentForm');
+            const commentText = document.getElementById('commentText');
+            const commentName = document.getElementById('commentName');
+            const commentEmail = document.getElementById('commentEmail');
+            const commentsList = document.getElementById('commentsList');
+            const noComments = document.getElementById('noComments');
+            const commentsCount = document.getElementById('commentsCount');
+            
+            // Variable pour stocker l'ID de l'article en cours
+            let currentArticleId = null;
+            
+            // Précharger les informations utilisateur depuis localStorage s'il y en a
+            if (localStorage.getItem('userName')) {
+                commentName.value = localStorage.getItem('userName');
+            }
+            
+            if (localStorage.getItem('userEmail')) {
+                commentEmail.value = localStorage.getItem('userEmail');
+            }
+            
+            // Ajouter les boutons de commentaires à chaque article
+            document.querySelectorAll('.blog-meta').forEach((meta, index) => {
+                const commentBtn = document.createElement('button');
+                commentBtn.className = 'comments-toggle';
+                commentBtn.innerHTML = '<i class="fas fa-comment"></i> Commenter';
+                commentBtn.setAttribute('data-article-id', `article-${index}`);
+                
+                meta.appendChild(commentBtn);
+                
+                // Associer le gestionnaire d'événements pour ouvrir la modal
+                commentBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Obtenir les données de l'article
+                    const article = this.closest('.blog-post');
+                    const articleId = this.getAttribute('data-article-id');
+                    currentArticleId = articleId;
+                    
+                    const title = article.querySelector('.blog-title').textContent;
+                    const author = article.querySelector('.blog-author').textContent;
+                    const date = article.querySelector('.blog-date').textContent;
+                    const excerpt = article.querySelector('.blog-excerpt').textContent;
+                    const category = article.querySelector('.blog-category-tag').textContent;
+                    const imgSrc = article.querySelector('.blog-image img').src;
+                    
+                    // Obtenir le temps de lecture
+                    const readingTime = article.querySelector('.reading-time .time-value').textContent;
+                    
+                    // Créer le contenu étendu pour la modal
+                    const content = `
+                        <div class="article-header">
+                            <div class="article-category">${category}</div>
+                            <h1 class="article-title">${title}</h1>
+                            <div class="article-meta">
+                                <div class="article-author">${author}</div>
+                                <div class="article-date">${date}</div>
+                            </div>
+                            <div class="article-reading-time">
+                                <i class="far fa-clock"></i> ${readingTime}
+                            </div>
+                        </div>
+                        <div class="article-featured-image">
+                            <img src="${imgSrc}" alt="${title}">
+                        </div>
+                        <div class="article-body">
+                            <p>${excerpt}</p>
+                            <p>Cet article est un exemple pour démontrer le système de commentaires. Dans un vrai site, vous auriez ici le contenu complet de l'article avec plusieurs paragraphes, des images, des citations, etc.</p>
+                            <p>Les utilisateurs peuvent interagir avec votre contenu en laissant des commentaires ci-dessous, ce qui favorise l'engagement et crée une communauté autour de votre site.</p>
+                        </div>
+                    `;
+                    
+                    // Injecter le contenu dans la modal
+                    articleContent.innerHTML = content;
+                    
+                    // Charger les commentaires pour cet article
+                    loadComments(articleId);
+                    
+                    // Ouvrir la modal
+                    articleModal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Empêcher le défilement de la page
+                });
+            });
+            
+            // Fermer la modal quand on clique sur le bouton de fermeture
+            if (articleClose) {
+                articleClose.addEventListener('click', function() {
+                    articleModal.classList.remove('active');
+                    document.body.style.overflow = ''; // Restaurer le défilement
+                });
+            }
+            
+            // Fermer la modal quand on clique en dehors du contenu
+            if (articleModal) {
+                articleModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+            
+            // Gérer la soumission du formulaire de commentaire
+            if (commentForm) {
+                commentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (!currentArticleId) return;
+                    
+                    // Valider les champs du formulaire
+                    if (!commentText.value.trim() || !commentName.value.trim() || !commentEmail.value.trim()) {
+                        alert('Veuillez remplir tous les champs du formulaire.');
+                        return;
+                    }
+                    
+                    // Créer un nouvel objet commentaire
+                    const newComment = {
+                        id: Date.now(), // Utiliser un timestamp comme ID unique
+                        articleId: currentArticleId,
+                        name: commentName.value.trim(),
+                        email: commentEmail.value.trim(),
+                        text: commentText.value.trim(),
+                        date: new Date().toLocaleDateString('fr-FR', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        }),
+                        likes: 0
+                    };
+                    
+                    // Stocker les informations utilisateur pour les prochaines fois
+                    localStorage.setItem('userName', newComment.name);
+                    localStorage.setItem('userEmail', newComment.email);
+                    
+                    // Ajouter le commentaire à la liste des commentaires
+                    addComment(newComment);
+                    
+                    // Réinitialiser le formulaire
+                    commentText.value = '';
+                    
+                    // Stocker les commentaires dans localStorage
+                    saveComments();
+                });
+            }
+            
+            // Charger les commentaires pour un article spécifique
+            function loadComments(articleId) {
+                // Obtenir les commentaires depuis localStorage ou initialiser un tableau vide
+                const comments = getCommentsFromStorage();
+                
+                // Filtrer les commentaires pour l'article actuel
+                const articleComments = comments.filter(comment => comment.articleId === articleId);
+                
+                // Mettre à jour le compteur de commentaires
+                updateCommentsCount(articleComments.length);
+                
+                // Effacer la liste des commentaires
+                commentsList.innerHTML = '';
+                
+                // Afficher "Pas de commentaires" si nécessaire
+                if (articleComments.length === 0) {
+                    commentsList.appendChild(noComments);
+                } else {
+                    // Masquer le message "Pas de commentaires"
+                    noComments.remove();
+                    
+                    // Afficher chaque commentaire
+                    articleComments.forEach(comment => {
+                        const commentElement = createCommentElement(comment);
+                        commentsList.appendChild(commentElement);
+                    });
+                }
+            }
+            
+            // Créer un élément DOM pour un commentaire
+            function createCommentElement(comment) {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment';
+                commentDiv.dataset.id = comment.id;
+                
+                commentDiv.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.name}</span>
+                        <span class="comment-date">${comment.date}</span>
+                    </div>
+                    <div class="comment-content">
+                        <p>${comment.text}</p>
+                    </div>
+                    <div class="comment-actions">
+                        <button class="comment-like" data-id="${comment.id}">
+                            <i class="far fa-thumbs-up"></i> J'aime <span class="likes-count">${comment.likes}</span>
+                        </button>
+                        <button class="comment-reply" data-id="${comment.id}">
+                            <i class="far fa-comment"></i> Répondre
+                        </button>
+                    </div>
+                `;
+                
+                // Ajouter les gestionnaires d'événements pour les boutons "J'aime" et "Répondre"
+                const likeBtn = commentDiv.querySelector('.comment-like');
+                likeBtn.addEventListener('click', function() {
+                    const commentId = parseInt(this.getAttribute('data-id'));
+                    likeComment(commentId);
+                });
+                
+                const replyBtn = commentDiv.querySelector('.comment-reply');
+                replyBtn.addEventListener('click', function() {
+                    const commentId = parseInt(this.getAttribute('data-id'));
+                    replyToComment(commentId);
+                });
+                
+                return commentDiv;
+            }
+            
+            // Ajouter un nouveau commentaire
+            function addComment(comment) {
+                // Obtenir les commentaires existants
+                const comments = getCommentsFromStorage();
+                
+                // Ajouter le nouveau commentaire
+                comments.push(comment);
+                
+                // Stocker les commentaires mis à jour
+                localStorage.setItem('comments', JSON.stringify(comments));
+                
+                // Créer l'élément DOM pour le nouveau commentaire
+                const commentElement = createCommentElement(comment);
+                
+                // Masquer le message "Pas de commentaires" s'il est affiché
+                if (noComments.parentNode) {
+                    noComments.remove();
+                }
+                
+                // Ajouter le commentaire à la liste
+                commentsList.appendChild(commentElement);
+                
+                // Mettre à jour le compteur de commentaires
+                updateCommentsCount(document.querySelectorAll('.comment').length);
+            }
+            
+            // "J'aime" un commentaire
+            function likeComment(commentId) {
+                // Obtenir les commentaires depuis localStorage
+                const comments = getCommentsFromStorage();
+                
+                // Trouver le commentaire à aimer
+                const comment = comments.find(c => c.id === commentId);
+                
+                if (comment) {
+                    // Incrémenter le nombre de "J'aime"
+                    comment.likes++;
+                    
+                    // Mettre à jour le stockage
+                    localStorage.setItem('comments', JSON.stringify(comments));
+                    
+                    // Mettre à jour l'interface utilisateur
+                    const likeBtn = document.querySelector(`.comment-like[data-id="${commentId}"]`);
+                    if (likeBtn) {
+                        const likesCount = likeBtn.querySelector('.likes-count');
+                        likesCount.textContent = comment.likes;
+                        likeBtn.classList.add('active');
+                    }
+                }
+            }
+            
+            // Répondre à un commentaire
+            function replyToComment(commentId) {
+                // Faire défiler la page jusqu'au formulaire de commentaire
+                commentForm.scrollIntoView({ behavior: 'smooth' });
+                
+                // Obtenir les commentaires depuis localStorage
+                const comments = getCommentsFromStorage();
+                
+                // Trouver le commentaire auquel répondre
+                const comment = comments.find(c => c.id === commentId);
+                
+                if (comment) {
+                    // Préremplir le formulaire avec une mention de l'auteur du commentaire
+                    commentText.value = `@${comment.name} : `;
+                    commentText.focus();
+                    
+                    // Placer le curseur à la fin du texte
+                    commentText.setSelectionRange(commentText.value.length, commentText.value.length);
+                }
+            }
+            
+            // Mettre à jour le compteur de commentaires
+            function updateCommentsCount(count) {
+                commentsCount.textContent = count;
+            }
+            
+            // Obtenir les commentaires depuis localStorage
+            function getCommentsFromStorage() {
+                const storedComments = localStorage.getItem('comments');
+                return storedComments ? JSON.parse(storedComments) : [];
+            }
+            
+            // Sauvegarder les commentaires dans localStorage
+            function saveComments() {
+                const comments = Array.from(document.querySelectorAll('.comment')).map(commentEl => {
+                    const id = parseInt(commentEl.dataset.id);
+                    const likes = parseInt(commentEl.querySelector('.likes-count').textContent);
+                    return {
+                        id,
+                        likes,
+                        articleId: currentArticleId,
+                        name: commentEl.querySelector('.comment-author').textContent,
+                        date: commentEl.querySelector('.comment-date').textContent,
+                        text: commentEl.querySelector('.comment-content p').textContent
+                    };
+                });
+                
+                // Fusionner avec les commentaires existants pour d'autres articles
+                const allComments = getCommentsFromStorage();
+                const otherArticlesComments = allComments.filter(comment => comment.articleId !== currentArticleId);
+                const updatedComments = [...otherArticlesComments, ...comments];
+                
+                localStorage.setItem('comments', JSON.stringify(updatedComments));
+            }
+            
+            // Calcul dynamique du temps de lecture
+            function calculateReadingTime() {
+                // Sélectionner tous les extraits d'articles
+                const excerpts = document.querySelectorAll('.blog-excerpt p');
+                
+                // Parcourir chaque extrait
+                excerpts.forEach(excerpt => {
+                    // Obtenir le texte et compter les mots
+                    const text = excerpt.textContent;
+                    const wordCount = text.split(/\s+/).length;
+                    
+                    // Calculer le temps de lecture (en utilisant 225 mots par minute comme référence)
+                    // Ajouter 2 minutes supplémentaires pour l'article complet (qui serait plus long que l'extrait)
+                    const readingTimeValue = Math.ceil(wordCount / 225) + 2;
+                    
+                    // Trouver l'élément de temps de lecture correspondant
+                    const timeElement = excerpt.closest('.blog-content').querySelector('.reading-time .time-value');
+                    
+                    // Mise à jour du temps de lecture
+                    if (timeElement) {
+                        timeElement.textContent = `${readingTimeValue} min de lecture`;
+                    }
+                });
+            }
+            
+            // Exécuter le calcul du temps de lecture au chargement de la page
+            calculateReadingTime();
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html> 

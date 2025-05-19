@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorbo-Ingénierie | Excellence et Innovation en Génie civil</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Styles spécifiques à la page d'accueil modernisée */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80');
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Style pour les services dans le hero */
+        .hero-services {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .service-item i {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .service-item span {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .hero-btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.4);
+        }
+        
+        /* Mot du directeur */
+        .about-director {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .about-director::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.03;
+            clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+        }
+        
+        .about-director h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .about-director h2::after {
+            display: none;
+        }
+        
+        .about-director h3 {
+            text-align: center;
+            font-weight: 400;
+            color: var(--light-text);
+            margin-bottom: 50px;
+        }
+        
+        .director-message {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .director-image {
+            position: relative;
+        }
+        
+        .director-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .director-image::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 15px;
+            left: 15px;
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            z-index: -1;
+        }
+        
+        .message {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .signature::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        /* News section */
+        .news {
+            background-color: white;
+        }
+        
+        .news h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .news h2::after {
+            display: none;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-image {
+            height: 240px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .date {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .news-content p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+        
+        /* Google Maps section */
+        .map-section {
+            background-color: #f9f9f9;
+            position: relative;
+            padding: 80px 0;
+        }
+        
+        .map-section h2 {
+            text-align: center;
+            padding-bottom: 0;
+            margin-bottom: 40px;
+        }
+        
+        .map-section h2::after {
+            display: none;
+        }
+        
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 450px;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            z-index: 1;
+        }
+        
+        .map-overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .map-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--light-text);
+        }
+        
+        .map-overlay .btn {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+        }
+        
+        /* Newsletter section */
+        .newsletter {
+            background-color: #f9f9f9;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 40%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.03;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .newsletter h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .newsletter h2::after {
+            display: none;
+        }
+        
+        .newsletter p {
+            text-align: center;
+            max-width: 700px;
+            margin: 20px auto 30px;
+            color: var(--light-text);
+        }
+        
+        .newsletter-form {
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            padding: 20px 25px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 35px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            
+            .hero-services {
+                gap: 20px;
+            }
+            
+            .service-item {
+                padding: 15px 20px;
+            }
+            
+            .service-item i {
+                font-size: 2.2rem;
+            }
+            
+            .service-item span {
+                font-size: 1rem;
+            }
+            
+            .director-message {
+                grid-template-columns: 1fr;
+            }
+            
+            .director-image {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            
+            .map-overlay {
+                position: relative;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .hero-services {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .service-item {
+                padding: 12px 15px;
+                min-width: 100px;
+            }
+            
+            .service-item i {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+            
+            .service-item span {
+                font-size: 0.9rem;
+            }
+            
+            .hero-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .newsletter-form input {
+                width: 100%;
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .newsletter-form button {
+                width: 100%;
+                padding: 15px;
+                border-radius: 0 0 10px 10px;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        /* Animations et transitions pour le scrolling */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .slide-up {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .slide-up.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Amélioration de l'effet de lazy loading */
+        img {
+            transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+        
+        img[loading="lazy"] {
+            opacity: 0;
+            filter: blur(10px);
+        }
+        
+        img.loaded {
+            opacity: 1;
+            filter: blur(0);
+        }
+        
+        /* Styles pour le carousel de projets */
+        .projects-carousel {
+            background-color: var(--light-bg);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .projects-carousel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.03;
+            clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+        }
+        
+        .projects-carousel h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .projects-carousel h2::after {
+            display: none;
+        }
+        
+        .projects-carousel > .container > p {
+            text-align: center;
+            max-width: 700px;
+            margin: 20px auto 50px;
+            color: var(--light-text);
+        }
+        
+        /* conteneur du slider */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Track - piste de défilement */
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s ease;
+        }
+        
+        /* éléments du carousel */ 
+        .carousel-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0;
+            position: relative;
+            opacity: 0.6;
+            transform: scale(0.85);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        /* état actif */
+        .carousel-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* carte projet */
+        .project-card {
+            position: relative;
+            height: 500px; /* à adapter selon maquette */
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        
+        /* zoom effet sur image active */
+        .carousel-item.active .project-image img {
+            transform: scale(1.05);
+        }
+        
+        /* overlay texte */
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 30px 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+        
+        /* titre projet */
+        .project-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease 0.1s, opacity 0.5s ease 0.1s;
+        }
+        
+        /* Texte projet */
+        .project-overlay p {
+            margin-bottom: 15px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
+        }
+        
+        /* Tags style */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease 0.3s, opacity 0.5s ease 0.3s;
+        }
+        
+        .project-tags span {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Animation éléments de l'overlay */
+        .carousel-item.active .project-overlay h3,
+        .carousel-item.active .project-overlay p,
+        .carousel-item.active .project-tags {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Navigation */
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        /* Boutons slider */
+        .carousel-prev,
+        .carousel-next {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 15px;
+        }
+        
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Indicateurs */
+        .carousel-dots {
+            display: flex;
+            gap: 8px; 
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* point actif */
+        .carousel-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        
+        /* utilitaires */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-40 {
+            margin-top: 40px;
+        }
+        
+        /* Media queries... */
+        @media (max-width: 992px) {
+            .project-card {
+                height: 450px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .project-card {
+                height: 400px;
+            }
+            
+            .project-overlay {
+                padding: 30px 20px 20px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 1.3rem;
+            }
+            
+            .carousel-prev,
+            .carousel-next {
+                width: 35px;
+                height: 35px;
+                margin: 0 10px;
+            }
+        }
+        
+        /* petit mobile */
+        @media (max-width: 576px) {
+            .project-card {
+                height: 350px;
+            }
+            
+            .project-tags span {
+                padding: 4px 10px; 
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png"  alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li><a href="contact.html">Contactez-nous</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="rendez-vous.html">Rendez-vous</a></li>
+                            <li><a href="evenements.html">Événements</a></li>
+                            <li><a href="actualites.html">Actualités</a></li>
+                            <li><a href="acheter-formations.html">Acheter nos formations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h1 data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">Sorbo-Ingénierie</h1>
+                <h2 data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">Excellence et Innovation en Génie civil</h2>
+                <div class="hero-services" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800" aria-label="Nos services">
+                    <a href="ingenierie.html" class="service-item" aria-label="Service d'ingénierie" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="500">
+                        <i class="fas fa-building" aria-hidden="true"></i>
+                        <span>Ingénierie</span>
+                    </a>
+                    <a href="nos-formations.html" class="service-item" aria-label="Service de formation" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="500">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        <span>Formation</span>
+                    </a>
+                    <a href="nos-logiciels.html" class="service-item" aria-label="Nos logiciels" data-aos="zoom-in" data-aos-delay="800" data-aos-duration="500">
+                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                        <span>Logiciels</span>
+                    </a>
+                </div>
+                <a href="#director" class="btn primary-btn hero-btn" data-aos="fade-up" data-aos-delay="900" data-aos-duration="800">Découvrir notre entreprise</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="director" class="about-director">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Mot du Directeur Général</h2>
+            <h3 data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">Faites confiance à l'expertise de notre équipe pour la réussite de vos projets</h3>
+            <div class="director-message">
+                <div class="director-image" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="300">
+                    <img src="https://img.freepik.com/photos-gratuite/confiant-entrepreneur-regardant-camera-bras-croises-souriant_1098-18840.jpg?uid=R148823136&ga=GA1.1.1836152391.1727230970&semt=ais_hybrid&w=740" alt="Alexis KOFFI, Directeur Général">
+                </div>
+                <div class="message" data-aos="fade-left" data-aos-duration="1000" data-aos-offset="300">
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="100">Cher visiteur,</p>
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="200">C'est avec un immense plaisir que nous vous accueillons sur le site de Sorbo-Ingénierie. Depuis notre création, nous nous engageons à offrir des solutions techniques performantes et adaptées aux défis de l'ingénierie moderne. Nous plaçons l'innovation, la rigueur et la qualité au cœur de nos interventions, qu'il s'agisse d'études, de suivi de travaux, de formation ou de développement de logiciels spécialisés.</p>
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="300">Grâce à une équipe d'experts passionnés et à une approche méthodique, nous avons su nous imposer comme un partenaire de confiance sur des projets d'envergure en Afrique. Notre ambition est de continuer à accompagner nos clients avec professionnalisme et excellence, en apportant des solutions toujours plus efficaces et adaptées aux besoins spécifiques de chaque projet.</p>
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="400">Nous vous invitons à parcourir notre site pour découvrir l'étendue de nos services et réalisations. Que vous soyez un maître d'ouvrage, un bureau d'études, une entreprise ou un professionnel du secteur, nous sommes à votre disposition pour collaborer et construire ensemble les infrastructures de demain.</p>
+                    <p class="signature" data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="500"><strong>Alexis KOFFI</strong><br>Directeur Général</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Notre actualité</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            
+            <div class="news-grid">
+                <div class="news-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                    <div class="news-image" data-aos="zoom-in" data-aos-delay="300" data-aos-anchor=".news-grid" data-aos-duration="600">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Formation Covadis" loading="lazy">
+                    </div>
+                    <div class="news-content">
+                        <span class="date">20/12/2025</span>
+                        <h3>Formation sur le logiciel Covadis pour la société Ivoirienne de construction</h3>
+                        <p>Dans le cadre de son engagement à renforcer l'expertise technique de ses équipes, la Société Ivoirienne de Construction a organisé une formation approfondie sur le logiciel Covadis.</p>
+                        <a href="actualites.html" class="btn text-btn">Savoir plus</a>
+                    </div>
+                </div>
+
+                <div class="news-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                    <div class="news-image" data-aos="zoom-in" data-aos-delay="400" data-aos-anchor=".news-grid" data-aos-duration="600">
+                        <img src="https://img.freepik.com/free-photo/business-professional-explaining-project-details-colleague_74855-1493.jpg?uid=R148823136&ga=GA1.1.1836152391.1727230970&semt=ais_hybrid&w=740 " alt="Formation SETEC Afrique" loading="lazy">
+                    </div>
+                    <div class="news-content">
+                        <span class="date">20/10/2025</span>
+                        <h3>Formation sur les logiciels d'ingénierie de l'eau pour SETEC Afrique</h3>
+                        <p>Dans un environnement où la gestion des ressources hydriques est devenue un enjeu stratégique majeur, SETEC Afrique met en œuvre une initiative ambitieuse.</p>
+                        <a href="actualites.html" class="btn text-btn">Savoir plus</a>
+                    </div>
+                </div>
+
+                <div class="news-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                    <div class="news-image" data-aos="zoom-in" data-aos-delay="500" data-aos-anchor=".news-grid" data-aos-duration="600">
+                        <img src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Formation Covadis" loading="lazy">
+                    </div>
+                    <div class="news-content">
+                        <span class="date">06/04/2025</span>
+                        <h3>Formation société Ivoirienne de construction</h3>
+                        <p>Dans le cadre de son engagement à renforcer l'expertise technique de ses équipes, la Société Ivoirienne de Construction a organisé une formation approfondie.</p>
+                        <a href="actualites.html" class="btn text-btn">Savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-carousel">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Nos réalisations</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">Découvrez nos projets d'ingénierie innovants et nos réalisations marquantes.</p>
+            
+            <div class="carousel-container" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                <div class="carousel-track">
+                    <div class="carousel-item active">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tour d'affaires" loading="lazy">
+                            </div>
+                            <div class="project-overlay">
+                                <h3>Immeuble KPMG à Abidjan</h3>
+                                <p>Étude de structure et suivi technique de l'immeuble de 15 étages (2021-2022)</p>
+                                <div class="project-tags">
+                                    <span>Génie civil</span>
+                                    <span>Structure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pont autoroutier" loading="lazy">
+                            </div>
+                            <div class="project-overlay">
+                                <h3>Pont PK 23 - Autoroute du Nord</h3>
+                                <p>Étude technique et conception d'un pont de 237m avec technique mixte acier-béton</p>
+                                <div class="project-tags">
+                                    <span>Ouvrage d'art</span>
+                                    <span>Infrastructure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Réseau hydraulique" loading="lazy">
+                            </div>
+                            <div class="project-overlay">
+                                <h3>Assainissement Bouaké</h3>
+                                <p>Conception et assistance technique pour le réseau secondaire d'assainissement (7,5 km)</p>
+                                <div class="project-tags">
+                                    <span>Hydraulique</span>
+                                    <span>Environnement</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Campus universitaire" loading="lazy">
+                            </div>
+                            <div class="project-overlay">
+                                <h3>Campus Abobo</h3>
+                                <p>Plans d'exécution et études techniques pour les bâtiments A et B du nouveau campus</p>
+                                <div class="project-tags">
+                                    <span>Bâtiment</span>
+                                    <span>Études techniques</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-nav">
+                    <button class="carousel-prev" aria-label="Projet précédent">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-dots">
+                        <span class="carousel-dot active" data-index="0"></span>
+                        <span class="carousel-dot" data-index="1"></span>
+                        <span class="carousel-dot" data-index="2"></span>
+                        <span class="carousel-dot" data-index="3"></span>
+                    </div>
+                    <button class="carousel-next" aria-label="Projet suivant">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-40" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                <a href="realisations.html" class="btn outline-btn">Voir toutes nos réalisations</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Nous trouver</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            
+            <div class="map-container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <div class="map-overlay fade-in" data-aos="fade-right" data-aos-delay="400" data-aos-duration="800">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Abidjan, Cocody Angré 8ème Tranche</p>
+                    <p><i class="fas fa-phone"></i> (+225) 01 50 12 30 50</p>
+                    <p><i class="fas fa-envelope"></i> contact@sorbo.ingenierie.ci</p>
+                    <a href="contact.html" class="btn primary-btn">Nous contacter</a>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4376615729384!2d-3.9888842!3d5.3473065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjAnNTAuMyJOIDPCsDU5JzE5LjkiVw!5e0!3m2!1sfr!2sci!4v1637324567890!5m2!1sfr!2sci" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Abonnez-vous à notre newsletter</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            <p class="slide-up" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">Recevez toutes les dernières nouvelles, articles de blog et mises à jour de produits de notre entreprise, directement dans votre boîte de réception.</p>
+            <form class="newsletter-form fade-in" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                <input type="email" placeholder="Votre adresse email" required>
+                <button type="submit" class="btn">S'inscrire</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column slide-up">
+                    <h3>Sorbo - Ingénierie</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column fade-in">
+                    <h3>Nous suivre</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © Sorbo - Ingénierie</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialisation de AOS avec des paramètres améliorés
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: false,
+            mirror: true,
+            anchorPlacement: 'top-bottom',
+            disable: 'mobile'
+        });
+        
+        // Gestion du lazy loading des images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.onload = function() {
+                                img.classList.add('loaded');
+                            };
+                            
+                            // Si l'image est déjà chargée du cache
+                            if (img.complete) {
+                                img.classList.add('loaded');
+                            }
+                            
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(img) {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas IntersectionObserver
+                lazyImages.forEach(function(img) {
+                    img.classList.add('loaded');
+                });
+            }
+        });
+        
+        // Effets de défilement personnalisés
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const slideElements = document.querySelectorAll('.slide-up');
+            
+            const scrollObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else if (!AOS.options.once) {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(function(el) {
+                scrollObserver.observe(el);
+            });
+            
+            slideElements.forEach(function(el) {
+                scrollObserver.observe(el);
+            });
+        });
+        
+        // Gestion du scroll pour le header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Gestion du menu mobile
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.querySelector('.main-nav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            // Mise à jour de l'attribut aria-expanded
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Gestion des liens du menu mobile
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+        
+        // Gestion du menu déroulant sur mobile
+        const dropdownToggle = document.querySelector('.dropdown > a');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            dropdownMenu.classList.toggle('show');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Gestion du carousel de projets
+        document.addEventListener('DOMContentLoaded', function() {
+            // On récupère les éléments du DOM
+            var track = document.querySelector('.carousel-track');
+            var items = document.querySelectorAll('.carousel-item');
+            var prevBtn = document.querySelector('.carousel-prev');
+            var nextBtn = document.querySelector('.carousel-next');
+            var dots = document.querySelectorAll('.carousel-dot');
+            
+            var currentIndex = 0;
+            var autoplayInterval;
+            var itemCount = items.length;
+            
+            // TODO: Implémenter preload des images suivantes
+            
+            // Change de slide
+            function updateCarousel() {
+                // Animation de translation
+                track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
+                
+                // On retire la classe active de tous les items
+                for(var i = 0; i < items.length; i++) {
+                    items[i].classList.remove('active');
+                }
+                // On l'ajoute à l'item actif
+                items[currentIndex].classList.add('active');
+                
+                // Même chose pour les points
+                for(var j = 0; j < dots.length; j++) {
+                    dots[j].classList.remove('active');
+                }
+                dots[currentIndex].classList.add('active');
+            }
+            
+            // Passe à la slide suivante
+            function nextSlide() {
+                currentIndex++;
+                // On revient au début si on dépasse
+                if(currentIndex >= itemCount) {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }
+            
+            // Passe à la slide précédente
+            function prevSlide() {
+                currentIndex--;
+                // On va à la fin si on est au début
+                if(currentIndex < 0) {
+                    currentIndex = itemCount - 1;
+                }
+                updateCarousel();
+            }
+            
+            // Gestion des boutons
+            nextBtn.onclick = function() {
+                nextSlide();
+                // On reset l'autoplay
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            };
+            
+            prevBtn.onclick = function() {
+                prevSlide();
+                // On reset l'autoplay
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            };
+            
+            // Gestion des points
+            for(var k = 0; k < dots.length; k++) {
+                // On utilise une IIFE pour capturer la valeur de k
+                (function(index) {
+                    dots[index].onclick = function() {
+                        currentIndex = index;
+                        updateCarousel();
+                        // On reset l'autoplay
+                        clearInterval(autoplayInterval);
+                        startAutoplay();
+                    };
+                })(k);
+            }
+            
+            // Défilement auto toutes les 5 secondes
+            function startAutoplay() {
+                autoplayInterval = setInterval(function() {
+                    nextSlide();
+                }, 5000);
+            }
+            
+            // Support tactile (swipe)
+            var touchStartX = 0;
+            var touchEndX = 0;
+            
+            var carousel = document.querySelector('.carousel-container');
+            
+            carousel.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            carousel.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                
+                // Si différence suffisante = swipe
+                var diff = touchStartX - touchEndX;
+                if(Math.abs(diff) > 50) { // seuil de détection
+                    if(diff > 0) {
+                        // swipe gauche
+                        nextSlide();
+                    } else {
+                        // swipe droite
+                        prevSlide();
+                    }
+                    // reset autoplay
+                    clearInterval(autoplayInterval);
+                    startAutoplay();
+                }
+            }, { passive: true });
+            
+            // Lancement initial
+            updateCarousel();
+            startAutoplay();
+            
+            // Fix bug IE11
+            if (/Trident\/|MSIE/.test(window.navigator.userAgent)) {
+                console.log('Détection IE, ajustements appliqués');
+                // Code pas encore implémenté
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,13 @@
+1. Problème de connexion MongoDB:
+- Votre fichier .env contient des sauts de ligne dans la chaîne MONGODB_URI
+- Le nom de la base de données 'sorbo-ingenierie' est manquant après mongodb.net/
+2. Problème dans le contrôleur:
+- La fonction inscriptionFormation n'est pas correctement exportée ou n'existe pas
+- Nous avons corrigé cela en implémentant la fonction directement dans la route
+3. Solution pour la connexion MongoDB:
+- Corrigez le fichier .env en supprimant les sauts de ligne
+- Voici la bonne chaîne à utiliser: MONGODB_URI=mongodb+srv://Kevin0150446754:Kevinyameogo@sorbo.zxzett3.mongodb.net/sorbo-ingenierie?retryWrites=true&w=majority&appName=Sorbo
+4. Étapes pour déployer en production:
+- Créer un fichier .env.production avec les paramètres de production
+- Configurer NODE_ENV=production
+- Mettre à jour les URLs pour votre domaine réel

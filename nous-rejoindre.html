@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nous Rejoindre | Sorbo-Ingénierie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .careers-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .careers-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 1;
+        }
+        
+        .careers-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .careers-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            margin-top: 20px;
+        }
+        
+        .hero-btn:hover {
+            background-color: transparent;
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: #777;
+            line-height: 1.6;
+        }
+        
+        .intro-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-section::before {
+            content: '{ }';
+            font-size: 350px;
+            position: absolute;
+            opacity: 0.03;
+            top: 50%;
+            right: -50px;
+            transform: translateY(-50%);
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+        }
+        
+        .intro-section p {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #444;
+        }
+        
+        .benefits-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 90% 10%, rgba(209, 0, 0, 0.1) 0%, transparent 60%);
+        }
+        
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: 1;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .benefit-card i {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .benefit-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .benefit-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .benefit-card:hover h3 {
+            color: var(--primary-color);
+        }
+        
+        .benefit-card:hover h3::after {
+            width: 80px;
+        }
+        
+        .benefit-card p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .advantages-text {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .advantages-text p:last-child {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .jobs-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .jobs-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .job-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .filter {
+            padding: 12px 20px;
+            background-color: #f0f0f0;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+        }
+        
+        .filter.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .jobs-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .job-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .job-type {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+            color: white;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-bottom-left-radius: 15px;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.2);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .job-title {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .job-card:hover .job-title {
+            color: var(--primary-color);
+        }
+        
+        .job-meta {
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .job-meta span {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: #f5f5f5;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        
+        .job-card:hover .job-meta span {
+            background-color: #f0f0f0;
+        }
+        
+        .job-meta i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .job-positions {
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .job-card:hover .job-positions {
+            background-color: rgba(209, 0, 0, 0.1);
+        }
+        
+        .job-description {
+            margin-bottom: 30px;
+            line-height: 1.7;
+            color: #555;
+            font-size: 1.05rem;
+        }
+        
+        .apply-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .apply-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .team-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 90%, rgba(209, 0, 0, 0.1) 0%, transparent 60%);
+        }
+        
+        .team-section p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .team-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.05) 0%, transparent 100%);
+        }
+        
+        .team-image i {
+            font-size: 5rem;
+            color: var(--primary-color);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .team-image i {
+            transform: scale(1.2) rotate(5deg);
+            opacity: 1;
+        }
+        
+        .team-details {
+            padding: 30px;
+        }
+        
+        .team-name {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .team-member:hover .team-name {
+            color: var(--primary-color);
+        }
+        
+        .team-position {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .team-position::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .team-member:hover .team-position::after {
+            width: 60px;
+        }
+        
+        .team-bio {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(209, 0, 0, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .cta::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(209, 0, 0, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .primary-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .outline-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .outline-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 992px) {
+            .careers-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .careers-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .careers-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .job-positions {
+                margin-top: 10px;
+            }
+            
+            .benefits-container,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Style du formulaire de candidature modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .application-modal {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+        }
+        
+        .modal-overlay.active .application-modal {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+        
+        .application-form h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .application-form p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(209, 0, 0, 0.1);
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .file-upload {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            height: 100px;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(209, 0, 0, 0.05);
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+        
+        .file-upload-info {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .file-upload-info span {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .file-upload-info small {
+            color: #888;
+        }
+        
+        .file-name {
+            display: none;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: rgba(209, 0, 0, 0.1);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #a70000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .application-modal {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Styles pour la section FAQ */
+        .faq-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(209, 0, 0, 0.05) 0%, transparent 60%);
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .faq-question h3 {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin: 0;
+            transition: color 0.3s ease;
+            padding-right: 40px;
+        }
+        
+        .faq-question:hover h3 {
+            color: var(--primary-color);
+        }
+        
+        .faq-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+            color: #888;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .faq-toggle:hover {
+            background-color: rgba(209, 0, 0, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .faq-toggle .fa-minus {
+            display: none;
+        }
+        
+        .faq-item.active .faq-toggle .fa-plus {
+            display: none;
+        }
+        
+        .faq-item.active .faq-toggle .fa-minus {
+            display: block;
+            color: var(--primary-color);
+        }
+        
+        .faq-item.active .faq-question h3 {
+            color: var(--primary-color);
+        }
+        
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 30px 30px;
+            max-height: 1000px;
+        }
+        
+        .faq-answer p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-answer ul, .faq-answer ol {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 20px;
+            }
+            
+            .faq-question h3 {
+                font-size: 1.1rem;
+                padding-right: 30px;
+            }
+            
+            .faq-toggle {
+                right: 20px;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 20px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html" class="active">Nous rejoindre</a></li>
+                    <li><a href="contact.html">Contactez-nous</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="rendez-vous.html">Rendez-vous</a></li>
+                            <li><a href="evenements.html">Événements</a></li>
+                            <li><a href="actualites.html">Actualités</a></li>
+                            <li><a href="acheter-formations.html">Acheter nos formations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="careers-hero">
+        <div class="container" data-aos="fade-up" data-aos-duration="1000">
+            <h1>NOUS REJOINDRE</h1>
+            <p>Ensemble, façonnons l'avenir du génie civil !</p>
+            <a href="#offres" class="hero-btn">Découvrir nos offres</a>
+        </div>
+    </section>
+
+    <section class="intro-section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <p>Rejoindre notre équipe, c'est intégrer une entreprise à taille humaine et donner un élan à votre carrière dans un environnement stimulant et enrichissant.</p>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Pourquoi nous rejoindre ?</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Des avantages concrets qui font la différence dans votre parcours professionnel</p>
+            
+            <div class="benefits-container">
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="150">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Des projets variés et stimulants</h3>
+                    <p>Vous aurez l'opportunité de travailler sur une large gamme de projets ambitieux et innovants qui vous permettront de développer vos compétences et d'élargir votre expertise.</p>
+                </div>
+
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Un encadrement technique de haut niveau</h3>
+                    <p>Profitez d'un accompagnement par des experts reconnus dans leur domaine. Notre culture de mentorat favorise le partage de connaissances et l'excellence technique.</p>
+                </div>
+
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="250">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Une formation continue</h3>
+                    <p>Développez vos compétences grâce à des sessions de formation régulières. Notre plan de développement personnalisé vous aide à atteindre vos objectifs professionnels.</p>
+                </div>
+
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-users"></i>
+                    <h3>Une équipe dynamique et multiculturelle</h3>
+                    <p>Évoluez au sein d'un collectif expérimenté et à dimension internationale. Notre diversité est notre force et favorise la créativité et l'innovation.</p>
+                </div>
+            </div>
+
+            <div class="advantages-text" data-aos="fade-up" data-aos-delay="350">
+                <p>De nombreux autres avantages : À découvrir lors d'un entretien !</p>
+                <p>N'hésitez plus ! Rejoignez-nous !</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="offres" class="jobs-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Nos offres d'emploi</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Trouvez l'opportunité qui correspond à vos ambitions et compétences</p>
+            
+            <div class="job-filters" data-aos="fade-up" data-aos-delay="150">
+                <div class="filter active">Tous les pays</div>
+                <div class="filter">Côte d'Ivoire</div>
+                <div class="filter">Tous les départements</div>
+                <div class="filter">Tous les types</div>
+            </div>
+
+            <div class="jobs-container">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="job-type">STAGE</div>
+                    <div class="job-header">
+                        <h3 class="job-title">Technicien Génie civil</h3>
+                        <div class="job-positions">3 postes disponibles</div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-graduation-cap"></i> Niveau: Bac + 3</span>
+                        <span><i class="fas fa-bookmark"></i> Spécialité: eau et assainissement</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Poste basé à Abidjan</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Stage professionnel pour technicien en génie civil spécialisé dans les domaines de l'eau et de l'assainissement. Vous participerez à des projets concrets sous la supervision d'ingénieurs expérimentés et aurez l'opportunité de mettre en pratique vos connaissances théoriques dans un contexte professionnel stimulant.</p>
+                    </div>
+                    <a href="#" class="apply-btn" data-job="Technicien Génie civil" data-type="STAGE">Postuler</a>
+                </div>
+
+                <div class="job-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="job-type">CDI</div>
+                    <div class="job-header">
+                        <h3 class="job-title">Ingénieur Eau</h3>
+                        <div class="job-positions">1 poste disponible</div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-graduation-cap"></i> Niveau: Bac + 5</span>
+                        <span><i class="fas fa-bookmark"></i> Spécialité: hydraulique</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Poste basé à Abidjan</span>
+                    </div>
+                    <div class="job-description">
+                        <p>Nous recherchons un ingénieur spécialisé dans les domaines de l'hydraulique et de l'assainissement pour contribuer à nos projets d'infrastructures d'eau. Vous serez responsable des études techniques et de la coordination des équipes sur le terrain. Ce poste offre des opportunités d'évolution et de développement professionnel au sein d'une entreprise en pleine croissance.</p>
+                    </div>
+                    <a href="#" class="apply-btn" data-job="Ingénieur Eau" data-type="CDI">Postuler</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Rejoignez notre équipe passionnée</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Nous sommes une équipe de personnes passionnées dont le but est d'améliorer la vie de tout le monde par des produits hors normes. Nous créons de superbes produits pour résoudre les problèmes de votre entreprise.</p>
+            
+            <div class="team-grid">
+                <div class="team-member" data-aos="fade-up" data-aos-delay="150">
+                    <div class="team-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-details">
+                        <h3 class="team-name">Département Ingénierie</h3>
+                        <div class="team-position">Conception et réalisation</div>
+                        <p class="team-bio">Notre équipe d'ingénieurs travaille sur des projets variés dans les domaines du génie civil, de l'hydraulique et des infrastructures. Rejoignez des experts passionnés par l'innovation technique.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="team-details">
+                        <h3 class="team-name">Département Logiciels</h3>
+                        <div class="team-position">Développement et innovation</div>
+                        <p class="team-bio">Nos développeurs créent des solutions logicielles adaptées aux besoins spécifiques du secteur du génie civil. Contribuez à façonner les outils qui révolutionnent notre industrie.</p>
+                    </div>
+                </div>
+                
+                <div class="team-member" data-aos="fade-up" data-aos-delay="250">
+                    <div class="team-image">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="team-details">
+                        <h3 class="team-name">Département Formation</h3>
+                        <div class="team-position">Transmission et accompagnement</div>
+                        <p class="team-bio">Nos formateurs partagent leur expertise pour renforcer les compétences des professionnels du secteur. Aidez les autres à progresser et à exceller dans leur domaine d'expertise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Questions fréquentes</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Tout ce que vous devez savoir sur notre processus de recrutement</p>
+            
+            <div class="faq-container" data-aos="fade-up" data-aos-delay="150">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment se déroule le processus de recrutement chez Sorbo-Ingénierie ?</h3>
+                        <button class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Notre processus de recrutement se déroule généralement en 4 étapes :</p>
+                        <ol>
+                            <li><strong>Présélection des candidatures</strong> : analyse de votre CV et lettre de motivation</li>
+                            <li><strong>Premier entretien</strong> : échange avec un recruteur pour mieux vous connaitre</li>
+                            <li><strong>Entretien technique</strong> : évaluation de vos compétences avec un responsable du département concerné</li>
+                            <li><strong>Entretien final</strong> : rencontre avec la direction pour discuter des aspects contractuels</li>
+                        </ol>
+                        <p>Le processus complet dure généralement entre 3 et 4 semaines.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels sont les critères de sélection pour rejoindre votre équipe ?</h3>
+                        <button class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous recherchons des candidats qui correspondent à nos valeurs et disposent des compétences techniques nécessaires. Nos principaux critères sont :</p>
+                        <ul>
+                            <li><strong>Compétences techniques</strong> solides dans votre domaine de spécialité</li>
+                            <li><strong>Esprit d'équipe</strong> et capacité à travailler en mode collaboratif</li>
+                            <li><strong>Autonomie</strong> et sens de l'initiative</li>
+                            <li><strong>Capacité d'adaptation</strong> à des environnements et projets variés</li>
+                            <li><strong>Intérêt pour l'innovation</strong> et volonté d'apprendre continuellement</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment se préparer aux entretiens chez Sorbo-Ingénierie ?</h3>
+                        <button class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour mettre toutes les chances de votre côté lors de nos entretiens, nous vous conseillons de :</p>
+                        <ul>
+                            <li>Vous renseigner sur notre entreprise, nos activités et nos projets récents</li>
+                            <li>Préparer des exemples concrets de réalisations en lien avec le poste</li>
+                            <li>Réviser les connaissances techniques essentielles pour le poste visé</li>
+                            <li>Réfléchir sur la façon dont votre parcours s'intègre dans notre entreprise</li>
+                            <li>Préparer vos questions sur l'entreprise, le poste ou les évolutions possibles</li>
+                        </ul>
+                        <p>La clé est d'être authentique et de montrer votre motivation pour le poste et notre secteur d'activité.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Proposez-vous un accompagnement pour les nouveaux collaborateurs ?</h3>
+                        <button class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument ! Nous accordons une grande importance à l'intégration de nos nouveaux collaborateurs. Vous bénéficierez de :</p>
+                        <ul>
+                            <li>Un parcours d'intégration personnalisé sur les premières semaines</li>
+                            <li>Un mentor dédié pour vous accompagner au quotidien</li>
+                            <li>Des formations adaptées à votre profil et vos besoins</li>
+                            <li>Des points réguliers avec votre responsable pour suivre votre progression</li>
+                        </ul>
+                        <p>Notre objectif est de vous donner rapidement les clés pour vous épanouir et contribuer efficacement aux projets de l'entreprise.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Puis-je postuler sans offre correspondant exactement à mon profil ?</h3>
+                        <button class="faq-toggle">
+                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, nous sommes toujours à la recherche de talents ! Même si aucune offre ne correspond précisément à votre profil, n'hésitez pas à nous envoyer une candidature spontanée.</p>
+                        <p>Utilisez le formulaire "Envoyer votre CV" en précisant vos domaines d'expertise et le type de poste que vous recherchez. Nous étudions toutes les candidatures et conservons les profils intéressants pour nos futurs besoins.</p>
+                        <p>De nombreux collaborateurs ont rejoint notre équipe suite à une candidature spontanée !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container" data-aos="fade-up">
+            <h2>Prêt à rejoindre l'aventure Sorbo-Ingénierie ?</h2>
+            <p>Envoyez-nous votre candidature et devenez acteur de projets innovants dans le domaine du génie civil. Votre avenir professionnel commence ici !</p>
+                        <div class="cta-buttons">                <a href="contact.html" class="btn primary-btn">Contactez-nous</a>                <a href="#" class="btn outline-btn" id="openApplicationForm">Envoyer votre CV</a>            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sorbo - Ingénierie</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Nous suivre</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © Sorbo - Ingénierie</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal pour le formulaire de candidature -->
+    <div class="modal-overlay" id="applicationModal">
+        <div class="application-modal">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <form class="application-form" id="applicationForm">
+                <h3>Candidature - <span id="jobTitle"></span></h3>
+                <p>Merci de l'intérêt que vous portez à rejoindre notre équipe. Veuillez remplir ce formulaire pour postuler.</p>
+                
+                <input type="hidden" id="jobPosition" name="jobPosition">
+                <input type="hidden" id="jobType" name="jobType">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Prénom *</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nom *</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Adresse</label>
+                    <input type="text" id="address" name="address" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Années d'expérience *</label>
+                    <select id="experience" name="experience" class="form-control" required>
+                        <option value="">-- Sélectionnez --</option>
+                        <option value="0-1">Moins d'1 an</option>
+                        <option value="1-3">1 à 3 ans</option>
+                        <option value="3-5">3 à 5 ans</option>
+                        <option value="5+">Plus de 5 ans</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cv">CV (PDF, DOC, DOCX) *</label>
+                    <div class="file-upload" id="cvUpload">
+                        <i class="fas fa-file-upload"></i>
+                        <div class="file-upload-info">
+                            <span>Téléchargez votre CV</span>
+                            <small>Format PDF, DOC ou DOCX (max 5MB)</small>
+                            <div class="file-name" id="cvFileName"></div>
+                        </div>
+                        <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="motivationLetter">Lettre de motivation (PDF, DOC, DOCX)</label>
+                    <div class="file-upload" id="letterUpload">
+                        <i class="fas fa-file-upload"></i>
+                        <div class="file-upload-info">
+                            <span>Téléchargez votre lettre de motivation</span>
+                            <small>Format PDF, DOC ou DOCX (max 5MB)</small>
+                            <div class="file-name" id="letterFileName"></div>
+                        </div>
+                        <input type="file" id="motivationLetter" name="motivationLetter" accept=".pdf,.doc,.docx">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message / Informations complémentaires</label>
+                    <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Envoyer ma candidature</button>
+                
+                <div class="form-footer">
+                    En soumettant ce formulaire, vous acceptez que vos données soient traitées conformément à notre politique de confidentialité.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 120,
+            duration: 800,
+            easing: 'ease-out',
+            once: true
+        });
+        
+        // Gestion du formulaire de candidature
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('applicationModal');
+            const applyButtons = document.querySelectorAll('.apply-btn');
+            const ctaButton = document.getElementById('openApplicationForm');
+            const closeButton = document.getElementById('modalClose');
+            const applicationForm = document.getElementById('applicationForm');
+            const jobTitleSpan = document.getElementById('jobTitle');
+            const jobPositionInput = document.getElementById('jobPosition');
+            const jobTypeInput = document.getElementById('jobType');
+            
+            // Gestion des accordéons FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Fermer tous les autres items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Basculer l'état de l'item actuel
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Gestion du téléchargement des fichiers
+            const cvInput = document.getElementById('cv');
+            const letterInput = document.getElementById('motivationLetter');
+            const cvFileName = document.getElementById('cvFileName');
+            const letterFileName = document.getElementById('letterFileName');
+            
+            // Ouverture du modal via les boutons "Postuler"
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Récupérer les informations sur le poste
+                    const jobTitle = this.getAttribute('data-job');
+                    const jobType = this.getAttribute('data-type');
+                    
+                    // Mettre à jour les champs du formulaire
+                    jobTitleSpan.textContent = jobTitle;
+                    jobPositionInput.value = jobTitle;
+                    jobTypeInput.value = jobType;
+                    
+                    // Afficher le modal
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Empêcher le défilement
+                });
+            });
+            
+            // Ouverture du modal via le bouton "Envoyer votre CV" (candidature spontanée)
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Mettre à jour les champs du formulaire pour une candidature spontanée
+                    jobTitleSpan.textContent = "Candidature spontanée";
+                    jobPositionInput.value = "Candidature spontanée";
+                    jobTypeInput.value = "";
+                    
+                    // Afficher le modal
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Fermeture du modal
+            closeButton.addEventListener('click', function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Réactiver le défilement
+                applicationForm.reset(); // Réinitialiser le formulaire
+                cvFileName.style.display = 'none';
+                letterFileName.style.display = 'none';
+            });
+            
+            // Fermeture en cliquant en dehors du modal
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    applicationForm.reset();
+                    cvFileName.style.display = 'none';
+                    letterFileName.style.display = 'none';
+                }
+            });
+            
+            // Afficher le nom du fichier CV
+            cvInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    cvFileName.textContent = this.files[0].name;
+                    cvFileName.style.display = 'block';
+                } else {
+                    cvFileName.style.display = 'none';
+                }
+            });
+            
+            // Afficher le nom du fichier lettre de motivation
+            letterInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    letterFileName.textContent = this.files[0].name;
+                    letterFileName.style.display = 'block';
+                } else {
+                    letterFileName.style.display = 'none';
+                }
+            });
+            
+            // Soumission du formulaire
+            applicationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Ici, vous pourriez ajouter du code pour envoyer les données à un serveur
+                // Pour l'instant, nous allons simplement simuler un envoi réussi
+                
+                const formData = new FormData(this);
+                
+                // Simulation d'envoi (remplacer par un vrai envoi AJAX)
+                setTimeout(() => {
+                    alert('Votre candidature a été envoyée avec succès ! Nous vous contacterons prochainement.');
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    applicationForm.reset();
+                    cvFileName.style.display = 'none';
+                    letterFileName.style.display = 'none';
+                }, 1000);
+            });
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html> 
