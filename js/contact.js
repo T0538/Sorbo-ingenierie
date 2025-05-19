@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
-    const apiUrl = '/api/contact';
+    const apiUrl = 'https://sorbo-api-production.up.railway.app/api/contact';
 
     if (contactForm) {
         // Gestion de la soumission du formulaire
