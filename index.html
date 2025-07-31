@@ -10,12 +10,13 @@
     <style>
         /* Styles spécifiques à la page d'accueil modernisée */
         .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80');
-            background-attachment: fixed;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-bg-4k.svg');
             position: relative;
             overflow: hidden;
             background-position: center;
             background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
         }
         
         .hero::before {
@@ -99,9 +100,134 @@
             box-shadow: 0 8px 25px rgba(209, 0, 0, 0.4);
         }
         
+        /* Icônes flottantes à droite - uniquement dans la section hero */
+        .floating-icons {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* Conteneur pour limiter les icônes à la section hero */
+        .hero {
+            position: relative;
+        }
+        
+        .floating-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .floating-icon:hover::before {
+            left: 100%;
+        }
+        
+        .floating-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(209, 0, 0, 0.4);
+        }
+        
+        .floating-icon .tooltip {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .floating-icon .tooltip::after {
+            content: '';
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .floating-icon:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px;
+        }
+        
+        /* Animation d'apparition des icônes */
+        .floating-icon {
+            animation: slideInRight 0.6s ease forwards;
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        
+        .floating-icon:nth-child(1) { animation-delay: 0.2s; }
+        .floating-icon:nth-child(2) { animation-delay: 0.4s; }
+        .floating-icon:nth-child(3) { animation-delay: 0.6s; }
+        .floating-icon:nth-child(4) { animation-delay: 0.8s; }
+        .floating-icon:nth-child(5) { animation-delay: 1.0s; }
+        
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive pour les icônes flottantes */
+        @media (max-width: 768px) {
+            .floating-icons {
+                right: 15px;
+                gap: 15px;
+            }
+            
+            .floating-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .floating-icon .tooltip {
+                display: none;
+            }
+        }
+        
         /* Mot du directeur */
         .about-director {
-            background-attachment: fixed;
+            
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -850,6 +976,30 @@
                 <a href="#director" class="btn primary-btn hero-btn" data-aos="fade-up" data-aos-delay="900" data-aos-duration="800">Découvrir notre entreprise</a>
             </div>
         </div>
+        
+        <!-- Icônes flottantes à droite - uniquement dans la section hero -->
+        <div class="floating-icons">
+            <a href="contact.html" class="floating-icon" aria-label="Nous contacter">
+                <i class="fas fa-phone"></i>
+                <span class="tooltip">Nous contacter</span>
+            </a>
+            <a href="mailto:contact@sorbo.ingenierie.ci" class="floating-icon" aria-label="Envoyer un email">
+                <i class="fas fa-envelope"></i>
+                <span class="tooltip">Envoyer un email</span>
+            </a>
+            <a href="nos-formations.html" class="floating-icon" aria-label="Nos formations">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="tooltip">Nos formations</span>
+            </a>
+            <a href="ingenierie.html" class="floating-icon" aria-label="Services d'ingénierie">
+                <i class="fas fa-building"></i>
+                <span class="tooltip">Ingénierie</span>
+            </a>
+            <a href="nos-logiciels.html" class="floating-icon" aria-label="Nos logiciels">
+                <i class="fas fa-laptop-code"></i>
+                <span class="tooltip">Nos logiciels</span>
+            </a>
+        </div>
     </section>
 
     <section id="director" class="about-director">
@@ -1026,23 +1176,19 @@
         </div>
     </section>
 
-    <section class="newsletter">
-        <div class="container">
-            <h2 data-aos="fade-up" data-aos-duration="800">Abonnez-vous à notre newsletter</h2>
-            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
-            <p class="slide-up" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">Recevez toutes les dernières nouvelles, articles de blog et mises à jour de produits de notre entreprise, directement dans votre boîte de réception.</p>
-            <form class="newsletter-form fade-in" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                <input type="email" placeholder="Votre adresse email" required>
-                <button type="submit" class="btn">S'inscrire</button>
-            </form>
-        </div>
-    </section>
+
 
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column slide-up">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
                     <h3>Sorbo - Ingénierie</h3>
+                    <p class="footer-description">Excellence et Innovation en Génie civil</p>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Informations légales</h3>
                     <ul class="company-info">
                         <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
                         <li><strong>N° Compte contribuable :</strong> 2242797T</li>
@@ -1062,8 +1208,13 @@
                     </ul>
                 </div>
 
-                <div class="footer-column fade-in">
-                    <h3>Nous suivre</h3>
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
@@ -1073,7 +1224,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>Copyright © Sorbo - Ingénierie</p>
+                <p>Copyright © 2024 Sorbo - Ingénierie. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
@@ -1337,4 +1488,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
