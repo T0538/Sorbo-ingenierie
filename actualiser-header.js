@@ -22,8 +22,8 @@ const newHeader = `<header>
                 <ul class="main-nav">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li><a href="nos-formations.html">Nos formations</a></li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li><a href="contact.html">Contactez-nous</a></li>
@@ -73,4 +73,4 @@ filesToUpdate.forEach(file => {
     }
 });
 
-console.log('Mise à jour des headers terminée !'); 
+console.log('Mise à jour des headers terminée !');

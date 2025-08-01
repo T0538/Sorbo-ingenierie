@@ -370,11 +370,14 @@
         .benefit-card {
             background-color: white;
             border-radius: 15px;
-            padding: 30px;
+            padding: 0;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .benefit-card::before {
@@ -385,6 +388,7 @@
             width: 5px;
             height: 100%;
             background-color: var(--primary-color);
+            z-index: 2;
         }
         
         .benefit-card:hover {
@@ -392,15 +396,178 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .benefit-card h3 {
+        .benefit-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .benefit-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .benefit-card:hover .benefit-image img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.8), rgba(255, 68, 68, 0.6));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .benefit-card:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .overlay-icon {
+            color: white;
+            font-size: 3rem;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+        
+        .benefit-card:hover .overlay-icon {
+            transform: scale(1);
+        }
+        
+        .benefit-content {
+            padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .benefit-icon {
+            display: none; /* Masqué car remplacé par l'overlay */
+        }
+        
+        .benefit-content h3 {
             color: var(--primary-color);
             margin-bottom: 15px;
             font-size: 1.3rem;
+            font-weight: 600;
         }
         
-        .benefit-card p {
+        .benefit-content p {
             color: var(--light-text);
             line-height: 1.7;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        
+        .benefit-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .benefit-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+        
+        .benefit-features li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .conclusion-section {
+            margin-top: 80px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conclusion-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(209, 0, 0, 0.03) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .conclusion-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .conclusion-content h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .conclusion-content p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .conclusion-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .conclusion-stat {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .conclusion-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            display: block;
+            color: var(--light-text);
+            font-size: 1rem;
+            line-height: 1.5;
         }
         
         /* Animation et transitions pour les éléments de la page */
@@ -426,85 +593,239 @@
         
         /* Styles pour les sections restantes */
         .formation-types {
-            padding: 100px 0;
-            background-color: white;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
         
-        .formation-type {
-            margin-bottom: 80px;
-            background-color: #f9f9f9;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            position: relative;
+        .formation-types .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .formation-types .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+        
+        .formation-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .formation-type-card {
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
         }
         
-        .formation-type::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background-color: var(--primary-color);
+        .formation-type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
         
-        .formation-type h2 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            text-align: left;
+        .formation-type-header {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            padding: 30px;
+            color: white;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .formation-type-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .formation-type-badge {
+            background: rgba(255,255,255,0.9);
+            color: #dc3545;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .formation-type-content {
+            padding: 40px;
+        }
+        
+        .formation-type-content h3 {
+            color: #333;
+            font-size: 1.6rem;
             margin-bottom: 10px;
+            font-weight: 700;
         }
         
-        .formation-type h3 {
-            text-align: left;
+        .formation-type-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .formation-type-description {
             margin-bottom: 30px;
-            font-size: 1.5rem;
-            color: var(--accent-color);
         }
         
-        .formation-type p {
-            max-width: 800px;
-            text-align: left;
-            margin-bottom: 20px;
+        .formation-type-description p {
+            color: #555;
             line-height: 1.7;
-            color: var(--light-text);
+        }
+        
+        .formation-advantages {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .formation-advantages h4 {
+            color: #dc3545;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .formation-advantages ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .formation-advantages li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #555;
+        }
+        
+        .formation-advantages li i {
+            color: #28a745;
+            font-size: 1rem;
         }
         
         .formation-modalities {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 800px;
-            margin: 30px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
         }
         
         .formation-modalities h4 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 1.3rem;
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .formation-modalities ul {
-            padding-left: 20px;
+        .modality-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .modality-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #fff;
+            border: 2px solid #f1f3f4;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .modality-item:hover {
+            border-color: #dc3545;
+            background: #fef7f7;
+        }
+        
+        .modality-item i {
+            color: #dc3545;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+        
+        .formation-contact {
             margin-bottom: 20px;
         }
         
-        .formation-modalities li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 10px;
-            color: var(--light-text);
-            line-height: 1.7;
+        .formation-contact h4 {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .formation-modalities li::before {
-            content: "✔";
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
+        .contact-requirements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .requirement {
+            background: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-info {
+            margin-top: 15px;
+        }
+        
+        .contact-info p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .contact-info i {
+            color: #dc3545;
+            width: 16px;
+        }
+        
+        .formation-type-footer {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .formation-type-footer .btn {
+            width: 100%;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .catalog-section {
@@ -597,6 +918,7 @@
             margin-bottom: 15px;
             position: relative;
             display: inline-block;
+            transition: all 0.3s ease;
         }
         
         .stat-item .percentage::after {
@@ -605,12 +927,76 @@
             position: absolute;
             top: 10px;
             right: -20px;
+            color: var(--primary-color);
+        }
+        
+        .stat-item.animate .percentage {
+            transform: scale(1.1);
+        }
+        
+        .stat-item .percentage.counting {
+            color: #28a745;
         }
         
         .stat-item .description {
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--accent-color);
+        }
+        
+        /* Animations pour les statistiques */
+        .stat-item.animate {
+            animation: statPulse 0.6s ease-out;
+        }
+        
+        .stat-item .percentage.counting {
+            color: #28a745;
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.3);
+        }
+        
+        @keyframes statPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Animations pour les cartes de formation */
+        .formation-type-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .formation-type-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .formation-type-badge {
+            transition: all 0.3s ease;
+        }
+        
+        /* Amélioration responsive */
+        @media (max-width: 768px) {
+            .formation-types-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .formation-type-card {
+                margin: 0 10px;
+            }
+            
+            .formation-type-content {
+                padding: 30px 25px;
+            }
+            
+            .contact-requirements {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .requirement {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         .why-choose-us {
@@ -981,80 +1367,298 @@
 
     <section class="why-formation">
         <div class="container">
-            <h2 data-aos="fade-up" data-aos-duration="800">Pourquoi se former ?</h2>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <h2>Pourquoi se former ?</h2>
+                <p class="section-subtitle">Investir dans la formation, c'est investir dans l'avenir de votre carrière et de votre entreprise</p>
+            </div>
+            
             <div class="benefits-container">
                 <div class="benefit-card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
-                    <h3>Gagner en expertise et en efficacité</h3>
-                    <p>Acquérez des méthodes et des outils innovants pour optimiser vos études et projets.</p>
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ingénieur travaillant sur des plans techniques" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Gagner en expertise et en efficacité</h3>
+                        <p>Acquérez des méthodes et des outils innovants pour optimiser vos études et projets. Maîtrisez les dernières technologies du secteur.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check"></i> Outils de pointe</li>
+                            <li><i class="fas fa-check"></i> Méthodes éprouvées</li>
+                            <li><i class="fas fa-check"></i> Gain de productivité</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="benefit-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                    <h3>S'adapter aux évolutions réglementaires et normatives</h3>
-                    <p>Nos formations intègrent les dernières mises à jour en vigueur.</p>
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professionnel consultant des documents réglementaires" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>S'adapter aux évolutions réglementaires</h3>
+                        <p>Nos formations intègrent les dernières mises à jour normatives et réglementaires en vigueur dans le secteur du génie civil.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check"></i> Normes actualisées</li>
+                            <li><i class="fas fa-check"></i> Conformité garantie</li>
+                            <li><i class="fas fa-check"></i> Veille réglementaire</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="benefit-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                    <h3>Valoriser son profil professionnel</h3>
-                    <p>Une formation certifiée améliore vos opportunités de carrière et renforce votre crédibilité.</p>
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professionnel en réunion présentant ses compétences" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Valoriser son profil professionnel</h3>
+                        <p>Une formation certifiée améliore vos opportunités de carrière et renforce votre crédibilité auprès des employeurs et clients.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check"></i> Certification reconnue</li>
+                            <li><i class="fas fa-check"></i> Évolution de carrière</li>
+                            <li><i class="fas fa-check"></i> Crédibilité renforcée</li>
+                        </ul>
+                    </div>
                 </div>
                 
                 <div class="benefit-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
-                    <h3>Optimiser la performance des équipes</h3>
-                    <p>Pour les entreprises, former ses collaborateurs, c'est garantir des études et réalisations plus précises et conformes aux exigences du métier.</p>
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe d'ingénieurs collaborant sur un projet" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Développer l'esprit d'équipe</h3>
+                        <p>Nos formations favorisent les échanges entre professionnels et renforcent la cohésion d'équipe à travers des projets collaboratifs.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check"></i> Travail collaboratif</li>
+                            <li><i class="fas fa-check"></i> Échanges d'expériences</li>
+                            <li><i class="fas fa-check"></i> Réseau professionnel</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             
-            <p class="text-center slide-up" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800" style="text-align: center; margin-top: 40px;">Dans un monde en constante évolution, se former est un levier incontournable pour rester compétitif, s'adapter aux nouvelles normes et maîtriser les outils de pointe du génie civil. Chez Sorbo-Ingénierie, nous vous accompagnons dans le développement de vos compétences grâce à des formations techniques et spécialisées, adaptées aux enjeux actuels du secteur.</p>
+            <div class="conclusion-section" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+                <div class="conclusion-content">
+                    <h3>L'investissement formation : un choix stratégique</h3>
+                    <p>Dans un secteur en constante évolution, la formation continue est devenue indispensable pour maintenir sa compétitivité et anticiper les défis de demain.</p>
+                    <div class="conclusion-stats">
+                        <div class="conclusion-stat">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">de nos apprenants recommandent nos formations</span>
+                        </div>
+                        <div class="conclusion-stat">
+                            <span class="stat-number">87%</span>
+                            <span class="stat-label">constatent une amélioration immédiate de leur efficacité</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                            <circle cx="150" cy="120" r="15" fill="white" opacity="0.9"/>
+                            <circle cx="250" cy="120" r="15" fill="white" opacity="0.9"/>
+                            <circle cx="200" cy="180" r="15" fill="white" opacity="0.9"/>
+                            <circle cx="330" cy="70" r="8" fill="#d10000" opacity="0.4"/>
+                            <circle cx="70" cy="230" r="12" fill="#d10000" opacity="0.3"/>
+                            <text x="200" y="260" text-anchor="middle" fill="#666" font-size="14">Performance d'Équipe</text>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3>Optimiser la performance des équipes</h3>
+                        <p>Former ses collaborateurs garantit des études et réalisations plus précises, conformes aux exigences du métier et aux standards de qualité.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check"></i> Équipes performantes</li>
+                            <li><i class="fas fa-check"></i> Qualité des livrables</li>
+                            <li><i class="fas fa-check"></i> Cohésion renforcée</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="why-formation-conclusion" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+                <div class="conclusion-content">
+                    <div class="conclusion-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>L'investissement formation : un levier stratégique</h3>
+                    <p>Dans un monde en constante évolution, se former est un levier incontournable pour rester compétitif, s'adapter aux nouvelles normes et maîtriser les outils de pointe du génie civil. Chez Sorbo-Ingénierie, nous vous accompagnons dans le développement de vos compétences grâce à des formations techniques et spécialisées, adaptées aux enjeux actuels du secteur.</p>
+                    <div class="conclusion-stats">
+                        <div class="mini-stat">
+                            <span class="mini-number">95%</span>
+                            <span class="mini-label">Satisfaction</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-number">500+</span>
+                            <span class="mini-label">Professionnels formés</span>
+                        </div>
+                        <div class="mini-stat">
+                            <span class="mini-number">15+</span>
+                            <span class="mini-label">Années d'expérience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="types-formations" class="formation-types">
         <div class="container">
-            <h2 data-aos="fade-up" data-aos-duration="800">Nos types de formation</h2>
-            
-            <div class="formation-type" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                <h2>Formation Intra-Entreprises :</h2>
-                <h3>Une approche sur-mesure</h3>
-                <p>Nos formations intra-entreprises sont spécialement conçues pour répondre aux besoins spécifiques des entreprises. Elles permettent d'aborder des problématiques précises en adaptant le programme aux exigences du commanditaire, garantissant ainsi une montée en compétence ciblée et efficace.</p>
-                <p>Nous vous accompagnons pour concevoir une formation parfaitement alignée avec vos objectifs et vos contraintes opérationnelles.</p>
-                
-                <div class="formation-modalities">
-                    <h4>Nos modalités</h4>
-                    <ul>
-                        <li>Les sessions se tiennent, sauf exception, dans les locaux de l'entreprise mandataire.</li>
-                        <li>Les dates sont définies en fonction des disponibilités des salariés et de nos formateurs experts.</li>
-                        <li>Nos formations sont accessibles aux personnes à mobilité réduite, sous réserve de disposer d'une salle adaptée.</li>
-                    </ul>
-                    
-                    <h4>Organisation d'une session</h4>
-                    <p>Pour mettre en place une formation adaptée à vos besoins, contactez-nous à contact@sorbo-ingenierie.ci en précisant :</p>
-                    <ul>
-                        <li>Le module de formation souhaité</li>
-                        <li>Le nombre de participants</li>
-                        <li>Le lieu et la période prévue</li>
-                    </ul>
-                </div>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <h2>Nos types de formation</h2>
+                <p class="section-subtitle">Choisissez la modalité qui correspond le mieux à vos besoins</p>
             </div>
             
-            <div class="formation-type" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                <h2>Formation Inter-Entreprises :</h2>
-                <h3>Développez vos compétences en réseau</h3>
-                <p>Nos formations inter-entreprises offrent une opportunité unique d'apprentissage et d'échange entre professionnels issus de différents secteurs. Organisées dans nos locaux, elles permettent aux participants de bénéficier d'un cadre structuré et d'un programme adapté aux exigences du marché.</p>
-                <p>💡 Investissez dans votre avenir professionnel avec Sorbo-Ingénierie et accédez à des formations reconnues et certifiées.</p>
-                
-                <div class="formation-modalities">
-                    <h4>Nos modalités</h4>
-                    <ul>
-                        <li>Contenus et dates prédéfinis selon notre programme de formation.</li>
-                        <li>Les sessions sont maintenues sous réserve d'un nombre suffisant de participants.</li>
-                        <li>Les dates sont fixes et ne peuvent être modifiées.</li>
-                        <li>En cas d'annulation par un participant moins de 15 jours avant la session, une retenue de 30 % sera appliquée.</li>
-                        <li>Il est possible de remplacer un participant inscrit en cas d'indisponibilité.</li>
-                    </ul>
+            <div class="formation-types-grid">
+                <!-- Formation Intra-Entreprises -->
+                <div class="formation-type-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                    <div class="formation-type-header">
+                        <div class="formation-type-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="formation-type-badge">Sur-mesure</div>
+                    </div>
                     
-                    <h4>Inscription</h4>
-                    <p>Pour vous inscrire, remplissez et retournez le bulletin d'inscription en précisant le module choisi et la période souhaitée.</p>
-                    <p>📞 Besoin d'informations ? Contactez-nous à contact@sorbo-ingenierie.ci</p>
+                    <div class="formation-type-content">
+                        <h3>Formation Intra-Entreprises</h3>
+                        <p class="formation-type-subtitle">Une approche personnalisée pour votre entreprise</p>
+                        
+                        <div class="formation-type-description">
+                            <p>Nos formations intra-entreprises sont spécialement conçues pour répondre aux besoins spécifiques de votre organisation. Elles permettent d'aborder des problématiques précises en adaptant le programme aux exigences du commanditaire.</p>
+                        </div>
+                        
+                        <div class="formation-advantages">
+                            <h4><i class="fas fa-star"></i> Avantages clés</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Programme adapté à vos besoins spécifiques</li>
+                                <li><i class="fas fa-check"></i> Formation dans vos locaux</li>
+                                <li><i class="fas fa-check"></i> Dates flexibles selon vos disponibilités</li>
+                                <li><i class="fas fa-check"></i> Cohésion d'équipe renforcée</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="formation-modalities">
+                            <h4><i class="fas fa-cogs"></i> Modalités pratiques</h4>
+                            <div class="modality-grid">
+                                <div class="modality-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Dans vos locaux (sauf exception)</span>
+                                </div>
+                                <div class="modality-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Dates définies ensemble</span>
+                                </div>
+                                <div class="modality-item">
+                                    <i class="fas fa-universal-access"></i>
+                                    <span>Accessible PMR</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="formation-contact">
+                            <h4><i class="fas fa-envelope"></i> Organisation d'une session</h4>
+                            <p>Contactez-nous à <strong>contact@sorbo-ingenierie.ci</strong> en précisant :</p>
+                            <div class="contact-requirements">
+                                <span class="requirement"><i class="fas fa-book"></i> Module souhaité</span>
+                                <span class="requirement"><i class="fas fa-users"></i> Nombre de participants</span>
+                                <span class="requirement"><i class="fas fa-clock"></i> Période prévue</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="formation-type-footer">
+                        <a href="contact.html" class="btn primary-btn">Demander un devis</a>
+                    </div>
+                </div>
+                
+                <!-- Formation Inter-Entreprises -->
+                <div class="formation-type-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                    <div class="formation-type-header">
+                        <div class="formation-type-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="formation-type-badge">Réseau</div>
+                    </div>
+                    
+                    <div class="formation-type-content">
+                        <h3>Formation Inter-Entreprises</h3>
+                        <p class="formation-type-subtitle">Développez vos compétences en réseau professionnel</p>
+                        
+                        <div class="formation-type-description">
+                            <p>Nos formations inter-entreprises offrent une opportunité unique d'apprentissage et d'échange entre professionnels issus de différents secteurs. Organisées dans nos locaux modernes, elles favorisent le networking et l'enrichissement mutuel.</p>
+                        </div>
+                        
+                        <div class="formation-advantages">
+                            <h4><i class="fas fa-star"></i> Avantages clés</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Échanges avec d'autres professionnels</li>
+                                <li><i class="fas fa-check"></i> Programmes certifiés et reconnus</li>
+                                <li><i class="fas fa-check"></i> Locaux équipés et modernes</li>
+                                <li><i class="fas fa-check"></i> Réseau professionnel élargi</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="formation-modalities">
+                            <h4><i class="fas fa-cogs"></i> Modalités pratiques</h4>
+                            <div class="modality-grid">
+                                <div class="modality-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Dates et contenus prédéfinis</span>
+                                </div>
+                                <div class="modality-item">
+                                    <i class="fas fa-user-friends"></i>
+                                    <span>Nombre minimum requis</span>
+                                </div>
+                                <div class="modality-item">
+                                    <i class="fas fa-exchange-alt"></i>
+                                    <span>Remplacement possible</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="formation-contact">
+                            <h4><i class="fas fa-clipboard-list"></i> Inscription</h4>
+                            <p>Remplissez le bulletin d'inscription en précisant le module et la période souhaités.</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-info-circle"></i> <strong>Annulation :</strong> Retenue de 30% si moins de 15 jours avant la session</p>
+                                <p><i class="fas fa-phone"></i> <strong>Contact :</strong> contact@sorbo-ingenierie.ci</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="formation-type-footer">
+                        <a href="#formations-disponibles" class="btn primary-btn">Voir les formations</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1594,6 +2198,121 @@
                 alert('Félicitations ! Votre inscription a été confirmée. Vous recevrez un email de confirmation dans quelques instants.');
             });
         });
+        
+        // Animation des statistiques de formation 2023
+        function animateStatistics() {
+            const statItems = document.querySelectorAll('.stat-item');
+            const statisticsSection = document.querySelector('.statistics');
+            
+            if (!statisticsSection) return;
+            
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const statisticsObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statisticsObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            statisticsObserver.observe(statisticsSection);
+            
+            function animateCounters() {
+                statItems.forEach(function(item, index) {
+                    const percentage = item.querySelector('.percentage');
+                    if (!percentage) return;
+                    
+                    const finalValue = parseInt(percentage.textContent);
+                    let currentValue = 0;
+                    const increment = finalValue / 60; // Animation sur 60 étapes pour plus de fluidité
+                    const duration = 2500; // 2.5 secondes
+                    const stepTime = duration / 60;
+                    
+                    // Ajouter des classes d'animation
+                    item.classList.add('animate');
+                    percentage.classList.add('counting');
+                    
+                    // Animation du compteur avec délai progressif
+                    setTimeout(function() {
+                        const counter = setInterval(function() {
+                            currentValue += increment;
+                            if (currentValue >= finalValue) {
+                                currentValue = finalValue;
+                                clearInterval(counter);
+                                percentage.classList.remove('counting');
+                                
+                                // Animation finale de mise en évidence
+                                percentage.style.transform = 'scale(1.1)';
+                                setTimeout(function() {
+                                    percentage.style.transform = 'scale(1)';
+                                }, 300);
+                            }
+                            percentage.textContent = Math.floor(currentValue);
+                        }, stepTime);
+                        
+                        // Animation de la carte
+                        item.style.transform = 'translateY(-5px) scale(1.02)';
+                        item.style.boxShadow = '0 20px 40px rgba(220, 53, 69, 0.2)';
+                        
+                        setTimeout(function() {
+                            item.style.transform = 'translateY(0) scale(1)';
+                            item.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
+                        }, 2000);
+                        
+                    }, index * 300); // Délai progressif entre chaque statistique
+                });
+            }
+        }
+        
+        // Amélioration des animations de formation types
+        function enhanceFormationTypeAnimations() {
+            const formationCards = document.querySelectorAll('.formation-type-card');
+            
+            formationCards.forEach(function(card, index) {
+                // Animation au survol améliorée
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) scale(1.02)';
+                    this.style.boxShadow = '0 30px 60px rgba(220, 53, 69, 0.15)';
+                    
+                    // Animation des éléments internes
+                    const icon = this.querySelector('.formation-type-icon');
+                    const badge = this.querySelector('.formation-type-badge');
+                    
+                    if (icon) {
+                        icon.style.transform = 'rotate(10deg) scale(1.1)';
+                    }
+                    if (badge) {
+                        badge.style.transform = 'scale(1.05)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                    this.style.boxShadow = '0 25px 50px rgba(0,0,0,0.15)';
+                    
+                    const icon = this.querySelector('.formation-type-icon');
+                    const badge = this.querySelector('.formation-type-badge');
+                    
+                    if (icon) {
+                        icon.style.transform = 'rotate(0deg) scale(1)';
+                    }
+                    if (badge) {
+                        badge.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        }
+        
+        // Initialisation des animations améliorées
+        document.addEventListener('DOMContentLoaded', function() {
+            animateStatistics();
+            enhanceFormationTypeAnimations();
+        });
     </script>
 
     <!-- Modales d'inscription et de paiement -->
@@ -1757,4 +2476,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
