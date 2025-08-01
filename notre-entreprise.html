@@ -95,26 +95,84 @@
             z-index: 1;
         }
         
-        .values-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* Uniformisation des titres de sections */
+        .company-values h2,
+        .team-section h2,
+        .presentation h2,
+        .cta h2 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        
+        /* Styles améliorés pour la section des valeurs */
+        .company-values {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-values::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(209, 0, 0, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(209, 0, 0, 0.03) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .company-values .container {
             position: relative;
             z-index: 2;
         }
         
-        .value-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        .values-header {
             text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .values-header h2 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        .values-header p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .values-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .value-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
         
         .value-card::before {
@@ -123,42 +181,85 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: var(--primary-color);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #e53e3e);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .value-card:hover::before {
+            transform: scaleX(1);
         }
         
         .value-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: rgba(209, 0, 0, 0.2);
+        }
+        
+        .value-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
         
         .value-card .icon {
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), #e53e3e);
             color: white;
-            border-radius: 50%;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease;
+            border-radius: 18px;
+            font-size: 1.8rem;
+            margin-right: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.25);
         }
         
         .value-card:hover .icon {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(209, 0, 0, 0.35);
         }
         
-        .value-card h3 {
-            margin-bottom: 20px;
+        .value-header h3 {
+            margin: 0;
             color: var(--primary-color);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.3;
         }
         
         .value-card p {
             color: var(--light-text);
             line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+        
+        .value-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .value-badge {
+            background: rgba(209, 0, 0, 0.1);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(209, 0, 0, 0.2);
+        }
+        
+        .value-card:hover .value-badge {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
         }
         
         .team-section {
@@ -186,6 +287,7 @@
         
         /* Nouveau design minimaliste pour les domaines d'intervention */
         .domains {
+            display: none; /* Section masquée */
             padding: 120px 0;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             position: relative;
@@ -807,8 +909,14 @@
                 font-size: 2.2rem;
             }
             
-            .domains-list {
-                grid-template-columns: 1fr;
+            .domains-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
             }
         }
         
@@ -833,15 +941,27 @@
                 font-size: 2rem;
             }
             
-            .domain-item {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+            .domains-grid, .values-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .domain-item i {
-                margin-right: 0;
-                margin-bottom: 15px;
+            .domain-item, .value-card {
+                padding: 25px 20px;
+            }
+            
+            .domain-icon, .icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .domain-content h3, .value-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .domains-header h2, .values-header h2 {
+                font-size: 2rem;
             }
             
             .cta-buttons {
@@ -864,12 +984,6 @@
                 padding: 60px 0;
             }
             
-            .value-card .icon {
-                width: 70px;
-                height: 70px;
-                font-size: 1.8rem;
-            }
-            
             .hero-arrows {
                 padding: 0 15px;
             }
@@ -878,6 +992,29 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .domains, .values {
+                padding: 50px 0;
+            }
+            
+            .domains-header h2, .values-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .domain-item, .value-card {
+                padding: 20px 15px;
+            }
+            
+            .domain-features, .value-features {
+                gap: 6px;
+            }
+            
+            .domain-feature, .value-badge {
+                padding: 6px 10px;
+                font-size: 0.75rem;
             }
         }
         
@@ -1294,111 +1431,105 @@
 
     <section class="domains">
         <div class="container">
-            <h2 data-aos="fade-up" data-aos-duration="800">Domaines d'Intervention</h2>
-            <p data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">Nous opérons dans plusieurs secteur clés du génie civil :</p>
-            <div class="domains-carousel" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="carousel-item active">
-                            <div class="domain-card">
-                                <div class="domain-icon">
-                                    <i class="fas fa-pencil-ruler"></i>
-                                </div>
-                                <div class="domain-content">
-                                    <h3>Études et conception</h3>
-                                    <p>Réalisation d'études de faisabilité, d'avant-projet d'exécution pour des infrastructures et bâtiments. Notre équipe d'ingénieurs expérimentés conçoit des solutions innovantes et adaptées à vos besoins.</p>
-                                    <ul class="domain-features">
-                                        <li>Études préliminaires et de faisabilité</li>
-                                        <li>Conception détaillée et plans d'exécution</li>
-                                        <li>Dimensionnement de structures</li>
-                                        <li>Modélisation 3D et BIM</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="domain-card">
-                                <div class="domain-icon">
-                                    <i class="fas fa-handshake"></i>
-                                </div>
-                                <div class="domain-content">
-                                    <h3>Assistance à maîtrise d'ouvrage</h3>
-                                    <p>Conseil et accompagnement des maîtres d'ouvrage pour assurer la réussite des projets. Nous vous assistons dans toutes les phases, de la conception à la réception des travaux.</p>
-                                    <ul class="domain-features">
-                                        <li>Programmation et définition des besoins</li>
-                                        <li>Montage technique et financier</li>
-                                        <li>Suivi des délais et des budgets</li>
-                                        <li>Coordination des intervenants</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="domain-card">
-                                <div class="domain-icon">
-                                    <i class="fas fa-clipboard-check"></i>
-                                </div>
-                                <div class="domain-content">
-                                    <h3>Contrôle et suivi des travaux</h3>
-                                    <p>Supervision technique et contrôle qualité des ouvrages en phase de réalisation. Nos experts veillent au respect des normes et à la conformité des travaux.</p>
-                                    <ul class="domain-features">
-                                        <li>Contrôle de la qualité d'exécution</li>
-                                        <li>Vérification des matériaux</li>
-                                        <li>Suivi du planning d'exécution</li>
-                                        <li>Rapports de chantier détaillés</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="domain-card">
-                                <div class="domain-icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="domain-content">
-                                    <h3>Formation professionnelle</h3>
-                                    <p>Programmes de formation spécialisés pour ingénieurs, techniciens et entreprises du secteur du BTP. Nous partageons notre expertise pour renforcer les compétences de vos équipes.</p>
-                                    <ul class="domain-features">
-                                        <li>Logiciels techniques et de CAO</li>
-                                        <li>Normes et réglementations</li>
-                                        <li>Méthodes de calcul et dimensionnement</li>
-                                        <li>Management de projets de construction</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="domain-card">
-                                <div class="domain-icon">
-                                    <i class="fas fa-laptop-code"></i>
-                                </div>
-                                <div class="domain-content">
-                                    <h3>Développement de logiciels</h3>
-                                    <p>Conception d'outils numériques pour l'analyse, la modélisation et l'optimisation des projets d'ingénierie. Nos solutions logicielles facilitent votre travail quotidien.</p>
-                                    <ul class="domain-features">
-                                        <li>Solutions de calcul automatisées</li>
-                                        <li>Applications métier spécifiques</li>
-                                        <li>Outils d'aide à la décision</li>
-                                        <li>Interconnexion avec les logiciels standards</li>
-                                    </ul>
-                                </div>
-                            </div>
+            <div class="domains-header" data-aos="fade-up" data-aos-duration="800">
+                <h2>Domaines d'Intervention</h2>
+                <p>Nous opérons dans plusieurs secteurs clés du génie civil avec une expertise reconnue et des solutions innovantes</p>
+            </div>
+            
+            <div class="domains-grid">
+                <div class="domain-item" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+                    <div class="domain-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <div class="domain-content">
+                        <h3>Études et Conception</h3>
+                        <p>Réalisation d'études de faisabilité, d'avant-projet et d'exécution pour des infrastructures et bâtiments. Notre équipe d'ingénieurs expérimentés conçoit des solutions innovantes et adaptées à vos besoins spécifiques.</p>
+                        <div class="domain-features">
+                            <span class="domain-feature">Études préliminaires</span>
+                            <span class="domain-feature">Plans d'exécution</span>
+                            <span class="domain-feature">Dimensionnement</span>
+                            <span class="domain-feature">Modélisation 3D</span>
                         </div>
                     </div>
-                    <div class="carousel-nav">
-                        <button class="carousel-prev" aria-label="Domaine précédent">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <div class="carousel-dots">
-                            <span class="carousel-dot active" data-index="0"></span>
-                            <span class="carousel-dot" data-index="1"></span>
-                            <span class="carousel-dot" data-index="2"></span>
-                            <span class="carousel-dot" data-index="3"></span>
-                            <span class="carousel-dot" data-index="4"></span>
+                </div>
+                
+                <div class="domain-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                    <div class="domain-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="domain-content">
+                        <h3>Assistance à Maîtrise d'Ouvrage</h3>
+                        <p>Conseil et accompagnement des maîtres d'ouvrage pour assurer la réussite des projets. Nous vous assistons dans toutes les phases, de la conception à la réception des travaux.</p>
+                        <div class="domain-features">
+                            <span class="domain-feature">Programmation</span>
+                            <span class="domain-feature">Montage financier</span>
+                            <span class="domain-feature">Suivi budgétaire</span>
+                            <span class="domain-feature">Coordination</span>
                         </div>
-                        <button class="carousel-next" aria-label="Domaine suivant">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                    </div>
+                </div>
+                
+                <div class="domain-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                    <div class="domain-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="domain-content">
+                        <h3>Contrôle et Suivi des Travaux</h3>
+                        <p>Supervision technique et contrôle qualité des ouvrages en phase de réalisation. Nos experts veillent au respect des normes et à la conformité des travaux.</p>
+                        <div class="domain-features">
+                            <span class="domain-feature">Contrôle qualité</span>
+                            <span class="domain-feature">Vérification matériaux</span>
+                            <span class="domain-feature">Suivi planning</span>
+                            <span class="domain-feature">Rapports détaillés</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="domain-item" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                    <div class="domain-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="domain-content">
+                        <h3>Formation Professionnelle</h3>
+                        <p>Programmes de formation spécialisés pour ingénieurs, techniciens et entreprises du secteur du BTP. Nous partageons notre expertise pour renforcer les compétences de vos équipes.</p>
+                        <div class="domain-features">
+                            <span class="domain-feature">Logiciels CAO</span>
+                            <span class="domain-feature">Normes techniques</span>
+                            <span class="domain-feature">Méthodes de calcul</span>
+                            <span class="domain-feature">Management de projets</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="domain-item" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+                    <div class="domain-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="domain-content">
+                        <h3>Développement de Logiciels</h3>
+                        <p>Conception d'outils numériques pour l'analyse, la modélisation et l'optimisation des projets d'ingénierie. Nos solutions logicielles facilitent votre travail quotidien.</p>
+                        <div class="domain-features">
+                            <span class="domain-feature">Calcul automatisé</span>
+                            <span class="domain-feature">Applications métier</span>
+                            <span class="domain-feature">Aide à la décision</span>
+                            <span class="domain-feature">Interconnexion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="domain-item" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
+                    <div class="domain-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="domain-content">
+                        <h3>Expertise Technique</h3>
+                        <p>Missions d'expertise et d'audit technique pour évaluer l'état des ouvrages existants. Nous proposons des solutions de réhabilitation et de renforcement adaptées.</p>
+                        <div class="domain-features">
+                            <span class="domain-feature">Diagnostic structure</span>
+                            <span class="domain-feature">Audit technique</span>
+                            <span class="domain-feature">Solutions de réparation</span>
+                            <span class="domain-feature">Renforcement</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1407,30 +1538,100 @@
 
     <section class="company-values">
         <div class="container">
-            <h2 data-aos="fade-up" data-aos-duration="800">Nos Valeurs</h2>
+            <div class="values-header" data-aos="fade-up" data-aos-duration="800">
+                <h2>Nos Valeurs</h2>
+                <p>Des principes humains qui guident chacune de nos actions et forgent notre identité d'entreprise</p>
+            </div>
+            
             <div class="values-container">
                 <div class="value-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                    <div class="icon">
-                        <i class="fas fa-users"></i>
+                    <div class="value-header">
+                        <div class="icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Humanité & Bienveillance</h3>
                     </div>
-                    <h3>Une culture centrée sur l'humain</h3>
-                    <p>Nous plaçons l'humain au cœur de notre démarche, avec une équipe passionnée qui fait de chaque mission une opportunité d'excellence et de progrès.</p>
+                    <p>Nous plaçons l'humain au cœur de notre démarche. Chaque collaborateur, chaque client, chaque partenaire est traité avec respect et considération. Notre équipe passionnée fait de chaque mission une opportunité d'excellence et de progrès partagé.</p>
+                    <div class="value-features">
+                        <span class="value-badge">Écoute active</span>
+                        <span class="value-badge">Respect mutuel</span>
+                        <span class="value-badge">Épanouissement professionnel</span>
+                    </div>
                 </div>
                 
                 <div class="value-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                    <div class="icon">
-                        <i class="fas fa-award"></i>
+                    <div class="value-header">
+                        <div class="icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Excellence & Intégrité</h3>
                     </div>
-                    <h3>L'excellence comme valeur fondatrice</h3>
-                    <p>Entreprise indépendante, engagée et rigoureuse, nous construisons chaque projet sur des fondations solides : la compétence, la transparence et le souci permanent de la qualité.</p>
+                    <p>Entreprise indépendante, engagée et rigoureuse, nous construisons chaque projet sur des fondations solides : la compétence technique, la transparence dans nos relations et le souci permanent de la qualité dans nos réalisations.</p>
+                    <div class="value-features">
+                        <span class="value-badge">Qualité irréprochable</span>
+                        <span class="value-badge">Transparence totale</span>
+                        <span class="value-badge">Engagement sincère</span>
+                    </div>
                 </div>
                 
                 <div class="value-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
-                    <div class="icon">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="value-header">
+                        <div class="icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Innovation & Performance</h3>
                     </div>
-                    <h3>Performance</h3>
-                    <p>Nous nous engageons à fournir des résultats d'exception, en optimisant chaque aspect de nos projets pour atteindre l'excellence technique et économique.</p>
+                    <p>Nous nous engageons à fournir des résultats d'exception en alliant innovation technologique et méthodes éprouvées. Chaque projet est une opportunité d'optimiser nos processus et de repousser les limites de l'excellence.</p>
+                    <div class="value-features">
+                        <span class="value-badge">Solutions innovantes</span>
+                        <span class="value-badge">Résultats mesurables</span>
+                        <span class="value-badge">Amélioration continue</span>
+                    </div>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+                    <div class="value-header">
+                        <div class="icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Collaboration & Confiance</h3>
+                    </div>
+                    <p>Nous croyons en la force du travail d'équipe et en l'importance de relations durables. La confiance mutuelle avec nos clients et partenaires est le socle de notre réussite commune et de projets aboutis.</p>
+                    <div class="value-features">
+                        <span class="value-badge">Esprit d'équipe</span>
+                        <span class="value-badge">Partenariats durables</span>
+                        <span class="value-badge">Communication ouverte</span>
+                    </div>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
+                    <div class="value-header">
+                        <div class="icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Responsabilité & Durabilité</h3>
+                    </div>
+                    <p>Conscients de notre impact sur l'environnement et la société, nous intégrons les principes du développement durable dans nos projets. Nous construisons aujourd'hui en pensant aux générations futures.</p>
+                    <div class="value-features">
+                        <span class="value-badge">Éco-conception</span>
+                        <span class="value-badge">Impact social positif</span>
+                        <span class="value-badge">Vision long terme</span>
+                    </div>
+                </div>
+                
+                <div class="value-card" data-aos="fade-up" data-aos-delay="700" data-aos-duration="800">
+                    <div class="value-header">
+                        <div class="icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Apprentissage & Évolution</h3>
+                    </div>
+                    <p>Dans un secteur en constante évolution, nous cultivons une culture d'apprentissage permanent. Chaque défi est une opportunité de grandir, d'innover et de renforcer notre expertise collective.</p>
+                    <div class="value-features">
+                        <span class="value-badge">Formation continue</span>
+                        <span class="value-badge">Veille technologique</span>
+                        <span class="value-badge">Partage de connaissances</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1756,122 +1957,6 @@
                     modalBody.innerHTML = '';
                 }, 300);
             }
-            
-            // Gestion du carousel de domaines d'intervention
-            const domainsCarousel = {
-                track: document.querySelector('.domains-carousel .carousel-track'),
-                items: document.querySelectorAll('.domains-carousel .carousel-item'),
-                prevBtn: document.querySelector('.domains-carousel .carousel-prev'),
-                nextBtn: document.querySelector('.domains-carousel .carousel-next'),
-                dots: document.querySelectorAll('.domains-carousel .carousel-dot'),
-                currentIndex: 0,
-                itemCount: document.querySelectorAll('.domains-carousel .carousel-item').length,
-                autoplayInterval: null,
-                
-                init: function() {
-                    // Si le carousel n'existe pas sur cette page, on sort de la fonction
-                    if (!this.track) return;
-                    
-                    // Configuration initiale
-                    this.updateCarousel();
-                    this.startAutoplay();
-                    
-                    // Boutons de navigation
-                    this.prevBtn.addEventListener('click', () => {
-                        this.prevSlide();
-                        this.resetAutoplay();
-                    });
-                    
-                    this.nextBtn.addEventListener('click', () => {
-                        this.nextSlide();
-                        this.resetAutoplay();
-                    });
-                    
-                    // Indicateurs
-                    this.dots.forEach((dot, index) => {
-                        dot.addEventListener('click', () => {
-                            this.currentIndex = index;
-                            this.updateCarousel();
-                            this.resetAutoplay();
-                        });
-                    });
-                    
-                    // Support tactile
-                    let touchStartX = 0;
-                    let touchEndX = 0;
-                    const container = document.querySelector('.domains-carousel .carousel-container');
-                    
-                    container.addEventListener('touchstart', (e) => {
-                        touchStartX = e.changedTouches[0].screenX;
-                    }, { passive: true });
-                    
-                    container.addEventListener('touchend', (e) => {
-                        touchEndX = e.changedTouches[0].screenX;
-                        const diff = touchStartX - touchEndX;
-                        
-                        if (Math.abs(diff) > 50) {
-                            if (diff > 0) {
-                                this.nextSlide();
-                            } else {
-                                this.prevSlide();
-                            }
-                            this.resetAutoplay();
-                        }
-                    }, { passive: true });
-                },
-                
-                updateCarousel: function() {
-                    // Mise à jour de la position du track
-                    this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
-                    
-                    // Mise à jour des classes actives
-                    this.items.forEach((item, index) => {
-                        if (index === this.currentIndex) {
-                            item.classList.add('active');
-                        } else {
-                            item.classList.remove('active');
-                        }
-                    });
-                    
-                    this.dots.forEach((dot, index) => {
-                        if (index === this.currentIndex) {
-                            dot.classList.add('active');
-                        } else {
-                            dot.classList.remove('active');
-                        }
-                    });
-                },
-                
-                nextSlide: function() {
-                    this.currentIndex++;
-                    if (this.currentIndex >= this.itemCount) {
-                        this.currentIndex = 0;
-                    }
-                    this.updateCarousel();
-                },
-                
-                prevSlide: function() {
-                    this.currentIndex--;
-                    if (this.currentIndex < 0) {
-                        this.currentIndex = this.itemCount - 1;
-                    }
-                    this.updateCarousel();
-                },
-                
-                startAutoplay: function() {
-                    this.autoplayInterval = setInterval(() => {
-                        this.nextSlide();
-                    }, 5000);
-                },
-                
-                resetAutoplay: function() {
-                    clearInterval(this.autoplayInterval);
-                    this.startAutoplay();
-                }
-            };
-            
-            // Initialisation du carousel
-            domainsCarousel.init();
             
             // Gestion du carousel de la bannière héroïque (valeurs)
             const heroCarousel = {
