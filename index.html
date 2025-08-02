@@ -64,7 +64,6 @@
             background-color: rgba(255, 255, 255, 0.15);
             padding: 15px 25px;
             border-radius: 10px;
-            backdrop-filter: blur(5px);
             transition: transform 0.3s ease, background-color 0.3s ease;
             text-decoration: none;
             color: white;
@@ -650,12 +649,10 @@
         
         img[loading="lazy"] {
             opacity: 0;
-            filter: blur(10px);
         }
-        
+
         img.loaded {
             opacity: 1;
-            filter: blur(0);
         }
         
         /* Styles pour le carousel de projets */
@@ -979,7 +976,7 @@
         
         <!-- Icônes flottantes à droite - uniquement dans la section hero -->
         <div class="floating-icons">
-            <a href="contact.html" class="floating-icon" aria-label="Nous contacter">
+            <a href="tel:+2252121802126" class="floating-icon" aria-label="Nous contacter">
                 <i class="fas fa-phone"></i>
                 <span class="tooltip">Nous contacter</span>
             </a>
