@@ -621,13 +621,56 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
+            border: 1px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .formation-type-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #dc3545, #ff6b7a, #dc3545);
+            border-radius: 20px;
+            padding: 2px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        
+        .formation-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+            z-index: 1;
         }
         
         .formation-type-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+        
+        .formation-type-card:hover::before {
+            left: 100%;
+        }
+        
+        .formation-type-card:hover::after {
+            opacity: 1;
+        }
+        
+        .formation-type-card:hover .formation-type-content {
+            transform: translateY(-5px);
         }
         
         .formation-type-header {
@@ -649,6 +692,15 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .formation-type-card:hover .formation-type-icon {
+            transform: rotate(360deg) scale(1.1);
+            background: rgba(255,255,255,0.3);
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
         }
         
         .formation-type-badge {
@@ -658,10 +710,22 @@
             border-radius: 20px;
             font-weight: 600;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .formation-type-card:hover .formation-type-badge {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
         }
         
         .formation-type-content {
             padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
         
         .formation-type-content h3 {
@@ -763,6 +827,12 @@
             color: #dc3545;
             font-size: 1.1rem;
             width: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .modality-item:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: #ff4757;
         }
         
         .formation-contact {
@@ -848,7 +918,7 @@
         
         .catalog-section h2 {
             margin-bottom: 40px;
-            position: relative;
+           position: relative;
             z-index: 2;
         }
         
@@ -918,7 +988,8 @@
             margin-bottom: 15px;
             position: relative;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .stat-item .percentage::after {
@@ -928,14 +999,28 @@
             top: 10px;
             right: -20px;
             color: var(--primary-color);
+            transition: all 0.3s ease;
         }
         
         .stat-item.animate .percentage {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
+            color: #28a745;
+            text-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        .stat-item.animate .percentage::after {
+            transform: rotate(-5deg);
+            color: #28a745;
         }
         
         .stat-item .percentage.counting {
             color: #28a745;
+            animation: pulse 0.8s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         .stat-item .description {
@@ -1308,8 +1393,8 @@
                 <ul class="main-nav">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
-                    <li><a href="nos-formations.html" class="active">Nos formations</a></li>
-                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li><a href="Nos-formations.html" class="active">Nos formations</a></li>
+                    <li><a href="ingenierie.html">Ingenierie</a></li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li><a href="contact.html">Contactez-nous</a></li>
@@ -1428,6 +1513,8 @@
                             </div>
                         </div>
                     </div>
+                                                   
+
                     <div class="benefit-content">
                         <div class="benefit-icon">
                             <i class="fas fa-trophy"></i>
@@ -1462,14 +1549,41 @@
                             <li><i class="fas fa-check"></i> Échanges d'expériences</li>
                             <li><i class="fas fa-check"></i> Réseau professionnel</li>
                         </ul>
+                        
+                    </div>
+                  
+                </div>
+                  <div class="benefit-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                    <div class="benefit-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe d'ingénieurs collaborant sur un projet" loading="lazy">
+                        <div class="image-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
+               
+               <div class="benefit-content">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3>Optimiser la performance des équipes</h3>
+                        <p>Former ses collaborateurs garantit des études et réalisations plus précises, conformes aux exigences du métier et aux standards de qualité.</p>
+                        <ul class="benefit-features">
+                            <li><i class="fas fa-check"></i> Équipes performantes</li>
+                            <li><i class="fas fa-check"></i> Qualité des livrables</li>
+                            <li><i class="fas fa-check"></i> Cohésion renforcée</li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+            
             </div>
             
             <div class="conclusion-section" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
                 <div class="conclusion-content">
                     <h3>L'investissement formation : un choix stratégique</h3>
-                    <p>Dans un secteur en constante évolution, la formation continue est devenue indispensable pour maintenir sa compétitivité et anticiper les défis de demain.</p>
+                    <p> Dans un monde en constante évolution, se former est un levier incontournable pour rester compétitif, s'adapter aux nouvelles normes et maîtriser les outils de pointe du génie civil. Chez Sorbo-Ingénierie, nous vous accompagnons dans le développement de vos compétences grâce à des formations techniques et spécialisées, adaptées aux enjeux actuels du secteur.</p>
                     <div class="conclusion-stats">
                         <div class="conclusion-stat">
                             <span class="stat-number">95%</span>
@@ -1488,24 +1602,10 @@
                             <circle cx="200" cy="180" r="15" fill="white" opacity="0.9"/>
                             <circle cx="330" cy="70" r="8" fill="#d10000" opacity="0.4"/>
                             <circle cx="70" cy="230" r="12" fill="#d10000" opacity="0.3"/>
-                            <text x="200" y="260" text-anchor="middle" fill="#666" font-size="14">Performance d'Équipe</text>
+                            <text x="200" y="260" text-anchor="middle" fill="#666" font-size="14"></text>
                         </svg>
                     </div>
-                    <div class="benefit-content">
-                        <div class="benefit-icon">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <h3>Optimiser la performance des équipes</h3>
-                        <p>Former ses collaborateurs garantit des études et réalisations plus précises, conformes aux exigences du métier et aux standards de qualité.</p>
-                        <ul class="benefit-features">
-                            <li><i class="fas fa-check"></i> Équipes performantes</li>
-                            <li><i class="fas fa-check"></i> Qualité des livrables</li>
-                            <li><i class="fas fa-check"></i> Cohésion renforcée</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
+              <!--       
             <div class="why-formation-conclusion" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
                 <div class="conclusion-content">
                     <div class="conclusion-icon">
@@ -1513,6 +1613,7 @@
                     </div>
                     <h3>L'investissement formation : un levier stratégique</h3>
                     <p>Dans un monde en constante évolution, se former est un levier incontournable pour rester compétitif, s'adapter aux nouvelles normes et maîtriser les outils de pointe du génie civil. Chez Sorbo-Ingénierie, nous vous accompagnons dans le développement de vos compétences grâce à des formations techniques et spécialisées, adaptées aux enjeux actuels du secteur.</p>
+                   
                     <div class="conclusion-stats">
                         <div class="mini-stat">
                             <span class="mini-number">95%</span>
@@ -1526,7 +1627,7 @@
                             <span class="mini-number">15+</span>
                             <span class="mini-label">Années d'expérience</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -2229,16 +2330,23 @@
                     
                     const finalValue = parseInt(percentage.textContent);
                     let currentValue = 0;
-                    const increment = finalValue / 60; // Animation sur 60 étapes pour plus de fluidité
-                    const duration = 2500; // 2.5 secondes
-                    const stepTime = duration / 60;
+                    const increment = finalValue / 80; // Animation plus fluide avec 80 étapes
+                    const duration = 3000; // 3 secondes pour plus d'impact
+                    const stepTime = duration / 80;
                     
                     // Ajouter des classes d'animation
                     item.classList.add('animate');
                     percentage.classList.add('counting');
                     
+                    // Effet de brillance initial
+                    item.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(220,53,69,0.05) 100%)';
+                    
                     // Animation du compteur avec délai progressif
                     setTimeout(function() {
+                        // Animation d'entrée spectaculaire
+                        item.style.transform = 'translateY(-20px) scale(1.05) rotateX(10deg)';
+                        item.style.boxShadow = '0 25px 50px rgba(220, 53, 69, 0.3), 0 0 30px rgba(220, 53, 69, 0.2)';
+                        
                         const counter = setInterval(function() {
                             currentValue += increment;
                             if (currentValue >= finalValue) {
@@ -2246,25 +2354,34 @@
                                 clearInterval(counter);
                                 percentage.classList.remove('counting');
                                 
-                                // Animation finale de mise en évidence
-                                percentage.style.transform = 'scale(1.1)';
+                                // Animation finale spectaculaire
+                                percentage.style.transform = 'scale(1.2) rotate(5deg)';
+                                percentage.style.color = '#28a745';
+                                percentage.style.textShadow = '0 0 25px rgba(40, 167, 69, 0.6), 0 0 50px rgba(40, 167, 69, 0.3)';
+                                
+                                // Effet de particules simulé
+                                item.style.background = 'linear-gradient(135deg, rgba(40,167,69,0.1) 0%, rgba(255,255,255,0.05) 100%)';
+                                
                                 setTimeout(function() {
-                                    percentage.style.transform = 'scale(1)';
-                                }, 300);
+                                    percentage.style.transform = 'scale(1) rotate(0deg)';
+                                    percentage.style.textShadow = '0 0 15px rgba(40, 167, 69, 0.4)';
+                                }, 500);
                             }
+                            
+                            // Effet de pulsation pendant le comptage
+                            const pulseScale = 1 + Math.sin(currentValue / finalValue * Math.PI) * 0.05;
+                            percentage.style.transform = `scale(${pulseScale})`;
                             percentage.textContent = Math.floor(currentValue);
                         }, stepTime);
                         
-                        // Animation de la carte
-                        item.style.transform = 'translateY(-5px) scale(1.02)';
-                        item.style.boxShadow = '0 20px 40px rgba(220, 53, 69, 0.2)';
-                        
+                        // Retour à la position normale après l'animation
                         setTimeout(function() {
-                            item.style.transform = 'translateY(0) scale(1)';
-                            item.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
-                        }, 2000);
+                            item.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
+                            item.style.boxShadow = '0 15px 35px rgba(0,0,0,0.1)';
+                            item.style.background = 'white';
+                        }, 2500);
                         
-                    }, index * 300); // Délai progressif entre chaque statistique
+                    }, index * 400); // Délai progressif plus marqué entre chaque statistique
                 });
             }
         }
