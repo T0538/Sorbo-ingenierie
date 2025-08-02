@@ -73,6 +73,7 @@
             padding: 100px 0;
             position: relative;
             overflow: hidden;
+            background-color: var(--primary-color);
         }
         
         .intro-section::before {
@@ -93,7 +94,7 @@
             line-height: 1.8;
             text-align: center;
             font-size: 1.1rem;
-            color: #444;
+            color: white;
         }
         
         .section-title {
@@ -143,150 +144,190 @@
         
         .software-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .software-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
+
+        .software-card.modern-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
             transition: all 0.4s ease;
-            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
             position: relative;
-            z-index: 1;
+            height: 100%;
         }
-        
-        .software-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+
+        .software-card.modern-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
         }
-        
-        .software-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: var(--primary-color);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-            z-index: 1;
+
+        .software-header {
+            padding: 2rem 2rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
-        
-        .software-card:hover::after {
-            transform: scaleX(1);
-        }
-        
-        .software-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+
+        .software-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg,rgb(199, 17, 17),rgb(207, 16, 16));
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(44, 90, 160, 0.3);
         }
-        
-        .software-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.1;
-            mix-blend-mode: overlay;
+
+        .software-icon.blue {
+            background: linear-gradient(135deg,rgb(228, 20, 20),rgb(202, 15, 24));
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
         }
-        
-        .software-image i {
-            font-size: 5rem;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            z-index: 2;
+
+        .software-icon.green {
+            background: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
         }
-        
-        .software-card:hover .software-image i {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
-        .software-content {
-            padding: 40px 30px;
-        }
-        
-        .software-content h3 {
-            color: var(--primary-color);
+
+        .software-icon i {
             font-size: 1.8rem;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
+            color: white;
         }
-        
-        .software-content h3::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
+
+        .software-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
         }
-        
-        .software-card:hover .software-content h3::after {
-            width: 100%;
+
+        .software-badge.popular {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
         }
-        
+
+        .software-badge.premium {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+
+        .software-content {
+            padding: 0 2rem 2rem;
+        }
+
+        .software-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .software-content h3 .highlight {
+            background: linear-gradient(135deg,rgb(196, 8, 24),rgb(182, 13, 13));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .software-content h3 .highlight.blue {
+            background: linear-gradient(135deg,rgb(194, 7, 7),rgb(187, 19, 19));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .software-content h3 .highlight.green {
+            background: var(--primary-color);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .software-category {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .software-content p {
-            margin-bottom: 30px;
-            line-height: 1.7;
-            color: #555;
-            font-size: 1.05rem;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
-        
+
+        .features-list {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .feature-item i {
+            color: #10b981;
+            margin-right: 0.8rem;
+            font-size: 0.9rem;
+            width: 16px;
+        }
+
         .software-buttons {
             display: flex;
-            gap: 15px;
+            gap: 0.8rem;
+            flex-direction: column;
         }
-        
+
         .software-btn {
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
             text-decoration: none;
-            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: center;
         }
-        
-        .download-btn {
-            background-color: var(--primary-color);
+
+        .primary-btn {
+            background: var(--primary-color);
             color: white;
-            border: 2px solid var(--primary-color);
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
         }
-        
-        .download-btn:hover {
-            background-color: transparent;
-            color: var(--primary-color);
+
+        .primary-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 90, 160, 0.4);
         }
-        
-        .info-btn {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            background-color: transparent;
+
+        .secondary-btn {
+            background: rgba(44, 90, 160, 0.1);
+            color:var(--light-text);
+            border: 1px solid rgba(44, 90, 160, 0.2);
         }
-        
-        .info-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
+
+        .secondary-btn:hover {
+            background: rgba(44, 90, 160, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(44, 90, 160, 0.3);
         }
         
         .info-section {
@@ -492,7 +533,7 @@
             font-style: italic;
             line-height: 1.8;
             color: #555;
-        }
+        } 
         
         .cta {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -679,34 +720,102 @@
 
     <section id="software" class="featured-software">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">NOS RÉCENTS LOGICIELS</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Des solutions spécialisées pour répondre aux besoins spécifiques de votre secteur</p>
+            <h2 class="section-title" data-aos="fade-up">NOS LOGICIELS MÉTIERS</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Des solutions innovantes pour l'ingénierie moderne</p>
             
             <div class="software-grid">
-                <div class="software-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="software-image">
-                        <i class="fas fa-building-columns"></i>
+                <!-- GeoSTORM -->
+                <div class="software-card modern-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="software-header">
+                        <div class="software-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <div class="software-badge">Nouveau</div>
                     </div>
                     <div class="software-content">
-                        <h3>PILLAR V1</h3>
-                        <p>Logiciel d'aide à la conception et au dimensionnement géotechnique des fondations de bâtiments et d'ouvrages d'art selon les Eurocodes et les anciens réglements. Une solution complète qui simplifie vos calculs complexes.</p>
+                        <h3>Sorbo<span class="highlight">Pillar v1.1</span><sup>®</sup></h3>
+                        <div class="software-category">Logiciel geotechnique</div>
+                        <p>Logiciel d'aide à la conception et au dimensionnement géotechnique des de bâtiment et d'ouvrages d'arts selon les Eurocodes et les anciens règlements.
+</p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span>Facile à apprendre et à utiliser</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Interagir graphiquement avec tous les éléments du modèle</span>
+                            </div>
+                        </div>
+                        
                         <div class="software-buttons">
-                            <a href="#" class="software-btn download-btn">Télécharger</a>
-                            <a href="#" class="software-btn info-btn">En savoir plus</a>
+                            <a href="#" class="software-btn primary-btn">En savoir plus</a>
+                            <a href="#" class="software-btn secondary-btn">Démarrer l'essai gratuit</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="software-card" data-aos="fade-up" data-aos-delay="250">
-                    <div class="software-image">
-                        <i class="fas fa-road"></i>
+                <!-- GeoHECRAS -->
+                <div class="software-card modern-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="software-header">
+                        <div class="software-icon blue">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        <div class="software-badge popular">Populaire</div>
                     </div>
                     <div class="software-content">
-                        <h3>OH - ROUTE V1</h3>
-                        <p>Logiciel d'aide à l'étude des projets d'assainissement et de drainage routier. Une interface intuitive couplée à des calculs précis pour optimiser vos projets d'infrastructure routière.</p>
+                        <h3>Sorbo<span class="highlight blue">OH-Route v1.1</span><sup>®</sup></h3>
+                        <div class="software-category">Logiciel Hydraulique</div>
+                        <p>Logiciel d'aide à la conception et au dimensionnement ouvrages hydrauliques selon les méthodes rationnelles, Orstorm et CIEH.
+</p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-map"></i>
+                                <span>Travailler directement sur la carte</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-images"></i>
+                                <span>Incorporer Google Maps et des fichiers d'imagerie aérienne haute résolution</span>
+                            </div>
+                        </div>
+                        
                         <div class="software-buttons">
-                            <a href="#" class="software-btn download-btn">Télécharger</a>
-                            <a href="#" class="software-btn info-btn">En savoir plus</a>
+                            <a href="#" class="software-btn primary-btn">En savoir plus</a>
+                            <a href="#" class="software-btn secondary-btn">Démarrer l'essai gratuit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GeoHECHMS -->
+                <div class="software-card modern-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="software-header">
+                        <div class="software-icon green">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <div class="software-badge premium">Premium</div>
+                    </div>
+                    <div class="software-content">
+                        <h3>Sorbo<span class="highlight green">Pillar Beta</span><sup>®</sup></h3>
+                        <div class="software-category">Logiciel geotechnique</div>
+                        <p>Logiciel d'aide à la conception et au dimensionnement géotechnique des de bâtiment et d'ouvrages d'arts selon les Eurocodes et les anciens règlements.
+</p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-puzzle-piece"></i>
+                                <span>Intégration CAO et SIG</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-download"></i>
+                                <span>Intégrez votre modèle d'ingénierie directement à AutoCAD, MicroStation et ArcGIS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">En savoir plus</a>
+                            <a href="#" class="software-btn secondary-btn">Démarrer l'essai gratuit</a>
                         </div>
                     </div>
                 </div>
@@ -837,4 +946,4 @@
     </script>
     <script src="js/script.js"></script>
 </body>
-</html> 
+</html>
