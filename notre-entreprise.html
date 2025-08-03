@@ -297,23 +297,88 @@
         }
         
         .values-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
+            display: flex;
+            max-width: 1200px;
             margin: 0 auto;
+            background: linear-gradient(135deg, #d10000 0%, #b30000 50%, #d10000 100%);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(209, 0, 0, 0.3);
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .values-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+        }
+        
+        .values-left {
+            flex: 1;
+            padding: 50px 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .values-divider {
+            width: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .values-divider img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .values-divider:hover img {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .values-right {
+            flex: 1;
+            padding: 50px 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            position: relative;
+            z-index: 2;
         }
         
         .value-card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 24px;
-            padding: 40px 30px;
-            text-align: left;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: rgba(168, 6, 6, 0.95);
+            border:0;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
         }
         
         .value-card::before {
@@ -321,86 +386,144 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), #e53e3e);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-        
-        .value-card:hover::before {
-            transform: scaleX(1);
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.05) 0%, transparent 50%, rgba(209, 0, 0, 0.02) 100%);
+            pointer-events: none;
         }
         
         .value-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            border-color: rgba(209, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(209, 0, 0, 0.2);
         }
         
         .value-header {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
         }
         
         .value-card .icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary-color), #e53e3e);
+            background: linear-gradient(135deg, #d10000, #b30000);
             color: white;
-            border-radius: 18px;
+            border-radius: 50%;
             font-size: 1.8rem;
-            margin-right: 20px;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.25);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(209, 0, 0, 0.3);
         }
         
         .value-card:hover .icon {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 35px rgba(209, 0, 0, 0.35);
+            background: linear-gradient(135deg, #b30000, #d10000);
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(209, 0, 0, 0.4);
         }
         
         .value-header h3 {
             margin: 0;
-            color: var(--primary-color);
-            font-size: 1.4rem;
+            color: #ffffff;
+            font-size: 1.1rem;
             font-weight: 600;
             line-height: 1.3;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover .value-header h3 {
+            color: #b30000;
+            transform: scale(1.05);
         }
         
         .value-card p {
-            color: var(--light-text);
-            line-height: 1.7;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
+            color: #f1f1f1;
+            line-height: 1.5;
+            margin: 0;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .value-card:hover p {
+            color: #2d3748;
         }
         
         .value-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            display: none;
         }
         
         .value-badge {
-            background: rgba(209, 0, 0, 0.1);
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(209, 0, 0, 0.2);
+            display: none;
         }
         
-        .value-card:hover .value-badge {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
+        /* Responsive design pour les valeurs */
+        @media (max-width: 768px) {
+            .values-container {
+                flex-direction: column;
+                max-width: 100%;
+                margin: 0 20px;
+            }
+            
+            .values-left,
+            .values-right {
+                padding: 30px 20px;
+                gap: 20px;
+            }
+            
+            .values-divider {
+                width: 100%;
+                height: 60px;
+                margin: 20px 0;
+                flex-direction: row;
+            }
+            
+            .values-divider img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .value-card {
+                min-height: 180px;
+                padding: 20px 15px;
+                border-width: 1px;
+            }
+            
+            .value-card .icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+                border-width: 1px;
+            }
+            
+            .value-header h3 {
+                font-size: 1rem;
+            }
+            
+            .value-card p {
+                font-size: 0.8rem;
+            }
+            
+            /* Effets de survol adaptés pour mobile */
+            .value-card:hover {
+                transform: translateY(-3px);
+            }
+            
+            .value-card:hover .icon {
+                transform: scale(1.05);
+            }
         }
         
         .team-section {
@@ -1635,14 +1758,15 @@
                 <ul class="main-nav">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html" class="active">Notre entreprise</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li><a href="nos-formations.html">Nos formations</a></li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li><a href="contact.html">Contactez-nous</a></li>
                     <li class="dropdown">
                         <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" role="menu">
+
                             <li><a href="rendez-vous.html">Rendez-vous</a></li>
                             <li><a href="evenements.html">Événements</a></li>
                             <li><a href="actualites.html">Actualités</a></li>
@@ -1825,94 +1949,52 @@
                 <p>Des principes humains qui guident chacune de nos actions et forgent notre identité d'entreprise</p>
             </div>
             
-            <div class="values-container">
-                <div class="value-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                    <div class="value-header">
-                        <div class="icon">
-                            <i class="fas fa-heart"></i>
+            <div class="values-container" data-aos="fade-up" data-aos-duration="800">
+                <div class="values-left">
+                    <div class="value-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                        <div class="value-header">
+                            <div class="icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Humanité & Bienveillance</h3>
                         </div>
-                        <h3>Humanité & Bienveillance</h3>
+                        <p>Nous plaçons l'humain au cœur de notre démarche. Chaque collaborateur, chaque client, chaque partenaire est traité avec respect et considération.</p>
                     </div>
-                    <p>Nous plaçons l'humain au cœur de notre démarche. Chaque collaborateur, chaque client, chaque partenaire est traité avec respect et considération. Notre équipe passionnée fait de chaque mission une opportunité d'excellence et de progrès partagé.</p>
-                    <div class="value-features">
-                        <span class="value-badge">Écoute active</span>
-                        <span class="value-badge">Respect mutuel</span>
-                        <span class="value-badge">Épanouissement professionnel</span>
+                    
+                    <div class="value-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                        <div class="value-header">
+                            <div class="icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3>Excellence & Intégrité</h3>
+                        </div>
+                        <p>Entreprise indépendante, engagée et rigoureuse, nous construisons chaque projet sur des fondations solides : la compétence technique et la transparence.</p>
                     </div>
                 </div>
                 
-                <div class="value-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                    <div class="value-header">
-                        <div class="icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h3>Excellence & Intégrité</h3>
-                    </div>
-                    <p>Entreprise indépendante, engagée et rigoureuse, nous construisons chaque projet sur des fondations solides : la compétence technique, la transparence dans nos relations et le souci permanent de la qualité dans nos réalisations.</p>
-                    <div class="value-features">
-                        <span class="value-badge">Qualité irréprochable</span>
-                        <span class="value-badge">Transparence totale</span>
-                        <span class="value-badge">Engagement sincère</span>
-                    </div>
+                <div class="values-divider">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Image centrale" loading="lazy">
                 </div>
                 
-                <div class="value-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
-                    <div class="value-header">
-                        <div class="icon">
-                            <i class="fas fa-rocket"></i>
+                <div class="values-right">
+                    <div class="value-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                        <div class="value-header">
+                            <div class="icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h3>Innovation & Performance</h3>
                         </div>
-                        <h3>Innovation & Performance</h3>
+                        <p>Nous nous engageons à fournir des résultats d'exception en alliant innovation technologique et méthodes éprouvées pour repousser les limites de l'excellence.</p>
                     </div>
-                    <p>Nous nous engageons à fournir des résultats d'exception en alliant innovation technologique et méthodes éprouvées. Chaque projet est une opportunité d'optimiser nos processus et de repousser les limites de l'excellence.</p>
-                    <div class="value-features">
-                        <span class="value-badge">Solutions innovantes</span>
-                        <span class="value-badge">Résultats mesurables</span>
-                        <span class="value-badge">Amélioration continue</span>
-                    </div>
-                </div>
-                
-                <div class="value-card" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
-                    <div class="value-header">
-                        <div class="icon">
-                            <i class="fas fa-handshake"></i>
+                    
+                    <div class="value-card" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
+                        <div class="value-header">
+                            <div class="icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h3>Collaboration & Confiance</h3>
                         </div>
-                        <h3>Collaboration & Confiance</h3>
-                    </div>
-                    <p>Nous croyons en la force du travail d'équipe et en l'importance de relations durables. La confiance mutuelle avec nos clients et partenaires est le socle de notre réussite commune et de projets aboutis.</p>
-                    <div class="value-features">
-                        <span class="value-badge">Esprit d'équipe</span>
-                        <span class="value-badge">Partenariats durables</span>
-                        <span class="value-badge">Communication ouverte</span>
-                    </div>
-                </div>
-                
-                <div class="value-card" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800">
-                    <div class="value-header">
-                        <div class="icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <h3>Responsabilité & Durabilité</h3>
-                    </div>
-                    <p>Conscients de notre impact sur l'environnement et la société, nous intégrons les principes du développement durable dans nos projets. Nous construisons aujourd'hui en pensant aux générations futures.</p>
-                    <div class="value-features">
-                        <span class="value-badge">Éco-conception</span>
-                        <span class="value-badge">Impact social positif</span>
-                        <span class="value-badge">Vision long terme</span>
-                    </div>
-                </div>
-                
-                <div class="value-card" data-aos="fade-up" data-aos-delay="700" data-aos-duration="800">
-                    <div class="value-header">
-                        <div class="icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3>Apprentissage & Évolution</h3>
-                    </div>
-                    <p>Dans un secteur en constante évolution, nous cultivons une culture d'apprentissage permanent. Chaque défi est une opportunité de grandir, d'innover et de renforcer notre expertise collective.</p>
-                    <div class="value-features">
-                        <span class="value-badge">Formation continue</span>
-                        <span class="value-badge">Veille technologique</span>
-                        <span class="value-badge">Partage de connaissances</span>
+                        <p>Nous croyons en la force du travail d'équipe et en l'importance de relations durables. La confiance mutuelle est le socle de notre réussite commune.</p>
                     </div>
                 </div>
             </div>
@@ -2404,4 +2486,5 @@
         });
     </script>
 </body>
+</html>
 </html>
