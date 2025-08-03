@@ -42,13 +42,18 @@ self.addEventListener('activate', event => {
 // Interception des requêtes réseau
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
+    fetch(event.request)
+      .then(networkResponse => {
+        // Optionally update the cache with the latest version
+        if (event.request.method === 'GET' && networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseClone);
+          });
         }
-        return fetch(event.request);
+        return networkResponse;
       })
+      .catch(() => caches.match(event.request))
   );
 });
 
@@ -118,4 +123,4 @@ self.addEventListener('notificationclick', event => {
       }
     })
   );
-}); 
+});
