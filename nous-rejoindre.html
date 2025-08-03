@@ -241,6 +241,7 @@
             padding: 100px 0;
             position: relative;
             overflow: hidden;
+            background-color: var(--primary-color);
         }
         
         .intro-section::before {
@@ -261,7 +262,7 @@
             line-height: 1.8;
             text-align: center;
             font-size: 1.2rem;
-            color: #444;
+            color: white;
         }
         
         .benefits-section {
@@ -385,170 +386,286 @@
             font-size: 1.2rem;
         }
         
-        .jobs-section {
+        /* Section Notre entreprise et Nos métiers */
+        .company-info-section {
             padding: 100px 0;
-            background-color: white;
-            position: relative;
+            background-color: #f8f9fa;
+            border: 1px solid #e5e7eb;
         }
         
-        .jobs-section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background-color: rgba(0, 0, 0, 0.02);
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .job-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-        
-        .filter {
-            padding: 12px 20px;
-            background-color: #f0f0f0;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .filter:hover {
-            background-color: #e0e0e0;
-            transform: translateY(-3px);
-        }
-        
-        .filter.active {
-            background-color: var(--primary-color);
-            color: white;
-            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
-        }
-        
-        .jobs-container {
-            max-width: 1000px;
+        .company-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
-        .job-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        .company-info-column {
+            background: white;
             padding: 40px;
-            margin-bottom: 40px;
-            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .company-info-title {
+            color: #d10000;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            font-family: sans-serif;
+        }
+        
+        .company-info-image {
+            margin-bottom: 30px;
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.03);
         }
         
-        .job-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        .company-info-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
         
-        .job-type {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
-            color: white;
-            padding: 10px 20px;
+        .company-info-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .company-info-content {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            font-family: sans-serif;
+        }
+        
+        .company-info-content p {
+            margin-bottom: 20px;
+        }
+        
+        .company-info-content strong {
+            color: #d10000;
             font-weight: 600;
-            font-size: 0.9rem;
-            border-bottom-left-radius: 15px;
-            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.2);
         }
         
-        .job-header {
+        .jobs-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        /* Barre de recherche et filtres */
+        .job-search-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+        
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .search-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .search-group label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .search-group input,
+        .search-group select {
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .search-group input:focus,
+        .search-group select:focus {
+            outline: none;
+            border-color: #d10000;
+            box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.1);
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #d10000, #b30000);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(209, 0, 0, 0.3);
+        }
+        
+        /* Résultats de recherche */
+        .jobs-results {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+        
+        .results-header h3 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            font-weight: 700;
+        }
+        
+        .results-count {
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .jobs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .job-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .job-card:hover {
+            border-color: #d10000;
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .job-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .job-type-badge {
+            background: #d10000;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .job-type-badge.stage {
+            background: #10b981;
+        }
+        
+        .job-type-badge.cdd {
+            background: #f59e0b;
+        }
+        
+        .job-type-badge.alternance {
+            background: #3b82f6;
+        }
+        
+        .job-department {
+            color: #6b7280;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .job-card-content {
+            padding: 0;
         }
         
         .job-title {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-        
-        .job-card:hover .job-title {
-            color: var(--primary-color);
-        }
-        
-        .job-meta {
-            margin-bottom: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .job-meta span {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 15px;
-            background-color: #f5f5f5;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            color: #555;
-            transition: all 0.3s ease;
-        }
-        
-        .job-card:hover .job-meta span {
-            background-color: #f0f0f0;
-        }
-        
-        .job-meta i {
-            margin-right: 8px;
-            color: var(--primary-color);
-        }
-        
-        .job-positions {
-            background-color: #f0f0f0;
-            padding: 8px 15px;
-            border-radius: 30px;
+            font-size: 1.1rem;
+            color: #d10000;
+            margin-bottom: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            display: inline-block;
-            transition: all 0.3s ease;
+            line-height: 1.3;
         }
         
-        .job-card:hover .job-positions {
-            background-color: rgba(209, 0, 0, 0.1);
+        .job-location {
+            color: #d10000;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 500;
         }
         
         .job-description {
-            margin-bottom: 30px;
-            line-height: 1.7;
-            color: #555;
-            font-size: 1.05rem;
+            margin-bottom: 20px;
         }
         
-        .apply-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
+        .job-description p {
+            color: #6b7280;
+            line-height: 1.5;
+            font-size: 0.85rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .job-requirements {
+            display: none;
+        }
+        
+        .job-card-footer {
+            padding: 0;
+            margin-top: 15px;
+        }
+        
+        .view-job-btn {
+            color: #d10000;
+            text-decoration: underline;
+            font-weight: 500;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            border: 2px solid var(--primary-color);
         }
         
-        .apply-btn:hover {
-            background-color: transparent;
-            color: var(--primary-color);
+        .view-job-btn:hover {
+            color: #b30000;
+            text-decoration: none;
+        }
+        
+        .view-job-btn i {
+            display: none;
         }
         
         .team-section {
@@ -809,6 +926,97 @@
             
             .cta h2 {
                 font-size: 2rem;
+            }
+            
+            .job-search-container {
+                padding: 25px;
+            }
+            
+            .search-filters {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .jobs-results {
+                padding: 25px;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .jobs-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            
+            .job-card {
+                padding: 20px;
+            }
+            
+            .job-title {
+                font-size: 1rem;
+            }
+            
+            .job-location {
+                font-size: 0.85rem;
+            }
+            
+            .job-description p {
+                font-size: 0.8rem;
+            }
+            
+            .company-info-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .company-info-column {
+                padding: 30px;
+            }
+            
+            .company-info-title {
+                font-size: 1.8rem;
+            }
+            
+            .company-info-image img {
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .job-search-container {
+                padding: 20px;
+            }
+            
+            .jobs-results {
+                padding: 20px;
+            }
+            
+            .job-card-content {
+                padding: 20px;
+            }
+            
+            .job-title {
+                font-size: 1.2rem;
+            }
+            
+            .company-info-column {
+                padding: 25px;
+            }
+            
+            .company-info-title {
+                font-size: 1.6rem;
+            }
+            
+            .company-info-content {
+                font-size: 1rem;
+            }
+            
+            .company-info-image img {
+                height: 180px;
             }
         }
         
@@ -1227,6 +1435,47 @@
         </div>
     </section>
 
+    <!-- Section Notre entreprise et Nos métiers -->
+    <section class="company-info-section">
+        <div class="container">
+            <div class="company-info-grid">
+                <!-- Colonne gauche : Notre entreprise -->
+                <div class="company-info-column" data-aos="fade-right" data-aos-duration="800">
+                    <h2 class="company-info-title">Notre entreprise</h2>
+                    
+                    <div class="company-info-image">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe Sorbo-Ingénierie sur chantier" loading="lazy">
+                    </div>
+                    
+                    <div class="company-info-content">
+                        <p>Présentes dans plusieurs pays d'Afrique de l'Ouest et Centrale, les équipes de Sorbo-Ingénierie agissent avec passion en construisant des ouvrages de toutes tailles. Notre expertise reconnue dans tous les domaines des travaux publics nous permet d'offrir une approche dédiée à la hauteur des projets les plus ambitieux.</p>
+                        
+                        <p>L'entreprise s'engage autour de 4 axes : agir sur la santé et le bien-être de ses collaborateurs, réduire l'impact environnemental de ses activités, s'engager pour ses équipes d'aujourd'hui et de demain et contribuer au développement de la vie sociétale de ses territoires.</p>
+                        
+                        <p>Notre engagement repose sur des valeurs partagées avec toutes nos équipes au service de nos clients : <strong>audace & responsabilité</strong>, <strong>professionnalisme & développement</strong>, <strong>confiance & solidarité</strong>.</p>
+                    </div>
+                </div>
+                
+                <!-- Colonne droite : Nos métiers -->
+                <div class="company-info-column" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <h2 class="company-info-title">Nos métiers</h2>
+                    
+                    <div class="company-info-image">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professionnels Sorbo-Ingénierie en action" loading="lazy">
+                    </div>
+                    
+                    <div class="company-info-content">
+                        <p>Sorbo-Ingénierie est un expert reconnu dans tous les domaines des travaux publics : génie civil et ouvrages d'art, travaux souterrains, barrages, installations nucléaires, infrastructures linéaires, génie urbain et écologique. Véritable partenaire de proximité reconnu pour ses expertises techniques, Sorbo-Ingénierie répond aux attentes de ses clients avec des solutions inventives et fiables.</p>
+                        
+                        <p>Présente depuis de nombreuses années sur des chantiers d'envergure, l'entreprise est également ancrée en régions. Elle accompagne les acteurs locaux pour transformer les villes en œuvrant à des constructions durables et en rénovant l'existant.</p>
+                        
+                        <p>À l'international, l'entreprise accompagne les pays à construire leurs réseaux routiers et les aide à gérer la ressource en eau.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--
     <section class="benefits-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Pourquoi nous rejoindre ?</h2>
@@ -1263,53 +1512,175 @@
                 <p>N'hésitez plus ! Rejoignez-nous !</p>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <section id="offres" class="jobs-section">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Nos offres d'emploi</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Trouvez l'opportunité qui correspond à vos ambitions et compétences</p>
+            <h2 class="section-title" data-aos="fade-up">Rechercher une offre</h2>
             
-            <div class="job-filters" data-aos="fade-up" data-aos-delay="150">
-                <div class="filter active">Tous les pays</div>
-                <div class="filter">Côte d'Ivoire</div>
-                <div class="filter">Tous les départements</div>
-                <div class="filter">Tous les types</div>
+            <!-- Barre de recherche et filtres -->
+            <div class="job-search-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="search-filters">
+                    <div class="search-group">
+                        <label for="keyword-search">Recherche par mots clés</label>
+                        <input type="text" id="keyword-search" placeholder="Ex: ingénieur, technicien, génie civil...">
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="department-filter">Familles de Métiers</label>
+                        <select id="department-filter">
+                            <option value="">Tous les départements</option>
+                            <option value="ingenierie">Ingénierie</option>
+                            <option value="bureau-etudes">Bureau d'études</option>
+                            <option value="chantier">Chantier / Affaires</option>
+                            <option value="geotechnique">Géotechnique</option>
+                            <option value="eau-assainissement">Eau et Assainissement</option>
+                            <option value="topographie">Topographie et SIG</option>
+                            <option value="formation">Formation</option>
+                            <option value="logiciels">Développement Logiciels</option>
+                            <option value="administration">Administration</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="rh">Ressources Humaines</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="contract-filter">Types de contrat</label>
+                        <select id="contract-filter">
+                            <option value="">Tous les contrats</option>
+                            <option value="CDI">CDI</option>
+                            <option value="CDD">CDD</option>
+                            <option value="STAGE">Stage</option>
+                            <option value="ALTERNANCE">Alternance</option>
+                            <option value="VIE">VIE</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-group">
+                        <label for="location-filter">Localisation</label>
+                        <select id="location-filter">
+                            <option value="">Tous les pays</option>
+                            <option value="cote-ivoire">Côte d'Ivoire</option>
+                            <option value="senegal">Sénégal</option>
+                            <option value="mali">Mali</option>
+                            <option value="burkina-faso">Burkina Faso</option>
+                            <option value="togo">Togo</option>
+                            <option value="benin">Bénin</option>
+                            <option value="cameroun">Cameroun</option>
+                            <option value="gabon">Gabon</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="search-btn" id="search-jobs">
+                    <i class="fas fa-search"></i>
+                    Rechercher
+                </button>
             </div>
 
-            <div class="jobs-container">
-                <div class="job-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="job-type">STAGE</div>
-                    <div class="job-header">
-                        <h3 class="job-title">Technicien Génie civil</h3>
-                        <div class="job-positions">3 postes disponibles</div>
-                    </div>
-                    <div class="job-meta">
-                        <span><i class="fas fa-graduation-cap"></i> Niveau: Bac + 3</span>
-                        <span><i class="fas fa-bookmark"></i> Spécialité: eau et assainissement</span>
-                        <span><i class="fas fa-map-marker-alt"></i> Poste basé à Abidjan</span>
-                    </div>
-                    <div class="job-description">
-                        <p>Stage professionnel pour technicien en génie civil spécialisé dans les domaines de l'eau et de l'assainissement. Vous participerez à des projets concrets sous la supervision d'ingénieurs expérimentés et aurez l'opportunité de mettre en pratique vos connaissances théoriques dans un contexte professionnel stimulant.</p>
-                    </div>
-                    <a href="#" class="apply-btn" data-job="Technicien Génie civil" data-type="STAGE">Postuler</a>
+            <!-- Résultats de recherche -->
+            <div class="jobs-results" data-aos="fade-up" data-aos-delay="150">
+                <div class="results-header">
+                    <h3>Résultats de recherche</h3>
+                    <span class="results-count">6 offres trouvées</span>
                 </div>
+                
+                <div class="jobs-container">
+                    <div class="job-card" data-aos="fade-up" data-aos-delay="200" data-department="ingenierie" data-contract="CDI" data-location="cote-ivoire">
+                        <div class="job-card-header">
+                            <div class="job-type-badge">Ingénierie</div>
+                        </div>
+                        <div class="job-card-content">
+                            <h3 class="job-title">Ingénieur Génie Civil - Spécialité Hydraulique</h3>
+                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
+                            <div class="job-description">
+                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
+                            </div>
+                        </div>
+                        <div class="job-card-footer">
+                            <a href="#" class="view-job-btn" data-job="Ingénieur Génie Civil - Spécialité Hydraulique">Voir l'offre</a>
+                        </div>
+                    </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="250">
-                    <div class="job-type">CDI</div>
-                    <div class="job-header">
-                        <h3 class="job-title">Ingénieur Eau</h3>
-                        <div class="job-positions">1 poste disponible</div>
+                    <div class="job-card" data-aos="fade-up" data-aos-delay="250" data-department="bureau-etudes" data-contract="STAGE" data-location="cote-ivoire">
+                        <div class="job-card-header">
+                            <div class="job-type-badge stage">Bureau d'études</div>
+                        </div>
+                        <div class="job-card-content">
+                            <h3 class="job-title">Stagiaire Technicien Bureau d'Études</h3>
+                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
+                            <div class="job-description">
+                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
+                            </div>
+                        </div>
+                        <div class="job-card-footer">
+                            <a href="#" class="view-job-btn" data-job="Stagiaire Technicien Bureau d'Études">Voir l'offre</a>
+                        </div>
                     </div>
-                    <div class="job-meta">
-                        <span><i class="fas fa-graduation-cap"></i> Niveau: Bac + 5</span>
-                        <span><i class="fas fa-bookmark"></i> Spécialité: hydraulique</span>
-                        <span><i class="fas fa-map-marker-alt"></i> Poste basé à Abidjan</span>
+
+                    <div class="job-card" data-aos="fade-up" data-aos-delay="300" data-department="geotechnique" data-contract="CDD" data-location="senegal">
+                        <div class="job-card-header">
+                            <div class="job-type-badge cdd">Géotechnique</div>
+                        </div>
+                        <div class="job-card-content">
+                            <h3 class="job-title">Ingénieur Géotechnicien</h3>
+                            <div class="job-location">Dakar, Sénégal</div>
+                            <div class="job-description">
+                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
+                            </div>
+                        </div>
+                        <div class="job-card-footer">
+                            <a href="#" class="view-job-btn" data-job="Ingénieur Géotechnicien">Voir l'offre</a>
+                        </div>
                     </div>
-                    <div class="job-description">
-                        <p>Nous recherchons un ingénieur spécialisé dans les domaines de l'hydraulique et de l'assainissement pour contribuer à nos projets d'infrastructures d'eau. Vous serez responsable des études techniques et de la coordination des équipes sur le terrain. Ce poste offre des opportunités d'évolution et de développement professionnel au sein d'une entreprise en pleine croissance.</p>
+
+                    <div class="job-card" data-aos="fade-up" data-aos-delay="350" data-department="formation" data-contract="CDI" data-location="cote-ivoire">
+                        <div class="job-card-header">
+                            <div class="job-type-badge">Formation</div>
+                        </div>
+                        <div class="job-card-content">
+                            <h3 class="job-title">Formateur en Génie Civil</h3>
+                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
+                            <div class="job-description">
+                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
+                            </div>
+                        </div>
+                        <div class="job-card-footer">
+                            <a href="#" class="view-job-btn" data-job="Formateur en Génie Civil">Voir l'offre</a>
+                        </div>
                     </div>
-                    <a href="#" class="apply-btn" data-job="Ingénieur Eau" data-type="CDI">Postuler</a>
+
+                    <div class="job-card" data-aos="fade-up" data-aos-delay="400" data-department="logiciels" data-contract="ALTERNANCE" data-location="cote-ivoire">
+                        <div class="job-card-header">
+                            <div class="job-type-badge alternance">Développement Logiciels</div>
+                        </div>
+                        <div class="job-card-content">
+                            <h3 class="job-title">Développeur Logiciel - Alternance</h3>
+                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
+                            <div class="job-description">
+                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
+                            </div>
+                        </div>
+                        <div class="job-card-footer">
+                            <a href="#" class="view-job-btn" data-job="Développeur Logiciel - Alternance">Voir l'offre</a>
+                        </div>
+                    </div>
+
+                    <div class="job-card" data-aos="fade-up" data-aos-delay="450" data-department="eau-assainissement" data-contract="CDI" data-location="mali">
+                        <div class="job-card-header">
+                            <div class="job-type-badge">Eau et Assainissement</div>
+                        </div>
+                        <div class="job-card-content">
+                            <h3 class="job-title">Ingénieur Eau et Assainissement</h3>
+                            <div class="job-location">Bamako, Mali</div>
+                            <div class="job-description">
+                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
+                            </div>
+                        </div>
+                        <div class="job-card-footer">
+                            <a href="#" class="view-job-btn" data-job="Ingénieur Eau et Assainissement">Voir l'offre</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1356,7 +1727,7 @@
             </div>
         </div>
     </section>
-
+<!--
     <section class="faq-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Questions fréquentes</h2>
@@ -1460,7 +1831,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="cta">
         <div class="container" data-aos="fade-up">
@@ -1782,6 +2153,86 @@
                     cvFileName.style.display = 'none';
                     letterFileName.style.display = 'none';
                 }, 1000);
+            });
+            
+            // Fonctionnalité de recherche et filtrage des offres d'emploi
+            const searchJobsBtn = document.getElementById('search-jobs');
+            const keywordSearch = document.getElementById('keyword-search');
+            const departmentFilter = document.getElementById('department-filter');
+            const contractFilter = document.getElementById('contract-filter');
+            const locationFilter = document.getElementById('location-filter');
+            const jobCards = document.querySelectorAll('.job-card');
+            const resultsCount = document.querySelector('.results-count');
+            
+            function filterJobs() {
+                const keyword = keywordSearch.value.toLowerCase();
+                const department = departmentFilter.value;
+                const contract = contractFilter.value;
+                const location = locationFilter.value;
+                
+                let visibleCount = 0;
+                
+                jobCards.forEach(card => {
+                    const title = card.querySelector('.job-title').textContent.toLowerCase();
+                    const description = card.querySelector('.job-description p').textContent.toLowerCase();
+                    const cardDepartment = card.getAttribute('data-department');
+                    const cardContract = card.getAttribute('data-contract');
+                    const cardLocation = card.getAttribute('data-location');
+                    
+                    const matchesKeyword = !keyword || title.includes(keyword) || description.includes(keyword);
+                    const matchesDepartment = !department || cardDepartment === department;
+                    const matchesContract = !contract || cardContract === contract;
+                    const matchesLocation = !location || cardLocation === location;
+                    
+                    if (matchesKeyword && matchesDepartment && matchesContract && matchesLocation) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Mettre à jour le compteur de résultats
+                resultsCount.textContent = `${visibleCount} offre${visibleCount > 1 ? 's' : ''} trouvée${visibleCount > 1 ? 's' : ''}`;
+            }
+            
+            // Événements pour la recherche
+            if (searchJobsBtn) {
+                searchJobsBtn.addEventListener('click', filterJobs);
+            }
+            
+            if (keywordSearch) {
+                keywordSearch.addEventListener('input', filterJobs);
+            }
+            
+            if (departmentFilter) {
+                departmentFilter.addEventListener('change', filterJobs);
+            }
+            
+            if (contractFilter) {
+                contractFilter.addEventListener('change', filterJobs);
+            }
+            
+            if (locationFilter) {
+                locationFilter.addEventListener('change', filterJobs);
+            }
+            
+            // Événements pour les boutons "Voir l'offre"
+            const viewJobBtns = document.querySelectorAll('.view-job-btn');
+            viewJobBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const jobTitle = this.getAttribute('data-job');
+                    
+                    // Mettre à jour les champs du formulaire
+                    jobTitleSpan.textContent = jobTitle;
+                    jobPositionInput.value = jobTitle;
+                    jobTypeInput.value = "";
+                    
+                    // Afficher le modal
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
             });
         });
     </script>

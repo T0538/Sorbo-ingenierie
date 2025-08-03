@@ -244,6 +244,88 @@
             box-shadow: 0 8px 25px rgba(209, 0, 0, 0.4);
         }
         
+        /* Barre d'information défilante */
+        .info-ticker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, rgba(209, 0, 0, 0.95), rgba(139, 0, 0, 0.95));
+            color: white;
+            z-index: 10;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ticker-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .ticker-label {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-right: 20px;
+            white-space: nowrap;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .ticker-label i {
+            margin-right: 8px;
+            color: #ffd700;
+        }
+        
+        .ticker-content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ticker-track {
+            display: flex;
+            animation: tickerScroll 60s linear infinite;
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .ticker-item i {
+            margin-right: 10px;
+            color: #ffd700;
+            font-size: 1rem;
+        }
+        
+        .ticker-item span {
+            color: white;
+        }
+        
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Pause au survol */
+        .ticker-content:hover .ticker-track {
+            animation-play-state: paused;
+        }
+        
         /* Icônes flottantes à droite - uniquement dans la section hero */
         .floating-icons {
             position: absolute;
@@ -708,6 +790,27 @@
         }
         
         @media (max-width: 768px) {
+            .info-ticker {
+                padding: 10px 0;
+            }
+            
+            .ticker-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 15px;
+            }
+            
+            .ticker-label {
+                margin-right: 0;
+                margin-bottom: 5px;
+                font-size: 0.8rem;
+            }
+            
+            .ticker-item {
+                padding: 0 20px;
+                font-size: 0.85rem;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -1050,6 +1153,28 @@
         
         /* petit mobile */
         @media (max-width: 576px) {
+            .info-ticker {
+                padding: 8px 0;
+            }
+            
+            .ticker-container {
+                padding: 0 10px;
+            }
+            
+            .ticker-label {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            
+            .ticker-item {
+                padding: 0 15px;
+                font-size: 0.8rem;
+            }
+            
+            .ticker-item i {
+                font-size: 0.9rem;
+            }
+            
             .project-card {
                 height: 350px;
             }
@@ -1114,6 +1239,44 @@
     </header>
 
     <section class="hero">
+        <!-- Barre d'information défilante -->
+        <div class="info-ticker">
+            <div class="ticker-container">
+                <div class="ticker-label">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Actualités</span>
+                </div>
+                <div class="ticker-content">
+                    <div class="ticker-track">
+                        <div class="ticker-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Nouvelle formation AutoCAD 2025 disponible - Inscriptions ouvertes</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>Sorbo-Ingénierie remporte le prix d'excellence 2024</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement en cours : Ingénieurs génie civil et topographes</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-cogs"></i>
+                            <span>Nouveau logiciel de calcul de structures disponible</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Prochaines formations : Covadis, AutoCAD, Revit - Réservez votre place</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-globe"></i>
+                            <span>Extension de nos services au Mali et au Burkina Faso</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="container">
             <div class="hero-content" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 <h1 data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">Sorbo-Ingénierie</h1>

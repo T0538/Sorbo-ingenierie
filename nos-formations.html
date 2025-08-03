@@ -370,51 +370,186 @@
         }
         
         .formation-values {
-            padding: 100px 0;
-            background-color: white;
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             position: relative;
+            overflow: hidden;
+        }
+        
+        .formation-values::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.03) 0%, transparent 100%);
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
         }
         
         .value-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .value-item {
-            background-color: #f9f9f9;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(209, 0, 0, 0.1);
         }
         
-        .value-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
+
         
-        .value-item::before {
+        .value-item::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background-color: var(--primary-color);
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.05) 0%, transparent 100%);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+            transition: all 0.5s ease;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(209, 0, 0, 0.15);
+            border-color: rgba(209, 0, 0, 0.2);
+        }
+        
+        .value-item:hover::after {
+            transform: translate(20px, -20px) scale(1.2);
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.1) 0%, transparent 100%);
         }
         
         .value-item h3 {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            color: #d10000;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.3;
+            position: relative;
+            z-index: 2;
         }
         
         .value-item p {
-            color: var(--light-text);
-            line-height: 1.7;
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .value-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .value-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .value-item:hover .value-image {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .value-item:hover .value-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Responsive design pour la section formation-values */
+        @media (max-width: 1200px) {
+            .value-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 40px;
+            }
+            
+            .value-item {
+                padding: 40px 35px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .formation-values {
+                padding: 80px 0;
+            }
+            
+            .value-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 100%;
+            }
+            
+            .value-item {
+                padding: 35px 30px;
+                border-radius: 20px;
+            }
+            
+            .value-item h3 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            
+            .value-item p {
+                font-size: 1rem;
+            }
+            
+            .value-item::after {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .value-image {
+                height: 180px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .formation-values {
+                padding: 60px 0;
+            }
+            
+            .value-item {
+                padding: 30px 25px;
+                border-radius: 15px;
+            }
+            
+            .value-item h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            
+            .value-item p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+            
+            .value-image {
+                height: 160px;
+                margin-bottom: 18px;
+            }
         }
         
         .presentation {
@@ -1523,6 +1658,307 @@
                 margin: 0 auto;
             }
         }
+        
+        /* Styles pour les formations disponibles */
+        .formations-disponibles {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .formations-disponibles h2 {
+            text-align: center;
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .section-intro {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+        
+        /* Styles pour les filtres */
+        .formations-filters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            font-size: 0.95rem;
+            min-width: 180px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.1);
+        }
+        
+        .filter-select:hover {
+            border-color: var(--primary-color);
+        }
+        
+        /* Résultats des filtres */
+        .filter-results {
+            margin-bottom: 40px;
+        }
+        
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        #results-count {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .clear-filters-btn {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-filters-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Grille des formations */
+        .formations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .formation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .formation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .formation-card.hidden {
+            display: none;
+        }
+        
+        .formation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .formation-category {
+            background: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .formation-price {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .formation-card h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .formation-details {
+            margin-bottom: 20px;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .detail i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 16px;
+        }
+        
+        .formation-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .formation-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .inscription-btn {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+        }
+        
+        .more-info {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .more-info:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Bouton "Afficher plus" */
+        .load-more-container {
+            text-align: center;
+        }
+        
+        .load-more-btn {
+            padding: 15px 30px;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .formations-filters {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .filter-group {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .filter-select {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .results-info {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .formations-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .formation-card {
+                padding: 20px;
+            }
+            
+            .formation-footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .inscription-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .formations-disponibles h2 {
+                font-size: 2rem;
+            }
+            
+            .section-intro {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .filter-group label {
+                font-size: 0.85rem;
+            }
+            
+            .filter-select {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+            
+            .formation-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .formation-price {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation pour les cartes filtrées */
+        .formation-card.fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1585,10 +2021,16 @@
         <div class="container">
             <div class="value-grid">
                 <div class="value-item" data-aos="fade-up" data-aos-duration="800">
+                    <div class="value-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professionnels en formation" loading="lazy">
+                    </div>
                     <h3>Une pédagogie ancrée dans la réalité du métier</h3>
                     <p>Nos formations sont animées par des professionnels expérimentés, alliant pédagogie et expertise, afin de renforcer les compétences techniques des ingénieurs, techniciens et décideurs.</p>
                 </div>
                 <div class="value-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                    <div class="value-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe en développement professionnel" loading="lazy">
+                    </div>
                     <h3>Accompagner la montée en compétence des acteurs du génie civil</h3>
                     <p>Parce que la performance passe aussi par la montée en compétence, nous accompagnons les acteurs du génie civil dans leur évolution, à travers des programmes adaptés et tournés vers la réalité professionnelle.</p>
                 </div>
@@ -1941,9 +2383,65 @@
                 Inscrivez-vous en ligne et réglez votre participation de manière sécurisée.
             </p>
             
-            <div class="formations-grid">
+            <!-- Filtres de formations -->
+            <div class="formations-filters" data-aos="fade-up" data-aos-delay="150" data-aos-duration="800">
+                <div class="filter-group">
+                    <label for="status-filter">Statut :</label>
+                    <select id="status-filter" class="filter-select">
+                        <option value="all">Toutes les formations</option>
+                        <option value="recentes">Formations récentes</option>
+                        <option value="en-cours">Formations en cours</option>
+                        <option value="a-venir">Formations à venir</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="category-filter">Catégorie :</label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="architecture">Architecture</option>
+                        <option value="ingenierie-routiere">Ingénierie routière</option>
+                        <option value="topographie">Topographie</option>
+                        <option value="ingenierie-eau">Ingénierie de l'eau</option>
+                        <option value="genie-civil">Génie civil</option>
+                        <option value="bim">BIM</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="location-filter">Localisation :</label>
+                    <select id="location-filter" class="filter-select">
+                        <option value="all">Tous les lieux</option>
+                        <option value="abidjan-cocody">Abidjan, Cocody</option>
+                        <option value="abidjan-plateau">Abidjan, Plateau</option>
+                        <option value="abidjan-zone4">Abidjan, Zone 4</option>
+                        <option value="en-ligne">En ligne</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price-filter">Prix :</label>
+                    <select id="price-filter" class="filter-select">
+                        <option value="all">Tous les prix</option>
+                        <option value="0-200000">Moins de 200 000 FCFA</option>
+                        <option value="200000-300000">200 000 - 300 000 FCFA</option>
+                        <option value="300000-400000">300 000 - 400 000 FCFA</option>
+                        <option value="400000+">Plus de 400 000 FCFA</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-results" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                <div class="results-info">
+                    <span id="results-count">4 formations trouvées</span>
+                    <button id="clear-filters" class="clear-filters-btn">Effacer les filtres</button>
+                </div>
+            </div>
+            
+            <div class="formations-grid" id="formations-grid">
                 <!-- Formation 1 -->
-                <div class="formation-card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+                <div class="formation-card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800" 
+                     data-status="a-venir" data-category="architecture" data-location="abidjan-cocody" data-price="350000">
                     <div class="formation-header">
                         <div class="formation-category">Architecture</div>
                         <div class="formation-price">350 000 FCFA</div>
@@ -1963,7 +2461,8 @@
                 </div>
                 
                 <!-- Formation 2 -->
-                <div class="formation-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                <div class="formation-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800"
+                     data-status="a-venir" data-category="ingenierie-routiere" data-location="abidjan-plateau" data-price="400000">
                     <div class="formation-header">
                         <div class="formation-category">Ingénierie routière</div>
                         <div class="formation-price">400 000 FCFA</div>
@@ -1983,7 +2482,8 @@
                 </div>
                 
                 <!-- Formation 3 -->
-                <div class="formation-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                <div class="formation-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800"
+                     data-status="a-venir" data-category="topographie" data-location="abidjan-cocody" data-price="275000">
                     <div class="formation-header">
                         <div class="formation-category">Topographie</div>
                         <div class="formation-price">275 000 FCFA</div>
@@ -2003,7 +2503,8 @@
                 </div>
                 
                 <!-- Formation 4 -->
-                <div class="formation-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                <div class="formation-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800"
+                     data-status="a-venir" data-category="ingenierie-eau" data-location="abidjan-zone4" data-price="325000">
                     <div class="formation-header">
                         <div class="formation-category">Ingénierie de l'eau</div>
                         <div class="formation-price">325 000 FCFA</div>
@@ -2018,6 +2519,48 @@
                     <p>Découvrez les méthodes modernes de traitement des eaux usées et les approches durables pour la gestion des ressources hydriques.</p>
                     <div class="formation-footer">
                         <button class="btn primary-btn inscription-btn" data-formation-id="4">S'inscrire maintenant</button>
+                        <a href="#" class="more-info">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Formation 5 (récente) -->
+                <div class="formation-card" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800"
+                     data-status="recentes" data-category="genie-civil" data-location="abidjan-cocody" data-price="450000">
+                    <div class="formation-header">
+                        <div class="formation-category">Génie civil</div>
+                        <div class="formation-price">450 000 FCFA</div>
+                    </div>
+                    <h3>Calcul de structures en béton armé</h3>
+                    <div class="formation-details">
+                        <div class="detail"><i class="fas fa-calendar-alt"></i> Du 10 au 15 décembre 2024</div>
+                        <div class="detail"><i class="fas fa-clock"></i> 40 heures (5 jours)</div>
+                        <div class="detail"><i class="fas fa-map-marker-alt"></i> Abidjan, Cocody</div>
+                        <div class="detail"><i class="fas fa-users"></i> 6 places disponibles</div>
+                    </div>
+                    <p>Formation complète sur le calcul et la conception de structures en béton armé selon les normes en vigueur.</p>
+                    <div class="formation-footer">
+                        <button class="btn primary-btn inscription-btn" data-formation-id="5">S'inscrire maintenant</button>
+                        <a href="#" class="more-info">En savoir plus</a>
+                    </div>
+                </div>
+                
+                <!-- Formation 6 (en cours) -->
+                <div class="formation-card" data-aos="fade-up" data-aos-delay="600" data-aos-duration="800"
+                     data-status="en-cours" data-category="bim" data-location="en-ligne" data-price="280000">
+                    <div class="formation-header">
+                        <div class="formation-category">BIM</div>
+                        <div class="formation-price">280 000 FCFA</div>
+                    </div>
+                    <h3>Revit Architecture - Modélisation 3D</h3>
+                    <div class="formation-details">
+                        <div class="detail"><i class="fas fa-calendar-alt"></i> Du 20 au 25 novembre 2024</div>
+                        <div class="detail"><i class="fas fa-clock"></i> 30 heures (5 jours)</div>
+                        <div class="detail"><i class="fas fa-map-marker-alt"></i> En ligne</div>
+                        <div class="detail"><i class="fas fa-users"></i> 20 places disponibles</div>
+                    </div>
+                    <p>Apprenez à maîtriser Revit Architecture pour la modélisation 3D et la conception architecturale collaborative.</p>
+                    <div class="formation-footer">
+                        <button class="btn primary-btn inscription-btn" data-formation-id="6">S'inscrire maintenant</button>
                         <a href="#" class="more-info">En savoir plus</a>
                     </div>
                 </div>
@@ -2415,7 +2958,18 @@
             inscriptionBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const formationId = this.getAttribute('data-formation-id');
-                    openModal(formationId);
+                    const formationCard = this.closest('.formation-card');
+                    const formationTitle = formationCard.querySelector('h3').textContent;
+                    const formationPrice = formationCard.querySelector('.formation-price').textContent;
+                    
+                    // Remplir les champs du formulaire
+                    document.getElementById('formation-id').value = formationId;
+                    document.getElementById('formation-title').value = formationTitle;
+                    document.getElementById('formation-price').value = formationPrice;
+                    
+                    // Afficher la modale
+                    modalContainer.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
                 });
             });
             
@@ -2629,6 +3183,91 @@
             animateStatistics();
             enhanceFormationTypeAnimations();
         });
+        
+        // Fonctionnalité de filtrage des formations
+        const statusFilter = document.getElementById('status-filter');
+        const categoryFilter = document.getElementById('category-filter');
+        const locationFilter = document.getElementById('location-filter');
+        const priceFilter = document.getElementById('price-filter');
+        const clearFiltersBtn = document.getElementById('clear-filters');
+        const resultsCount = document.getElementById('results-count');
+        const formationCards = document.querySelectorAll('.formation-card');
+        
+        function filterFormations() {
+            const status = statusFilter.value;
+            const category = categoryFilter.value;
+            const location = locationFilter.value;
+            const price = priceFilter.value;
+            
+            let visibleCount = 0;
+            
+            formationCards.forEach(card => {
+                const cardStatus = card.getAttribute('data-status');
+                const cardCategory = card.getAttribute('data-category');
+                const cardLocation = card.getAttribute('data-location');
+                const cardPrice = parseInt(card.getAttribute('data-price'));
+                
+                let showCard = true;
+                
+                // Filtre par statut
+                if (status !== 'all' && cardStatus !== status) {
+                    showCard = false;
+                }
+                
+                // Filtre par catégorie
+                if (category !== 'all' && cardCategory !== category) {
+                    showCard = false;
+                }
+                
+                // Filtre par localisation
+                if (location !== 'all' && cardLocation !== location) {
+                    showCard = false;
+                }
+                
+                // Filtre par prix
+                if (price !== 'all') {
+                    const [minPrice, maxPrice] = price.split('-').map(p => p === '+' ? Infinity : parseInt(p));
+                    if (cardPrice < minPrice || (maxPrice !== Infinity && cardPrice > maxPrice)) {
+                        showCard = false;
+                    }
+                }
+                
+                if (showCard) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Mettre à jour le compteur
+            resultsCount.textContent = `${visibleCount} formation${visibleCount > 1 ? 's' : ''} trouvée${visibleCount > 1 ? 's' : ''}`;
+            
+            // Animation pour les cartes visibles
+            const visibleCards = document.querySelectorAll('.formation-card:not(.hidden)');
+            visibleCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('fade-in');
+            });
+        }
+        
+        // Événements pour les filtres
+        statusFilter.addEventListener('change', filterFormations);
+        categoryFilter.addEventListener('change', filterFormations);
+        locationFilter.addEventListener('change', filterFormations);
+        priceFilter.addEventListener('change', filterFormations);
+        
+        // Événement pour effacer les filtres
+        clearFiltersBtn.addEventListener('click', function() {
+            statusFilter.value = 'all';
+            categoryFilter.value = 'all';
+            locationFilter.value = 'all';
+            priceFilter.value = 'all';
+            filterFormations();
+        });
+        
+        // Initialiser le filtrage
+        filterFormations();
     </script>
 
     <!-- Modales d'inscription et de paiement -->

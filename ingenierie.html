@@ -270,65 +270,106 @@
         }
         
         .sector-card {
-            padding: 40px 30px;
             background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
-            z-index: 1;
+            height: 280px;
+            cursor: pointer;
+        }
+        
+        .sector-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sector-image {
+            position: relative;
+            width: 100%;
             height: 100%;
+            overflow: hidden;
+        }
+        
+        .sector-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .sector-card:hover .sector-image img {
+            transform: scale(1.1);
+        }
+        
+        .sector-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.4s ease;
         }
         
-        .sector-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 0;
-            background-color: var(--primary-color);
-            transition: height 0.5s ease;
-            z-index: -1;
+        .sector-card:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
         }
         
-        .sector-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .sector-card:hover::before {
-            height: 100%;
-        }
-        
-        .sector-card h3 {
-            color: var(--accent-color);
-            margin-top: 15px;
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        
-        .sector-card:hover h3 {
-            color: var(--primary-color);
-        }
-
-        .sector-card i {
+        .sector-overlay i {
             font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
+            color: white;
+            margin-bottom: 15px;
             transition: all 0.3s ease;
         }
         
-        .sector-card:hover i {
-            transform: scale(1.2);
+        .sector-overlay h3 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Couleurs spécifiques pour chaque secteur */
+        .sector-card[data-sector="batiments"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.85) 0%, rgba(179, 0, 0, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="infrastructures"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.85) 0%, rgba(0, 86, 179, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="geotechnique"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.85) 0%, rgba(28, 117, 48, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="eau"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.85) 0%, rgba(0, 105, 179, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="hydroagricole"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.85) 0%, rgba(179, 135, 5, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="topographie"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(108, 117, 125, 0.85) 0%, rgba(76, 85, 93, 0.75) 100%);
+        }
+        
+        .sector-card:hover .sector-overlay i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .sector-card:hover .sector-overlay h3 {
+            transform: translateY(-5px);
         }
         
         .service-pillars {
@@ -358,13 +399,39 @@
         
         .pillar-card {
             background-color: white;
-            padding: 40px 30px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-            z-index: 1;
+            overflow: hidden;
             border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pillar-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .pillar-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .pillar-card:hover .pillar-image img {
+            transform: scale(1.1);
+        }
+        
+        .pillar-content {
+            padding: 30px;
         }
         
         .pillar-card::before {
@@ -840,6 +907,58 @@
                 width: 100%;
                 height: 100px;
             }
+            
+            .sectors-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .sector-card {
+                height: 240px;
+            }
+            
+            .sector-overlay h3 {
+                font-size: 1.1rem;
+            }
+            
+            .sector-overlay i {
+                font-size: 2.5rem;
+            }
+            
+            .pillars-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .pillar-image {
+                height: 180px;
+            }
+            
+            .pillar-content {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sector-card {
+                height: 220px;
+            }
+            
+            .sector-overlay h3 {
+                font-size: 1rem;
+            }
+            
+            .sector-overlay i {
+                font-size: 2rem;
+            }
+            
+            .pillar-image {
+                height: 160px;
+            }
+            
+            .pillar-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -910,34 +1029,64 @@
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Nous intervenons dans des secteurs stratégiques, garantissant des solutions fiables et durables</p>
             
             <div class="sectors-container">
-                <div class="sector-card" data-aos="fade-up" data-aos-delay="150">
-                    <i class="fas fa-city"></i>
-                    <h3>Bâtiments civils et aménagement urbain</h3>
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="150" data-sector="batiments">
+                    <div class="sector-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bâtiments civils" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-city"></i>
+                            <h3>Bâtiments civils et aménagement urbain</h3>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="sector-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-road"></i>
-                    <h3>Infrastructures et transport</h3>
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="200" data-sector="infrastructures">
+                    <div class="sector-image">
+                        <img src="https://images.unsplash.com/photo-1545459720-aac8509eb02c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Infrastructures et transport" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-road"></i>
+                            <h3>Infrastructures et transport</h3>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="sector-card" data-aos="fade-up" data-aos-delay="250">
-                    <i class="fas fa-mountain"></i>
-                    <h3>Ouvrages géotechniques</h3>
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="250" data-sector="geotechnique">
+                    <div class="sector-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ouvrages géotechniques" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-mountain"></i>
+                            <h3>Ouvrages géotechniques</h3>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="sector-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-water"></i>
-                    <h3>Eau et assainissement</h3>
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="300" data-sector="eau">
+                    <div class="sector-image">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Eau et assainissement" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-water"></i>
+                            <h3>Eau et assainissement</h3>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="sector-card" data-aos="fade-up" data-aos-delay="350">
-                    <i class="fas fa-seedling"></i>
-                    <h3>Aménagement hydroagricole</h3>
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="350" data-sector="hydroagricole">
+                    <div class="sector-image">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aménagement hydroagricole" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-seedling"></i>
+                            <h3>Aménagement hydroagricole</h3>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="sector-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <h3>Topographie et SIG</h3>
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="400" data-sector="topographie">
+                    <div class="sector-image">
+                        <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Topographie et SIG" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h3>Topographie et SIG</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1047,21 +1196,36 @@
             
             <div class="pillars-container">
                 <div class="pillar-card" data-aos="fade-right" data-aos-delay="150">
-                    <i class="fas fa-drafting-compass pillar-icon"></i>
-                    <h3>Les études techniques</h3>
-                    <p>Conception, dimensionnement et optimisation des ouvrages en s'appuyant sur des méthodologies éprouvées et des outils de pointe.</p>
+                    <div class="pillar-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Études techniques" loading="lazy">
+                    </div>
+                    <div class="pillar-content">
+                        <i class="fas fa-drafting-compass pillar-icon"></i>
+                        <h3>Les études techniques</h3>
+                        <p>Conception, dimensionnement et optimisation des ouvrages en s'appuyant sur des méthodologies éprouvées et des outils de pointe.</p>
+                    </div>
                 </div>
                 
                 <div class="pillar-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-tasks pillar-icon"></i>
-                    <h3>Le suivi et contrôle de travaux</h3>
-                    <p>Supervision, gestion de la qualité, respect des délais et conformité des ouvrages avec les prescriptions techniques.</p>
+                    <div class="pillar-image">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suivi et contrôle de travaux" loading="lazy">
+                    </div>
+                    <div class="pillar-content">
+                        <i class="fas fa-tasks pillar-icon"></i>
+                        <h3>Le suivi et contrôle de travaux</h3>
+                        <p>Supervision, gestion de la qualité, respect des délais et conformité des ouvrages avec les prescriptions techniques.</p>
+                    </div>
                 </div>
                 
                 <div class="pillar-card" data-aos="fade-left" data-aos-delay="250">
-                    <i class="fas fa-hands-helping pillar-icon"></i>
-                    <h3>L'assistance technique</h3>
-                    <p>Accompagnement des maîtres d'ouvrage et des entreprises pour garantir la réussite des projets à chaque étape.</p>
+                    <div class="pillar-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Assistance technique" loading="lazy">
+                    </div>
+                    <div class="pillar-content">
+                        <i class="fas fa-hands-helping pillar-icon"></i>
+                        <h3>L'assistance technique</h3>
+                        <p>Accompagnement des maîtres d'ouvrage et des entreprises pour garantir la réussite des projets à chaque étape.</p>
+                    </div>
                 </div>
             </div>
             
