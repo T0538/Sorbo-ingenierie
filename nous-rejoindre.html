@@ -8,6 +8,150 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
+        /* Loader Styles */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .loader-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d10000;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: slideInFromLeft 1s ease-out 0.3s both;
+        }
+
+        .loader-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: slideInFromRight 1s ease-out 0.6s both;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #d10000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .loader-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #d10000, #b30000);
+            border-radius: 2px;
+            animation: loadProgress 3s ease-out forwards;
+        }
+        
+        /* Animations pour le loader */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes loadProgress {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 60%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
         .careers-hero {
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
@@ -1023,6 +1167,19 @@
     </style>
 </head>
 <body>
+
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <img src="images/logo.png" alt="Logo Sorbo-Ingénierie" class="loader-logo">
+            <h1 class="loader-title">SORBO-INGÉNIERIE</h1>
+            <p class="loader-subtitle">Solutions d'ingénierie innovantes</p>
+            <div class="loader-spinner"></div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <div class="logo">
@@ -1446,6 +1603,48 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            const progressBar = document.querySelector('.loader-progress-bar');
+            
+            // Animation de la barre de progression
+            if (progressBar) {
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 100);
+            }
+            
+            // Attendre un minimum de 2 secondes pour l'effet visuel
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                
+                // Supprimer complètement le loader après la transition
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Initialiser AOS après le chargement
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                AOS.init({
+                    offset: 120,
+                    duration: 800,
+                    easing: 'ease-out',
+                    once: true
+                });
+            }, 2500);
+        });
+
+        // Afficher le loader immédiatement si la page se recharge
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('pageLoader');
+            loader.style.display = 'flex';
+        });
+
         AOS.init({
             offset: 120,
             duration: 800,
