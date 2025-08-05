@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/logo.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Loader Styles */
@@ -157,8 +158,8 @@
         /* Styles spécifiques à la page de contact */
         .contact-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
         }
         
         .contact-info {
@@ -258,6 +259,86 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+        
+        /* Styles pour la section service client */
+        .customer-service {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .customer-service h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .customer-service p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .customer-service-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.2);
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .service-features li {
+            margin-bottom: 12px;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-features i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive pour la section service client */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .customer-service {
+                padding: 30px 20px;
+            }
+            
+            .customer-service-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .customer-service h3 {
+                font-size: 1.3rem;
+            }
+            
+            .service-features li {
+                font-size: 0.9rem;
+            }
         }
         
         .checkbox-group {
@@ -626,6 +707,18 @@
                     </form>
                 </div>
                 
+                <div class="customer-service">
+                    <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Service client Sorbo-Ingénierie" class="customer-service-image" loading="lazy">
+                    <h3>Service Client de Qualité</h3>
+                    <p>Notre équipe dédiée est là pour vous accompagner à chaque étape de votre projet. Nous garantissons une réponse rapide et un suivi personnalisé.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Réponse sous 24h</li>
+                        <li><i class="fas fa-users"></i> Équipe expérimentée</li>
+                        <li><i class="fas fa-shield-alt"></i> Confidentialité garantie</li>
+                        <li><i class="fas fa-handshake"></i> Accompagnement personnalisé</li>
+                    </ul>
+                </div>
+                
                 <div class="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127356.39773170619!2d-4.047242142002386!3d5.351078653833855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ea5311959121%3A0x3fe70ddce19221a6!2sAbidjan%2C%20C%C3%B4te%20d&#39;Ivoire!5e0!3m2!1sfr!2s!4v1667842284532!5m2!1sfr!2s" allowfullscreen></iframe>
                 </div>
@@ -673,7 +766,11 @@
         </div>
     </footer>
 
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/lazy-loading.js"></script>
+    <script src="js/performance-optimizer.js"></script>
+    <script src="js/backend-integration.js"></script>
     <script src="js/contact.js"></script>
     <script>
         // Page Loader

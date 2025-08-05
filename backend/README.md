@@ -1,133 +1,533 @@
-# Backend pour le site web de Sorbo-Ingénierie
+# 🚀 Sorbo Ingénierie - Backend API
 
-Ce dossier contient le code backend pour le site web de Sorbo-Ingénierie, développé avec Node.js, Express et MongoDB.
+Backend Node.js/Express pour le site web de Sorbo Ingénierie avec MongoDB, Redis, et optimisations de performance.
 
-## Architecture
+## 📋 Table des Matières
 
-Le backend est organisé selon une architecture MVC (Modèle-Vue-Contrôleur) :
+- [Prérequis](#prérequis)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Base de Données](#base-de-données)
+- [Cache Redis](#cache-redis)
+- [Démarrage](#démarrage)
+- [API Endpoints](#api-endpoints)
+- [Tests](#tests)
+- [Déploiement](#déploiement)
+- [Monitoring](#monitoring)
+- [Troubleshooting](#troubleshooting)
 
-- **Modèles** (`models/`) : Définissent la structure des données et interagissent avec la base de données MongoDB.
-- **Contrôleurs** (`controllers/`) : Contiennent la logique métier de l'application.
-- **Routes** (`routes/`) : Définissent les points d'entrée de l'API.
-- **Middleware** (`middleware/`) : Contient des fonctions intermédiaires pour gérer l'authentification, les validations, etc.
+## 🔧 Prérequis
 
-## Fonctionnalités
+- **Node.js** 18.x ou supérieur
+- **npm** ou **yarn**
+- **MongoDB** (local ou Atlas)
+- **Redis** (optionnel, pour le cache)
 
-Le backend implémente les fonctionnalités suivantes :
+### Vérification des prérequis
 
-- **Authentification** : Inscription, connexion et gestion des utilisateurs avec JWT.
-- **Gestion des contacts** : Formulaire de contact et gestion des demandes.
-- **Formations** : CRUD pour les formations proposées par Sorbo-Ingénierie.
-- **Emplois** : CRUD pour les offres d'emploi et gestion des candidatures.
-- **Projets** : CRUD pour les projets d'ingénierie.
-- **Logiciels** : CRUD pour les logiciels développés par Sorbo-Ingénierie.
+```bash
+# Vérifier Node.js
+node --version  # Doit être >= 18.0.0
 
-## Installation
+# Vérifier npm
+npm --version
 
-### Prérequis
+# Vérifier MongoDB (si local)
+mongod --version
+```
 
-- Node.js (v14.x ou supérieur)
-- MongoDB (v4.x ou supérieur)
+## 📦 Installation
 
-### Étapes
+### 1. Cloner le projet
 
-1. Clonez le dépôt :
+```bash
+cd backend
+```
+
+### 2. Installer les dépendances
+
+```bash
+npm install
+```
+
+### 3. Créer le fichier d'environnement
+
+```bash
+# Copier le fichier d'exemple
+cp .env.example .env
+
+# Ou créer manuellement
+touch .env
+```
+
+## ⚙️ Configuration
+
+### Variables d'Environnement (.env)
+
+```env
+# Configuration de la base de données
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/sorbo-ingenierie?retryWrites=true&w=majority
+
+# Configuration Redis (optionnel)
+REDIS_URL=redis://username:password@redis-server:port
+
+# Configuration JWT
+JWT_SECRET=votre_secret_jwt_tres_securise
+JWT_EXPIRE=30d
+
+# Configuration Email
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=votre_email@gmail.com
+EMAIL_PASS=votre_mot_de_passe_app
+
+# Configuration CORS
+FRONTEND_URL=https://sorbo-ingenierie.netlify.app
+
+# Configuration du serveur
+PORT=5000
+NODE_ENV=development
+
+# Configuration des logs
+LOG_LEVEL=info
+
+# Configuration de sécurité
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+
+# Configuration du cache
+CACHE_TTL=3600
+```
+
+### Configuration MongoDB Atlas (Recommandé)
+
+1. **Créer un compte MongoDB Atlas**
+   - Aller sur [mongodb.com/cloud/atlas](https://mongodb.com/cloud/atlas)
+   - Créer un compte gratuit
+
+2. **Créer un cluster**
+   - Choisir le plan gratuit (M0)
+   - Sélectionner un provider (AWS, Google Cloud, Azure)
+   - Choisir une région proche
+
+3. **Configurer l'accès réseau**
+   - Aller dans "Network Access"
+   - Ajouter `0.0.0.0/0` pour permettre l'accès depuis n'importe où
+   - Ou ajouter votre IP spécifique
+
+4. **Créer un utilisateur DB**
+   - Aller dans "Database Access"
+   - Créer un nouvel utilisateur
+   - Noter le nom d'utilisateur et mot de passe
+
+5. **Obtenir l'URI de connexion**
+   - Aller dans "Database"
+   - Cliquer sur "Connect"
+   - Choisir "Connect your application"
+   - Copier l'URI et remplacer `<password>` par votre mot de passe
+
+### Configuration Redis (Optionnel)
+
+1. **Redis Local**
+   ```bash
+   # Installer Redis
+   # Windows: Télécharger depuis redis.io
+   # macOS: brew install redis
+   # Linux: sudo apt-get install redis-server
+   
+   # Démarrer Redis
+   redis-server
    ```
-   git clone <url-du-depot>
-   cd sorbo-ingenierie-site-web/backend
-   ```
 
-2. Installez les dépendances :
-   ```
-   npm install
-   ```
+2. **Redis Cloud (Recommandé)**
+   - Aller sur [redis.com/try-free](https://redis.com/try-free)
+   - Créer un compte gratuit
+   - Créer une base de données
+   - Copier l'URL de connexion
 
-3. Configurez les variables d'environnement :
-   - Créez un fichier `.env` à la racine du dossier `backend/`
-   - Consultez le fichier `README-ENV.md` pour les détails de configuration
+## 🗄️ Base de Données
 
-4. Démarrez MongoDB (si en local) :
-   ```
-   mongod
-   ```
+### Migration et Index
 
-5. Lancez le serveur en mode développement :
-   ```
-   npm run dev
-   ```
+```bash
+# Créer les index et migrer les données
+npm run migrate
 
-Le serveur sera disponible à l'adresse : `http://localhost:5000`
+# Vérifier les index
+npm run test-api
+```
 
-## Déploiement en production
+### Structure des Collections
 
-Pour déployer en production :
+#### Formations
+```javascript
+{
+  titre: String,
+  description: String,
+  categorie: String,
+  prix: Number,
+  duree: String,
+  niveau: String,
+  dateDebut: Date,
+  inscriptions: Array,
+  createdAt: Date
+}
+```
 
-1. Configurez les variables d'environnement pour la production (voir `README-ENV.md`).
+#### Contacts
+```javascript
+{
+  name: String,
+  email: String,
+  phone: String,
+  subject: String,
+  message: String,
+  status: String,
+  createdAt: Date
+}
+```
 
-2. Construisez l'application pour la production :
-   ```
-   npm run build
-   ```
+#### Utilisateurs
+```javascript
+{
+  name: String,
+  email: String,
+  password: String,
+  role: String,
+  createdAt: Date
+}
+```
 
-3. Démarrez le serveur en mode production :
-   ```
-   npm start
-   ```
+## 🚀 Démarrage
 
-## Documentation de l'API
+### Mode Développement
 
-### Authentification
+```bash
+# Démarrer avec nodemon (rechargement automatique)
+npm run dev
 
-- `POST /api/auth/register` : Inscription d'un nouvel utilisateur
-- `POST /api/auth/login` : Connexion d'un utilisateur
-- `GET /api/auth/profile` : Récupération du profil de l'utilisateur connecté
-- `PUT /api/auth/profile` : Mise à jour du profil de l'utilisateur connecté
+# Ou démarrer normalement
+npm start
+```
 
-### Contacts
+### Mode Production
 
-- `POST /api/contact` : Envoi d'un message de contact
-- `GET /api/contact` : Récupération de tous les messages (admin)
-- `GET /api/contact/:id` : Récupération d'un message par son ID (admin)
-- `PUT /api/contact/:id` : Mise à jour du statut d'un message (admin)
-- `DELETE /api/contact/:id` : Suppression d'un message (admin)
+```bash
+# Démarrer le serveur optimisé
+node server-optimized.js
 
-### Formations
+# Ou utiliser le script de déploiement
+chmod +x deploy.sh
+./deploy.sh
+```
 
-- `GET /api/formations` : Récupération de toutes les formations
-- `GET /api/formations/:id` : Récupération d'une formation par son ID
-- `POST /api/formations` : Création d'une nouvelle formation (admin)
-- `PUT /api/formations/:id` : Mise à jour d'une formation (admin)
-- `DELETE /api/formations/:id` : Suppression d'une formation (admin)
-- `POST /api/formations/:id/testimonials` : Ajout d'un témoignage à une formation
-- `POST /api/formations/:id/inscription` : Inscription à une formation
+### Vérification du démarrage
 
-### Emplois
+```bash
+# Tester l'API
+curl http://localhost:5000/api/health
 
-- `GET /api/emplois` : Récupération de toutes les offres d'emploi
-- `GET /api/emplois/:id` : Récupération d'une offre d'emploi par son ID
-- `POST /api/emplois` : Création d'une nouvelle offre d'emploi (admin)
-- `PUT /api/emplois/:id` : Mise à jour d'une offre d'emploi (admin)
-- `DELETE /api/emplois/:id` : Suppression d'une offre d'emploi (admin)
-- `POST /api/emplois/:id/candidatures` : Soumission d'une candidature
-- `GET /api/emplois/candidatures` : Récupération de toutes les candidatures (admin)
-- `PUT /api/emplois/candidatures/:id` : Mise à jour du statut d'une candidature (admin)
+# Réponse attendue
+{
+  "status": "OK",
+  "timestamp": "2024-01-01T00:00:00.000Z",
+  "uptime": 123.456,
+  "memory": {...},
+  "redis": "connected"
+}
+```
 
-### Projets
+## 📡 API Endpoints
 
-- `GET /api/projets` : Récupération de tous les projets
-- `GET /api/projets/:id` : Récupération d'un projet par son ID
-- `GET /api/projets/slug/:slug` : Récupération d'un projet par son slug
-- `POST /api/projets` : Création d'un nouveau projet (admin)
-- `PUT /api/projets/:id` : Mise à jour d'un projet (admin)
-- `DELETE /api/projets/:id` : Suppression d'un projet (admin)
+### 🔐 Authentification
 
-### Logiciels
+```bash
+# Inscription
+POST /api/auth/register
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}
 
-- `GET /api/logiciels` : Récupération de tous les logiciels
-- `GET /api/logiciels/:id` : Récupération d'un logiciel par son ID
-- `GET /api/logiciels/slug/:slug` : Récupération d'un logiciel par son slug
-- `POST /api/logiciels` : Création d'un nouveau logiciel (admin)
-- `PUT /api/logiciels/:id` : Mise à jour d'un logiciel (admin)
-- `DELETE /api/logiciels/:id` : Suppression d'un logiciel (admin)
-- `POST /api/logiciels/:id/versions` : Ajout d'une version à un logiciel (admin)
-- `POST /api/logiciels/:id/testimonials` : Ajout d'un témoignage à un logiciel 
+# Connexion
+POST /api/auth/login
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+```
+
+### 📞 Contact
+
+```bash
+# Créer un contact
+POST /api/contact
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+1234567890",
+  "subject": "formation",
+  "message": "Bonjour, je souhaite..."
+}
+```
+
+### 🎓 Formations
+
+```bash
+# Lister toutes les formations
+GET /api/formations
+
+# Obtenir une formation
+GET /api/formations/:id
+
+# Inscription à une formation
+POST /api/formations/:id/inscription
+{
+  "nom": "John",
+  "prenom": "Doe",
+  "email": "john@example.com",
+  "telephone": "+1234567890",
+  "entreprise": "Ma Société"
+}
+```
+
+### 💼 Emplois
+
+```bash
+# Lister les emplois
+GET /api/emplois
+
+# Créer un emploi
+POST /api/emplois
+{
+  "titre": "Ingénieur Civil",
+  "description": "Description du poste...",
+  "entreprise": "Sorbo Ingénierie"
+}
+```
+
+### 🏗️ Projets
+
+```bash
+# Lister les projets
+GET /api/projets
+
+# Créer un projet
+POST /api/projets
+{
+  "titre": "Pont de la Concorde",
+  "description": "Construction d'un pont...",
+  "client": "Ville de Paris"
+}
+```
+
+### 💻 Logiciels
+
+```bash
+# Lister les logiciels
+GET /api/logiciels
+
+# Créer un logiciel
+POST /api/logiciels
+{
+  "nom": "Sorbo Struct",
+  "description": "Logiciel de calcul...",
+  "version": "2.1.0"
+}
+```
+
+## 🧪 Tests
+
+### Test de l'API
+
+```bash
+# Tester tous les endpoints
+npm run test-api
+
+# Tester un endpoint spécifique
+curl -X GET http://localhost:5000/api/formations
+```
+
+### Test de Performance
+
+```bash
+# Installer Apache Bench (ab)
+# Windows: Télécharger depuis httpd.apache.org
+# macOS: brew install httpd
+# Linux: sudo apt-get install apache2-utils
+
+# Test de charge
+ab -n 1000 -c 10 http://localhost:5000/api/health
+```
+
+### Test de Cache
+
+```bash
+# Vérifier le cache Redis
+redis-cli
+> KEYS *
+> GET cache:api/formations
+```
+
+## 📊 Monitoring
+
+### Logs
+
+```bash
+# Voir les logs en temps réel
+tail -f logs/api.log
+
+# Voir les erreurs
+tail -f logs/error.log
+
+# Voir tous les logs
+tail -f logs/combined.log
+```
+
+### Métriques
+
+```bash
+# Statistiques de l'API
+GET /api/stats
+
+# Santé du système
+GET /api/health
+```
+
+### Monitoring MongoDB
+
+```bash
+# Voir les connexions actives
+db.serverStatus().connections
+
+# Voir les index
+db.formations.getIndexes()
+```
+
+## 🚀 Déploiement
+
+### Déploiement Local
+
+```bash
+# Installer les dépendances
+npm install
+
+# Configurer l'environnement
+cp .env.example .env
+# Éditer .env avec vos paramètres
+
+# Migrer la base de données
+npm run migrate
+
+# Démarrer
+npm start
+```
+
+### Déploiement Production
+
+```bash
+# Utiliser le script de déploiement
+chmod +x deploy.sh
+./deploy.sh
+
+# Ou déployer manuellement
+NODE_ENV=production npm start
+```
+
+### Variables d'Environnement Production
+
+```env
+NODE_ENV=production
+MONGODB_URI=mongodb+srv://...
+REDIS_URL=redis://...
+JWT_SECRET=secret_tres_securise_production
+```
+
+## 🔧 Troubleshooting
+
+### Erreurs Communes
+
+#### 1. Erreur de connexion MongoDB
+```bash
+# Vérifier l'URI MongoDB
+echo $MONGODB_URI
+
+# Tester la connexion
+node -e "
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ MongoDB connecté'))
+  .catch(err => console.error('❌ Erreur:', err.message));
+"
+```
+
+#### 2. Erreur Redis
+```bash
+# Vérifier Redis
+redis-cli ping
+# Doit répondre PONG
+
+# Si Redis n'est pas disponible, l'API fonctionne sans cache
+```
+
+#### 3. Erreur CORS
+```bash
+# Vérifier les origines autorisées
+curl -H "Origin: http://localhost:3000" \
+     -H "Access-Control-Request-Method: POST" \
+     -H "Access-Control-Request-Headers: Content-Type" \
+     -X OPTIONS http://localhost:5000/api/contact
+```
+
+#### 4. Erreur JWT
+```bash
+# Vérifier le secret JWT
+echo $JWT_SECRET
+
+# Régénérer un secret
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
+
+### Logs de Debug
+
+```bash
+# Activer les logs détaillés
+LOG_LEVEL=debug npm run dev
+
+# Voir les logs en temps réel
+tail -f logs/combined.log | grep ERROR
+```
+
+### Performance
+
+```bash
+# Vérifier l'utilisation mémoire
+node -e "
+const mem = process.memoryUsage();
+console.log('RSS:', Math.round(mem.rss / 1024 / 1024) + ' MB');
+console.log('Heap Total:', Math.round(mem.heapTotal / 1024 / 1024) + ' MB');
+console.log('Heap Used:', Math.round(mem.heapUsed / 1024 / 1024) + ' MB');
+"
+```
+
+## 📚 Ressources
+
+- [Documentation Express.js](https://expressjs.com/)
+- [Documentation Mongoose](https://mongoosejs.com/)
+- [Documentation MongoDB Atlas](https://docs.atlas.mongodb.com/)
+- [Documentation Redis](https://redis.io/documentation)
+- [Documentation Winston](https://github.com/winstonjs/winston)
+
+## 🤝 Support
+
+Pour toute question ou problème :
+
+1. Vérifier les logs : `tail -f logs/error.log`
+2. Tester l'API : `npm run test-api`
+3. Vérifier la configuration : `.env`
+4. Consulter ce README
+
+---
+
+**🚀 Votre backend est maintenant prêt à être utilisé !** 

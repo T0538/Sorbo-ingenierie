@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
-    const apiUrl = 'https://sorbo-api-production.up.railway.app/api/contact';
 
     if (contactForm) {
         // Gestion de la soumission du formulaire
@@ -25,20 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             try {
-                // Envoyer les données à l'API
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    body: JSON.stringify(jsonData),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                // Utiliser l'intégration backend si disponible
+                let data;
+                if (window.backendIntegration && window.backendIntegration.isBackendAvailable) {
+                    data = await window.backendIntegration.sendContact(jsonData);
+                } else {
+                    // Fallback vers l'API directe
+                    const response = await fetch('http://localhost:5000/api/contact', {
+                        method: 'POST',
+                        body: JSON.stringify(jsonData),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    data = await response.json();
+                    
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Erreur lors de l\'envoi du formulaire');
                     }
-                });
-                
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(data.message || 'Erreur lors de l\'envoi du formulaire');
                 }
                 
                 // Fonction pour obtenir le texte du sujet sélectionné
@@ -59,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <p><strong>Sujet:</strong> ${getSubjectText(subject)}</p>
                             <p><strong>Nom:</strong> ${jsonData.name}</p>
                             <p><strong>Email:</strong> ${jsonData.email}</p>
+                            ${jsonData.phone ? `<p><strong>Téléphone:</strong> ${jsonData.phone}</p>` : ''}
                             <p><strong>Message:</strong> ${jsonData.message}</p>
                         </div>
                     </div>
