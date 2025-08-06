@@ -3,7 +3,7 @@ services:
     name: sorbo-ingenierie-backend
     env: node
     buildCommand: cd backend && npm install
-    startCommand: cd backend && node server-mongodb.js
+    startCommand: cd backend && npm start
     envVars:
       - key: MONGODB_URI
         value: mongodb+srv://kevinyameogo01:wBLR2n5hAPNZM93Y@sorbo-ingenierie.ol32tmy.mongodb.net/?retryWrites=true&w=majority&appName=Sorbo-ingenierie

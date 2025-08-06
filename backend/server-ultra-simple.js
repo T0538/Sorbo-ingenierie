@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 // Initialisation de l'application Express
@@ -33,66 +34,63 @@ app.get('/api/test', (req, res) => {
   });
 });
 
-// Route de contact simple (sans base de données)
-app.post('/api/contact', (req, res) => {
+// Route formations simple
+app.get('/api/formations', async (req, res) => {
   try {
-    const { name, email, phone, subject, message } = req.body;
-    
-    // Validation simple
-    if (!name || !email || !message) {
-      return res.status(400).json({
-        success: false,
-        message: 'Nom, email et message sont requis'
-      });
-    }
-    
-    // Simuler l'enregistrement
-    console.log('📞 Nouveau contact reçu:', { name, email, phone, subject, message });
-    
-    res.status(200).json({
-      success: true,
-      message: 'Contact reçu avec succès',
-      data: {
-        id: Date.now(),
-        name,
-        email,
-        phone,
-        subject,
-        message,
-        createdAt: new Date().toISOString()
+    // Données de test pour formations
+    const formations = [
+      {
+        id: 1,
+        titre: "Formation AutoCAD",
+        description: "Maîtrisez AutoCAD pour la conception technique",
+        duree: "40 heures",
+        niveau: "Débutant",
+        prix: "800€",
+        image: "images/autocad.jpg"
+      },
+      {
+        id: 2,
+        titre: "Formation Revit",
+        description: "Apprenez Revit pour la modélisation BIM",
+        duree: "35 heures",
+        niveau: "Intermédiaire",
+        prix: "900€",
+        image: "images/revit.jpg"
+      },
+      {
+        id: 3,
+        titre: "Formation SolidWorks",
+        description: "Conception 3D avec SolidWorks",
+        duree: "45 heures",
+        niveau: "Avancé",
+        prix: "1000€",
+        image: "images/solidworks.jpg"
       }
+    ];
+
+    res.json({
+      success: true,
+      message: 'Formations récupérées avec succès',
+      data: formations
     });
   } catch (error) {
+    console.error('Erreur formations:', error);
     res.status(500).json({
       success: false,
-      message: 'Erreur serveur',
+      message: 'Erreur lors de la récupération des formations',
       error: error.message
     });
   }
 });
 
-// Route de formations simple
-app.get('/api/formations', (req, res) => {
-  res.json({
-    success: true,
-    data: [
-      {
-        id: 1,
-        titre: 'Formation AutoCAD',
-        description: 'Apprenez AutoCAD de A à Z',
-        prix: 500,
-        duree: '3 jours'
-      },
-      {
-        id: 2,
-        titre: 'Formation Covadis',
-        description: 'Maîtrisez Covadis',
-        prix: 400,
-        duree: '2 jours'
-      }
-    ]
+// Servir les fichiers statiques en production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'index.html'));
   });
-});
+}
 
 // Middleware de gestion des erreurs simple
 app.use((err, req, res, next) => {
@@ -108,10 +106,8 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur ultra-simple démarré sur le port ${PORT}`);
+  console.log(`🚀 Serveur démarré sur le port ${PORT}`);
   console.log(`📊 Mode: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 URL: http://localhost:${PORT}`);
   console.log(`✅ API Health: http://localhost:${PORT}/api/health`);
-  console.log(`📞 Contact: http://localhost:${PORT}/api/contact`);
-  console.log(`🎓 Formations: http://localhost:${PORT}/api/formations`);
 }); 

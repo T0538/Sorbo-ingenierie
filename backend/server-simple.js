@@ -4,10 +4,6 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-// Import des routes
-const contactRoutes = require('./routes/contactRoutes');
-const formationRoutes = require('./routes/formation');
-
 // Initialisation de l'application Express
 const app = express();
 
@@ -26,10 +22,6 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
-
-// Routes API
-app.use('/api/contact', contactRoutes);
-app.use('/api/formations', formationRoutes);
 
 // Route de santé simple
 app.get('/api/health', (req, res) => {
@@ -52,6 +44,55 @@ app.get('/api/test', (req, res) => {
       date: new Date().toISOString()
     }
   });
+});
+
+// Route formations simple
+app.get('/api/formations', async (req, res) => {
+  try {
+    // Données de test pour formations
+    const formations = [
+      {
+        id: 1,
+        titre: "Formation AutoCAD",
+        description: "Maîtrisez AutoCAD pour la conception technique",
+        duree: "40 heures",
+        niveau: "Débutant",
+        prix: "800€",
+        image: "images/autocad.jpg"
+      },
+      {
+        id: 2,
+        titre: "Formation Revit",
+        description: "Apprenez Revit pour la modélisation BIM",
+        duree: "35 heures",
+        niveau: "Intermédiaire",
+        prix: "900€",
+        image: "images/revit.jpg"
+      },
+      {
+        id: 3,
+        titre: "Formation SolidWorks",
+        description: "Conception 3D avec SolidWorks",
+        duree: "45 heures",
+        niveau: "Avancé",
+        prix: "1000€",
+        image: "images/solidworks.jpg"
+      }
+    ];
+
+    res.json({
+      success: true,
+      message: 'Formations récupérées avec succès',
+      data: formations
+    });
+  } catch (error) {
+    console.error('Erreur formations:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur lors de la récupération des formations',
+      error: error.message
+    });
+  }
 });
 
 // Servir les fichiers statiques en production
