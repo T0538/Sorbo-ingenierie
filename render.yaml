@@ -16,6 +16,6 @@ services:
       - key: JWT_EXPIRES_IN
         value: 30d
       - key: FRONTEND_URL
-        value: https://sorbo-ingenierie.onrender.com
+        value: https://sorbo-ingenierie.netlify.app
       - key: API_URL
-        value: https://sorbo-ingenierie-backend.onrender.com/api 
+        value: https://sorbo-ingenierie-1.onrender.com/api 

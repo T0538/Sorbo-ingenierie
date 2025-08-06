@@ -4,8 +4,8 @@
   "description": "Backend simplifié pour débutant - Sorbo Ingénierie",
   "main": "server-simple.js",
   "scripts": {
-    "start": "node server-ultra-simple.js",
-    "dev": "nodemon server-ultra-simple.js",
+    "start": "node server-no-mongodb.js",
+    "dev": "nodemon server-no-mongodb.js",
     "test": "node test-simple.js"
   },
   "dependencies": {
