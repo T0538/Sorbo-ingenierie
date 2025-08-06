@@ -10,9 +10,9 @@ async function loadFormationsFromMongoDB() {
     try {
         console.log('📡 Connexion à l\'API MongoDB...');
         
-        // Créer un contrôleur d'abandon avec timeout de 15 secondes
+        // Créer un contrôleur d'abandon avec timeout de 20 secondes
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000);
+        const timeoutId = setTimeout(() => controller.abort(), 20000);
         
         const response = await fetch(`${API_BASE_URL}/api/formations`, {
             method: 'GET',
@@ -44,9 +44,9 @@ async function loadFormationsFromMongoDB() {
         console.error('❌ Erreur:', error);
         
         if (error.name === 'AbortError') {
-            displayError('L\'API prend du temps à démarrer. Veuillez patienter quelques minutes et recharger la page.');
+            displayRenderStarting();
         } else if (error.message.includes('Failed to fetch')) {
-            displayError('L\'API n\'est pas encore disponible. L\'instance Render est en cours de démarrage.');
+            displayRenderStarting();
         } else {
             displayError(error.message);
         }
@@ -168,6 +168,35 @@ function displayNoFormations() {
                 <i class="fas fa-info-circle" style="font-size: 3rem; color: #3498db; margin-bottom: 20px;"></i>
                 <h3>Aucune formation disponible</h3>
                 <p>Les formations seront bientôt disponibles.</p>
+            </div>
+        `;
+    }
+}
+
+// Afficher message "Render en démarrage"
+function displayRenderStarting() {
+    const container = document.getElementById('formations-grid');
+    if (container) {
+        container.innerHTML = `
+            <div class="render-starting" style="text-align: center; padding: 40px; color: #3498db;">
+                <i class="fas fa-cloud" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                <h3>🚀 API Render en cours de démarrage</h3>
+                <p>L'instance Render prend quelques minutes à démarrer.</p>
+                <p style="font-size: 0.9rem; margin-top: 15px; color: #666;">
+                    ⏰ Temps estimé: 2-3 minutes
+                </p>
+                <button onclick="location.reload()" style="
+                    background: #3498db;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    margin-top: 15px;
+                ">🔄 Recharger dans 2 minutes</button>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #999;">
+                    En attendant, vous pouvez voir les formations statiques ci-dessous
+                </p>
             </div>
         `;
     }
