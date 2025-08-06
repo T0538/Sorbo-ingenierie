@@ -15,10 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
-    message: 'Serveur Sorbo Ingénierie fonctionnel (sans MongoDB)',
+    message: 'Serveur local Sorbo Ingénierie fonctionnel',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: 'local'
   });
 });
 
@@ -26,9 +26,9 @@ app.get('/api/health', (req, res) => {
 app.get('/api/test', (req, res) => {
   res.json({
     success: true,
-    message: 'API fonctionnelle !',
+    message: 'API locale fonctionnelle !',
     data: {
-      formations: 3,
+      formations: 5,
       contacts: 0,
       date: new Date().toISOString()
     }
@@ -147,14 +147,8 @@ app.post('/api/contact', (req, res) => {
   }
 });
 
-// Servir les fichiers statiques en production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../')));
-  
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../', 'index.html'));
-  });
-}
+// Servir les fichiers statiques
+app.use(express.static(path.join(__dirname, '../')));
 
 // Middleware de gestion des erreurs simple
 app.use((err, req, res, next) => {
@@ -167,13 +161,14 @@ app.use((err, req, res, next) => {
 });
 
 // Port et démarrage du serveur
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur démarré sur le port ${PORT}`);
+  console.log(`🚀 Serveur local démarré sur le port ${PORT}`);
   console.log(`📊 Mode: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 URL: http://localhost:${PORT}`);
   console.log(`✅ API Health: http://localhost:${PORT}/api/health`);
   console.log(`📞 Contact: http://localhost:${PORT}/api/contact`);
   console.log(`🎓 Formations: http://localhost:${PORT}/api/formations`);
+  console.log(`🌐 Frontend: http://localhost:${PORT}`);
 }); 

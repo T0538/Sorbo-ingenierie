@@ -1,2 +1,0 @@
-Problème trouvé: Le fichier .env contient une erreur de formatage. La chaîne MONGODB_URI est coupée en plusieurs lignes, ce qui la rend invalide.
-Le nom de la base de données est manquant aussi. Ajoutez 'sorbo-ingenierie' après mongodb.net/

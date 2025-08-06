@@ -1,1 +1,0 @@
-# La principale erreur est : 'bad auth : authentication failed' - Le mot de passe est incorrect ou l'utilisateur n'existe pas
