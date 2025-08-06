@@ -1,22 +1,29 @@
 // Version simplifiée du chargeur de formations MongoDB Atlas
 console.log('🚀 Démarrage du chargeur MongoDB simplifié...');
 
-// URL de l'API - Changez selon votre déploiement
-const API_BASE_URL = 'https://sorbo-ingenierie-backend.onrender.com'; // Production
+// URL de l'API - Production Render
+const API_BASE_URL = 'https://sorbo-ingenierie-1.onrender.com'; // Production Render
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
-// Fonction principale
+// Fonction principale avec timeout amélioré
 async function loadFormationsFromMongoDB() {
     try {
         console.log('📡 Connexion à l\'API MongoDB...');
+        
+        // Créer un contrôleur d'abandon avec timeout de 15 secondes
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
         
         const response = await fetch(`${API_BASE_URL}/api/formations`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            signal: controller.signal
         });
+
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
             throw new Error(`Erreur HTTP: ${response.status}`);
@@ -35,7 +42,14 @@ async function loadFormationsFromMongoDB() {
         
     } catch (error) {
         console.error('❌ Erreur:', error);
-        displayError(error.message);
+        
+        if (error.name === 'AbortError') {
+            displayError('L\'API prend du temps à démarrer. Veuillez patienter quelques minutes et recharger la page.');
+        } else if (error.message.includes('Failed to fetch')) {
+            displayError('L\'API n\'est pas encore disponible. L\'instance Render est en cours de démarrage.');
+        } else {
+            displayError(error.message);
+        }
     }
 }
 

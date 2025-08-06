@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "mongodb": "^6.18.0"
-  }
   "name": "sorbo-ingenierie-backend",
   "version": "1.0.0",
   "description": "Backend Sorbo Ingénierie avec MongoDB Atlas",
@@ -12,11 +9,12 @@
     "test": "node test-mongodb.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.5.0",
+    "axios": "^1.11.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "axios": "^1.5.0"
+    "express": "^4.18.2",
+    "mongodb": "^6.18.0",
+    "mongoose": "^7.5.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
@@ -25,5 +23,3 @@
     "node": ">=16.0.0"
   }
 }
-
-
