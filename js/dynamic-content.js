@@ -1,7 +1,7 @@
 // Script pour charger dynamiquement le contenu depuis MongoDB Atlas
 class DynamicContentLoader {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.apiBaseUrl = 'https://sorbo-api-production.up.railway.app/api';
         this.init();
     }
 

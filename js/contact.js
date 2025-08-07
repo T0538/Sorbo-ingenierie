@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     data = await window.backendIntegration.sendContact(jsonData);
                 } else {
                     // Fallback vers l'API directe
-                    const response = await fetch('http://localhost:5000/api/contact', {
+                    const response = await fetch('https://sorbo-api-production.up.railway.app/api/contact', {
                         method: 'POST',
                         body: JSON.stringify(jsonData),
                         headers: {

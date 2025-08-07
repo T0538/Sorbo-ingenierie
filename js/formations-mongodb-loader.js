@@ -1,7 +1,7 @@
 // Script pour charger les formations depuis MongoDB Atlas
 class FormationsMongoDBLoader {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000';
+        this.apiBaseUrl = 'https://sorbo-api-production.up.railway.app';
         this.formationsContainer = null;
     }
 

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Tester l'API directement
     console.log('🌐 Test de l\'API MongoDB...');
-    fetch('http://localhost:5000/api/formations')
+    fetch('https://sorbo-api-production.up.railway.app/api/formations')
         .then(response => {
             console.log('📡 Réponse API:', response.status, response.statusText);
             return response.json();
