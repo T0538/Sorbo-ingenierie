@@ -1500,12 +1500,18 @@
                 <div class="blog-category" data-filter="logiciels">Logiciels</div>
             </div>
 
-            <div class="blog-posts">
-                <!-- Message quand aucun ru00e9sultat de filtrage -->
-                <div class="no-results">
+            <div class="blog-posts" id="blog-posts">
+                <!-- Les actualités seront chargées dynamiquement depuis MongoDB Atlas -->
+                <div class="loading-actualites" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #3498db; margin-bottom: 20px;"></i>
+                    <p>Chargement des actualités depuis MongoDB Atlas...</p>
+                </div>
+                
+                <!-- Message quand aucun résultat de filtrage -->
+                <div class="no-results" style="display: none;">
                     <i class="fas fa-search"></i>
-                    <p>Aucun article ne correspond u00e0 cette catu00e9gorie.</p>
-                    <p>Veuillez su00e9lectionner une autre catu00e9gorie ou revenir u00e0 "Tous".</p>
+                    <p>Aucun article ne correspond à cette catégorie.</p>
+                    <p>Veuillez sélectionner une autre catégorie ou revenir à "Tous".</p>
                 </div>
 
                 <div class="blog-post" data-aos="fade-up" data-aos-delay="200" data-category="formation">
@@ -2734,5 +2740,17 @@
     <script src="js/backend-integration.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/actualites-loader.js"></script>
+    <script>
+        // Initialisation du chargeur d'actualités
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📰 Initialisation du chargeur d\'actualités...');
+            
+            // Le script actualites-loader.js s'occupera du chargement
+            // depuis MongoDB Atlas automatiquement
+        });
+    </script>
 </body>
 </html> 

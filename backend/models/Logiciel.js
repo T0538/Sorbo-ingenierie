@@ -1,136 +1,74 @@
 const mongoose = require('mongoose');
 
-const LogicielSchema = new mongoose.Schema({
+const logicielSchema = new mongoose.Schema({
   nom: {
     type: String,
-    required: true,
+    required: [true, 'Le nom du logiciel est requis'],
     trim: true
-  },
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true
-  },
-  categorie: {
-    type: String,
-    required: true,
-    enum: ['structure', 'hydraulique', 'geotechnique', 'autre']
   },
   description: {
     type: String,
-    required: true
+    required: [true, 'La description est requise'],
+    trim: true
   },
-  fonctionnalites: [String],
-  avantages: [String],
-  versions: [
-    {
-      numero: String,
-      datePublication: Date,
-      nouveautes: [String],
-      corrections: [String],
-      lienTelechargement: String
-    }
-  ],
-  images: [
-    {
-      url: String,
-      alt: String,
-      ordre: Number
-    }
-  ],
-  videos: [
-    {
-      url: String,
-      titre: String,
-      description: String
-    }
-  ],
-  systemes: [{
+  version: {
     type: String,
-    enum: ['windows', 'mac', 'linux']
+    default: '1.0'
+  },
+  categorie: {
+    type: String,
+    enum: ['autocad', 'covadis', 'robot', 'revit', 'civil3d', 'sketchup', 'autre'],
+    required: [true, 'La catégorie est requise']
+  },
+  prix: {
+    type: Number,
+    default: 0
+  },
+  devise: {
+    type: String,
+    default: 'FCFA'
+  },
+  image: {
+    type: String,
+    default: '/images/logiciels/default.jpg'
+  },
+  lienTelechargement: {
+    type: String,
+    trim: true
+  },
+  lienDemo: {
+    type: String,
+    trim: true
+  },
+  fonctionnalites: [{
+    type: String,
+    trim: true
   }],
-  configuration: {
-    minimale: {
-      processeur: String,
-      memoire: String,
-      stockage: String,
-      graphique: String,
-      os: [String]
-    },
-    recommandee: {
-      processeur: String,
-      memoire: String,
-      stockage: String,
-      graphique: String,
-      os: [String]
-    }
+  specifications: {
+    systeme: String,
+    ram: String,
+    espace: String,
+    processeur: String
   },
-  licences: [
-    {
-      type: {
-        type: String,
-        enum: ['individuelle', 'entreprise', 'educative', 'essai']
-      },
-      duree: String,
-      prix: Number,
-      devise: {
-        type: String,
-        default: 'FCFA'
-      },
-      caracteristiques: [String]
-    }
-  ],
-  faq: [
-    {
-      question: String,
-      reponse: String
-    }
-  ],
-  testimonials: [
-    {
-      nom: String,
-      entreprise: String,
-      poste: String,
-      commentaire: String,
-      note: {
-        type: Number,
-        min: 1,
-        max: 5
-      },
-      date: {
-        type: Date,
-        default: Date.now
-      }
-    }
-  ],
-  documentation: {
-    manuelUtilisateur: String,
-    guideDemarrage: String,
-    tutoriels: [
-      {
-        titre: String,
-        description: String,
-        lien: String
-      }
-    ]
-  },
-  support: {
-    email: String,
-    telephone: String,
-    formulaire: String,
-    heures: String
-  },
-  active: {
+  disponible: {
     type: Boolean,
     default: true
   },
-  featured: {
+  populaire: {
     type: Boolean,
     default: false
   },
-  createdAt: {
+  note: {
+    type: Number,
+    min: 0,
+    max: 5,
+    default: 0
+  },
+  nombreTelechargements: {
+    type: Number,
+    default: 0
+  },
+  dateAjout: {
     type: Date,
     default: Date.now
   }
@@ -138,14 +76,4 @@ const LogicielSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Créer le slug automatiquement à partir du nom
-LogicielSchema.pre('save', function(next) {
-  if (!this.isModified('nom')) return next();
-  this.slug = this.nom.toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-  next();
-});
-
-module.exports = mongoose.model('Logiciel', LogicielSchema); 
+module.exports = mongoose.model('Logiciel', logicielSchema); 

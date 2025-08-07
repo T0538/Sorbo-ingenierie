@@ -886,101 +886,11 @@
             <h2 class="section-title" data-aos="fade-up">NOS LOGICIELS MÉTIERS</h2>
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Des solutions innovantes pour l'ingénierie moderne</p>
             
-            <div class="software-grid">
-                <!-- GeoSTORM -->
-                <div class="software-card modern-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="software-header">
-                        <div class="software-icon">
-                            <i class="fas fa-water"></i>
-                        </div>
-                        <div class="software-badge">Nouveau</div>
-                    </div>
-                    <div class="software-content">
-                        <h3>Sorbo<span class="highlight">Pillar v1.1</span><sup>®</sup></h3>
-                        <div class="software-category">Logiciel geotechnique</div>
-                        <p>Logiciel d'aide à la conception et au dimensionnement géotechnique des de bâtiment et d'ouvrages d'arts selon les Eurocodes et les anciens règlements.
-</p>
-                        
-                        <div class="features-list">
-                            <div class="feature-item">
-                                <i class="fas fa-thumbs-up"></i>
-                                <span>Facile à apprendre et à utiliser</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-sync-alt"></i>
-                                <span>Interagir graphiquement avec tous les éléments du modèle</span>
-                            </div>
-                        </div>
-                        
-                        <div class="software-buttons">
-                            <a href="#" class="software-btn primary-btn">En savoir plus</a>
-                            <a href="#" class="software-btn secondary-btn">Démarrer l'essai gratuit</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GeoHECRAS -->
-                <div class="software-card modern-card" data-aos="fade-up" data-aos-delay="250">
-                    <div class="software-header">
-                        <div class="software-icon blue">
-                            <i class="fas fa-chart-area"></i>
-                        </div>
-                        <div class="software-badge popular">Populaire</div>
-                    </div>
-                    <div class="software-content">
-                        <h3>Sorbo<span class="highlight blue">OH-Route v1.1</span><sup>®</sup></h3>
-                        <div class="software-category">Logiciel Hydraulique</div>
-                        <p>Logiciel d'aide à la conception et au dimensionnement ouvrages hydrauliques selon les méthodes rationnelles, Orstorm et CIEH.
-</p>
-                        
-                        <div class="features-list">
-                            <div class="feature-item">
-                                <i class="fas fa-map"></i>
-                                <span>Travailler directement sur la carte</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-images"></i>
-                                <span>Incorporer Google Maps et des fichiers d'imagerie aérienne haute résolution</span>
-                            </div>
-                        </div>
-                        
-                        <div class="software-buttons">
-                            <a href="#" class="software-btn primary-btn">En savoir plus</a>
-                            <a href="#" class="software-btn secondary-btn">Démarrer l'essai gratuit</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GeoHECHMS -->
-                <div class="software-card modern-card" data-aos="fade-up" data-aos-delay="350">
-                    <div class="software-header">
-                        <div class="software-icon green">
-                            <i class="fas fa-cube"></i>
-                        </div>
-                        <div class="software-badge premium">Premium</div>
-                    </div>
-                    <div class="software-content">
-                        <h3>Sorbo<span class="highlight green">Pillar Beta</span><sup>®</sup></h3>
-                        <div class="software-category">Logiciel geotechnique</div>
-                        <p>Logiciel d'aide à la conception et au dimensionnement géotechnique des de bâtiment et d'ouvrages d'arts selon les Eurocodes et les anciens règlements.
-</p>
-                        
-                        <div class="features-list">
-                            <div class="feature-item">
-                                <i class="fas fa-puzzle-piece"></i>
-                                <span>Intégration CAO et SIG</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-download"></i>
-                                <span>Intégrez votre modèle d'ingénierie directement à AutoCAD, MicroStation et ArcGIS</span>
-                            </div>
-                        </div>
-                        
-                        <div class="software-buttons">
-                            <a href="#" class="software-btn primary-btn">En savoir plus</a>
-                            <a href="#" class="software-btn secondary-btn">Démarrer l'essai gratuit</a>
-                        </div>
-                    </div>
+            <div class="software-grid" id="software-grid">
+                <!-- Les logiciels seront chargés dynamiquement depuis MongoDB Atlas -->
+                <div class="loading-software" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #3498db; margin-bottom: 20px;"></i>
+                    <p>Chargement des logiciels depuis MongoDB Atlas...</p>
                 </div>
             </div>
         </div>
@@ -1133,7 +1043,18 @@
             loader.style.display = 'flex';
         });
     </script>
+    <!-- Scripts -->
     <script src="js/script.js"></script>
+    <script src="js/logiciels-loader.js"></script>
+    <script>
+        // Initialisation du chargeur de logiciels
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Initialisation du chargeur de logiciels...');
+            
+            // Le script logiciels-loader.js s'occupera du chargement
+            // depuis MongoDB Atlas automatiquement
+        });
+    </script>
     <script src="js/backend-integration.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>

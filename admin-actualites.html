@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration Actualités - Sorbo Ingénierie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .admin-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .btn-admin {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        .btn-admin:hover {
+            transform: translateY(-2px);
+        }
+        
+        .actualites-list {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .actualite-item {
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.3s;
+        }
+        
+        .actualite-item:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .actualite-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .actualite-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .actualite-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .actualite-description {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .actualite-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-newspaper"></i> Administration des Actualités</h1>
+            <p>Ajoutez et gérez les actualités de Sorbo Ingénierie</p>
+        </div>
+
+        <div id="status-message"></div>
+
+        <div class="admin-form">
+            <h2><i class="fas fa-plus"></i> Ajouter une nouvelle actualité</h2>
+            <form id="actualite-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="titre">Titre *</label>
+                        <input type="text" id="titre" name="titre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categorie">Catégorie</label>
+                        <select id="categorie" name="categorie">
+                            <option value="Actualité">Actualité</option>
+                            <option value="Formation">Formation</option>
+                            <option value="Événement">Événement</option>
+                            <option value="Certification">Certification</option>
+                            <option value="Logiciel">Logiciel</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description courte *</label>
+                    <textarea id="description" name="description" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contenu">Contenu complet *</label>
+                    <textarea id="contenu" name="contenu" rows="6" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="auteur">Auteur</label>
+                        <input type="text" id="auteur" name="auteur" value="Équipe Sorbo Ingénierie">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">URL de l'image</label>
+                        <input type="url" id="image" name="image" placeholder="https://...">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Tags (séparés par des virgules)</label>
+                    <input type="text" id="tags" name="tags" placeholder="AutoCAD, 2024, Nouveautés">
+                </div>
+
+                <button type="submit" class="btn-admin">
+                    <i class="fas fa-save"></i> Ajouter l'actualité
+                </button>
+            </form>
+        </div>
+
+        <div class="actualites-list">
+            <h2><i class="fas fa-list"></i> Actualités existantes</h2>
+            <div id="actualites-container">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Chargement des actualités...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-actualites.js"></script>
+</body>
+</html> 

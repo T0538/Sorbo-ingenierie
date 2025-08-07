@@ -1,0 +1,17 @@
+# MongoDB Atlas
+MONGODB_URI=mongodb+srv://sorbo-admin:VotreMotDePasseSecurise123!@cluster0.xxxxx.mongodb.net/sorbo-ingenierie?retryWrites=true&w=majority
+
+# Serveur
+PORT=5000
+NODE_ENV=development
+
+# Admin Token (à changer en production)
+ADMIN_TOKEN=admin123
+
+# Email (optionnel)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=votre-email@gmail.com
+EMAIL_PASS=votre-mot-de-passe-app
+
+

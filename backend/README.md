@@ -47,8 +47,8 @@ cd backend
 ### 2. Installer les dépendances
 
 ```bash
-npm install
-```
+   npm install
+   ```
 
 ### 3. Créer le fichier d'environnement
 
@@ -204,7 +204,7 @@ npm run test-api
 
 ```bash
 # Démarrer avec nodemon (rechargement automatique)
-npm run dev
+   npm run dev
 
 # Ou démarrer normalement
 npm start
@@ -421,8 +421,8 @@ cp .env.example .env
 npm run migrate
 
 # Démarrer
-npm start
-```
+   npm start
+   ```
 
 ### Déploiement Production
 
