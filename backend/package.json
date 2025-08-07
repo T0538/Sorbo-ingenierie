@@ -1,6 +1,6 @@
 {
   "name": "sorbo-ingenierie-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Backend Sorbo Ingénierie avec MongoDB Atlas - Production Ready",
   "main": "server-production.js",
   "scripts": {
