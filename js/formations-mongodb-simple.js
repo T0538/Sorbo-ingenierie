@@ -2,7 +2,7 @@
 console.log('🚀 Démarrage du chargeur MongoDB simplifié...');
 
 // URL de l'API - Production Render
-const API_BASE_URL = 'https://sorbo-ingenierie-1.onrender.com'; // Production Render
+const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
 // Fonction principale avec timeout amélioré
