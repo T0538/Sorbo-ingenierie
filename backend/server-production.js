@@ -47,17 +47,31 @@ const corsOptions = {
       'https://sorbo-ingenierie.netlify.app',
       'https://sorbo-ingenierie.vercel.app',
       'http://localhost:3000',
-      'http://localhost:5000'
+      'http://localhost:5000',
+      'http://localhost:8080',
+      'http://127.0.0.1:5500',
+      'http://127.0.0.1:3000',
+      'file://' // Pour les fichiers HTML locaux
     ];
     
+    // En développement, autoriser toutes les origines
+    if (process.env.NODE_ENV !== 'production') {
+      callback(null, true);
+      return;
+    }
+    
+    // En production, vérifier les origines autorisées
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('❌ Origine bloquée par CORS:', origin);
       callback(new Error('Origine non autorisée par CORS'));
     }
   },
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
 app.use(cors(corsOptions));
