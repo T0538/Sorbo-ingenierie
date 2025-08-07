@@ -1,7 +1,7 @@
 // Script d'intégration backend-frontend pour Sorbo Ingénierie
 class BackendIntegration {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000';
+        this.apiBaseUrl = 'https://sorbo-api-production.up.railway.app';
         this.isBackendAvailable = false;
         this.retryCount = 0;
         this.maxRetries = 3;
