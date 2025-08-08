@@ -55,14 +55,14 @@ const actualiteSchema = new mongoose.Schema({
   slug: {
     type: String,
     unique: true,
-    required: true
+    required: false
   }
 }, {
   timestamps: true
 });
 
-// Middleware pour générer le slug
-actualiteSchema.pre('save', function(next) {
+// Générer le slug avant validation pour satisfaire les contraintes
+actualiteSchema.pre('validate', function(next) {
   if (this.isModified('titre')) {
     this.slug = this.titre
       .toLowerCase()
@@ -76,5 +76,6 @@ actualiteSchema.pre('save', function(next) {
 });
 
 module.exports = mongoose.model('Actualite', actualiteSchema);
+
 
 
