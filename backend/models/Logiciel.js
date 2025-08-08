@@ -1,6 +1,25 @@
 const mongoose = require('mongoose');
 
+// Utilitaire simple pour générer un slug à partir d'un nom
+function toSlug(value) {
+  if (!value) return undefined;
+  return value
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
+}
+
 const logicielSchema = new mongoose.Schema({
+  slug: {
+    type: String,
+    unique: true,
+    index: true,
+    trim: true,
+    lowercase: true
+  },
   nom: {
     type: String,
     required: [true, 'Le nom du logiciel est requis'],
@@ -74,6 +93,23 @@ const logicielSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true
+});
+
+// Générer le slug automatiquement si absent
+logicielSchema.pre('save', function(next) {
+  if (!this.slug && this.nom) {
+    this.slug = toSlug(this.nom);
+  }
+  next();
+});
+
+logicielSchema.pre('findOneAndUpdate', function(next) {
+  const update = this.getUpdate() || {};
+  if (!update.slug && update.nom) {
+    update.slug = toSlug(update.nom);
+    this.setUpdate(update);
+  }
+  next();
 });
 
 module.exports = mongoose.model('Logiciel', logicielSchema); 
