@@ -1582,109 +1582,14 @@
                 </button>
             </div>
 
-            <!-- Résultats de recherche -->
+            <!-- Résultats de recherche dynamiques -->
             <div class="jobs-results" data-aos="fade-up" data-aos-delay="150">
                 <div class="results-header">
                     <h3>Résultats de recherche</h3>
-                    <span class="results-count">6 offres trouvées</span>
+                    <span class="results-count" id="jobs-count">Chargement...</span>
                 </div>
-                
-                <div class="jobs-container">
-                    <div class="job-card" data-aos="fade-up" data-aos-delay="200" data-department="ingenierie" data-contract="CDI" data-location="cote-ivoire">
-                        <div class="job-card-header">
-                            <div class="job-type-badge">Ingénierie</div>
-                        </div>
-                        <div class="job-card-content">
-                            <h3 class="job-title">Ingénieur Génie Civil - Spécialité Hydraulique</h3>
-                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
-                            <div class="job-description">
-                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
-                            </div>
-                        </div>
-                        <div class="job-card-footer">
-                            <a href="#" class="view-job-btn" data-job="Ingénieur Génie Civil - Spécialité Hydraulique">Voir l'offre</a>
-                        </div>
-                    </div>
-
-                    <div class="job-card" data-aos="fade-up" data-aos-delay="250" data-department="bureau-etudes" data-contract="STAGE" data-location="cote-ivoire">
-                        <div class="job-card-header">
-                            <div class="job-type-badge stage">Bureau d'études</div>
-                        </div>
-                        <div class="job-card-content">
-                            <h3 class="job-title">Stagiaire Technicien Bureau d'Études</h3>
-                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
-                            <div class="job-description">
-                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
-                            </div>
-                        </div>
-                        <div class="job-card-footer">
-                            <a href="#" class="view-job-btn" data-job="Stagiaire Technicien Bureau d'Études">Voir l'offre</a>
-                        </div>
-                    </div>
-
-                    <div class="job-card" data-aos="fade-up" data-aos-delay="300" data-department="geotechnique" data-contract="CDD" data-location="senegal">
-                        <div class="job-card-header">
-                            <div class="job-type-badge cdd">Géotechnique</div>
-                        </div>
-                        <div class="job-card-content">
-                            <h3 class="job-title">Ingénieur Géotechnicien</h3>
-                            <div class="job-location">Dakar, Sénégal</div>
-                            <div class="job-description">
-                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
-                            </div>
-                        </div>
-                        <div class="job-card-footer">
-                            <a href="#" class="view-job-btn" data-job="Ingénieur Géotechnicien">Voir l'offre</a>
-                        </div>
-                    </div>
-
-                    <div class="job-card" data-aos="fade-up" data-aos-delay="350" data-department="formation" data-contract="CDI" data-location="cote-ivoire">
-                        <div class="job-card-header">
-                            <div class="job-type-badge">Formation</div>
-                        </div>
-                        <div class="job-card-content">
-                            <h3 class="job-title">Formateur en Génie Civil</h3>
-                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
-                            <div class="job-description">
-                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
-                            </div>
-                        </div>
-                        <div class="job-card-footer">
-                            <a href="#" class="view-job-btn" data-job="Formateur en Génie Civil">Voir l'offre</a>
-                        </div>
-                    </div>
-
-                    <div class="job-card" data-aos="fade-up" data-aos-delay="400" data-department="logiciels" data-contract="ALTERNANCE" data-location="cote-ivoire">
-                        <div class="job-card-header">
-                            <div class="job-type-badge alternance">Développement Logiciels</div>
-                        </div>
-                        <div class="job-card-content">
-                            <h3 class="job-title">Développeur Logiciel - Alternance</h3>
-                            <div class="job-location">Abidjan, Côte d'Ivoire</div>
-                            <div class="job-description">
-                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
-                            </div>
-                        </div>
-                        <div class="job-card-footer">
-                            <a href="#" class="view-job-btn" data-job="Développeur Logiciel - Alternance">Voir l'offre</a>
-                        </div>
-                    </div>
-
-                    <div class="job-card" data-aos="fade-up" data-aos-delay="450" data-department="eau-assainissement" data-contract="CDI" data-location="mali">
-                        <div class="job-card-header">
-                            <div class="job-type-badge">Eau et Assainissement</div>
-                        </div>
-                        <div class="job-card-content">
-                            <h3 class="job-title">Ingénieur Eau et Assainissement</h3>
-                            <div class="job-location">Bamako, Mali</div>
-                            <div class="job-description">
-                                <p>Sorbo-Ingénierie, expert reconnu dans tous les domaines des travaux publics : ouvrages d'art, infrastructures linéaires et terrassement, travaux souterrains, génie civil industriel et nucléaire, barrages, environnement et génie urbain et écologique.</p>
-                            </div>
-                        </div>
-                        <div class="job-card-footer">
-                            <a href="#" class="view-job-btn" data-job="Ingénieur Eau et Assainissement">Voir l'offre</a>
-                        </div>
-                    </div>
+                <div id="emplois-container" class="jobs-container">
+                    <div style="text-align:center; padding:20px; color:#666;">Chargement des offres...</div>
                 </div>
             </div>
         </div>
@@ -2241,7 +2146,7 @@
         });
     </script>
     <script src="js/script.js"></script>
-    <script src="js/backend-integration.js"></script>
+    <script src="js/dynamic-content.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>
 </body>
