@@ -4,32 +4,45 @@ require('dotenv').config();
 
 const app = express();
 
-// CORS simple pour production
+// CORS sécurisé avec validation d'origine
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://sorbo-ingenierie.netlify.app',
+  'https://sorbo-ingenierie.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:5000',
+  'http://localhost:8080',
+  'http://127.0.0.1:5500',
+  'http://127.0.0.1:3000'
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    'https://sorbo-ingenierie.netlify.app',
-    'https://sorbo-ingenierie.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:5000',
-    'http://localhost:8080',
-    'http://127.0.0.1:5500',
-    'http://127.0.0.1:3000',
-    'file://'
-  ],
-  credentials: true
+  origin: function (origin, callback) {
+    // Autoriser requêtes sans en-tête Origin (curl, santé Railway, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // Refuser silencieusement (pas d'erreur 500)
+    return callback(null, false);
+  },
+  credentials: true,
 }));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Route de santé
+// Route de santé (ne doit jamais renvoyer 500)
 app.get('/api/health', (req, res) => {
-  res.json({
-    success: true,
-    message: 'API Sorbo Ingénierie fonctionne correctement',
-    timestamp: new Date().toISOString(),
-    version: '1.0.1'
-  });
+  try {
+    res.status(200).json({
+      success: true,
+      message: 'API Sorbo Ingénierie fonctionne correctement',
+      timestamp: new Date().toISOString(),
+      version: '1.0.2'
+    });
+  } catch (e) {
+    // Réponse de secours
+    res.status(200).json({ success: true, message: 'OK' });
+  }
 });
 
 // Route formations
