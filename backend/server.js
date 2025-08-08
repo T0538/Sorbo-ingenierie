@@ -40,6 +40,20 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Health check (toujours 200)
+app.get('/api/health', (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: 'API Sorbo Ingénierie fonctionne correctement',
+      timestamp: new Date().toISOString(),
+      version: '1.0.2'
+    });
+  } catch (e) {
+    res.status(200).json({ success: true, message: 'OK' });
+  }
+});
+
 // Configuration de la connexion à MongoDB
 const connectDB = async () => {
   try {

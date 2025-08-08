@@ -42,18 +42,25 @@ self.addEventListener('activate', event => {
 // Interception des requêtes réseau
 self.addEventListener('fetch', event => {
   event.respondWith(
-    fetch(event.request)
-      .then(networkResponse => {
-        // Optionally update the cache with the latest version
-        if (event.request.method === 'GET' && networkResponse && networkResponse.status === 200) {
+    (async () => {
+      try {
+        const networkResponse = await fetch(event.request);
+        if (
+          event.request.method === 'GET' &&
+          networkResponse &&
+          networkResponse.status === 200 &&
+          event.request.url.startsWith(self.location.origin)
+        ) {
+          // N'essaie pas de mettre en cache les schémas non supportés (chrome-extension, etc.)
           const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseClone);
-          });
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(event.request, responseClone);
         }
         return networkResponse;
-      })
-      .catch(() => caches.match(event.request))
+      } catch (e) {
+        return caches.match(event.request);
+      }
+    })()
   );
 });
 
