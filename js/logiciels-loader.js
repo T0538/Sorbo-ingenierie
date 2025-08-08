@@ -56,35 +56,46 @@ function displayLogiciels(logiciels) {
 }
 
 function createLogicielCard(logiciel) {
-    const fonctionnalitesHTML = logiciel.fonctionnalites ? 
-        logiciel.fonctionnalites.map(f => `<span class="tag">${f}</span>`).join('') : '';
-    
+    const nom = logiciel.nom || 'Logiciel';
+    const description = logiciel.description || '';
+    const categorie = logiciel.categorie || '';
+    const version = logiciel.version ? `v${logiciel.version}` : '';
+    const prix = logiciel.prix || 'Gratuit';
+
+    const features = Array.isArray(logiciel.fonctionnalites)
+      ? logiciel.fonctionnalites.slice(0, 4)
+      : [];
+
+    const featuresHTML = features
+      .map(f => `<div class="feature-item"><i class="fas fa-check"></i><span>${f}</span></div>`)
+      .join('');
+
+    // Choix couleur d'icône selon catégorie
+    const iconColorClass = categorie.toLowerCase().includes('géo') || categorie.toLowerCase().includes('hydro')
+      ? 'green'
+      : categorie.toLowerCase().includes('bim') || categorie.toLowerCase().includes('cao')
+        ? 'blue'
+        : '';
+
     return `
-        <div class="logiciel-card" data-logiciel-id="${logiciel.id}">
-            <div class="logiciel-image">
-                <img src="${logiciel.image || 'images/default-software.jpg'}" alt="${logiciel.nom}" loading="lazy">
-            </div>
-            <div class="logiciel-content">
-                <h3 class="logiciel-title">${logiciel.nom}</h3>
-                <p class="logiciel-description">${logiciel.description}</p>
-                <div class="logiciel-details">
-                    <span class="logiciel-categorie">${logiciel.categorie}</span>
-                    <span class="logiciel-version">v${logiciel.version}</span>
-                    <span class="logiciel-prix">${logiciel.prix}</span>
-                </div>
-                <div class="logiciel-fonctionnalites">
-                    ${fonctionnalitesHTML}
-                </div>
-                <div class="logiciel-actions">
-                    <button class="btn btn-primary download-btn" data-logiciel-id="${logiciel.id}">
-                        📥 Télécharger
-                    </button>
-                    <button class="btn btn-secondary trial-btn" data-logiciel-id="${logiciel.id}">
-                        🆓 Version d'essai
-                    </button>
-                </div>
-            </div>
+      <div class="software-card modern-card" data-logiciel-id="${logiciel.id}">
+        <div class="software-header">
+          <div class="software-icon ${iconColorClass}"><i class="fas fa-cubes"></i></div>
+          <span class="software-badge ${prix.toLowerCase().includes('gratuit') ? 'popular' : 'premium'}">${prix}</span>
         </div>
+        <div class="software-content">
+          <h3><span class="highlight ${iconColorClass}">${nom}</span></h3>
+          <div class="software-category">${[categorie, version].filter(Boolean).join(' • ')}</div>
+          <p>${description}</p>
+          <div class="features-list">
+            ${featuresHTML}
+          </div>
+          <div class="software-buttons">
+            <a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="${logiciel.id}">📥 Télécharger</a>
+            <a href="#" class="software-btn secondary-btn trial-btn" data-logiciel-id="${logiciel.id}">🆓 Version d'essai</a>
+          </div>
+        </div>
+      </div>
     `;
 }
 
