@@ -44,9 +44,11 @@ try {
   const formationRoutes = require('./routes/formation');
   const logicielRoutes = require('./routes/logicielRoutes');
   const emploiRoutes = require('./routes/emploiRoutes');
+  const actualiteRoutes = require('./routes/actualiteRoutes');
   app.use('/api/formations', formationRoutes);
   app.use('/api/logiciels', logicielRoutes);
   app.use('/api/emplois', emploiRoutes);
+  app.use('/api/actualites', actualiteRoutes);
 } catch (e) {
   console.warn('⚠️ Routes dynamiques non chargées:', e.message);
 }
@@ -68,49 +70,7 @@ app.get('/api/health', (req, res) => {
 
 // (les anciennes routes statiques ont été retirées)
 
-// Route actualités
-app.get('/api/actualites', (req, res) => {
-  const actualites = [
-    {
-      id: 1,
-      titre: 'Formation Covadis',
-      description: 'Formation sur le logiciel Covadis pour la Société Ivoirienne de Construction : une révolution technologique pour le génie civil.',
-      contenu: 'Dans un secteur en pleine mutation, où la précision et l\'efficacité des calculs sont devenues essentielles, la Société Ivoirienne de Construction a choisi Sorbo Ingénierie pour former ses équipes au logiciel Covadis.',
-      date: '2025-05-11T10:00:00.000Z',
-      categorie: 'Formation',
-      auteur: 'kevinyameogo01@gmail.com',
-      image: 'https://images.unsplash.com/photo-1517026575980-3e1e2dedeac4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-      tags: ['Covadis', 'Formation', 'Génie civil']
-    },
-    {
-      id: 2,
-      titre: 'Formation SETEC',
-      description: 'Formation sur les logiciels d\'ingénierie de l\'eau pour SETEC Afrique.',
-      contenu: 'Dans un environnement où la gestion des ressources hydriques est devenue un enjeu stratégique majeur, SETEC Afrique met en œuvre un programme de formation complet.',
-      date: '2025-05-11T14:00:00.000Z',
-      categorie: 'Formation',
-      auteur: 'kevinyameogo01@gmail.com',
-      image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-      tags: ['SETEC', 'Hydraulique', 'Formation']
-    },
-    {
-      id: 3,
-      titre: 'Début de formation le 20/12/2025',
-      description: 'Sorbo-Ingénierie annonce le début d\'une nouvelle session de formation pour les professionnels du génie civil.',
-      contenu: 'Cette formation portera sur les dernières méthodes et outils utilisés dans le secteur de l\'ingénierie moderne.',
-      date: '2025-06-15T09:00:00.000Z',
-      categorie: 'Actualités',
-      auteur: 'sorbo.ingenierie@gmail.com',
-      image: 'https://images.unsplash.com/photo-1584475784921-d9dbfd9d17ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-      tags: ['Formation', 'Génie civil', '2025']
-    }
-  ];
-
-  res.json({
-    success: true,
-    data: actualites
-  });
-});
+// Route actualités (maintenant gérée par actualiteRoutes)
 
 // (route emplois dynamique montée plus haut)
 
