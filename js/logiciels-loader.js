@@ -37,9 +37,9 @@ async function loadLogicielsFromAPI() {
 }
 
 function displayLogiciels(logiciels) {
-    const container = document.getElementById('logiciels-grid');
+    const container = document.getElementById('logiciels-grid') || document.getElementById('software-grid');
     if (!container) {
-        console.error('❌ Container logiciels-grid non trouvé');
+        console.error('❌ Container logiciels-grid/software-grid non trouvé');
         return;
     }
 

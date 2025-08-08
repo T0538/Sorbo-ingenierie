@@ -1,7 +1,7 @@
 // Service Worker pour les notifications push
 
 // Version du cache
-const CACHE_NAME = 'sorbo-cache-v1';
+const CACHE_NAME = 'sorbo-cache-v3';
 
 // Fichiers à mettre en cache
 const urlsToCache = [
@@ -41,6 +41,12 @@ self.addEventListener('activate', event => {
 
 // Interception des requêtes réseau
 self.addEventListener('fetch', event => {
+  // Ignorer les requêtes non HTTP/HTTPS (ex: chrome-extension://)
+  const url = event.request && event.request.url;
+  if (!url || !/^https?:/i.test(url)) {
+    return;
+  }
+
   event.respondWith(
     (async () => {
       try {
@@ -49,9 +55,8 @@ self.addEventListener('fetch', event => {
           event.request.method === 'GET' &&
           networkResponse &&
           networkResponse.status === 200 &&
-          event.request.url.startsWith(self.location.origin)
+          url.startsWith(self.location.origin)
         ) {
-          // N'essaie pas de mettre en cache les schémas non supportés (chrome-extension, etc.)
           const responseClone = networkResponse.clone();
           const cache = await caches.open(CACHE_NAME);
           await cache.put(event.request, responseClone);
