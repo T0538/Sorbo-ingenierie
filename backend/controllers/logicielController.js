@@ -105,7 +105,27 @@ exports.getLogicielBySlug = async (req, res) => {
 // @access  Private/Admin
 exports.createLogiciel = async (req, res) => {
   try {
-    const logiciel = new Logiciel(req.body);
+    // Nettoyage pour éviter les erreurs de clé dupliquée (_id)
+    const payload = { ...req.body };
+    delete payload._id;
+    delete payload.id;
+
+    // Normalisation/validation basique des URLs
+    const isHttpUrl = (v) => typeof v === 'string' ? /^https?:\/\//i.test(v) : true;
+    if (payload.lienTelechargement && !isHttpUrl(payload.lienTelechargement)) {
+      return res.status(400).json({ success: false, message: 'lienTelechargement doit commencer par http(s)://' });
+    }
+    if (payload.lienDemo && !isHttpUrl(payload.lienDemo)) {
+      return res.status(400).json({ success: false, message: 'lienDemo doit commencer par http(s)://' });
+    }
+
+    // Conversion éventuelle
+    if (typeof payload.prix === 'string') {
+      const n = Number(payload.prix);
+      if (!Number.isNaN(n)) payload.prix = n;
+    }
+
+    const logiciel = new Logiciel(payload);
     await logiciel.save();
     
     res.status(201).json({
@@ -120,6 +140,30 @@ exports.createLogiciel = async (req, res) => {
       message: 'Erreur lors de la création du logiciel',
       error: error.message
     });
+  }
+};
+
+// @desc    Obtenir les liens de téléchargement/démo
+// @route   GET /api/logiciels/:id/download
+// @access  Public
+exports.getDownloadLinks = async (req, res) => {
+  try {
+    const logiciel = await Logiciel.findById(req.params.id);
+    if (!logiciel) {
+      return res.status(404).json({ success: false, message: 'Logiciel non trouvé' });
+    }
+    return res.status(200).json({
+      success: true,
+      message: `Redirection vers ${logiciel.nom}`,
+      data: {
+        nom: logiciel.nom,
+        downloadUrl: logiciel.lienTelechargement || '',
+        trialUrl: logiciel.lienDemo || ''
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ success: false, message: 'Erreur lors de la récupération des liens', error: error.message });
   }
 };
 

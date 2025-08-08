@@ -8,7 +8,8 @@ const {
   updateLogiciel, 
   deleteLogiciel,
   addVersion,
-  addTestimonial
+  addTestimonial,
+  getDownloadLinks
 } = require('../controllers/logicielController');
 const { protect, restrict } = require('../middleware/authMiddleware');
 
@@ -16,6 +17,7 @@ const { protect, restrict } = require('../middleware/authMiddleware');
 router.get('/', getLogiciels);
 router.get('/slug/:slug', getLogicielBySlug);
 router.get('/:id', getLogicielById);
+router.get('/:id/download', getDownloadLinks);
 
 // Routes protégées (admin uniquement)
 router.post('/', protect, restrict(['admin']), createLogiciel);
