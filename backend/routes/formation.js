@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const formationController = require('../controllers/formationController');
 
-// Route simple pour tester
-router.get('/', (req, res) => {
-  res.json({ message: 'API Formations fonctionne' });
-});
+// GET /api/formations
+router.get('/', formationController.getFormations);
 
-module.exports = router; 
+// Vous avez déjà d'autres méthodes dans le controller si besoin plus tard
+
+module.exports = router;
