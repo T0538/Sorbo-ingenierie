@@ -975,11 +975,14 @@ footer h3::after {
   box-shadow: 0 18px 40px rgba(0,0,0,0.09);
 }
 
+.software-media { height: 180px; overflow: hidden; }
+.software-media img { width: 100%; height: 100%; object-fit: cover; display:block; }
+
 .software-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 20px 6px;
+  padding: 16px 18px 6px;
 }
 
 .software-icon {
@@ -1005,17 +1008,17 @@ footer h3::after {
 }
 .software-badge.premium { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
 
-.software-content { padding: 0 20px 20px; }
-.software-content h3 { margin: 0 0 4px; font-size: 1.35rem; }
-.software-category { color: #6b7280; font-size: .85rem; margin-bottom: 10px; }
-.software-content p { color: #4b5563; font-size: .95rem; line-height: 1.55; }
+.software-content { padding: 0 18px 18px; }
+.software-title { margin: 0 0 6px; font-size: 1.5rem; letter-spacing: .2px; }
+.software-category { color: #6b7280; font-size: .88rem; margin-bottom: 12px; }
+.software-content p { color: #4b5563; font-size: .95rem; line-height: 1.6; margin-bottom: 8px; }
 
-.features-list { margin: 14px 0 18px; }
+.features-list { margin: 12px 0 16px; }
 .feature-item { display:flex; align-items:center; gap:8px; margin:6px 0; color:#374151; font-size:.92rem; }
 .feature-item i { color:#10b981; }
 
 .software-buttons { display:flex; gap:10px; }
-.software-btn { border:none; border-radius:10px; padding:10px 14px; font-weight:600; text-decoration:none; }
+.software-btn { border:none; border-radius:10px; padding:10px 14px; font-weight:600; text-decoration:none; font-size:.92rem; }
 .primary-btn { background: var(--primary-color); color:#fff; }
 .secondary-btn { background: #f3f4f6; color:#374151; border:1px solid #e5e7eb; }
 .software-btn:hover { transform: translateY(-1px); }

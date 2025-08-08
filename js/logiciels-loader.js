@@ -61,6 +61,7 @@ function createLogicielCard(logiciel) {
     const categorie = logiciel.categorie || '';
     const version = logiciel.version ? `v${logiciel.version}` : '';
     const prix = logiciel.prix || 'Gratuit';
+    const image = logiciel.image || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=60';
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
@@ -79,12 +80,15 @@ function createLogicielCard(logiciel) {
 
     return `
       <div class="software-card modern-card" data-logiciel-id="${logiciel.id}">
+        <div class="software-media">
+          <img src="${image}" alt="${nom}" loading="lazy" />
+        </div>
         <div class="software-header">
           <div class="software-icon ${iconColorClass}"><i class="fas fa-cubes"></i></div>
           <span class="software-badge ${prix.toLowerCase().includes('gratuit') ? 'popular' : 'premium'}">${prix}</span>
         </div>
         <div class="software-content">
-          <h3><span class="highlight ${iconColorClass}">${nom}</span></h3>
+          <h3 class="software-title"><span class="highlight ${iconColorClass}">${nom}</span></h3>
           <div class="software-category">${[categorie, version].filter(Boolean).join(' • ')}</div>
           <p>${description}</p>
           <div class="features-list">
