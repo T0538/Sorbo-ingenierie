@@ -14,22 +14,21 @@ exports.getEmplois = async (req, res) => {
     const startIndex = (page - 1) * limit;
     
     // Filtres
-    const filter = { statut: 'active' };
+    const filter = { statut: 'actif' };
     
+    // Type de contrat (cdi, cdd, stage, freelance, autre)
     if (req.query.type) {
-      filter.type = req.query.type;
+      filter.typeContrat = req.query.type.toLowerCase();
     }
     
-    if (req.query.departement) {
-      filter.departement = req.query.departement;
-    }
+    // Département non présent dans le schéma actuel → ignoré si fourni
     
     if (req.query.experience) {
       filter.experience = req.query.experience;
     }
     
     if (req.query.localisation) {
-      filter.localisation = { $regex: req.query.localisation, $options: 'i' };
+      filter['lieu.ville'] = { $regex: req.query.localisation, $options: 'i' };
     }
     
     if (req.query.search) {
