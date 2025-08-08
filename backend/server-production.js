@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
@@ -30,6 +31,26 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Connexion MongoDB pour les routes dynamiques
+if (process.env.MONGODB_URI) {
+  mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => console.log('✅ MongoDB connecté (production)'))
+    .catch((err) => console.error('❌ Échec connexion MongoDB:', err.message));
+}
+
+// Routes dynamiques (MongoDB)
+try {
+  const formationRoutes = require('./routes/formation');
+  const logicielRoutes = require('./routes/logicielRoutes');
+  const emploiRoutes = require('./routes/emploiRoutes');
+  app.use('/api/formations', formationRoutes);
+  app.use('/api/logiciels', logicielRoutes);
+  app.use('/api/emplois', emploiRoutes);
+} catch (e) {
+  console.warn('⚠️ Routes dynamiques non chargées:', e.message);
+}
+
 // Route de santé (ne doit jamais renvoyer 500)
 app.get('/api/health', (req, res) => {
   try {
@@ -45,103 +66,7 @@ app.get('/api/health', (req, res) => {
   }
 });
 
-// Route formations
-app.get('/api/formations', (req, res) => {
-  const formations = [
-    {
-      id: 1,
-      title: 'Formation AutoCAD 2024',
-      type: 'autocad',
-      duration: 5,
-      price: 250000,
-      description: 'Formation complète AutoCAD 2024 pour professionnels',
-      category: 'Architecture',
-      location: 'Abidjan, Cocody'
-    },
-    {
-      id: 2,
-      title: 'Formation Revit Architecture',
-      type: 'revit',
-      duration: 7,
-      price: 350000,
-      description: 'Formation Revit Architecture pour la modélisation 3D',
-      category: 'Architecture',
-      location: 'Abidjan, Plateau'
-    },
-    {
-      id: 3,
-      title: 'Formation Covadis',
-      type: 'covadis',
-      duration: 4,
-      price: 200000,
-      description: 'Formation Covadis pour l\'ingénierie routière',
-      category: 'Ingénierie routière',
-      location: 'En ligne'
-    },
-    {
-      id: 4,
-      title: 'Formation SolidWorks',
-      type: 'solidworks',
-      duration: 6,
-      price: 300000,
-      description: 'Formation SolidWorks pour la conception mécanique',
-      category: 'Génie mécanique',
-      location: 'Abidjan, Zone 4'
-    }
-  ];
-
-  res.json({
-    success: true,
-    data: formations
-  });
-});
-
-// Route logiciels
-app.get('/api/logiciels', (req, res) => {
-  const logiciels = [
-    {
-      id: 1,
-      nom: 'SorboPillar v1.1',
-      description: 'Logiciel d\'aide à la conception et au dimensionnement géotechnique des bâtiments et d\'ouvrages d\'arts selon les Eurocodes et les anciens règlements.',
-      categorie: 'Géotechnique',
-      version: '1.1',
-      prix: 'Gratuit',
-      image: 'images/sorbo-pillar.jpg',
-      fonctionnalites: ['Facile à apprendre', 'Interagir graphiquement', 'Calculs précis'],
-      downloadUrl: '#',
-      trialUrl: '#'
-    },
-    {
-      id: 2,
-      nom: 'SorboOH-Route v1.1',
-      description: 'Logiciel d\'aide à la conception et au dimensionnement ouvrages hydrauliques selon les méthodes rationnelles, Orstorm et CIEH.',
-      categorie: 'Hydraulique',
-      version: '1.1',
-      prix: 'Gratuit',
-      image: 'images/sorbo-oh-route.jpg',
-      fonctionnalites: ['Travailler sur carte', 'Google Maps intégré', 'Calculs hydrauliques'],
-      downloadUrl: '#',
-      trialUrl: '#'
-    },
-    {
-      id: 3,
-      nom: 'SorboPillar Beta',
-      description: 'Logiciel d\'aide à la conception et au dimensionnement géotechnique des bâtiments et d\'ouvrages d\'arts selon les Eurocodes.',
-      categorie: 'Géotechnique',
-      version: 'Beta',
-      prix: 'Gratuit',
-      image: 'images/sorbo-pillar-beta.jpg',
-      fonctionnalites: ['Intégration CAO', 'AutoCAD compatible', 'Calculs avancés'],
-      downloadUrl: '#',
-      trialUrl: '#'
-    }
-  ];
-
-  res.json({
-    success: true,
-    data: logiciels
-  });
-});
+// (les anciennes routes statiques ont été retirées)
 
 // Route actualités
 app.get('/api/actualites', (req, res) => {
@@ -187,36 +112,7 @@ app.get('/api/actualites', (req, res) => {
   });
 });
 
-// Route emplois
-app.get('/api/emplois', (req, res) => {
-  const emplois = [
-    {
-      id: 1,
-      titre: 'Ingénieur Génie Civil',
-      entreprise: 'Sorbo Ingénierie',
-      lieu: 'Abidjan, Côte d\'Ivoire',
-      type: 'CDI',
-      description: 'Nous recherchons un ingénieur génie civil expérimenté pour rejoindre notre équipe.',
-      salaire: 'À négocier',
-      date: '2025-01-15T00:00:00.000Z'
-    },
-    {
-      id: 2,
-      titre: 'Développeur Full Stack',
-      entreprise: 'Sorbo Ingénierie',
-      lieu: 'Abidjan, Côte d\'Ivoire',
-      type: 'CDI',
-      description: 'Développement d\'applications web et logiciels métiers pour l\'ingénierie.',
-      salaire: 'À négocier',
-      date: '2025-01-10T00:00:00.000Z'
-    }
-  ];
-
-  res.json({
-    success: true,
-    data: emplois
-  });
-});
+// (route emplois dynamique montée plus haut)
 
 const PORT = process.env.PORT || 5000;
 
