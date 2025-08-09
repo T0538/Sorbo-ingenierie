@@ -15,3 +15,12 @@ EMAIL_USER=votre-email@gmail.com
 EMAIL_PASS=votre-mot-de-passe-app
 
 
+
+
+
+
+
+
+
+
+

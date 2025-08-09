@@ -434,3 +434,12 @@ Pour toute question ou problème :
 **Votre backend est maintenant prêt pour gérer tout le contenu de votre site web !** 🎯
 
 
+
+
+
+
+
+
+
+
+

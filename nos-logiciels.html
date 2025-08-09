@@ -850,11 +850,8 @@
                     <li class="dropdown">
                         <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" role="menu">
-
-                            <li><a href="rendez-vous.html">Rendez-vous</a></li>
-                            <li><a href="evenements.html">Événements</a></li>
-                            <li><a href="actualites.html">Actualités</a></li>
-                            <li><a href="acheter-formations.html">Acheter nos formations</a></li>
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -1008,7 +1005,8 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- AOS désactivé globalement; script conservé mais non initialisé si DISABLE_ANIMATIONS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script>
         // Page Loader
         window.addEventListener('load', function() {
@@ -1025,17 +1023,21 @@
             }, 2000);
         });
 
-        // Initialiser AOS après le chargement
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                AOS.init({
-                    offset: 120,
-                    duration: 800,
-                    easing: 'ease-out',
-                    once: true
-                });
-            }, 2500);
-        });
+        // Initialiser AOS après le chargement (désactivé si animations désactivées)
+        if (!window.DISABLE_ANIMATIONS) {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({
+                            offset: 120,
+                            duration: 800,
+                            easing: 'ease-out',
+                            once: true
+                        });
+                    }
+                }, 2500);
+            });
+        }
 
         // Afficher le loader immédiatement si la page se recharge
         document.addEventListener('DOMContentLoaded', function() {

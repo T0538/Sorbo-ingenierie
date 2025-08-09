@@ -275,3 +275,12 @@ Votre système d'administration est maintenant opérationnel ! Vous pouvez :
 **Votre site web est maintenant entièrement dynamique et facilement gérable !** 🚀
 
 
+
+
+
+
+
+
+
+
+

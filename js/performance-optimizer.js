@@ -12,7 +12,7 @@ const PerformanceConfig = {
     // Optimisation du viewport
     optimizeViewport: true,
     // Cache des animations
-    cacheAnimations: true
+    cacheAnimations: false
 };
 
 // Préchargement des images critiques
@@ -100,30 +100,25 @@ function enhanceImageLoading() {
 // Optimisation des animations selon les performances de l'appareil
 function optimizeAnimations() {
     // Détecter si l'appareil préfère les animations réduites
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = true;
     
     if (prefersReducedMotion) {
-        // Désactiver les animations complexes
-        document.documentElement.style.setProperty('--animation-duration', '0.2s');
-        
-        // Réduire les délais AOS
-        document.querySelectorAll('[data-aos-delay]').forEach(el => {
-            el.setAttribute('data-aos-delay', '0');
+        // Désactiver toutes les animations
+        document.documentElement.style.setProperty('--animation-duration', '0s');
+        document.querySelectorAll('[data-aos], [data-aos-delay], [data-aos-duration]').forEach(el => {
+            el.removeAttribute('data-aos');
+            el.removeAttribute('data-aos-delay');
+            el.removeAttribute('data-aos-duration');
         });
         
         console.log('⚡ Animations optimisées pour les performances');
     }
     
     // Optimiser selon la puissance de l'appareil
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    if (connection && connection.effectiveType === 'slow-2g') {
-        // Désactiver certaines animations sur connexion lente
-        document.querySelectorAll('[data-aos]').forEach(el => {
-            el.setAttribute('data-aos-duration', '400');
-        });
-        
-        console.log('📱 Animations adaptées à la connexion lente');
-    }
+    // Désactiver complètement pour uniformité
+    document.querySelectorAll('[data-aos]').forEach(el => {
+        el.removeAttribute('data-aos');
+    });
 }
 
 // Cache intelligent pour les éléments animés

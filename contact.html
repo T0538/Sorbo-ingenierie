@@ -8,7 +8,8 @@
     <link rel="shortcut icon" type="image/png" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/logo.png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- AOS désactivé globalement -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Loader Styles */
@@ -425,11 +426,8 @@
                     <li class="dropdown">
                         <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" role="menu">
-
-                            <li><a href="rendez-vous.html">Rendez-vous</a></li>
-                            <li><a href="evenements.html">Événements</a></li>
-                            <li><a href="actualites.html">Actualités</a></li>
-                            <li><a href="acheter-formations.html">Acheter nos formations</a></li>
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -766,7 +764,8 @@
         </div>
     </footer>
 
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- AOS script conservé mais non utilisé si DISABLE_ANIMATIONS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script src="js/script.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>

@@ -1,31 +1,33 @@
 /**
  * Script de chargement progressif universel pour toutes les pages
- * Utilise AOS (Animate On Scroll) et Intersection Observer
+ * Désactivation des animations (AOS et CSS) sur toutes les pages
  */
 
-// Configuration AOS globale
+// Drapeau global pour désactiver toute animation
+window.DISABLE_ANIMATIONS = true;
+
+// Configuration AOS (non utilisée si animations désactivées)
 const AOSConfig = {
-    duration: 800,
-    delay: 100,
-    easing: 'ease-out',
+    duration: 0,
+    delay: 0,
+    easing: 'linear',
     once: true,
     mirror: false,
-    offset: 50,
-    disable: function() {
-        return window.innerWidth < 768 && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
+    offset: 0,
+    disable: true
 };
 
 // Initialiser AOS si disponible
 function initAOS() {
+    if (window.DISABLE_ANIMATIONS) return;
     if (typeof AOS !== 'undefined') {
         AOS.init(AOSConfig);
-        console.log('✅ AOS initialisé avec succès');
     }
 }
 
 // Fonction pour ajouter les attributs data-aos aux éléments
 function addLazyLoadingAttributes() {
+    if (window.DISABLE_ANIMATIONS) return;
     // Sélecteurs des éléments à animer
     const selectors = [
         // Sections principales
@@ -136,15 +138,19 @@ function initLazyLoading() {
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
-                addLazyLoadingAttributes();
-                initAOS();
+                if (!window.DISABLE_ANIMATIONS) {
+                    addLazyLoadingAttributes();
+                    initAOS();
+                }
                 initImageLazyLoading();
             }, 100);
         });
     } else {
         setTimeout(() => {
-            addLazyLoadingAttributes();
-            initAOS();
+            if (!window.DISABLE_ANIMATIONS) {
+                addLazyLoadingAttributes();
+                initAOS();
+            }
             initImageLazyLoading();
         }, 100);
     }
@@ -152,6 +158,7 @@ function initLazyLoading() {
 
 // Réinitialiser AOS quand la fenêtre est redimensionnée
 window.addEventListener('resize', () => {
+    if (window.DISABLE_ANIMATIONS) return;
     if (typeof AOS !== 'undefined') {
         AOS.refresh();
     }
@@ -160,60 +167,26 @@ window.addEventListener('resize', () => {
 // Démarrer l'initialisation
 initLazyLoading();
 
-// Styles CSS pour les animations personnalisées
-const lazyLoadingStyles = `
+// Styles pour désactiver toutes les animations du site
+const noAnimationStyles = `
 <style>
-/* Styles pour le chargement progressif */
-.lazy {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.loaded {
-    opacity: 1;
-}
-
-.image-loaded {
-    animation: imageAppear 0.5s ease-out;
-}
-
-@keyframes imageAppear {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Animation pour les éléments qui apparaissent */
-[data-aos] {
-    transition-property: transform, opacity;
-    transition-duration: 0.8s;
-    transition-timing-function: ease-out;
-}
-
-/* Amélioration des performances */
-.aos-init[data-aos] {
-    transform: unset;
-}
-
-/* Styles spécifiques pour mobile */
-@media (max-width: 768px) {
-    [data-aos-duration] {
-        animation-duration: 0.6s !important;
-    }
-    
-    [data-aos-delay] {
-        animation-delay: 0.1s !important;
-    }
-}
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto !important; }
+  [data-aos] { opacity: 1 !important; transform: none !important; }
+  .image-loaded { animation: none !important; }
 </style>
 `;
 
-// Injecter les styles
-document.head.insertAdjacentHTML('beforeend', lazyLoadingStyles);
+document.head.insertAdjacentHTML('beforeend', noAnimationStyles);
 
-console.log('🚀 Système de chargement progressif initialisé');
+// Réactiver explicitement l'animation de la barre d'actualités du hero
+const reenableTickerStyles = `
+<style>
+  .ticker-track { animation: tickerScroll 60s linear infinite !important; }
+  .ticker-content:hover .ticker-track { animation-play-state: paused !important; }
+</style>
+`;
+
+document.head.insertAdjacentHTML('beforeend', reenableTickerStyles);
+
+console.log('🛑 Animations désactivées sur toutes les pages');

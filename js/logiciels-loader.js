@@ -179,7 +179,7 @@ function displayError(message) {
                 <h3>Erreur de chargement</h3>
                 <p>${message}</p>
                 <button onclick="location.reload()" style="
-                    background: #3498db;
+                    background:rgb(199, 24, 24);
                     color: white;
                     border: none;
                     padding: 10px 20px;
