@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Organigramme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Styles pour l'organigramme moderne */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .org-chart::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #d10000, #b30000);
+            border-radius: 2px;
+        }
+        
+        .org-level {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .org-connector {
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(180deg, #d10000, #b30000);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(209, 0, 0, 0.3);
+        }
+        
+        .org-card {
+            width: 300px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(209, 0, 0, 0.1), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .org-card:hover::before {
+            transform: rotate(45deg) translateX(100%);
+        }
+        
+        .org-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: #d10000;
+        }
+        
+        .org-card.org-ceo {
+            background: linear-gradient(135deg, #d10000 0%, #b30000 100%);
+            color: white;
+            border-color: #d10000;
+            position: relative;
+        }
+        
+        .org-card.org-ceo::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #d10000, #b30000, #d10000);
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .org-card.org-ceo:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(209, 0, 0, 0.3);
+        }
+        
+        .org-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .org-card.org-ceo .org-icon {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .org-icon i {
+            font-size: 2.5rem;
+            color: #d10000;
+            transition: all 0.4s ease;
+        }
+        
+        .org-card.org-ceo .org-icon i {
+            color: white;
+        }
+        
+        .org-card:hover .org-icon {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .org-info h4 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .org-card.org-ceo .org-info h4 {
+            color: white;
+        }
+        
+        .org-info p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        
+        .org-card.org-ceo .org-info p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .org-department {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            color: #495057;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .org-card.org-ceo .org-department {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .org-card:hover .org-department {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .org-card.org-ceo:hover .org-department {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Animation d'entrée */
+        .org-card {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .org-card:nth-child(1) { animation-delay: 0.1s; }
+        .org-card:nth-child(2) { animation-delay: 0.2s; }
+        .org-card:nth-child(3) { animation-delay: 0.3s; }
+        .org-card:nth-child(4) { animation-delay: 0.4s; }
+        .org-card:nth-child(5) { animation-delay: 0.5s; }
+        .org-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .org-card {
+                width: 280px;
+                padding: 25px;
+            }
+            
+            .org-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .org-icon i {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #d10000; margin-bottom: 40px;">Test de l'Organigramme</h1>
+        
+        <!-- Organigramme moderne -->
+        <div class="org-chart">
+            <!-- Niveau 1 : Direction Générale -->
+            <div class="org-level">
+                <div class="org-card org-ceo">
+                    <div class="org-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Amadou Konaté</h4>
+                        <p>Directeur Général</p>
+                        <div class="org-department">Direction Générale</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ligne de connexion -->
+            <div class="org-connector"></div>
+            
+            <!-- Niveau 2 : Direction -->
+            <div class="org-level">
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Marie Kouamé</h4>
+                        <p>Directrice Technique</p>
+                        <div class="org-department">Direction Technique</div>
+                    </div>
+                </div>
+                
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Pierre Diallo</h4>
+                        <p>Directeur Commercial</p>
+                        <div class="org-department">Direction Commerciale</div>
+                    </div>
+                </div>
+                
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Awa Bamba</h4>
+                        <p>Directrice des Ressources Humaines</p>
+                        <div class="org-department">Direction RH</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ligne de connexion -->
+            <div class="org-connector"></div>
+            
+            <!-- Niveau 3 : Équipes opérationnelles -->
+            <div class="org-level">
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Yao Koné</h4>
+                        <p>Ingénieur Senior Structures</p>
+                        <div class="org-department">Département Structures</div>
+                    </div>
+                </div>
+                
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>François Adou</h4>
+                        <p>Ingénieur Hydraulique</p>
+                        <div class="org-department">Département Hydraulique</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

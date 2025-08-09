@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Organigramme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .debug-info {
+            background: #fff;
+            border: 2px solid #d10000;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .debug-info h2 {
+            color: #d10000;
+            margin-bottom: 15px;
+        }
+        
+        .debug-info p {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        
+        /* Styles pour l'organigramme moderne */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            min-height: 200px;
+        }
+        
+        .org-chart::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #d10000, #b30000);
+            border-radius: 2px;
+        }
+        
+        .org-level {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            border: 1px solid #ddd;
+            padding: 20px;
+            min-height: 100px;
+        }
+        
+        .org-connector {
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(180deg, #d10000, #b30000);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(209, 0, 0, 0.3);
+        }
+        
+        .org-card {
+            width: 300px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .org-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: #d10000;
+        }
+        
+        .org-card.org-ceo {
+            background: linear-gradient(135deg, #d10000 0%, #b30000 100%);
+            color: white;
+            border-color: #d10000;
+        }
+        
+        .org-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .org-card.org-ceo .org-icon {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+        
+        .org-icon i {
+            font-size: 2.5rem;
+            color: #d10000;
+        }
+        
+        .org-card.org-ceo .org-icon i {
+            color: white;
+        }
+        
+        .org-info h4 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .org-card.org-ceo .org-info h4 {
+            color: white;
+        }
+        
+        .org-info p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .org-card.org-ceo .org-info p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .org-department {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            color: #495057;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .org-card.org-ceo .org-department {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="debug-info">
+            <h2>🔍 Debug de l'Organigramme</h2>
+            <p><strong>État du serveur:</strong> <span id="serverStatus">Vérification...</span></p>
+            <p><strong>Font Awesome:</strong> <span id="fontAwesomeStatus">Vérification...</span></p>
+            <p><strong>CSS chargé:</strong> <span id="cssStatus">Vérification...</span></p>
+            <p><strong>Éléments organigramme:</strong> <span id="elementsStatus">Vérification...</span></p>
+        </div>
+        
+        <h1 style="text-align: center; color: #d10000; margin-bottom: 40px;">Debug de l'Organigramme</h1>
+        
+        <!-- Organigramme moderne -->
+        <div class="org-chart" id="orgChart">
+            <!-- Niveau 1 : Direction Générale -->
+            <div class="org-level">
+                <div class="org-card org-ceo">
+                    <div class="org-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Amadou Konaté</h4>
+                        <p>Directeur Général</p>
+                        <div class="org-department">Direction Générale</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ligne de connexion -->
+            <div class="org-connector"></div>
+            
+            <!-- Niveau 2 : Direction -->
+            <div class="org-level">
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Marie Kouamé</h4>
+                        <p>Directrice Technique</p>
+                        <div class="org-department">Direction Technique</div>
+                    </div>
+                </div>
+                
+                <div class="org-card">
+                    <div class="org-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="org-info">
+                        <h4>Pierre Diallo</h4>
+                        <p>Directeur Commercial</p>
+                        <div class="org-department">Direction Commerciale</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Script de débogage
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Début du débogage de l\'organigramme');
+            
+            // Vérifier l'état du serveur
+            fetch('/test-organigramme.html')
+                .then(response => {
+                    document.getElementById('serverStatus').textContent = '✅ Serveur accessible (HTTP ' + response.status + ')';
+                    document.getElementById('serverStatus').style.color = 'green';
+                })
+                .catch(error => {
+                    document.getElementById('serverStatus').textContent = '❌ Erreur serveur: ' + error.message;
+                    document.getElementById('serverStatus').style.color = 'red';
+                });
+            
+            // Vérifier Font Awesome
+            const icon = document.querySelector('.fa-crown');
+            if (icon && getComputedStyle(icon, '::before').content !== 'none') {
+                document.getElementById('fontAwesomeStatus').textContent = '✅ Font Awesome chargé';
+                document.getElementById('fontAwesomeStatus').style.color = 'green';
+            } else {
+                document.getElementById('fontAwesomeStatus').textContent = '❌ Font Awesome non chargé';
+                document.getElementById('fontAwesomeStatus').style.color = 'red';
+            }
+            
+            // Vérifier le CSS
+            const orgChart = document.getElementById('orgChart');
+            const styles = getComputedStyle(orgChart);
+            if (styles.display === 'flex') {
+                document.getElementById('cssStatus').textContent = '✅ CSS appliqué';
+                document.getElementById('cssStatus').style.color = 'green';
+            } else {
+                document.getElementById('cssStatus').textContent = '❌ CSS non appliqué (display: ' + styles.display + ')';
+                document.getElementById('cssStatus').style.color = 'red';
+            }
+            
+            // Vérifier les éléments
+            const cards = document.querySelectorAll('.org-card');
+            const levels = document.querySelectorAll('.org-level');
+            const connectors = document.querySelectorAll('.org-connector');
+            
+            document.getElementById('elementsStatus').textContent = 
+                `✅ ${cards.length} cartes, ${levels.length} niveaux, ${connectors.length} connecteurs`;
+            document.getElementById('elementsStatus').style.color = 'green';
+            
+            // Log des informations de débogage
+            console.log('📊 Éléments trouvés:', {
+                cards: cards.length,
+                levels: levels.length,
+                connectors: connectors.length,
+                orgChart: orgChart ? 'trouvé' : 'non trouvé'
+            });
+            
+            // Vérifier les styles calculés
+            console.log('🎨 Styles calculés:', {
+                display: styles.display,
+                flexDirection: styles.flexDirection,
+                alignItems: styles.alignItems,
+                gap: styles.gap
+            });
+        });
+    </script>
+</body>
+</html>
