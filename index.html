@@ -356,6 +356,10 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            /* Animation d'apparition des icônes */
+            animation: slideInRight 0.6s ease forwards;
+            opacity: 1;
+            transform: translateX(0);
         }
         
         .floating-icon::before {
@@ -409,13 +413,6 @@
             opacity: 1;
             visibility: visible;
             right: 75px;
-        }
-        
-        /* Animation d'apparition des icônes */
-        .floating-icon {
-            animation: slideInRight 0.6s ease forwards;
-            opacity: 0;
-            transform: translateX(100px);
         }
         
         .floating-icon:nth-child(1) { animation-delay: 0.2s; }
@@ -1296,7 +1293,7 @@
         </div>
         
         <!-- Icônes flottantes à droite - uniquement dans la section hero -->
-        <div class="floating-icons">
+        <div class="floating-icons" style="display: flex !important; opacity: 1 !important; visibility: visible !important;">
             <a href="tel:+2252121802126" class="floating-icon" aria-label="Nous contacter">
                 <i class="fas fa-phone"></i>
                 <span class="tooltip">Nous contacter</span>
