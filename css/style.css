@@ -140,6 +140,25 @@ section {
     margin-left: 10px;
 }
 
+/* Style pour le bouton Contactez-nous dans le menu */
+.contact-btn {
+    background-color: var(--primary-color);
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+}
+
+.contact-btn:hover {
+    background-color: #B80000;
+    border-color: #B80000;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(209, 0, 0, 0.4);
+}
+
 /* Header */
 header {
     position: sticky;
