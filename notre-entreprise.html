@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -2454,18 +2454,20 @@
                 </div>
             </div>
         </div>
-    </section>
-
-
-
-    <footer>
+    </section>    <footer>
         <div class="container">
             <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.png" alt="Sorbo-IngÃ©nierie Logo" class="footer-logo">
+                    <h3>Sorbo-IngÃ©nierie</h3>
+                    <p class="footer-description">Excellence et Innovation en GÃ©nie civil</p>
+                </div>
+
                 <div class="footer-column slide-up">
-                    <h3>Sorbo - Ingénierie</h3>
+                    <h3>Informations lÃ©gales</h3>
                     <ul class="company-info">
-                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
-                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Nom lÃ©gal :</strong> Sorbo-IngÃ©nierie</li>
+                        <li><strong>NÂ° Compte contribuable :</strong> 2242797T</li>
                         <li><strong>Forme juridique :</strong> SARL</li>
                         <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
                         <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
@@ -2482,8 +2484,13 @@
                     </ul>
                 </div>
 
-                <div class="footer-column fade-in">
-                    <h3>Nous suivre</h3>
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informÃ© de nos derniÃ¨res actualitÃ©s</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
@@ -2493,15 +2500,14 @@
             </div>
 
             <div class="footer-bottom">
-                <p>Copyright © Sorbo - Ingénierie</p>
+                <p>Copyright Â© 2024 Sorbo-IngÃ©nierie. Tous droits rÃ©servÃ©s.</p>
             </div>
         </div>
-    </footer>
-
-    <script src="js/script.js"></script>
+    </footer><script src="js/script.js"></script>
     <script src="js/backend-integration.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>
+    <script src="js/newsletter-handler.js"></script>
     <!-- AOS script conservé mais non utilisé si DISABLE_ANIMATIONS -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script>
@@ -2807,3 +2813,7 @@
     </script>
 </body>
 </html></html>
+
+<script src="standardiser-footer.js"></script>
+
+

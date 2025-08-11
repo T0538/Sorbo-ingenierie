@@ -189,7 +189,8 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column slide-up">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
                     <h3>Sorbo - Ingénierie</h3>
                     <ul class="company-info">
                         <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
@@ -218,6 +219,15 @@
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
+
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
             </div>
 
             <div class="footer-bottom">
@@ -229,6 +239,7 @@
     <script src="js/script.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>
+    <script src="js/newsletter-handler.js"></script>
     <script>
         // Réactiver transitions pour le carrousel malgré la désactivation globale
         (function(){
@@ -309,3 +320,5 @@
 </body>
 </html>
 
+
+<script src="standardiser-footer.js"></script>

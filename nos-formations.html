@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -747,6 +747,177 @@
         .benefit-content p {
             color: var(--light-text);
             line-height: 1.7;
+        }
+        
+        /* Nouveau design moderne pour les cartes de bénéfices */
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card-modern {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(209, 0, 0, 0.1);
+        }
+        
+        .benefit-card-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .benefit-card-modern:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .benefit-card-modern:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(209, 0, 0, 0.15);
+            border-color: rgba(209, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 8px 24px rgba(209, 0, 0, 0.3);
+        }
+        
+        .card-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .card-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: rgba(209, 0, 0, 0.1);
+            line-height: 1;
+        }
+        
+        .card-content h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .card-content p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-tag {
+            background: rgba(209, 0, 0, 0.08);
+            color: var(--primary-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(209, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-tag:hover {
+            background: rgba(209, 0, 0, 0.15);
+            border-color: rgba(209, 0, 0, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .card-footer {
+            border-top: 1px solid rgba(209, 0, 0, 0.1);
+            padding-top: 1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(209, 0, 0, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+            border-radius: 3px;
+            transition: width 1.5s ease;
+        }
+        
+        .efficiency-rate {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Responsive pour les nouvelles cartes */
+        @media (max-width: 768px) {
+            .benefits-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .benefit-card-modern {
+                padding: 1.5rem;
+            }
+            
+            .card-header {
+                margin-bottom: 1rem;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .card-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .card-number {
+                font-size: 2rem;
+            }
+        }
+        
+        .benefit-content {
             margin-bottom: 20px;
             flex: 1;
         }
@@ -2864,122 +3035,85 @@
             </div>
             
             <div class="benefits-container">
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
-                    <div class="benefit-image">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ingénieur travaillant sur des plans techniques" loading="lazy">
-                        <div class="image-overlay">
-                            <div class="overlay-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="currentColor"/>
+                                <path d="M19 15L19.74 17.74L22.5 18.5L19.74 19.26L19 22L18.26 19.26L15.5 18.5L18.26 17.74L19 15Z" fill="currentColor"/>
+                                <path d="M5 6L5.64 7.64L7.28 8.28L5.64 8.92L5 10.56L4.36 8.92L2.72 8.28L4.36 7.64L5 6Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="card-number">01</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Expertise & Innovation</h3>
+                        <p>Maîtrisez les dernières technologies et méthodologies du génie civil pour optimiser vos projets et études techniques.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">Outils de pointe</span>
+                            <span class="feature-tag">Méthodes éprouvées</span>
+                            <span class="feature-tag">Gain de productivité</span>
                         </div>
                     </div>
-                    <div class="benefit-content">
-                        <div class="benefit-icon">
-                            <i class="fas fa-chart-line"></i>
+                    <div class="card-footer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%"></div>
                         </div>
-                        <h3>Gagner en expertise et en efficacité</h3>
-                        <p>Acquérez des méthodes et des outils innovants pour optimiser vos études et projets. Maîtrisez les dernières technologies du secteur.</p>
-                        <ul class="benefit-features">
-                            <li><i class="fas fa-check"></i> Outils de pointe</li>
-                            <li><i class="fas fa-check"></i> Méthodes éprouvées</li>
-                            <li><i class="fas fa-check"></i> Gain de productivité</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                    <div class="benefit-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professionnel consultant des documents réglementaires" loading="lazy">
-                        <div class="image-overlay">
-                            <div class="overlay-icon">
-                                <i class="fas fa-balance-scale"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-icon">
-                            <i class="fas fa-balance-scale"></i>
-                        </div>
-                        <h3>S'adapter aux évolutions réglementaires</h3>
-                        <p>Nos formations intègrent les dernières mises à jour normatives et réglementaires en vigueur dans le secteur du génie civil.</p>
-                        <ul class="benefit-features">
-                            <li><i class="fas fa-check"></i> Normes actualisées</li>
-                            <li><i class="fas fa-check"></i> Conformité garantie</li>
-                            <li><i class="fas fa-check"></i> Veille réglementaire</li>
-                        </ul>
+                        <span class="efficiency-rate">95% d'efficacité</span>
                     </div>
                 </div>
                 
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                    <div class="benefit-image">
-                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Professionnel en réunion présentant ses compétences" loading="lazy">
-                        <div class="image-overlay">
-                            <div class="overlay-icon">
-                                <i class="fas fa-trophy"></i>
-                            </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="card-number">02</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Conformité & Réglementation</h3>
+                        <p>Restez à jour avec les dernières normes et réglementations en vigueur dans le secteur du génie civil et de la construction.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">Normes actualisées</span>
+                            <span class="feature-tag">Conformité garantie</span>
+                            <span class="feature-tag">Veille réglementaire</span>
                         </div>
                     </div>
-                                                   
-
-                    <div class="benefit-content">
-                        <div class="benefit-icon">
-                            <i class="fas fa-trophy"></i>
+                    <div class="card-footer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 98%"></div>
                         </div>
-                        <h3>Valoriser son profil professionnel</h3>
-                        <p>Une formation certifiée améliore vos opportunités de carrière et renforce votre crédibilité auprès des employeurs et clients.</p>
-                        <ul class="benefit-features">
-                            <li><i class="fas fa-check"></i> Certification reconnue</li>
-                            <li><i class="fas fa-check"></i> Évolution de carrière</li>
-                            <li><i class="fas fa-check"></i> Crédibilité renforcée</li>
-                        </ul>
+                        <span class="efficiency-rate">98% de conformité</span>
                     </div>
                 </div>
                 
-                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
-                    <div class="benefit-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe d'ingénieurs collaborant sur un projet" loading="lazy">
-                        <div class="image-overlay">
-                            <div class="overlay-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="currentColor"/>
+                                <path d="M19 15L19.74 17.74L22.5 18.5L19.74 19.26L19 22L18.26 19.26L15.5 18.5L18.26 17.74L19 15Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="card-number">03</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Carrière & Reconnaissance</h3>
+                        <p>Développez votre profil professionnel avec des certifications reconnues et valorisez votre expertise sur le marché du travail.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">Certification reconnue</span>
+                            <span class="feature-tag">Évolution de carrière</span>
+                            <span class="feature-tag">Crédibilité renforcée</span>
                         </div>
                     </div>
-                    <div class="benefit-content">
-                        <div class="benefit-icon">
-                            <i class="fas fa-users"></i>
+                    <div class="card-footer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92%"></div>
                         </div>
-                        <h3>Développer l'esprit d'équipe</h3>
-                        <p>Nos formations favorisent les échanges entre professionnels et renforcent la cohésion d'équipe à travers des projets collaboratifs.</p>
-                        <ul class="benefit-features">
-                            <li><i class="fas fa-check"></i> Travail collaboratif</li>
-                            <li><i class="fas fa-check"></i> Échanges d'expériences</li>
-                            <li><i class="fas fa-check"></i> Réseau professionnel</li>
-                        </ul>
-                        
-                    </div>
-                  
-                </div>
-                  <div class="benefit-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
-                    <div class="benefit-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Équipe d'ingénieurs collaborant sur un projet" loading="lazy">
-                        <div class="image-overlay">
-                            <div class="overlay-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                        </div>
-                    </div>
-               
-               <div class="benefit-content">
-                        <div class="benefit-icon">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <h3>Optimiser la performance des équipes</h3>
-                        <p>Former ses collaborateurs garantit des études et réalisations plus précises, conformes aux exigences du métier et aux standards de qualité.</p>
-                        <ul class="benefit-features">
-                            <li><i class="fas fa-check"></i> Équipes performantes</li>
-                            <li><i class="fas fa-check"></i> Qualité des livrables</li>
-                            <li><i class="fas fa-check"></i> Cohésion renforcée</li>
-                        </ul>
+                        <span class="efficiency-rate">92% de réussite</span>
                     </div>
                 </div>
             </div>
@@ -3337,16 +3471,20 @@
                 <a href="#formations-disponibles" class="btn outline-btn">Acheter nos formations</a>
             </div>
         </div>
-    </section>
-
-    <footer>
+    </section>    <footer>
         <div class="container">
             <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.png" alt="Sorbo-IngÃ©nierie Logo" class="footer-logo">
+                    <h3>Sorbo-IngÃ©nierie</h3>
+                    <p class="footer-description">Excellence et Innovation en GÃ©nie civil</p>
+                </div>
+
                 <div class="footer-column slide-up">
-                    <h3>Sorbo - Ingénierie</h3>
+                    <h3>Informations lÃ©gales</h3>
                     <ul class="company-info">
-                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
-                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Nom lÃ©gal :</strong> Sorbo-IngÃ©nierie</li>
+                        <li><strong>NÂ° Compte contribuable :</strong> 2242797T</li>
                         <li><strong>Forme juridique :</strong> SARL</li>
                         <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
                         <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
@@ -3363,8 +3501,13 @@
                     </ul>
                 </div>
 
-                <div class="footer-column fade-in">
-                    <h3>Nous suivre</h3>
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informÃ© de nos derniÃ¨res actualitÃ©s</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
@@ -3374,12 +3517,10 @@
             </div>
 
             <div class="footer-bottom">
-                <p>Copyright © Sorbo - Ingénierie</p>
+                <p>Copyright Â© 2024 Sorbo-IngÃ©nierie. Tous droits rÃ©servÃ©s.</p>
             </div>
         </div>
-    </footer>
-
-    <script src="js/script.js"></script>
+    </footer><script src="js/script.js"></script>
             <!-- <script src="js/backend-integration.js"></script> -->
     <!-- <script src="js/formations-integration.js"></script> -->
     <script src="js/debug-formations.js"></script>
@@ -3388,6 +3529,7 @@
     <script src="js/render-monitor.js"></script>
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>
+    <script src="js/newsletter-handler.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         // Page Loader
@@ -4145,3 +4287,6 @@
     </script>
 </body>
 </html>
+<script src="standardiser-footer.js"></script>
+
+
