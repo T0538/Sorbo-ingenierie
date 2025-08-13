@@ -620,6 +620,14 @@ footer h3::after {
     font-size: 0.9rem;
 }
 
+/* Assurer la visibilité des colonnes du footer même sans JS d'animation */
+.footer-column.slide-up,
+.footer-column.fade-in,
+.footer-newsletter.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Media Queries */
 @media (max-width: 992px) {
     h1 {
@@ -863,7 +871,7 @@ footer h3::after {
 }
 
 .project-image {
-    height: 250px;
+    height: 260px;
     overflow: hidden;
 }
 
@@ -871,7 +879,25 @@ footer h3::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    image-rendering: auto;
+    -ms-interpolation-mode: nearest-neighbor;
     transition: var(--transition);
+}
+
+/* Ajustement de cadrage pour la 2e slide du carousel projets (têtes visibles) */
+.projects-carousel .carousel-track > .carousel-item:nth-child(2) .project-image img {
+    object-position: center 20%;
+}
+
+/* Ajustements de cadrage des autres slides du carousel projets */
+.projects-carousel .carousel-track > .carousel-item:nth-child(1) .project-image img {
+    object-position: center 35%;
+}
+.projects-carousel .carousel-track > .carousel-item:nth-child(3) .project-image img {
+    object-position: center 40%;
+}
+.projects-carousel .carousel-track > .carousel-item:nth-child(4) .project-image img {
+    object-position: center 30%;
 }
 
 .project-card:hover .project-image img {
@@ -2175,8 +2201,8 @@ footer h3::after {
     }
     
     .hero-services .service-item {
-        min-width: 200px;
-        min-height: 120px;
+        min-width: 300px;
+        min-height: 150px;
         padding: 1rem;
         flex-direction: row;
         gap: 1rem;

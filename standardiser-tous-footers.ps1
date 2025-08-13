@@ -101,3 +101,6 @@ foreach ($page in $pages) {
 Write-Host "🎉 Standardisation des footers terminée !" -ForegroundColor Green
 Write-Host "📋 Pages traitées : $($pages.Count)" -ForegroundColor Cyan
 
+
+
+

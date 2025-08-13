@@ -2796,7 +2796,7 @@
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                    } else if (!AOS.options.once) {
+                    } else if (typeof AOS !== 'undefined' && AOS?.options && AOS.options.once === false) {
                         entry.target.classList.remove('visible');
                     }
                 });
@@ -2811,9 +2811,8 @@
             });
         });
     </script>
+    <script src="standardiser-footer.js"></script>
 </body>
-</html></html>
-
-<script src="standardiser-footer.js"></script>
+</html>
 
 
