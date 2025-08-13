@@ -891,7 +891,7 @@ footer h3::after {
 
 /* Ajustements de cadrage des autres slides du carousel projets */
 .projects-carousel .carousel-track > .carousel-item:nth-child(1) .project-image img {
-    object-position: center 35%;
+    object-position: center 15%;
 }
 .projects-carousel .carousel-track > .carousel-item:nth-child(3) .project-image img {
     object-position: center 40%;
