@@ -246,3 +246,4 @@ function openInscriptionForm(formationName, duration, price, id) {
 }
 
 
+
