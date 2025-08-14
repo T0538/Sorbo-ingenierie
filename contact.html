@@ -518,6 +518,7 @@
                             <label for="subject">Sujet</label>
                             <select id="subject" name="subject" required>
                                 <option value="">Sélectionnez un sujet</option>
+                                <option value="rendezvous">Demande de rendez-vous</option>
                                 <option value="ingenierie">Projet d'ingénierie</option>
                                 <option value="formation">Formation</option>
                                 <option value="logiciel">Logiciels</option>
@@ -663,6 +664,37 @@
                                     <option value="windows">Windows</option>
                                     <option value="mac">macOS</option>
                                     <option value="linux">Linux</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Champs dynamiques pour Rendez-vous -->
+                        <div id="rendezvous-fields" class="dynamic-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="rdv-motif">Motif du rendez-vous</label>
+                                <select id="rdv-motif" name="rdv-motif">
+                                    <option value="">Sélectionnez un motif</option>
+                                    <option value="ingenierie">Projet d'ingénierie</option>
+                                    <option value="formation">Besoin de formation</option>
+                                    <option value="logiciel">Démonstration de logiciel</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rdv-date">Date souhaitée</label>
+                                <input type="date" id="rdv-date" name="rdv-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="rdv-time">Heure souhaitée</label>
+                                <input type="time" id="rdv-time" name="rdv-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="rdv-mode">Mode</label>
+                                <select id="rdv-mode" name="rdv-mode">
+                                    <option value="">Sélectionnez le mode</option>
+                                    <option value="presentiel">Présentiel</option>
+                                    <option value="visio">Visio (Google Meet)</option>
+                                    <option value="telephone">Téléphone</option>
                                 </select>
                             </div>
                         </div>
@@ -837,6 +869,46 @@
                 }
             }
             
+            // Pré-remplissage via paramètres d'URL (rendez-vous depuis Ingénierie)
+            const params = new URLSearchParams(window.location.search);
+            const subjectParam = (params.get('subject') || '').toLowerCase();
+            const fromParam = (params.get('from') || '').toLowerCase();
+
+            if (subjectParam === 'rendezvous' || subjectParam === 'rdv') {
+                subjectSelect.value = 'rendezvous';
+                toggleFields();
+
+                // Préremplir le motif en fonction de la page d'origine
+                const rdvMotif = document.getElementById('rdv-motif');
+                if (rdvMotif) {
+                    if (fromParam === 'ingenierie') rdvMotif.value = 'ingenierie';
+                    else if (fromParam === 'formation') rdvMotif.value = 'formation';
+                    else if (fromParam === 'logiciel') rdvMotif.value = 'logiciel';
+                }
+
+                // Optionnel: proposer une date par défaut (demain)
+                const rdvDate = document.getElementById('rdv-date');
+                if (rdvDate && !rdvDate.value) {
+                    const d = new Date();
+                    d.setDate(d.getDate() + 1);
+                    const yyyy = d.getFullYear();
+                    const mm = String(d.getMonth() + 1).padStart(2, '0');
+                    const dd = String(d.getDate()).padStart(2, '0');
+                    rdvDate.value = `${yyyy}-${mm}-${dd}`;
+                }
+
+                // Pré-remplir le message pour contextualiser
+                const message = document.getElementById('message');
+                if (message && !message.value) {
+                    const origin = fromParam ? ` via la page ${fromParam}` : '';
+                    message.value = `Demande de rendez-vous${origin}. Merci de confirmer la date et l'heure proposées, ou de nous suggérer une alternative.`;
+                }
+
+                // Focus sur le formulaire
+                const formEl = document.getElementById('contact-form');
+                if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
             // Écouter les changements sur le select du sujet
             subjectSelect.addEventListener('change', toggleFields);
             
