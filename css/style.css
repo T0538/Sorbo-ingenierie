@@ -612,6 +612,40 @@ footer h3::after {
     transform: translateY(-2px);
 }
 
+/* Contact page: centrer et rendre visibles les icônes "Suivez-nous" */
+.contact-info .social-links {
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.contact-info .social-links .social-link {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    line-height: 0; /* supprime la hauteur de ligne qui décale verticalement */
+}
+
+.contact-info .social-links .social-link i {
+    color: inherit;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-block;
+    width: 1.25em; /* largeur fixe façon Font Awesome fa-fw */
+    text-align: center;
+}
+
+.contact-info .social-links .social-link:hover {
+    background: #ffffff;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: 20px;
