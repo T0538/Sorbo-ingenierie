@@ -79,27 +79,63 @@ class FormationsMongoDBLoader {
     // Créer une carte de formation
     createFormationCard(formation, index) {
         const card = document.createElement('div');
-        card.className = 'formation-card-modern';
+        card.className = 'formation-card-promo';
         card.setAttribute('data-aos', 'fade-up');
         card.setAttribute('data-aos-delay', `${(index + 1) * 100}`);
         card.setAttribute('data-aos-duration', '800');
 
         // Image par défaut basée sur le type de formation
         const defaultImage = this.getDefaultImage(formation.type);
+        
+        // Calculer la durée en jours (si disponible)
+        const duration = formation.duration || 'À définir';
 
         card.innerHTML = `
-            <div class="formation-image">
-                <img src="${defaultImage}" alt="${formation.title}" loading="lazy">
-                <div class="formation-overlay">
-                    <span class="formation-price">${formation.price.toLocaleString()} FCFA</span>
+            <div class="formation-header">
+                <div class="formation-image">
+                    <img src="${defaultImage}" alt="${formation.title}" loading="lazy">
+                    <div class="formation-badge">
+                        <span class="badge-text">FORMATION INTER-ENTREPRISE</span>
+                    </div>
                 </div>
             </div>
-            <div class="formation-info">
-                <h3 class="formation-title">${formation.title}</h3>
-                <p class="formation-description">${formation.description}</p>
+            
+            <div class="formation-content">
+                <div class="formation-theme">
+                    <h3 class="formation-title">${formation.title}</h3>
+                </div>
+                
+                <div class="formation-details">
+                    <div class="detail-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Prochaine session à définir</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>${duration} jours</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Abidjan, Cocody</span>
+                    </div>
+                </div>
+                
+                <div class="formation-price-section">
+                    <div class="price-tag">
+                        <span class="price-amount">${formation.price.toLocaleString()}</span>
+                        <span class="price-currency">FCFA</span>
+                    </div>
+                </div>
+                
                 <div class="formation-actions">
-                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">S'inscrire</button>
-                    <a href="#" class="more-info">En savoir plus</a>
+                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">
+                        <i class="fas fa-user-plus"></i>
+                        S'INSCRIRE MAINTENANT
+                    </button>
+                    <a href="#" class="more-info">
+                        <i class="fas fa-info-circle"></i>
+                        En savoir plus
+                    </a>
                 </div>
             </div>
         `;
