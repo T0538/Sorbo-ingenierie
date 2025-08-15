@@ -2037,6 +2037,72 @@
                 height: 300px;
             }
         }
+
+        /* Styles pour les menus déroulants */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            margin: 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(209, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        /* Mobile responsif pour dropdown */
+        @media (max-width: 992px) {
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+                margin-top: 10px;
+            }
+            
+            .dropdown-menu.show {
+                max-height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2065,13 +2131,19 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html" class="active">Notre entreprise</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li class="dropdown">
                         <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" role="menu">
-
                             <li><a href="actualites.html">Notre actualité</a></li>
                             <li><a href="nos-projets.html">Nos projets</a></li>
                         </ul>
@@ -2085,27 +2157,29 @@
         </div>
     </header>
 
-    <section class="page-header" data-aos="fade-down" data-aos-duration="800">
-        <div class="container">
-            <h1>NOTRE ENTREPRISE</h1>
-            <p>Découvrez qui nous sommes et comment nous travaillons pour vous offrir des solutions d'ingénierie de qualité.</p>
-        </div>
-    </section>
-
     <section class="hero-banner">
-        <div class="hero-slide active">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h2>Une culture centrée sur l'humain et la performance</h2>
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1573164574511-73c773193279?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Partenaires de votre Réussite</h1>
+                <p>Une entreprise humaine au service de l'excellence technique</p>
             </div>
         </div>
-        <div class="hero-slide">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h2>L'excellence comme valeur fondatrice</h2>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1573164574511-73c773193279?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>20 Ans d'Innovation</h1>
+                <p>Depuis 2004, nous façonnons l'ingénierie moderne en Afrique</p>
             </div>
         </div>
-        <div class="hero-slide">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h2>Une équipe engagée au cœur de chaque projet</h2>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1573164574511-73c773193279?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Équipe Multidisciplinaire</h1>
+                <p>Des experts passionnés pour des projets d'exception</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1573164574511-73c773193279?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Certification & Qualité</h1>
+                <p>Standards internationaux pour une qualité garantie</p>
             </div>
         </div>
         
@@ -2125,6 +2199,7 @@
                 <div class="hero-dot active" data-index="0"></div>
                 <div class="hero-dot" data-index="1"></div>
                 <div class="hero-dot" data-index="2"></div>
+                <div class="hero-dot" data-index="3"></div>
             </div>
         </div>
     </section>
@@ -2729,6 +2804,51 @@
                 scrollObserver.observe(el);
             });
         });
+
+        // Gestion du menu mobile
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.querySelector('.main-nav');
+        
+        if (mobileMenuBtn && mainNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.classList.toggle('active');
+                
+                // Mise à jour de l'attribut aria-expanded
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+            });
+            
+            // Fermer le menu quand on clique sur un lien
+            const navLinks = document.querySelectorAll('.main-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.classList.remove('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+            
+            // Gestion des menus déroulants sur mobile
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                const dropdownToggle = dropdown.querySelector('a');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                
+                if (dropdownToggle && dropdownMenu) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 992) {
+                            e.preventDefault();
+                            dropdownMenu.classList.toggle('show');
+                            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                            this.setAttribute('aria-expanded', !isExpanded);
+                        }
+                    });
+                }
+            });
+        }
     </script>
     <script src="standardiser-footer.js"></script>
 </body>

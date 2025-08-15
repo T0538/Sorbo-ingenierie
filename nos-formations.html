@@ -2471,6 +2471,7 @@
             color: var(--accent-color);
             font-size: 2.5rem;
             margin-bottom: 20px;
+            justify-content: center;
         }
         
         .section-intro {
@@ -2966,7 +2967,14 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
-                    <li><a href="nos-formations.html" class="active">Nos formations</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html" class="active">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li class="dropdown">
@@ -3173,133 +3181,7 @@
         </div>
     </section>
 
-    <section id="types-formations" class="formation-types-modern">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
-                <h2>Nos types de formation</h2>
-                <p class="section-subtitle">Choisissez la modalité qui correspond le mieux à vos besoins</p>
-            </div>
-            
-            <!-- Navigation des onglets -->
-            <div class="formation-tabs-nav" data-aos="fade-up" data-aos-delay="200">
-                <button class="tab-btn active" data-tab="intra">
-                    <i class="fas fa-building"></i>
-                    <span>Formation Intra-Entreprises</span>
-                </button>
-                <button class="tab-btn" data-tab="inter">
-                    <i class="fas fa-users"></i>
-                    <span>Formation Inter-Entreprises</span>
-                </button>
-            </div>
-            
-            <!-- Contenu des onglets -->
-            <div class="formation-tabs-content">
-                <!-- Tab Intra-Entreprises -->
-                <div class="tab-content active" id="tab-intra" data-aos="fade-up" data-aos-delay="300">
-                    <div class="formation-split">
-                        <!-- Header avec image et titre -->
-                        <div class="formation-header">
-                            <div class="formation-header-content">
-                                <div class="formation-badge">Sur-mesure</div>
-                                <h3>Formation Intra-Entreprises</h3>
-                                <p class="formation-subtitle">Une approche personnalisée pour votre entreprise</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Corps du contenu -->
-                        <div class="formation-body">
-                            <!-- Description principale -->
-                            <div class="formation-description">
-                                Nos formations intra-entreprises sont spécialement conçues pour répondre aux besoins spécifiques de votre organisation. Elles permettent d'aborder des problématiques précises en adaptant le programme aux exigences du commanditaire, favorisant ainsi un apprentissage ciblé et efficace.
-                            </div>
-                            
-                            <!-- Caractéristiques en grille -->
-                            <div class="formation-features">
-                                <div class="feature-column">
-                                    <h4><i class="fas fa-star"></i> Avantages clés</h4>
-                                    <ul>
-                                        <li><i class="fas fa-check"></i> Programme adapté à vos besoins spécifiques</li>
-                                        <li><i class="fas fa-check"></i> Formation dans vos locaux</li>
-                                        <li><i class="fas fa-check"></i> Dates flexibles selon vos disponibilités</li>
-                                        <li><i class="fas fa-check"></i> Cohésion d'équipe renforcée</li>
-                                        <li><i class="fas fa-check"></i> Suivi personnalisé post-formation</li>
-                                    </ul>
-                                </div>
-                                <div class="feature-column">
-                                    <h4><i class="fas fa-cogs"></i> Modalités pratiques</h4>
-                                    <div class="modality-items">
-                                        <span class="modality-item"><i class="fas fa-map-marker-alt"></i> Formation dans vos locaux (sauf exception)</span>
-                                        <span class="modality-item"><i class="fas fa-calendar-check"></i> Dates définies ensemble</span>
-                                        <span class="modality-item"><i class="fas fa-universal-access"></i> Accessible PMR</span>
-                                        <span class="modality-item"><i class="fas fa-users"></i> Groupe de 8 à 15 participants</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Section contact/CTA -->
-                            <div class="formation-contact">
-                                <h4><i class="fas fa-rocket"></i> Lancez votre projet de formation</h4>
-                                <p>Contactez notre équipe pour discuter de vos besoins et obtenir un devis personnalisé</p>
-                                <a href="contact.html" class="btn">Demander un devis gratuit</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tab Inter-Entreprises -->
-                <div class="tab-content" id="tab-inter" data-aos="fade-up" data-aos-delay="300">
-                    <div class="formation-split">
-                        <!-- Header avec image et titre -->
-                        <div class="formation-header" style="background-image: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
-                            <div class="formation-header-content">
-                                <div class="formation-badge">Réseau</div>
-                                <h3>Formation Inter-Entreprises</h3>
-                                <p class="formation-subtitle">Développez vos compétences en réseau professionnel</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Corps du contenu -->
-                        <div class="formation-body">
-                            <!-- Description principale -->
-                            <div class="formation-description">
-                                Nos formations inter-entreprises offrent une opportunité unique d'apprentissage et d'échange entre professionnels issus de différents secteurs. Organisées dans nos locaux modernes et équipés, elles favorisent le networking et l'enrichissement mutuel des participants.
-                            </div>
-                            
-                            <!-- Caractéristiques en grille -->
-                            <div class="formation-features">
-                                <div class="feature-column">
-                                    <h4><i class="fas fa-star"></i> Avantages clés</h4>
-                                    <ul>
-                                        <li><i class="fas fa-check"></i> Échanges avec d'autres professionnels</li>
-                                        <li><i class="fas fa-check"></i> Programmes certifiés et reconnus</li>
-                                        <li><i class="fas fa-check"></i> Locaux équipés et modernes</li>
-                                        <li><i class="fas fa-check"></i> Réseau professionnel élargi</li>
-                                        <li><i class="fas fa-check"></i> Certification FDFP</li>
-                                    </ul>
-                                </div>
-                                <div class="feature-column">
-                                    <h4><i class="fas fa-cogs"></i> Modalités pratiques</h4>
-                                    <div class="modality-items">
-                                        <span class="modality-item"><i class="fas fa-calendar"></i> Dates et contenus prédéfinis</span>
-                                        <span class="modality-item"><i class="fas fa-user-friends"></i> Nombre minimum de 6 participants</span>
-                                        <span class="modality-item"><i class="fas fa-exchange-alt"></i> Remplacement possible (même entreprise)</span>
-                                        <span class="modality-item"><i class="fas fa-building"></i> Dans nos locaux à Abidjan</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Section contact/CTA -->
-                            <div class="formation-contact" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
-                                <h4><i class="fas fa-graduation-cap"></i> Rejoignez nos formations</h4>
-                                <p>Consultez notre planning et inscrivez-vous aux prochaines sessions disponibles</p>
-                                <a href="#formations-disponibles" class="btn">Voir les formations disponibles</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Section 'Nos types de formation' supprimée sur demande -->
 
     <section class="catalog-section">
         <div class="container">
@@ -3312,6 +3194,8 @@
     </section>
 
     <!-- Nouvelle section pour les formations disponibles -->
+    <!-- Section "Nos formations disponibles" déplacée vers la page Formations inter-entreprise -->
+    <!--
     <section class="formations-disponibles" id="formations-disponibles">
         <div class="container">
             <h2 data-aos="fade-up" data-aos-duration="800">Nos formations disponibles</h2>
@@ -3320,7 +3204,7 @@
                 Inscrivez-vous en ligne et réglez votre participation de manière sécurisée.
             </p>
             
-            <!-- Filtres de formations -->
+            <!-- Filtres de formations 
             <div class="formations-filters" data-aos="fade-up" data-aos-delay="150" data-aos-duration="800">
                 <div class="filter-group">
                     <label for="status-filter">Statut :</label>
@@ -3376,7 +3260,7 @@
             </div>
             
             <div class="formations-grid" id="formations-grid">
-                <!-- Les formations seront chargées dynamiquement depuis MongoDB Atlas -->
+            Les formations seront chargées dynamiquement depuis MongoDB Atlas --
                 <div class="loading-formations" style="text-align: center; padding: 40px;">
                     <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #3498db; margin-bottom: 20px;"></i>
                     <p>Chargement des formations depuis MongoDB Atlas...</p>
@@ -3388,6 +3272,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <section class="statistics">
         <div class="container">

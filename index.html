@@ -1213,7 +1213,14 @@
                     <li><a href="index.html" class="active">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li class="dropdown">
@@ -1666,14 +1673,15 @@
         });
         
         // Gestion du menu déroulant sur mobile
-        const dropdownToggle = document.querySelector('.dropdown > a');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
-        
-        dropdownToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            dropdownMenu.classList.toggle('show');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
+        const dropdownToggles = document.querySelectorAll('.dropdown > a');
+        dropdownToggles.forEach(toggle => {
+            const menu = toggle.parentElement.querySelector('.dropdown-menu');
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                menu.classList.toggle('show');
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+            });
         });
         
         // Smooth scroll pour les liens d'ancrage

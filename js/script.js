@@ -13,21 +13,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mainNav = document.querySelector('.main-nav');
 
-    mobileMenuBtn.addEventListener('click', function() {
-        mainNav.classList.toggle('active');
-    });
+    if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            // Mise à jour de l'attribut aria-expanded
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Fermer le menu quand on clique sur un lien
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
 
     // Dropdown menus on mobile
     const dropdowns = document.querySelectorAll('.dropdown');
     
-    if (window.innerWidth <= 768) {
-        dropdowns.forEach(dropdown => {
-            dropdown.querySelector('a').addEventListener('click', function(e) {
-                e.preventDefault();
-                this.parentNode.classList.toggle('active');
+    dropdowns.forEach(dropdown => {
+        const dropdownToggle = dropdown.querySelector('a');
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        
+        if (dropdownToggle && dropdownMenu) {
+            dropdownToggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    dropdownMenu.classList.toggle('show');
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                }
             });
-        });
-    }
+        }
+    });
 
     // Newsletter form
     const newsletterForm = document.querySelector('.newsletter-form');

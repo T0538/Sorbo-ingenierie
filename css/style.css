@@ -1154,9 +1154,9 @@ footer h3::after {
 
 .formations-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    margin-bottom: 36px;
     position: relative;
     z-index: 2;
 }
@@ -1285,6 +1285,82 @@ footer h3::after {
 
 .load-more-btn:hover i {
     transform: translateY(2px);
+}
+
+/* Filtres formations (mise en ligne horizontale) */
+.formations-filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 14px 18px;
+    align-items: end;
+    margin: 22px 0 10px;
+}
+
+.filter-group {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 0.92rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    color: #374151;
+    font-size: 0.95rem;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.10);
+}
+
+.clear-filters-btn {
+    justify-self: start;
+    align-self: end;
+    padding: 10px 14px;
+    border: 1px solid rgba(209, 0, 0, 0.35);
+    background: #fff;
+    color: var(--primary-color);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.clear-filters-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.filter-results {
+    margin: 6px 0 14px;
+}
+
+.results-info { display: flex; justify-content: space-between; align-items: center; }
+.results-info #results-count { color: #4b5563; font-weight: 600; }
+
+/* Densifier les cartes sur desktop large */
+@media (min-width: 1200px) {
+    .formations-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+
+/* Responsive filtres */
+@media (max-width: 992px) {
+    .formations-filters { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+}
+
+@media (max-width: 576px) {
+    .formations-filters { grid-template-columns: 1fr; }
 }
 
 /* Styles pour les modales d'inscription et de paiement */
@@ -2130,6 +2206,47 @@ footer h3::after {
 
 .newsletter-message-close:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ==== Hero bandeau global (toutes pages hors accueil) ==== */
+.hero-banner {
+    position: relative;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.hero-slide.active { opacity: 1; z-index: 2; }
+
+.hero-content { max-width: 900px; padding: 0 20px; z-index: 3; margin: 0 auto; }
+.hero-content h1, .hero-content h2 { font-size: 3rem; margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0,0,0,.5); }
+.hero-content p { font-size: 1.1rem; opacity: .95; }
+
+.hero-nav { position: absolute; bottom: 26px; left: 0; right: 0; display: flex; justify-content: center; z-index: 4; }
+.hero-dots { display: flex; gap: 10px; }
+.hero-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.55); cursor: pointer; transition: all .3s ease; }
+.hero-dot.active { background: #fff; transform: scale(1.15); }
+
+@media (max-width: 768px) {
+    .hero-banner { height: 400px; }
+    .hero-content h1, .hero-content h2 { font-size: 2rem; }
 }
 
 @keyframes slideInUp {

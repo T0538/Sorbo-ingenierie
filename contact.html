@@ -396,6 +396,72 @@
                 gap: 10px;
             }
         }
+
+        /* Styles pour les menus déroulants */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            margin: 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(209, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        /* Mobile responsif pour dropdown */
+        @media (max-width: 992px) {
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+                margin-top: 10px;
+            }
+            
+            .dropdown-menu.show {
+                max-height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -424,13 +490,19 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li class="dropdown">
                         <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" role="menu">
-
                             <li><a href="actualites.html">Notre actualité</a></li>
                             <li><a href="nos-projets.html">Nos projets</a></li>
                         </ul>
@@ -444,10 +516,38 @@
         </div>
     </header>
 
-    <section class="page-header">
-        <div class="container">
-            <h1>Contactez-nous</h1>
-            <p>Nous sommes à votre écoute pour répondre à toutes vos questions et vous accompagner dans vos projets.</p>
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Parlons de Votre Projet</h1>
+                <p>Des experts disponibles 24/7 pour transformer vos idées en réalité</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Service Client Premium</h1>
+                <p>Une équipe dédiée pour un accompagnement personnalisé</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Consultations Gratuites</h1>
+                <p>Obtenez des conseils d'experts sans engagement</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Réponse Rapide Garantie</h1>
+                <p>Réponse sous 24h pour toutes vos demandes</p>
+            </div>
+        </div>
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active"></div>
+                <div class="hero-dot"></div>
+                <div class="hero-dot"></div>
+                <div class="hero-dot"></div>
+            </div>
         </div>
     </section>
 
@@ -954,6 +1054,35 @@
                     const isExpanded = this.getAttribute('aria-expanded') === 'true';
                     this.setAttribute('aria-expanded', !isExpanded);
                 });
+            }
+
+            // Hero Banner Carousel
+            if (document.querySelector('.hero-banner')) {
+                const slides = document.querySelectorAll('.hero-slide');
+                const dots = document.querySelectorAll('.hero-dot');
+                let currentSlide = 0;
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                        showSlide(currentSlide);
+                    });
+                });
+
+                // Auto rotation toutes les 6 secondes
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }, 6000);
             }
         });
     </script>

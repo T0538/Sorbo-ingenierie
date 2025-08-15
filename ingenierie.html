@@ -353,7 +353,8 @@
         }
         
         .sector-card[data-sector="geotechnique"]:hover .sector-overlay {
-            background: linear-gradient(135deg, rgba(40, 167, 69, 0.85) 0%, rgba(28, 117, 48, 0.75) 100%);
+           
+            background: linear-gradient(135deg, rgba(228, 123, 4, 0.85) 0%, rgba(179, 135, 5, 0.75) 100%);
         }
         
         .sector-card[data-sector="eau"]:hover .sector-overlay {
@@ -361,7 +362,7 @@
         }
         
         .sector-card[data-sector="hydroagricole"]:hover .sector-overlay {
-            background: linear-gradient(135deg, rgba(255, 193, 7, 0.85) 0%, rgba(179, 135, 5, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.85) 0%, rgba(28, 117, 48, 0.75) 100%);
         }
         
         .sector-card[data-sector="topographie"]:hover .sector-overlay {
@@ -992,7 +993,14 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
                     <li><a href="ingenierie.html" class="active">Ingénierie</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li class="dropdown">
@@ -1012,11 +1020,38 @@
         </div>
     </header>
 
-    <section class="ingenierie-hero">
-        <div class="container" data-aos="fade-up" data-aos-duration="1000">
-            <h1>INGÉNIERIE</h1>
-            <p>Expertise et innovation au service de vos projets</p>
-            <a href="#services" class="btn primary-btn">Découvrir nos services</a>
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Expertise Technique de Pointe</h1>
+                <p>Transformons vos défis en réussites avec notre ingénierie d'excellence</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Innovation & Performance</h1>
+                <p>Des solutions sur mesure pour l'infrastructure de demain</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Bâtisseurs d'Avenir</h1>
+                <p>Conception, étude et réalisation de projets d'envergure</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Géotechnique & Structures</h1>
+                <p>Maîtrise totale des sols et fondations pour vos ouvrages</p>
+            </div>
+        </div>
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active"></div>
+                <div class="hero-dot"></div>
+                <div class="hero-dot"></div>
+                <div class="hero-dot"></div>
+            </div>
         </div>
     </section>
 

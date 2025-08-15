@@ -1412,6 +1412,72 @@
             color: #ddd;
             margin-bottom: 15px;
         }
+        
+        /* Styles pour les menus déroulants */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            margin: 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(209, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        /* Mobile responsif pour dropdown */
+        @media (max-width: 992px) {
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+                margin-top: 10px;
+            }
+            
+            .dropdown-menu.show {
+                max-height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1440,13 +1506,19 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="notre-entreprise.html">Notre entreprise</a></li>
                     <li><a href="ingenierie.html">Ingénierie</a></li>
-                    <li><a href="nos-formations.html">Nos formations</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
                     <li><a href="nos-logiciels.html">Nos logiciels</a></li>
                     <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
                     <li class="dropdown">
                         <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" role="menu">
-
                             <li><a href="actualites.html">Notre actualité</a></li>
                             <li><a href="nos-projets.html">Nos projets</a></li>
                         </ul>
@@ -1460,11 +1532,38 @@
         </div>
     </header>
 
-    <section class="news-hero">
-        <div class="container" data-aos="fade-up" data-aos-duration="1000">
-            <h1>Actualités</h1>
-            <p>Découvrez les dernières nouvelles et événements de Sorbo-Ingénierie</p>
-            <a href="#blog" class="hero-btn">Voir nos articles</a>
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Actualités & Innovation</h1>
+                <p>Suivez l'évolution de l'ingénierie moderne avec nous</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Projets en Cours</h1>
+                <p>Découvrez nos dernières réalisations et chantiers</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Formation & Expertise</h1>
+                <p>Restez informés de nos nouvelles formations et certifications</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Partenariats Stratégiques</h1>
+                <p>Nos collaborations qui font avancer l'industrie</p>
+            </div>
+        </div>
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active"></div>
+                <div class="hero-dot"></div>
+                <div class="hero-dot"></div>
+                <div class="hero-dot"></div>
+            </div>
         </div>
     </section>
 
@@ -2587,5 +2686,83 @@
     <script src="js/lazy-loading.js"></script>
     <script src="js/performance-optimizer.js"></script>
     <script src="js/dynamic-content.js"></script>
+    <script>
+        // Hero Banner Carousel et Menu déroulant
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero Banner Carousel
+            if (document.querySelector('.hero-banner')) {
+                const slides = document.querySelectorAll('.hero-slide');
+                const dots = document.querySelectorAll('.hero-dot');
+                let currentSlide = 0;
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                        showSlide(currentSlide);
+                    });
+                });
+
+                // Auto rotation toutes les 6 secondes
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }, 6000);
+            }
+
+            // Gestion du menu mobile complet
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    this.classList.toggle('active');
+                    
+                    // Mise à jour de l'attribut aria-expanded
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                });
+                
+                // Fermer le menu quand on clique sur un lien
+                const navLinks = document.querySelectorAll('.main-nav a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.classList.remove('active');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+            }
+
+            // Gestion du menu déroulant
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                const dropdownToggle = dropdown.querySelector('a');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                
+                if (dropdownToggle && dropdownMenu) {
+                    dropdownToggle.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 992) {
+                            e.preventDefault();
+                            dropdownMenu.classList.toggle('show');
+                            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                            this.setAttribute('aria-expanded', !isExpanded);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html> 

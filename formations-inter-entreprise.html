@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formations Inter‑entreprise | Sorbo‑Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        /* Hero moderne réutilisé (comme Notre entreprise) */
+        .hero-banner{position:relative;height:500px;display:flex;align-items:center;overflow:hidden;color:#fff;text-align:center}
+        .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center;background-attachment:fixed;display:flex;align-items:center;justify-content:center;z-index:1}
+        .hero-slide.active{opacity:1;z-index:2}
+        .hero-content{max-width:900px;padding:0 20px;z-index:3;margin:0 auto}
+        .hero-content h2{font-size:3rem;margin-bottom:14px;text-shadow:2px 2px 4px rgba(0,0,0,.5)}
+        .hero-nav{position:absolute;bottom:26px;left:0;right:0;display:flex;justify-content:center;z-index:4}
+        .hero-dots{display:flex;gap:10px}
+        .hero-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:all .3s ease}
+        .hero-dot.active{background:#fff;transform:scale(1.15)}
+        .hero-mini{ background:linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%); padding:90px 0 50px; text-align:center; }
+        .hero-mini h1{ color:var(--primary-color); }
+        .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; margin-top:24px; }
+        .card{ background:#fff; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.06); overflow:hidden; display:flex; flex-direction:column; }
+        .media{ height:160px; overflow:hidden; }
+        .media img{ width:100%; height:100%; object-fit:cover; display:block; }
+        .card-body{ padding:18px; }
+        .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+        .tag{ background:rgba(209,0,0,.1); color:var(--primary-color); border-radius:999px; padding:6px 10px; font-size:.85rem; }
+        .enroll{ margin-top:auto; padding:16px 18px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #eee; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html"><img src="images/logo.png" alt="Logo Sorbo-Ingénierie" /></a></div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html" class="active">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="contact-btn">Contactez-nous</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image1.jpg');"></div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image3.jpg');"></div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image2.jpg');"></div>
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <h2>Formations inter‑entreprise</h2>
+            <p>Des sessions planifiées, ouvertes à tous, idéales pour se former et réseauter entre professionnels.</p>
+        </div>
+        <div class="hero-nav"><div class="hero-dots"><div class="hero-dot active" data-index="0"></div><div class="hero-dot" data-index="1"></div><div class="hero-dot" data-index="2"></div></div></div>
+    </section>
+
+    <section class="formations-disponibles" id="formations-disponibles">
+        <div class="container">
+            <h2>Nos formations disponibles</h2>
+            <p class="section-intro">
+                Découvrez notre sélection de formations professionnelles dans le domaine du génie civil. 
+                Inscrivez-vous en ligne et réglez votre participation de manière sécurisée.
+            </p>
+            
+            <!-- Filtres de formations -->
+            <div class="formations-filters">
+                <div class="filter-group">
+                    <label for="status-filter">Statut :</label>
+                    <select id="status-filter" class="filter-select">
+                        <option value="all">Toutes les formations</option>
+                        <option value="recentes">Formations récentes</option>
+                        <option value="en-cours">Formations en cours</option>
+                        <option value="a-venir">Formations à venir</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="category-filter">Catégorie :</label>
+                    <select id="category-filter" class="filter-select">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="architecture">Architecture</option>
+                        <option value="ingenierie-routiere">Ingénierie routière</option>
+                        <option value="topographie">Topographie</option>
+                        <option value="ingenierie-eau">Ingénierie de l'eau</option>
+                        <option value="genie-civil">Génie civil</option>
+                        <option value="bim">BIM</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="location-filter">Localisation :</label>
+                    <select id="location-filter" class="filter-select">
+                        <option value="all">Tous les lieux</option>
+                        <option value="abidjan-cocody">Abidjan, Cocody</option>
+                        <option value="abidjan-plateau">Abidjan, Plateau</option>
+                        <option value="abidjan-zone4">Abidjan, Zone 4</option>
+                        <option value="en-ligne">En ligne</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price-filter">Prix :</label>
+                    <select id="price-filter" class="filter-select">
+                        <option value="all">Tous les prix</option>
+                        <option value="0-200000">Moins de 200 000 FCFA</option>
+                        <option value="200000-300000">200 000 - 300 000 FCFA</option>
+                        <option value="300000-400000">300 000 - 400 000 FCFA</option>
+                        <option value="400000+">Plus de 400 000 FCFA</option>
+                    </select>
+                </div>
+                <button id="clear-filters" class="clear-filters-btn">Effacer les filtres</button>
+            </div>
+            
+            <div class="filter-results">
+                <div class="results-info">
+                    <span id="results-count">0 formation trouvée</span>
+                </div>
+            </div>
+            
+            <div class="formations-grid" id="formations-grid">
+                <div class="loading-formations" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #c90d0d; margin-bottom: 20px;"></i>
+                    <p>Chargement des formations depuis MongoDB Atlas...</p>
+                </div>
+            </div>
+            
+            <div class="load-more-container">
+                <button class="btn outline-btn load-more-btn">Afficher plus de formations <i class="fas fa-chevron-down"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p class="footer-description">Excellence et Innovation en Génie civil</p>
+                </div>
+                <div class="footer-column slide-up">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mini carrousel pour le hero (slides + dots)
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.hero-banner .hero-slide');
+            const dots = document.querySelectorAll('.hero-banner .hero-dot');
+            let index = 0;
+            function show(i){
+                slides.forEach(s=>s.classList.remove('active'));
+                dots.forEach(d=>d.classList.remove('active'));
+                slides[i].classList.add('active');
+                if (dots[i]) dots[i].classList.add('active');
+            }
+            dots.forEach(d=>d.addEventListener('click',()=>{ index = Number(d.dataset.index); show(index);}));
+            setInterval(()=>{ index = (index+1)%slides.length; show(index); }, 6000);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('.main-nav');
+            if (btn) btn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                const exp = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', (!exp).toString());
+            });
+            document.querySelectorAll('.dropdown > a').forEach(a => {
+                const menu = a.parentElement.querySelector('.dropdown-menu');
+                a.addEventListener('click', e => { e.preventDefault(); menu.classList.toggle('show'); });
+            });
+        });
+    </script>
+</body>
+</html>
+
