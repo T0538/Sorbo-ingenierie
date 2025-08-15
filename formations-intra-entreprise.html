@@ -9,15 +9,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         /* Hero moderne réutilisé (comme Notre entreprise) */
-        .hero-banner{position:relative;height:500px;display:flex;align-items:center;overflow:hidden;color:#fff;text-align:center}
-        .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center;background-attachment:fixed;display:flex;align-items:center;justify-content:center;z-index:1}
-        .hero-slide.active{opacity:1;z-index:2}
-        .hero-content{max-width:900px;padding:0 20px;z-index:3;margin:0 auto}
-        .hero-content h2{font-size:3rem;margin-bottom:14px;text-shadow:2px 2px 4px rgba(0,0,0,.5)}
-        .hero-nav{position:absolute;bottom:26px;left:0;right:0;display:flex;justify-content:center;z-index:4}
-        .hero-dots{display:flex;gap:10px}
-        .hero-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:all .3s ease}
-        .hero-dot.active{background:#fff;transform:scale(1.15)}
+        .hero-banner {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 3;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,.5);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: .95;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero-nav {
+            position: absolute;
+            bottom: 26px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 4;
+        }
+        
+        .hero-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .hero-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.55);
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        
+        .hero-dot.active {
+            background: #fff;
+            transform: scale(1.15);
+        }
+        
         /* Styles repris de l'onglet Intra-Entreprises (copie conforme) */
         .formation-split { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.1); transition:all .3s ease; }
         .formation-split:hover { box-shadow:0 25px 60px rgba(0,0,0,0.15); transform:translateY(-5px); }
