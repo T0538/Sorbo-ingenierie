@@ -3,6 +3,9 @@ class FormationsMongoDBLoader {
     constructor() {
         this.apiBaseUrl = 'https://sorbo-api-production.up.railway.app';
         this.formationsContainer = null;
+        this.allFormations = []; // Stocker toutes les formations
+        this.currentIndex = 0; // Index de départ pour l'affichage
+        this.formationsPerPage = 3; // Nombre de formations à afficher à la fois
     }
 
     // Récupérer les formations depuis l'API MongoDB
@@ -37,17 +40,21 @@ class FormationsMongoDBLoader {
         }
     }
 
-    // Afficher les formations dans le conteneur
-    displayFormations(formations) {
+    // Afficher les formations dans le conteneur (par groupes de 3)
+    displayFormations(formations, isInitialLoad = false) {
         if (!this.formationsContainer) {
             console.error('❌ Conteneur de formations non trouvé');
             return;
         }
 
-        // Vider le conteneur
-        this.formationsContainer.innerHTML = '';
+        // Si c'est le chargement initial, vider le conteneur et stocker toutes les formations
+        if (isInitialLoad) {
+            this.formationsContainer.innerHTML = '';
+            this.allFormations = formations;
+            this.currentIndex = 0;
+        }
 
-        if (formations.length === 0) {
+        if (this.allFormations.length === 0) {
             this.formationsContainer.innerHTML = `
                 <div class="no-formations" style="text-align: center; padding: 40px;">
                     <i class="fas fa-info-circle" style="font-size: 3rem; color: #3498db; margin-bottom: 20px;"></i>
@@ -58,22 +65,76 @@ class FormationsMongoDBLoader {
             return;
         }
 
+        // Calculer les formations à afficher
+        const formationsToShow = this.allFormations.slice(this.currentIndex, this.currentIndex + this.formationsPerPage);
+        
         // Créer les cartes de formations
-        formations.forEach((formation, index) => {
-            const formationCard = this.createFormationCard(formation, index);
+        formationsToShow.forEach((formation, index) => {
+            const formationCard = this.createFormationCard(formation, this.currentIndex + index);
             this.formationsContainer.appendChild(formationCard);
         });
 
         // Mettre à jour le compteur
-        const resultsCount = document.getElementById('results-count');
-        if (resultsCount) {
-            resultsCount.textContent = `${formations.length} formation${formations.length > 1 ? 's' : ''} trouvée${formations.length > 1 ? 's' : ''}`;
-        }
+        this.updateResultsCount();
+
+        // Ajouter ou mettre à jour le bouton "Voir plus de formations"
+        this.updateLoadMoreButton();
 
         // Réinitialiser les animations AOS
         if (typeof AOS !== 'undefined') {
             AOS.refresh();
         }
+    }
+
+    // Mettre à jour le compteur de résultats
+    updateResultsCount() {
+        const resultsCount = document.getElementById('results-count');
+        if (resultsCount) {
+            const totalFormations = this.allFormations.length;
+            const displayedFormations = Math.min(this.currentIndex + this.formationsPerPage, totalFormations);
+            resultsCount.textContent = `${displayedFormations} sur ${totalFormations} formation${totalFormations > 1 ? 's' : ''} affichée${displayedFormations > 1 ? 's' : ''}`;
+        }
+    }
+
+    // Mettre à jour le bouton "Voir plus de formations"
+    updateLoadMoreButton() {
+        // Supprimer l'ancien bouton s'il existe
+        const existingButton = document.getElementById('load-more-formations');
+        if (existingButton) {
+            existingButton.remove();
+        }
+
+        // Vérifier s'il reste des formations à afficher
+        if (this.currentIndex + this.formationsPerPage < this.allFormations.length) {
+            const loadMoreButton = document.createElement('div');
+            loadMoreButton.className = 'load-more-container';
+            loadMoreButton.style.textAlign = 'center';
+            loadMoreButton.style.marginTop = '40px';
+            loadMoreButton.style.marginBottom = '40px';
+            
+            loadMoreButton.innerHTML = `
+                <button id="load-more-formations" class="load-more-btn">
+                    <i class="fas fa-plus-circle"></i>
+                    Voir plus de formations (${this.allFormations.length - (this.currentIndex + this.formationsPerPage)} restante${this.allFormations.length - (this.currentIndex + this.formationsPerPage) > 1 ? 's' : ''})
+                </button>
+            `;
+
+            // Ajouter le bouton après le conteneur de formations
+            this.formationsContainer.parentNode.insertBefore(loadMoreButton, this.formationsContainer.nextSibling);
+
+            // Ajouter l'événement click
+            const btn = loadMoreButton.querySelector('#load-more-formations');
+            btn.addEventListener('click', () => {
+                this.loadMoreFormations();
+            });
+        }
+    }
+
+    // Charger plus de formations
+    loadMoreFormations() {
+        this.currentIndex += this.formationsPerPage;
+        this.displayFormations([], false); // false = pas de chargement initial
+        console.log(`📚 Chargement de ${this.formationsPerPage} formations supplémentaires...`);
     }
 
     // Créer une carte de formation
@@ -212,8 +273,8 @@ class FormationsMongoDBLoader {
             // Charger les formations
             const formations = await this.loadFormationsFromMongoDB();
             
-            // Afficher les formations
-            this.displayFormations(formations);
+            // Afficher les formations (chargement initial)
+            this.displayFormations(formations, true);
             
             console.log('🎉 Formations chargées avec succès depuis MongoDB Atlas !');
             
