@@ -79,18 +79,26 @@ class FormationsMongoDBLoader {
     // Créer une carte de formation
     createFormationCard(formation, index) {
         const card = document.createElement('div');
-        card.className = 'formation-card-simple';
+        card.className = 'formation-card-modern';
         card.setAttribute('data-aos', 'fade-up');
         card.setAttribute('data-aos-delay', `${(index + 1) * 100}`);
         card.setAttribute('data-aos-duration', '800');
 
+        // Image par défaut basée sur le type de formation
+        const defaultImage = this.getDefaultImage(formation.type);
+
         card.innerHTML = `
-            <div class="formation-content">
+            <div class="formation-image">
+                <img src="${defaultImage}" alt="${formation.title}" loading="lazy">
+                <div class="formation-overlay">
+                    <span class="formation-price">${formation.price.toLocaleString()} FCFA</span>
+                </div>
+            </div>
+            <div class="formation-info">
                 <h3 class="formation-title">${formation.title}</h3>
                 <p class="formation-description">${formation.description}</p>
-                <div class="formation-price">${formation.price.toLocaleString()} FCFA</div>
                 <div class="formation-actions">
-                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">S'inscrire maintenant</button>
+                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">S'inscrire</button>
                     <a href="#" class="more-info">En savoir plus</a>
                 </div>
             </div>
@@ -106,6 +114,20 @@ class FormationsMongoDBLoader {
         }
 
         return card;
+    }
+
+    // Obtenir une image par défaut basée sur le type de formation
+    getDefaultImage(type) {
+        const imageMap = {
+            'autocad': 'images/image 30.jpg',
+            'revit': 'images/image 37.jpg',
+            'robot': 'images/image 3.jpg',
+            'covadis': 'images/iage22.jpg',
+            'genie-civil': 'images/imag 16.jpg',
+            'hydraulique': 'images/IMG-20241030-WA0039.jpg'
+        };
+        
+        return imageMap[type] || 'images/image 30.jpg'; // Image par défaut
     }
 
     // Obtenir la catégorie à partir du type
