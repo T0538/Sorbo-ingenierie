@@ -79,31 +79,20 @@ class FormationsMongoDBLoader {
     // Créer une carte de formation
     createFormationCard(formation, index) {
         const card = document.createElement('div');
-        card.className = 'formation-card';
+        card.className = 'formation-card-simple';
         card.setAttribute('data-aos', 'fade-up');
         card.setAttribute('data-aos-delay', `${(index + 1) * 100}`);
         card.setAttribute('data-aos-duration', '800');
-        card.setAttribute('data-status', 'a-venir');
-        card.setAttribute('data-category', formation.type || 'formation');
-        card.setAttribute('data-location', 'abidjan-cocody');
-        card.setAttribute('data-price', formation.price);
 
         card.innerHTML = `
-            <div class="formation-header">
-                <div class="formation-category">${this.getCategoryFromType(formation.type)}</div>
+            <div class="formation-content">
+                <h3 class="formation-title">${formation.title}</h3>
+                <p class="formation-description">${formation.description}</p>
                 <div class="formation-price">${formation.price.toLocaleString()} FCFA</div>
-            </div>
-            <h3>${formation.title}</h3>
-            <div class="formation-details">
-                <div class="detail"><i class="fas fa-calendar-alt"></i> Prochaine session à définir</div>
-                <div class="detail"><i class="fas fa-clock"></i> ${formation.duration} jours</div>
-                <div class="detail"><i class="fas fa-map-marker-alt"></i> Abidjan, Cocody</div>
-                <div class="detail"><i class="fas fa-users"></i> Places disponibles</div>
-            </div>
-            <p>${formation.description}</p>
-            <div class="formation-footer">
-                <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">S'inscrire maintenant</button>
-                <a href="#" class="more-info">En savoir plus</a>
+                <div class="formation-actions">
+                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">S'inscrire maintenant</button>
+                    <a href="#" class="more-info">En savoir plus</a>
+                </div>
             </div>
         `;
 

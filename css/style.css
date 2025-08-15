@@ -2523,3 +2523,103 @@ footer h3::after {
         gap: 25px;
     }
 }
+
+/* Styles pour les cartes de formation simplifiées */
+.formation-card-simple {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formation-card-simple:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.formation-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.formation-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.formation-description {
+    color: var(--light-text);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.formation-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(209, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.formation-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+}
+
+.formation-actions .primary-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.formation-actions .more-info {
+    text-align: center;
+    color: var(--accent-color);
+    font-weight: 600;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.formation-actions .more-info:hover {
+    color: var(--primary-color);
+    background-color: rgba(209, 0, 0, 0.05);
+}
+
+/* Responsive pour les cartes simplifiées */
+@media (max-width: 768px) {
+    .formation-card-simple {
+        margin-bottom: 20px;
+    }
+    
+    .formation-content {
+        padding: 20px;
+    }
+    
+    .formation-title {
+        font-size: 1.2rem;
+    }
+    
+    .formation-price {
+        font-size: 1.1rem;
+    }
+}
