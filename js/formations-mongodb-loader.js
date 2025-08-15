@@ -98,11 +98,9 @@ class FormationsMongoDBLoader {
 
     // Mettre à jour le bouton "Voir plus de formations"
     updateLoadMoreButton() {
-        // Supprimer l'ancien bouton s'il existe
-        const existingButton = document.getElementById('load-more-formations');
-        if (existingButton) {
-            existingButton.remove();
-        }
+        // Supprimer TOUS les boutons existants pour éviter les doublons
+        const existingButtons = document.querySelectorAll('.load-more-container');
+        existingButtons.forEach(button => button.remove());
 
         // Vérifier s'il reste des formations à afficher
         if (this.currentIndex + this.formationsPerPage < this.allFormations.length) {
