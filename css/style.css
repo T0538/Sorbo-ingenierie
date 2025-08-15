@@ -2566,7 +2566,8 @@ footer h3::after {
     transform: scale(1.08);
 }
 
-.formation-badge {
+/* Badge pour les cartes de formation promotionnelles */
+.formation-card-promo .formation-badge {
     position: absolute;
     top: 12px;
     left: 12px;
@@ -2579,6 +2580,26 @@ footer h3::after {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 3px 12px rgba(107, 114, 128, 0.3);
+}
+
+/* Badge pour les pages de formation (intra et inter) */
+.formation-conditions .formation-badge {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-transform: none;
+    letter-spacing: normal;
+    box-shadow: none;
 }
 
 .badge-text {
@@ -2770,11 +2791,11 @@ footer h3::after {
 }
 
 @media (max-width: 480px) {
-    .formation-header {
+    .formation-card-promo .formation-header {
         height: 130px;
     }
     
-    .formation-badge {
+    .formation-card-promo .formation-badge {
         top: 8px;
         left: 8px;
         padding: 5px 8px;
@@ -2784,19 +2805,19 @@ footer h3::after {
         font-size: 0.6rem;
     }
     
-    .formation-theme {
+    .formation-card-promo .formation-theme {
         padding: 10px;
     }
     
-    .formation-details {
+    .formation-card-promo .formation-details {
         padding: 10px;
     }
     
-    .formation-price-section {
+    .formation-card-promo .formation-price-section {
         padding: 10px;
     }
     
-    .formation-actions {
+    .formation-card-promo .formation-actions {
         padding: 10px;
     }
 }
