@@ -196,21 +196,28 @@ class DynamicContentLoader {
 
     // Charger les dernières actualités pour la page d'accueil
     async loadLatestActualites() {
+        console.log('🔄 Chargement des dernières actualités...');
         const actualites = await this.apiCall('/actualites?limit=3');
+        console.log('📰 Actualités récupérées:', actualites);
         this.displayLatestActualites(actualites);
     }
 
     displayLatestActualites(actualites) {
         const container = document.getElementById('latest-actualites');
-        if (!container) return;
+        console.log('🔍 Conteneur latest-actualites:', container);
+        
+        if (!container) {
+            console.error('❌ Conteneur latest-actualites non trouvé');
+            return;
+        }
 
         if (actualites.length === 0) {
+            console.log('ℹ️ Aucune actualité disponible');
             container.innerHTML = '<p class="no-data">Aucune actualité récente.</p>';
             return;
         }
 
         container.innerHTML = `
-            <h2>📰 Dernières Actualités</h2>
             <div class="actualites-grid">
                 ${actualites.map(actualite => `
                     <div class="actualite-mini-card">

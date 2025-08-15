@@ -49,6 +49,42 @@
         .formation-contact .btn{ background:#fff; color:#d10000; border:2px solid #fff; font-weight:600; padding:12px 30px; position:relative; z-index:2; }
         .formation-contact .btn:hover{ background:transparent; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,255,255,.2); }
         @media (max-width: 992px){ .formation-header{height:250px;} .formation-header-content{padding:0 30px;} .formation-header h3{font-size:2rem;} .formation-body{padding:30px;} .formation-features{grid-template-columns:1fr; gap:25px;} .feature-column{padding:25px;} }
+        
+        /* Styles pour la section formations passées */
+        .formations-passees { padding: 80px 0; background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: #333; margin-bottom: 20px; font-weight: 700; }
+        .section-header p { font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        
+        .formations-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transition: all 0.4s ease; }
+        .gallery-item:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(0,0,0,0.2); }
+        
+        .gallery-image { position: relative; height: 280px; overflow: hidden; }
+        .gallery-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover .gallery-image img { transform: scale(1.1); }
+        
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(209,0,0,0.9) 0%, rgba(179,0,0,0.8) 100%); display: flex; align-items: flex-end; opacity: 0; transition: all 0.4s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        
+        .gallery-info { padding: 25px; color: white; width: 100%; }
+        .gallery-info h4 { font-size: 1.3rem; margin-bottom: 8px; font-weight: 600; }
+        .gallery-info p { font-size: 0.95rem; margin-bottom: 12px; opacity: 0.9; }
+        .formation-date { display: inline-block; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+        
+        .gallery-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
+        .stat-item { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.3s ease; }
+        .stat-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        
+        .stat-number { font-size: 3rem; font-weight: 700; color: #d10000; margin-bottom: 10px; }
+        .stat-label { font-size: 1rem; color: #666; font-weight: 500; }
+        
+        @media (max-width: 768px) {
+            .formations-gallery { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-stats { grid-template-columns: 1fr; gap: 20px; }
+            .section-header h2 { font-size: 2rem; }
+            .formations-passees { padding: 60px 0; }
+        }
     </style>
 </head>
 <body>
@@ -85,23 +121,51 @@
     </header>
 
     <section class="hero-banner">
-        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image4.jpg');"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image2.jpg');"></div>
-        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image3.jpg');"></div>
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-            <h2>Formations intra‑entreprise</h2>
-            <p>Des programmes 100% personnalisés construits sur vos cas réels, en présentiel ou en visio.</p>
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image\ 38.jpg');">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Formations intra‑entreprise</h2>
+                <p>Des programmes 100% personnalisés construits sur vos cas réels, en présentiel ou en visio.</p>
+            </div>
         </div>
-        <div class="hero-nav"><div class="hero-dots"><div class="hero-dot active" data-index="0"></div><div class="hero-dot" data-index="1"></div><div class="hero-dot" data-index="2"></div></div></div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image\ 36.jpg');">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Formation sur-mesure</h2>
+                <p>Adaptée aux besoins spécifiques de votre organisation</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image\ 01.jpg'  );">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Flexibilité totale</h2>
+                <p>Dates et lieux adaptés à vos contraintes</p>
+            </div>
+        </div>
+        
+        <!-- Flèches de navigation -->
+        <div class="hero-arrows">
+            <div class="hero-arrow prev-slide">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="hero-arrow next-slide">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active" data-index="0"></div>
+                <div class="hero-dot" data-index="1"></div>
+                <div class="hero-dot" data-index="2"></div>
+            </div>
+        </div>
     </section>
 
-    <section>
+    <section class="formation-conditions">
         <div class="container">
             <div class="formation-split">
                 <div class="formation-header">
                     <div class="formation-header-content">
                         <div class="formation-badge">Sur-mesure</div>
-                        <h3>Formation Intra-Entreprises</h3>
+                        <h3>Conditions des Formations Intra-Entreprise</h3>
                         <p class="formation-subtitle">Une approche personnalisée pour votre entreprise</p>
                     </div>
                 </div>
@@ -140,6 +204,97 @@
         </div>
     </section>
 
+    <section class="formations-passees">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nos Formations Réalisées</h2>
+                <p>Découvrez un aperçu de nos sessions de formation passées et de l'engagement de nos participants</p>
+            </div>
+            
+            <div class="formations-gallery">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formation BIM en cours" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation BIM</h4>
+                                <p>Architecture & Construction</p>
+                                <span class="formation-date">Décembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formation Topographie" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Topographie</h4>
+                                <p>Génie civil & Infrastructure</p>
+                                <span class="formation-date">Novembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formation Ingénierie routière" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Ingénierie routière</h4>
+                                <p>Infrastructure & Transport</p>
+                                <span class="formation-date">Octobre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formation Architecture" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Architecture</h4>
+                                <p>Design & Construction</p>
+                                <span class="formation-date">Septembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formation Ingénierie de l'eau" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Ingénierie de l'eau</h4>
+                                <p>Hydraulique & Environnement</p>
+                                <span class="formation-date">Août 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Formation Génie civil" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Génie civil</h4>
+                                <p>Construction & Structure</p>
+                                <span class="formation-date">Juillet 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -148,13 +303,28 @@
                     <h3>Sorbo-Ingénierie</h3>
                     <p class="footer-description">Excellence et Innovation en Génie civil</p>
                 </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Informations légales</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
                 <div class="footer-column slide-up">
                     <h3>Nos contacts</h3>
                     <ul class="contact-info">
                         <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
                         <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-column footer-newsletter fade-in">
                     <h3>Newsletter</h3>
                     <p>Restez informé de nos dernières actualités</p>
@@ -162,8 +332,14 @@
                         <input type="email" placeholder="Votre email" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
             </div>
@@ -200,6 +376,7 @@
             });
         });
     </script>
+    <script src="js/hero-banner-navigation.js"></script>
 </body>
 </html>
 
