@@ -135,6 +135,56 @@ class FormationsMongoDBLoader {
         console.log(`📚 Chargement de ${this.formationsPerPage} formations supplémentaires...`);
     }
 
+    // Générer des objectifs basés sur le type de formation
+    generateObjectives(formationType) {
+        const objectivesMap = {
+            'génie civil': [
+                'Maîtriser les principes fondamentaux du génie civil',
+                'Apprendre les techniques de conception et de calcul',
+                'Comprendre les normes et réglementations en vigueur',
+                'Développer des compétences pratiques en construction'
+            ],
+            'architecture': [
+                'Concevoir des projets architecturaux innovants',
+                'Maîtriser les logiciels de conception assistée',
+                'Comprendre l\'ergonomie et l\'esthétique',
+                'Intégrer les contraintes techniques et réglementaires'
+            ],
+            'topographie': [
+                'Effectuer des levés topographiques précis',
+                'Maîtriser les instruments de mesure modernes',
+                'Traiter et analyser les données topographiques',
+                'Réaliser des plans et cartes techniques'
+            ],
+            'hydraulique': [
+                'Comprendre les principes de l\'hydraulique',
+                'Concevoir des réseaux d\'eau et d\'assainissement',
+                'Analyser les écoulements et pressions',
+                'Optimiser les systèmes hydrauliques'
+            ],
+            'bim': [
+                'Maîtriser la modélisation 3D collaborative',
+                'Utiliser les outils BIM pour la conception',
+                'Gérer les informations du projet',
+                'Optimiser la coordination entre disciplines'
+            ],
+            'routier': [
+                'Concevoir des infrastructures routières',
+                'Dimensionner les structures de chaussées',
+                'Analyser les sols et matériaux',
+                'Planifier la maintenance des routes'
+            ]
+        };
+        
+        // Retourner les objectifs correspondants ou des objectifs par défaut
+        return objectivesMap[formationType?.toLowerCase()] || [
+            'Développer des compétences techniques avancées',
+            'Maîtriser les outils et méthodes modernes',
+            'Appliquer les bonnes pratiques du secteur',
+            'Améliorer la qualité des projets réalisés'
+        ];
+    }
+
     // Créer une carte de formation
     createFormationCard(formation, index) {
         const card = document.createElement('div');
@@ -149,6 +199,9 @@ class FormationsMongoDBLoader {
         // Calculer la durée en jours (si disponible)
         const duration = formation.duration || 'À définir';
 
+        // Générer des objectifs basés sur le type de formation
+        const objectives = this.generateObjectives(formation.type);
+        
         card.innerHTML = `
             <div class="formation-header">
                 <div class="formation-image">
@@ -162,6 +215,16 @@ class FormationsMongoDBLoader {
             <div class="formation-content">
                 <div class="formation-theme">
                     <h3 class="formation-title">${formation.title}</h3>
+                </div>
+                
+                <!-- Objectifs de la formation -->
+                <div class="formation-objectives" style="margin: 15px 0; padding: 12px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #d10000;">
+                    <h4 style="color: #d10000; margin-bottom: 8px; font-size: 0.85rem; font-weight: bold;">
+                        <i class="fas fa-bullseye"></i> Objectifs de la formation
+                    </h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.75rem; color: #666;">
+                        ${objectives.map(obj => `<li style="margin-bottom: 4px;"><i class="fas fa-check" style="color: #28a745; margin-right: 6px; font-size: 0.7rem;"></i>${obj}</li>`).join('')}
+                    </ul>
                 </div>
                 
                 <div class="formation-details">
@@ -187,11 +250,11 @@ class FormationsMongoDBLoader {
                 </div>
                 
                 <div class="formation-actions">
-                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">
+                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}" onclick="openInscriptionForm('${formation.title}', '${formation.price}')">
                         <i class="fas fa-user-plus"></i>
                         S'INSCRIRE MAINTENANT
                     </button>
-                    <a href="#" class="more-info">
+                    <a href="#" class="more-info" onclick="showFormationDetails('${formation.title}', '${formation.type}', '${formation.price}', '${duration}')">
                         <i class="fas fa-info-circle"></i>
                         En savoir plus
                     </a>
@@ -308,4 +371,173 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 Page chargée, initialisation du chargeur de formations MongoDB Atlas...');
     window.formationsMongoDBLoader = new FormationsMongoDBLoader();
     window.formationsMongoDBLoader.init();
-}); 
+});
+
+// Fonctions globales pour le modal d'inscription et les détails
+function openInscriptionForm(formationTitle, prix) {
+    // Créer le modal d'inscription
+    const modal = document.createElement('div');
+    modal.id = 'inscriptionModal';
+    modal.style.cssText = `
+        position: fixed; 
+        z-index: 1000; 
+        left: 0; 
+        top: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    modal.innerHTML = `
+        <div style="background-color: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; position: relative;">
+            <span onclick="closeInscriptionModal()" style="position: absolute; right: 20px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; color: #666;">&times;</span>
+            
+            <h2 style="color: #d10000; margin-bottom: 20px; text-align: center;">Inscription à la formation</h2>
+            <p style="text-align: center; margin-bottom: 30px; font-weight: bold; color: #333;">${formationTitle}</p>
+            
+            <form id="inscriptionForm" onsubmit="submitInscription(event)">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Nom complet *</label>
+                    <input type="text" name="nom" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Email professionnel *</label>
+                    <input type="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Téléphone *</label>
+                    <input type="tel" name="telephone" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Entreprise *</label>
+                    <input type="text" name="entreprise" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Message (optionnel)</label>
+                    <textarea name="message" rows="4" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; resize: vertical;"></textarea>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button type="submit" style="background: #d10000; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                        Envoyer ma demande d'inscription
+                    </button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+}
+
+function closeInscriptionModal() {
+    const modal = document.getElementById('inscriptionModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function submitInscription(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    
+    // Simuler l'envoi par email
+    const emailBody = `
+        Nouvelle demande d'inscription à la formation :
+        
+        Formation : ${event.target.querySelector('p').textContent}
+        Nom : ${data.nom}
+        Email : ${data.email}
+        Téléphone : ${data.telephone}
+        Entreprise : ${data.entreprise}
+        Message : ${data.message || 'Aucun message'}
+        
+        Date de demande : ${new Date().toLocaleString('fr-FR')}
+    `;
+    
+    console.log('Demande d\'inscription :', emailBody);
+    
+    alert('Votre demande d\'inscription a été envoyée avec succès ! Nous vous contacterons dans les plus brefs délais.');
+    
+    closeInscriptionModal();
+}
+
+function showFormationDetails(title, type, price, duration) {
+    // Créer un modal simple avec les détails
+    const modal = document.createElement('div');
+    modal.id = 'detailsModal';
+    modal.style.cssText = `
+        position: fixed; 
+        z-index: 1000; 
+        left: 0; 
+        top: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    modal.innerHTML = `
+        <div style="background-color: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; position: relative;">
+            <span onclick="closeDetailsModal()" style="position: absolute; right: 20px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; color: #666;">&times;</span>
+            
+            <h2 style="color: #d10000; margin-bottom: 20px; text-align: center;">${title}</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #333; margin-bottom: 15px;">Informations de la formation</h3>
+                <p><strong>Type :</strong> ${type}</p>
+                <p><strong>Durée :</strong> ${duration} jours</p>
+                <p><strong>Prix :</strong> ${parseInt(price).toLocaleString()} FCFA</p>
+                <p><strong>Lieu :</strong> Abidjan, Cocody</p>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #333; margin-bottom: 15px;">Description</h3>
+                <p style="color: #666; line-height: 1.6;">
+                    Cette formation vous permettra de développer vos compétences dans le domaine de ${type.toLowerCase()}. 
+                    Vous apprendrez les techniques modernes et les bonnes pratiques du secteur.
+                </p>
+            </div>
+            
+            <div style="text-align: center;">
+                <button onclick="openInscriptionForm('${title}', '${price}')" style="background: #d10000; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; margin-right: 15px;">
+                    S'inscrire maintenant
+                </button>
+                <button onclick="closeDetailsModal()" style="background: #6c757d; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                    Fermer
+                </button>
+                <script>
+                    // Fermer le modal en cliquant à l'extérieur
+                    modal.onclick = function(event) {
+                        if (event.target === modal) {
+                            closeDetailsModal();
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDetailsModal() {
+    const modal = document.getElementById('detailsModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = 'auto';
+    }
+} 
