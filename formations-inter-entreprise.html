@@ -130,8 +130,8 @@
         .formation-contact:hover::before{ transform:translateX(100%); }
         .formation-contact h4{ color:#fff; margin-bottom:15px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:1.3rem; position:relative; z-index:2; }
         .formation-contact p{ color:rgba(255,255,255,.9); margin-bottom:20px; font-size:1rem; position:relative; z-index:2; }
-        .formation-contact .btn{ background:#fff; color:#d10000; border:2px solid #fff; font-weight:600; padding:12px 30px; position:relative; z-index:2; }
-        .formation-contact .btn:hover{ background:transparent; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,255,255,.2); }
+        .formation-contact .btn{ background:transparent; color:#fff; border:2px solid #fff; font-weight:600; padding:12px 30px; position:relative; z-index:2; }
+        .formation-contact .btn:hover{ background:#fff; color:#d10000; transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,255,255,.2); }
         @media (max-width: 992px){ .formation-header{height:250px;} .formation-header-content{padding:0 30px;} .formation-header h3{font-size:2rem;} .formation-body{padding:30px;} .formation-features{grid-template-columns:1fr; gap:25px;} .feature-column{padding:25px;} }
         
         /* Styles pour le bouton de téléchargement du bulletin */
@@ -144,6 +144,28 @@
         .btn-download-bulletin:active {
             transform: translateY(-1px);
             box-shadow: 0 4px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        /* Style unifié pour tous les boutons (style intra-entreprise) */
+        .btn-outline {
+            background: transparent;
+            color: #d10000;
+            border: 2px solid #d10000;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-outline:hover {
+            background: #d10000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(209, 0, 0, 0.3);
         }
         
         .bulletin-download {
@@ -438,10 +460,10 @@
                         </div>
                     </div>
                     <div class="enroll">
-                        <a href="formations-detail.html#formation-1" class="btn btn-secondary" style="background: #6c757d; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.8rem; transition: all 0.3s ease;">
+                        <a href="formations-detail.html#formation-1" class="btn btn-outline">
                             <i class="fas fa-info-circle"></i> En savoir plus
                         </a>
-                        <button class="btn btn-primary" onclick="openInscriptionForm('Dimensionnement des structures de chaussées routières', '150000')" style="background: #d10000; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button class="btn btn-outline" onclick="openInscriptionForm('Dimensionnement des structures de chaussées routières', '150000')">
                             <i class="fas fa-user-plus"></i> S'inscrire
                         </button>
                     </div>
@@ -481,10 +503,10 @@
                         </div>
                     </div>
                     <div class="enroll">
-                        <a href="formations-detail.html#formation-2" class="btn btn-secondary" style="background: #6c757d; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.8rem; transition: all 0.3s ease;">
+                        <a href="formations-detail.html#formation-2" class="btn btn-outline">
                             <i class="fas fa-info-circle"></i> En savoir plus
                         </a>
-                        <button class="btn btn-primary" onclick="openInscriptionForm('Diagnostic et renforcement des chaussées routières', '200000')" style="background: #d10000; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button class="btn btn-outline" onclick="openInscriptionForm('Diagnostic et renforcement des chaussées routières', '200000')">
                             <i class="fas fa-user-plus"></i> S'inscrire
                         </button>
                     </div>
@@ -524,10 +546,10 @@
                         </div>
                     </div>
                     <div class="enroll">
-                        <a href="formations-detail.html#formation-3" class="btn btn-secondary" style="background: #6c757d; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 0.8rem; transition: all 0.3s ease;">
+                        <a href="formations-detail.html#formation-3" class="btn btn-outline">
                             <i class="fas fa-info-circle"></i> En savoir plus
                         </a>
-                        <button class="btn btn-primary" onclick="openInscriptionForm('Dimensionnement des chaussées sous charges spéciales', '130000')" style="background: #d10000; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button class="btn btn-outline" onclick="openInscriptionForm('Dimensionnement des chaussées sous charges spéciales', '130000')">
                             <i class="fas fa-user-plus"></i> S'inscrire
                         </button>
                     </div>
