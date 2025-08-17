@@ -254,10 +254,6 @@ class FormationsMongoDBLoader {
                         <i class="fas fa-user-plus"></i>
                         S'INSCRIRE MAINTENANT
                     </button>
-                    <a href="#" class="more-info" onclick="showFormationDetails('${formation.title}', '${formation.type}', '${formation.price}', '${duration}')">
-                        <i class="fas fa-info-circle"></i>
-                        En savoir plus
-                    </a>
                 </div>
             </div>
         `;
@@ -472,72 +468,4 @@ function submitInscription(event) {
     closeInscriptionModal();
 }
 
-function showFormationDetails(title, type, price, duration) {
-    // Créer un modal simple avec les détails
-    const modal = document.createElement('div');
-    modal.id = 'detailsModal';
-    modal.style.cssText = `
-        position: fixed; 
-        z-index: 1000; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-        height: 100%; 
-        background-color: rgba(0,0,0,0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    `;
-    
-    modal.innerHTML = `
-        <div style="background-color: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; position: relative;">
-            <span onclick="closeDetailsModal()" style="position: absolute; right: 20px; top: 20px; font-size: 28px; font-weight: bold; cursor: pointer; color: #666;">&times;</span>
-            
-            <h2 style="color: #d10000; margin-bottom: 20px; text-align: center;">${title}</h2>
-            
-            <div style="margin-bottom: 20px;">
-                <h3 style="color: #333; margin-bottom: 15px;">Informations de la formation</h3>
-                <p><strong>Type :</strong> ${type}</p>
-                <p><strong>Durée :</strong> ${duration} jours</p>
-                <p><strong>Prix :</strong> ${parseInt(price).toLocaleString()} FCFA</p>
-                <p><strong>Lieu :</strong> Abidjan, Cocody</p>
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-                <h3 style="color: #333; margin-bottom: 15px;">Description</h3>
-                <p style="color: #666; line-height: 1.6;">
-                    Cette formation vous permettra de développer vos compétences dans le domaine de ${type.toLowerCase()}. 
-                    Vous apprendrez les techniques modernes et les bonnes pratiques du secteur.
-                </p>
-            </div>
-            
-            <div style="text-align: center;">
-                <button onclick="openInscriptionForm('${title}', '${price}')" style="background: #d10000; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; margin-right: 15px;">
-                    S'inscrire maintenant
-                </button>
-                <button onclick="closeDetailsModal()" style="background: #6c757d; color: white; border: none; padding: 15px 40px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer;">
-                    Fermer
-                </button>
-                <script>
-                    // Fermer le modal en cliquant à l'extérieur
-                    modal.onclick = function(event) {
-                        if (event.target === modal) {
-                            closeDetailsModal();
-                        }
-                    }
-                </script>
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-}
-
-function closeDetailsModal() {
-    const modal = document.getElementById('detailsModal');
-    if (modal) {
-        modal.remove();
-        document.body.style.overflow = 'auto';
-    }
-} 
+ 
