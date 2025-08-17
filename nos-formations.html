@@ -1972,7 +1972,7 @@
             opacity: 0;
         }
         
-        .stat-item .percentage::after {
+        .stat-item .percentage:not(.number)::after {
             content: '%';
             font-size: 2rem;
             position: absolute;
@@ -1984,7 +1984,7 @@
         }
         
         .stat-item .percentage.number::after {
-            content: '';
+            content: none;
         }
         
         .stat-item:nth-child(1) .percentage { transition-delay: 0.1s; }

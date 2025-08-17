@@ -134,6 +134,33 @@
         .formation-contact .btn:hover{ background:transparent; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,255,255,.2); }
         @media (max-width: 992px){ .formation-header{height:250px;} .formation-header-content{padding:0 30px;} .formation-header h3{font-size:2rem;} .formation-body{padding:30px;} .formation-features{grid-template-columns:1fr; gap:25px;} .feature-column{padding:25px;} }
         
+        /* Styles pour le bouton de téléchargement du bulletin */
+        .btn-download-bulletin:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.4);
+            background: linear-gradient(135deg, #b30000 0%, #8f0000 100%);
+        }
+        
+        .btn-download-bulletin:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(209, 0, 0, 0.3);
+        }
+        
+        .bulletin-download {
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .bulletin-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #d10000;
+        }
+        
         /* Styles pour la section formations passées */
         .formations-passees { padding: 80px 0; background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%); }
         .section-header { text-align: center; margin-bottom: 60px; }
@@ -273,14 +300,31 @@
                                 <li><i class="fas fa-check"></i> Prérequis techniques spécifiés</li>
                                 <li><i class="fas fa-check"></i> Validation des compétences préalables</li>
                             </ul>
+                            
+                            <!-- Bouton de téléchargement du bulletin d'inscription -->
+                            <div class="bulletin-download" style="margin-top: 25px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                                <h5 style="color: #d10000; margin-bottom: 15px; font-size: 1.1rem;">
+                                    <i class="fas fa-download"></i> Bulletin d'inscription
+                                </h5>
+                                <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;">
+                                    Ouvrez notre bulletin d'inscription, remplissez-le en ligne, puis imprimez-le ou sauvegardez-le en PDF.
+                                </p>
+                                <a href="documents/bulletin-inscription.html" 
+                                   class="btn-download-bulletin" 
+                                   target="_blank"
+                                   style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #d10000 0%, #b30000 100%); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(209, 0, 0, 0.3);">
+                                    <i class="fas fa-file-pdf" style="font-size: 1.1rem;"></i>
+                                    Télécharger le bulletin
+                                </a>
+                            </div>
                         </div>
                         <div class="feature-column">
                             <h4><i class="fas fa-map-marker-alt"></i> Organisation pratique</h4>
                             <div class="modality-items">
-                                <span class="modality-item"><i class="fas fa-building"></i> Centres de formation équipés</span>
+                                <span class="modality-item"><i class="fas fa-building"></i> Centres de formation équipé</span>
                                 <span class="modality-item"><i class="fas fa-clock"></i> Horaires : 8h30 - 17h30</span>
-                                <span class="modality-item"><i class="fas fa-coffee"></i> Pauses café et déjeuner inclus</span>
-                                <span class="modality-item"><i class="fas fa-wifi"></i> Accès WiFi et matériel fourni</span>
+                                <span class="modality-item"><i class="fas fa-coffee"></i> Pauses café inclus</span>
+                                <span class="modality-item"><i class="fas fa-wifi"></i> Accès WiFi et matériel Moderne fourni</span>
                             </div>
                         </div>
                     </div>
@@ -294,96 +338,7 @@
         </div>
     </section>
 
-    <section class="formations-passees">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nos Formations Inter-Entreprise Réalisées</h2>
-                <p>Découvrez un aperçu de nos sessions de formation passées et de l'engagement de nos participants</p>
-            </div>
-            
-            <div class="formations-gallery">
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="gallery-image">
-                        <img src="images/inter1.jpg" alt="Formation BIM en cours" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h4>Formation BIM</h4>
-                                <p>Architecture & Construction</p>
-                                <span class="formation-date">Décembre 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="gallery-image">
-                        <img src="images/image 37.jpg" alt="Formation Topographie" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h4>Formation Topographie</h4>
-                                <p>Génie civil & Infrastructure</p>
-                                <span class="formation-date">Novembre 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="gallery-image">
-                        <img src="images/image 3.jpg" alt="Formation Ingénierie routière" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h4>Formation Ingénierie routière</h4>
-                                <p>Infrastructure & Transport</p>
-                                <span class="formation-date">Octobre 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
-                    <div class="gallery-image">
-                        <img src="images/iage22.jpg" alt="Formation Architecture" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h4>Formation Architecture</h4>
-                                <p>Design & Construction</p>
-                                <span class="formation-date">Septembre 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
-                    <div class="gallery-image">
-                        <img src="images/imag 16.jpg" alt="Formation Ingénierie de l'eau" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h4>Formation Ingénierie de l'eau</h4>
-                                <p>Hydraulique & Environnement</p>
-                                <span class="formation-date">Août 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
-                    <div class="gallery-image">
-                        <img src="images/inter2.jpg" alt="Formation Génie civil" loading="lazy">
-                        <div class="gallery-overlay">
-                            <div class="gallery-info">
-                                <h4>Formation Génie civil</h4>
-                                <p>Construction & Structure</p>
-                                <span class="formation-date">Juillet 2024</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-
-        </div>
-    </section>
+   
 
     <section class="formations-disponibles" id="formations-disponibles">
         <div class="container">
@@ -451,7 +406,7 @@
             <div class="formations-grid" id="formations-grid">
                 <div class="loading-formations" style="text-align: center; padding: 40px;">
                     <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #c90d0d; margin-bottom: 20px;"></i>
-                    <p>Chargement des formations depuis MongoDB Atlas...</p>
+                    <p>Chargement des formations...</p>
                 </div>
             </div>
             
@@ -595,7 +550,7 @@
                         const statusText = document.getElementById('status-text');
                         
                         apiStatus.style.backgroundColor = '#d4edda';
-                        statusText.innerHTML = `<i class="fas fa-check-circle"></i> ${data.data.length} formation(s) chargée(s) depuis MongoDB Atlas !`;
+                        statusText.innerHTML = `<i class="fas fa-check-circle"></i> ${data.data.length} formation(s) chargée(s)!`;
                         
                         // Masquer le statut après 5 secondes
                         setTimeout(() => {
@@ -610,6 +565,97 @@
         }
     </script>
     
+    <section class="formations-passees">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quelques Formations Inter-Entreprise réalisées </h2>
+                <p>Découvrez un aperçu de nos sessions de formation passées et de l'engagement de nos participants</p>
+            </div>
+            
+            <div class="formations-gallery">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-image">
+                        <img src="images/inter1.jpg" alt="Formation BIM en cours" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation BIM</h4>
+                                <p>Architecture & Construction</p>
+                                <span class="formation-date">Décembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-image">
+                        <img src="images/image 37.jpg" alt="Formation Topographie" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Topographie</h4>
+                                <p>Génie civil & Infrastructure</p>
+                                <span class="formation-date">Novembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-image">
+                        <img src="images/image 3.jpg" alt="Formation Ingénierie routière" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Ingénierie routière</h4>
+                                <p>Infrastructure & Transport</p>
+                                <span class="formation-date">Octobre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="gallery-image">
+                        <img src="images/iage22.jpg" alt="Formation Architecture" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Architecture</h4>
+                                <p>Design & Construction</p>
+                                <span class="formation-date">Septembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="gallery-image">
+                        <img src="images/imag 16.jpg" alt="Formation Ingénierie de l'eau" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Ingénierie de l'eau</h4>
+                                <p>Hydraulique & Environnement</p>
+                                <span class="formation-date">Août 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="gallery-image">
+                        <img src="images/inter2.jpg" alt="Formation Génie civil" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Génie civil</h4>
+                                <p>Construction & Structure</p>
+                                <span class="formation-date">Juillet 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-content">
