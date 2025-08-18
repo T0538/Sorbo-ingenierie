@@ -88,7 +88,6 @@ function createLogicielCard(logiciel) {
           </div>
         </div>
         <div class="software-header">
-          <div class="software-icon ${iconColorClass}"><i class="fas fa-cubes"></i></div>
           <span class="software-badge ${prix.toLowerCase().includes('gratuit') ? 'popular' : 'premium'}">${prix}</span>
         </div>
         <div class="software-content">
