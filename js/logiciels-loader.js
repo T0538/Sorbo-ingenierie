@@ -63,7 +63,7 @@ function createLogicielCard(logiciel) {
     const prix = logiciel.prix || 'Gratuit';
     // Le logo est toujours chargé depuis le dossier local images/
     const image = 'images/image1.png';
-    const headerImage = logiciel.headerImage || 'images/drainagelog.jpg';
+    const headerImage = logiciel.headerImage || 'images/drainageroute.png';
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
