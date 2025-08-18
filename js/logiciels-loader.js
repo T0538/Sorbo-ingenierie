@@ -87,9 +87,7 @@ function createLogicielCard(logiciel) {
             <h4 class="software-name">${nom}</h4>
           </div>
         </div>
-        <div class="software-header">
-          <span class="software-badge ${prix.toLowerCase().includes('gratuit') ? 'popular' : 'premium'}">${prix}</span>
-        </div>
+
         <div class="software-content">
           <h3 class="software-title"><span class="highlight ${iconColorClass}">${nom}</span></h3>
           <div class="software-category">${[categorie, version].filter(Boolean).join(' • ')}</div>

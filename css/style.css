@@ -1081,7 +1081,7 @@ footer h3::after {
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 15px;
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255,255,255,0.3);
 }
@@ -1099,7 +1099,6 @@ footer h3::after {
   font-weight: 600;
   color: #333;
   margin: 0;
-  text-align: right;
 }
 
 .software-header {
