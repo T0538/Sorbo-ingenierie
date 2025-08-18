@@ -82,6 +82,10 @@ function createLogicielCard(logiciel) {
       <div class="software-card modern-card" data-logiciel-id="${logiciel.id}">
         <div class="software-media">
           <img src="${image}" alt="${nom}" loading="lazy" />
+          <div class="software-logo-section">
+            <img src="${logiciel.logo || 'images/image1.png'}" alt="Logo ${nom}" class="software-logo" />
+            <h4 class="software-name">${nom}</h4>
+          </div>
         </div>
         <div class="software-header">
           <div class="software-icon ${iconColorClass}"><i class="fas fa-cubes"></i></div>
