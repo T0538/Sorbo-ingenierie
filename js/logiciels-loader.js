@@ -80,16 +80,14 @@ function createLogicielCard(logiciel) {
 
     return `
       <div class="software-card modern-card" data-logiciel-id="${logiciel.id}">
-        <div class="software-media">
-          <img src="${image}" alt="${nom}" loading="lazy" />
-          <div class="software-logo-section">
-            <img src="${logiciel.logo || 'images/Image1.png'}" alt="Logo ${nom}" class="software-logo" />
+        <div class="software-header">
+          <div class="software-icon-section">
+            <img src="${image}" alt="Icône ${nom}" class="software-icon-image" loading="lazy" />
             <h4 class="software-name">${nom}</h4>
           </div>
         </div>
 
         <div class="software-content">
-          <h3 class="software-title"><span class="highlight ${iconColorClass}">${nom}</span></h3>
           <div class="software-category">${[categorie, version].filter(Boolean).join(' • ')}</div>
           <p>${description}</p>
           <div class="features-list">
