@@ -62,6 +62,7 @@ function createLogicielCard(logiciel) {
     const version = logiciel.version ? `v${logiciel.version}` : '';
     const prix = logiciel.prix || 'Gratuit';
     const image = logiciel.image || 'images/drainage-routier.svg';
+    const headerImage = logiciel.headerImage || 'images/default-header.jpg';
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
@@ -80,6 +81,9 @@ function createLogicielCard(logiciel) {
 
     return `
       <div class="software-card modern-card" data-logiciel-id="${logiciel.id}">
+        <div class="software-header-image">
+          <img src="${headerImage}" alt="Image d'en-tête ${nom}" class="header-image" loading="lazy" />
+        </div>
         <div class="software-header">
           <div class="software-icon-section">
             <img src="${image}" alt="Icône ${nom}" class="software-icon-image" loading="lazy" />
