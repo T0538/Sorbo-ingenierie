@@ -155,15 +155,44 @@ async function handleDownload(logicielId, type) {
 }
 
 function displayNoLogiciels() {
-    const container = document.getElementById('logiciels-grid');
+    const container = document.getElementById('logiciels-grid') || document.getElementById('software-grid');
     if (container) {
-        container.innerHTML = `
-            <div class="no-logiciels" style="text-align: center; padding: 40px; color: #666;">
-                <i class="fas fa-desktop" style="font-size: 3rem; margin-bottom: 20px;"></i>
-                <h3>Aucun logiciel disponible</h3>
-                <p>Les logiciels seront bientôt disponibles.</p>
-            </div>
-        `;
+        // Afficher 3 logiciels de démonstration
+        const demoLogiciels = [
+            {
+                id: 'demo1',
+                nom: 'TALREN',
+                description: 'Stabilité des ouvrages géotechniques, avec ou sans renforcements',
+                categorie: 'GÉOTECHNIQUE',
+                version: '2024',
+                fonctionnalites: ['Analyse de stabilité', 'Calculs géotechniques', 'Modélisation 3D'],
+                headerImage: 'images/talren-header.jpg'
+            },
+            {
+                id: 'demo2',
+                nom: 'FOXTA',
+                description: 'Dimensionnement des fondations superficielles et profondes',
+                categorie: 'FONDATIONS',
+                version: '3.2',
+                fonctionnalites: ['Fondations superficielles', 'Pieux et micropieux', 'Calculs de portance'],
+                headerImage: 'images/foxta-header.jpg'
+            },
+            {
+                id: 'demo3',
+                nom: 'K-RÉA',
+                description: 'Dimensionnement des écrans de soutènement',
+                categorie: 'STRUCTURES',
+                version: '2024.1',
+                fonctionnalites: ['Murs de soutènement', 'Écrans de sécurité', 'Calculs de stabilité'],
+                headerImage: 'images/krea-header.jpg'
+            }
+        ];
+        
+        const logicielsHTML = demoLogiciels.map(logiciel => createLogicielCard(logiciel)).join('');
+        container.innerHTML = logicielsHTML;
+        
+        // Ajouter les event listeners pour les boutons
+        addDownloadListeners();
     }
 }
 
