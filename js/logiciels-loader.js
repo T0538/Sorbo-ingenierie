@@ -96,7 +96,9 @@ function createLogicielCard(logiciel) {
           </div>
           <div class="software-buttons">
             <a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="${logiciel.id}">📥 Télécharger</a>
-            <a href="#" class="software-btn secondary-btn trial-btn" data-logiciel-id="${logiciel.id}">🆓 Version d'essai</a>
+            <a href="logiciel-details.html?id=${logiciel.id}" class="software-btn secondary-btn info-btn" target="_blank">
+              <i class="fas fa-info-circle"></i> Consulter les informations
+            </a>
           </div>
         </div>
       </div>
@@ -110,15 +112,6 @@ function addDownloadListeners() {
             e.preventDefault();
             const logicielId = btn.getAttribute('data-logiciel-id');
             await handleDownload(logicielId, 'download');
-        });
-    });
-
-    // Boutons d'essai
-    document.querySelectorAll('.trial-btn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const logicielId = btn.getAttribute('data-logiciel-id');
-            await handleDownload(logicielId, 'trial');
         });
     });
 }
