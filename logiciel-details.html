@@ -86,33 +86,39 @@
             color: #fff;
             padding: 0 50px;
             width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 40px;
         }
         
-        .logiciel-badge {
-            display: inline-block;
-            background: rgba(255,255,255,.2);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,.3);
+        .logiciel-logo {
+            flex-shrink: 0;
+        }
+        
+        .logiciel-logo img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+        
+        .logiciel-title-section {
+            flex: 1;
         }
         
         .logiciel-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin-bottom: 15px;
             font-weight: 700;
             text-shadow: 0 2px 4px rgba(0,0,0,.3);
         }
         
         .logiciel-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0;
-            opacity: 0.9;
+            opacity: 0.95;
             font-weight: 400;
+            line-height: 1.4;
         }
         
         .logiciel-body {
@@ -478,8 +484,13 @@
             <div class="logiciel-details-card">
                 <div class="logiciel-header" style="background: linear-gradient(135deg, #d10000 0%, #b30000 100%);">
                     <div class="logiciel-header-content">
-                        <div class="logiciel-badge">Logiciel OH-Route v1</div>
-                        <h2>OH-Route v1 – Solution logiciel pour les études d'assainissement et de drainage routier</h2>
+                        <div class="logiciel-logo">
+                            <img src="images/oh-route-logo.png" alt="Logo OH-Route" />
+                        </div>
+                        <div class="logiciel-title-section">
+                            <h2>OH-Route v1</h2>
+                            <p class="logiciel-subtitle">Logiciel pour l'assainissement et le drainage routier</p>
+                        </div>
                     </div>
                 </div>
                 
