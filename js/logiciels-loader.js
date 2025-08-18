@@ -62,7 +62,7 @@ function createLogicielCard(logiciel) {
     const version = logiciel.version ? `v${logiciel.version}` : '';
     const prix = logiciel.prix || 'Gratuit';
     const image = logiciel.image || 'images/image1.png';
-    const headerImage = logiciel.headerImage || 'image/drainagelog.jpg';
+    const headerImage = logiciel.headerImage || 'images/drainagelog.jpg';
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
