@@ -96,9 +96,9 @@ function createLogicielCard(logiciel) {
           </div>
           <div class="software-buttons">
             <a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="${logiciel.id}">📥 Télécharger</a>
-            <a href="logiciel-details.html?id=${logiciel.id}" class="software-btn secondary-btn info-btn" target="_blank">
-              <i class="fas fa-info-circle"></i> Consulter les informations
-            </a>
+                         <a href="logiciel-details.html" class="software-btn secondary-btn info-btn" target="_blank">
+               <i class="fas fa-info-circle"></i> Consulter les informations
+             </a>
           </div>
         </div>
       </div>

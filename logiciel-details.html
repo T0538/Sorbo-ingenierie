@@ -432,13 +432,125 @@
     <!-- Contenu principal -->
     <section class="logiciel-content">
         <div class="container">
-            <!-- Conteneur pour les détails du logiciel -->
-            <div id="logiciel-details-container">
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <h3>Chargement des détails du logiciel...</h3>
-                    <p>Veuillez patienter pendant que nous récupérons les informations.</p>
+            <!-- Détails statiques du logiciel -->
+            <div class="logiciel-details-card">
+                <div class="logiciel-header" style="background-image: linear-gradient(rgba(209,0,0,0.8), rgba(179,0,0,0.8)), url('images/image 30.jpg');">
+                    <div class="logiciel-header-content">
+                        <div class="logiciel-badge">Gratuit</div>
+                        <h2>OH - Route</h2>
+                        <p class="logiciel-subtitle">BIM • V2024</p>
+                    </div>
                 </div>
+                
+                <div class="logiciel-body">
+                    <!-- Section Description Générale -->
+                    <div class="logiciel-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Description Générale
+                        </h3>
+                        <div class="logiciel-description">
+                            OH-Route est un logiciel de drainage routier innovant conçu pour les ingénieurs et techniciens du génie civil. 
+                            Il permet de concevoir, analyser et optimiser les systèmes de drainage pour les infrastructures routières de manière 
+                            efficace et précise. Développé avec les dernières technologies, ce logiciel offre une interface intuitive et des 
+                            fonctionnalités avancées pour répondre aux exigences modernes de l'ingénierie routière.
+                        </div>
+                    </div>
+                    
+                    <!-- Section Présentation -->
+                    <div class="logiciel-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-presentation"></i>
+                            Présentation
+                        </h3>
+                        <div class="logiciel-features">
+                            <div class="feature-item">
+                                <h4><i class="fas fa-route"></i> Conception routière avancée</h4>
+                                <p>Créez des projets routiers complets avec des outils de conception intégrés pour le drainage, 
+                                la géométrie et l'analyse hydraulique.</p>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <h4><i class="fas fa-water"></i> Analyse hydraulique</h4>
+                                <p>Simulez et analysez les écoulements d'eau avec des modèles hydrauliques précis pour optimiser 
+                                vos systèmes de drainage.</p>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <h4><i class="fas fa-chart-line"></i> Modélisation 3D</h4>
+                                <p>Générez des modèles 3D détaillés de vos projets routiers avec visualisation en temps réel 
+                                et rendus photoréalistes.</p>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <h4><i class="fas fa-cogs"></i> Intégration BIM</h4>
+                                <p>Intégrez parfaitement vos projets dans un workflow BIM avec export vers les formats standards 
+                                de l'industrie.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Spécifications techniques -->
+                    <div class="logiciel-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-cogs"></i>
+                            Spécifications techniques
+                        </h3>
+                        <div class="logiciel-meta">
+                            <div class="meta-item">
+                                <div class="meta-icon">
+                                    <i class="fas fa-desktop"></i>
+                                </div>
+                                <div class="meta-label">Système d'exploitation</div>
+                                <div class="meta-value">Windows 10/11</div>
+                            </div>
+                            
+                            <div class="meta-item">
+                                <div class="meta-icon">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <div class="meta-label">Processeur</div>
+                                <div class="meta-value">Intel i5 ou AMD Ryzen 5</div>
+                            </div>
+                            
+                            <div class="meta-item">
+                                <div class="meta-icon">
+                                    <i class="fas fa-memory"></i>
+                                </div>
+                                <div class="meta-label">Mémoire RAM</div>
+                                <div class="meta-value">8 GB minimum</div>
+                            </div>
+                            
+                            <div class="meta-item">
+                                <div class="meta-icon">
+                                    <i class="fas fa-hdd"></i>
+                                </div>
+                                <div class="meta-label">Espace disque</div>
+                                <div class="meta-value">2 GB</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Actions -->
+                    <div class="logiciel-actions">
+                        <h3>Prêt à utiliser OH-Route ?</h3>
+                        <p>Téléchargez gratuitement ce logiciel professionnel et commencez à concevoir vos projets routiers dès aujourd'hui</p>
+                        <div class="action-buttons">
+                            <a href="#" class="btn-action" onclick="handleDownload()">
+                                <i class="fas fa-download"></i>
+                                Télécharger maintenant
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bouton retour -->
+            <div class="back-to-logiciels">
+                <a href="nos-logiciels.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour à la liste des logiciels
+                </a>
             </div>
         </div>
     </section>
@@ -496,7 +608,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/logiciel-details-loader.js"></script>
     <script>
         // Menu mobile et dropdowns
         document.addEventListener('DOMContentLoaded', () => {
@@ -512,6 +623,17 @@
                 a.addEventListener('click', e => { e.preventDefault(); menu.classList.toggle('show'); });
             });
         });
+        
+        // Fonction simple pour le téléchargement
+        function handleDownload() {
+            // Simuler un téléchargement (en production, remplacez par l'URL réelle)
+            const downloadUrl = 'https://example.com/oh-route-download';
+            const logicielName = 'OH-Route';
+            
+            if (confirm(`Vous allez être redirigé vers ${logicielName} pour le téléchargement. Continuer ?`)) {
+                window.open(downloadUrl, '_blank');
+            }
+        }
     </script>
 </body>
 </html>
