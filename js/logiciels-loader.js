@@ -61,7 +61,7 @@ function createLogicielCard(logiciel) {
     const categorie = logiciel.categorie || '';
     const version = logiciel.version ? `v${logiciel.version}` : '';
     const prix = logiciel.prix || 'Gratuit';
-    const image = logiciel.image || 'images/drainage-routier.svg';
+    const image = logiciel.image || 'images/image1.png';
     const headerImage = logiciel.headerImage || 'images/default-header.jpg';
 
     const features = Array.isArray(logiciel.fonctionnalites)
