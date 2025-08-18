@@ -329,6 +329,48 @@
             box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
         }
         
+        /* Styles pour la grille d'images */
+        .logiciel-images {
+            margin-bottom: 40px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .image-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.15);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 15px;
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-align: center;
+            background: #f8f9fa;
+        }
+        
         .loading {
             text-align: center;
             padding: 80px 20px;
@@ -434,107 +476,123 @@
         <div class="container">
             <!-- Détails statiques du logiciel -->
             <div class="logiciel-details-card">
-                <div class="logiciel-header" style="background-image: linear-gradient(rgba(209,0,0,0.8), rgba(179,0,0,0.8)), url('images/image 30.jpg');">
+                <div class="logiciel-header" style="background: linear-gradient(135deg, #d10000 0%, #b30000 100%);">
                     <div class="logiciel-header-content">
-                        <div class="logiciel-badge">Gratuit</div>
-                        <h2>OH - Route</h2>
-                        <p class="logiciel-subtitle">BIM • V2024</p>
+                        <div class="logiciel-badge">Logiciel OH-Route v1</div>
+                        <h2>OH-Route v1 – Solution logiciel pour les études d'assainissement et de drainage routier</h2>
                     </div>
                 </div>
                 
                 <div class="logiciel-body">
-                    <!-- Section Description Générale -->
+                    <!-- Section Introduction -->
                     <div class="logiciel-section">
                         <h3 class="section-title">
                             <i class="fas fa-info-circle"></i>
-                            Description Générale
+                            Introduction
                         </h3>
                         <div class="logiciel-description">
-                            OH-Route est un logiciel de drainage routier innovant conçu pour les ingénieurs et techniciens du génie civil. 
-                            Il permet de concevoir, analyser et optimiser les systèmes de drainage pour les infrastructures routières de manière 
-                            efficace et précise. Développé avec les dernières technologies, ce logiciel offre une interface intuitive et des 
-                            fonctionnalités avancées pour répondre aux exigences modernes de l'ingénierie routière.
+                            <p>OH-Route v1 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. 
+                            Développé pour répondre aux défis des infrastructures routières africaines, il s'adresse aux bureaux d'études, 
+                            ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p>
                         </div>
                     </div>
                     
-                    <!-- Section Présentation -->
+                    <!-- Section Architecture modulaire -->
                     <div class="logiciel-section">
                         <h3 class="section-title">
-                            <i class="fas fa-presentation"></i>
-                            Présentation
+                            <i class="fas fa-cubes"></i>
+                            Architecture modulaire
                         </h3>
-                        <div class="logiciel-features">
-                            <div class="feature-item">
-                                <h4><i class="fas fa-route"></i> Conception routière avancée</h4>
-                                <p>Créez des projets routiers complets avec des outils de conception intégrés pour le drainage, 
-                                la géométrie et l'analyse hydraulique.</p>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <h4><i class="fas fa-water"></i> Analyse hydraulique</h4>
-                                <p>Simulez et analysez les écoulements d'eau avec des modèles hydrauliques précis pour optimiser 
-                                vos systèmes de drainage.</p>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <h4><i class="fas fa-chart-line"></i> Modélisation 3D</h4>
-                                <p>Générez des modèles 3D détaillés de vos projets routiers avec visualisation en temps réel 
-                                et rendus photoréalistes.</p>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <h4><i class="fas fa-cogs"></i> Intégration BIM</h4>
-                                <p>Intégrez parfaitement vos projets dans un workflow BIM avec export vers les formats standards 
-                                de l'industrie.</p>
-                            </div>
+                        <div class="logiciel-description">
+                            <p>OH-Route v1 s'appuie sur une architecture modulaire avec deux parties complémentaires :</p>
+                            <ul style="margin: 20px 0; padding-left: 20px; color: #666; line-height: 1.6;">
+                                <li style="margin-bottom: 10px;">Un module hydrologie pour l'analyse des apports en eau</li>
+                                <li style="margin-bottom: 10px;">Un module hydraulique pour le dimensionnement des ouvrages d'évacuation</li>
+                            </ul>
+                            <p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>
                         </div>
                     </div>
                     
-                    <!-- Section Spécifications techniques -->
+                    <!-- Section Module hydrologie -->
+                    <div class="logiciel-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-water"></i>
+                            Module hydrologie pour l'estimation des débits projets
+                        </h3>
+                        <div class="logiciel-description">
+                            <p>Ce module permet d'estimer les débits projets à partir de plusieurs bassins versants en utilisant des méthodes 
+                            éprouvées et adaptées localement (Rationnelle, Caquot, ORSTOM, etc.). Il propose une saisie optimisée des données 
+                            et un traitement des caractéristiques des bassins, permettant à l'utilisateur de se concentrer sur l'analyse 
+                            technique et la prise de décision.</p>
+                            
+                            <p>Le logiciel permet également de combiner ou regrouper plusieurs bassins/sous-bassins selon des principes 
+                            hydrologiques clairs et fiables, permettant une modélisation rigoureuse de configurations complexes tout en 
+                            réduisant significativement le temps d'étude.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Module hydraulique -->
                     <div class="logiciel-section">
                         <h3 class="section-title">
                             <i class="fas fa-cogs"></i>
-                            Spécifications techniques
+                            Module hydraulique pour le dimensionnement optimal des ouvrages
                         </h3>
-                        <div class="logiciel-meta">
-                            <div class="meta-item">
-                                <div class="meta-icon">
-                                    <i class="fas fa-desktop"></i>
-                                </div>
-                                <div class="meta-label">Système d'exploitation</div>
-                                <div class="meta-value">Windows 10/11</div>
-                            </div>
+                        <div class="logiciel-description">
+                            <p>Ce module prend en charge le dimensionnement hydraulique des ouvrages de drainage (ponceaux, dalots, 
+                            canaux à ciel ouvert, fossés, etc.) une fois les débits déterminés. Il dispose d'un mode de calcul 
+                            automatisé pour identifier rapidement les sections optimales en fonction des contraintes hydrauliques 
+                            et des conditions d'exploitation attendues.</p>
                             
-                            <div class="meta-item">
-                                <div class="meta-icon">
-                                    <i class="fas fa-microchip"></i>
+                            <p>Cette capacité à générer rapidement des solutions adaptées constitue un atout majeur, notamment dans 
+                            les phases d'avant-projet ou d'analyse de variantes techniques.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Au-delà des calculs -->
+                    <div class="logiciel-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-file-alt"></i>
+                            Au-delà des calculs
+                        </h3>
+                        <div class="logiciel-description">
+                            <p>OH-Route produit également une note de calcul synthétique et structurée, présentant clairement les 
+                            hypothèses, résultats et conclusions de l'étude. Cette sortie est immédiatement utilisable dans les 
+                            dossiers techniques et facilite la communication avec les maîtres d'ouvrage ou services compétents.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Images du logiciel -->
+                    <div class="logiciel-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-images"></i>
+                            Images du logiciel
+                        </h3>
+                        <div class="logiciel-images">
+                            <div class="image-grid">
+                                <div class="image-item">
+                                    <img src="images/oh-route-interface.jpg" alt="Interface principale d'OH-Route" loading="lazy">
+                                    <p class="image-caption">Interface principale du logiciel</p>
                                 </div>
-                                <div class="meta-label">Processeur</div>
-                                <div class="meta-value">Intel i5 ou AMD Ryzen 5</div>
-                            </div>
-                            
-                            <div class="meta-item">
-                                <div class="meta-icon">
-                                    <i class="fas fa-memory"></i>
+                                <div class="image-item">
+                                    <img src="images/oh-route-hydrology.jpg" alt="Module hydrologie" loading="lazy">
+                                    <p class="image-caption">Module hydrologie - Analyse des bassins versants</p>
                                 </div>
-                                <div class="meta-label">Mémoire RAM</div>
-                                <div class="meta-value">8 GB minimum</div>
-                            </div>
-                            
-                            <div class="meta-item">
-                                <div class="meta-icon">
-                                    <i class="fas fa-hdd"></i>
+                                <div class="image-item">
+                                    <img src="images/oh-route-hydraulics.jpg" alt="Module hydraulique" loading="lazy">
+                                    <p class="image-caption">Module hydraulique - Dimensionnement des ouvrages</p>
                                 </div>
-                                <div class="meta-label">Espace disque</div>
-                                <div class="meta-value">2 GB</div>
+                                <div class="image-item">
+                                    <img src="images/oh-route-3d.jpg" alt="Visualisation 3D" loading="lazy">
+                                    <p class="image-caption">Visualisation 3D des projets routiers</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Section Actions -->
                     <div class="logiciel-actions">
-                        <h3>Prêt à utiliser OH-Route ?</h3>
-                        <p>Téléchargez gratuitement ce logiciel professionnel et commencez à concevoir vos projets routiers dès aujourd'hui</p>
+                        <h3>Prêt à utiliser OH-Route v1 ?</h3>
+                        <p>Téléchargez ce logiciel professionnel spécialisé dans les études d'assainissement et de drainage routier</p>
                         <div class="action-buttons">
                             <a href="#" class="btn-action" onclick="handleDownload()">
                                 <i class="fas fa-download"></i>
