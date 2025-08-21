@@ -1,0 +1,34 @@
+/* Styles spécifiques pour les catégories des logiciels Sorbo Ingénierie */
+
+/* Forcer le formatage des catégories sans text-transform: uppercase */
+.software-category {
+    text-transform: none !important; /* Force l'absence de transformation */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+/* S'assurer que les catégories gardent leur formatage original */
+.software-card .software-category {
+    text-transform: none !important;
+}
+
+/* Override pour tous les éléments de catégorie */
+[class*="category"] {
+    text-transform: none !important;
+}
+
+/* Responsive design pour les catégories */
+@media (max-width: 768px) {
+    .software-category {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .software-category {
+        font-size: 0.7rem;
+    }
+}
