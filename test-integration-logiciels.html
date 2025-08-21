@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Intégration Logiciels | Sorbo-Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/software-images.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-title {
+            color: #d10000;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .test-subtitle {
+            color: #6b7280;
+            font-size: 1.2rem;
+        }
+        
+        .test-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .test-info h3 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .test-info ul {
+            color: #6b7280;
+            line-height: 1.8;
+        }
+        
+        .test-info li {
+            margin-bottom: 10px;
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .demo-title {
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .software-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .software-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+        
+        .software-header-image {
+            width: 100%;
+            height: 140px; /* Utilise le nouveau CSS */
+            overflow: hidden;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.3s ease;
+            background: #ffffff;
+        }
+        
+        .software-card:hover .header-image {
+            transform: scale(1.02);
+        }
+        
+        .software-header {
+            padding: 0.75rem 0.75rem 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 0.5rem;
+        }
+        
+        .software-icon-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            gap: 0.75rem;
+        }
+        
+        .software-icon-image {
+            width: 40px; /* Utilise le nouveau CSS */
+            height: 40px;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+            padding: 4px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        
+        .software-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .software-content {
+            padding: 0 0.75rem 0.75rem;
+        }
+        
+        .software-category {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .software-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .software-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .primary-btn {
+            background: #d10000;
+            color: white;
+        }
+        
+        .primary-btn:hover {
+            background: #b30000;
+            transform: translateY(-2px);
+        }
+        
+        .secondary-btn {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .secondary-btn:hover {
+            background: #e5e7eb;
+            transform: translateY(-2px);
+        }
+        
+        .verification-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .verification-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .verification-icon {
+            font-size: 1.5rem;
+        }
+        
+        .verification-icon.success {
+            color: #16a34a;
+        }
+        
+        .verification-icon.error {
+            color: #dc2626;
+        }
+        
+        .verification-text {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+        
+        .verification-details {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1 class="test-title">🧪 Test Intégration CSS</h1>
+            <p class="test-subtitle">Vérification que css/software-images.css fonctionne sur la page des logiciels</p>
+        </div>
+        
+        <div class="test-info">
+            <h3>📋 Objectif du Test</h3>
+            <p>Ce fichier simule exactement la page <code>nos-logiciels.html</code> avec le nouveau CSS intégré :</p>
+            <ul>
+                <li><strong>CSS chargé :</strong> <code>css/software-images.css</code> est inclus</li>
+                <li><strong>Structure identique :</strong> Même HTML que la vraie page</li>
+                <li><strong>Images de démonstration :</strong> Utilise les vraies images du projet</li>
+                <li><strong>Validation :</strong> Vérifie que les styles s'appliquent correctement</li>
+            </ul>
+        </div>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">🎯 Démonstration des Logiciels avec Nouveau CSS</h2>
+            
+            <div class="software-grid">
+                <div class="software-card">
+                    <div class="software-header-image">
+                        <img src="images/drainageroute.png" alt="OH-Route V1" class="header-image">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône OH-Route" class="software-icon-image">
+                            <h4 class="software-name">OH-Route V1</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">EAU ET ASSAINISSEMENT • V2024</div>
+                        <p>Logiciel pour la conception et le dimensionnement des ouvrages d'assainissement et de drainage routier.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="software-card">
+                    <div class="software-header-image">
+                        <img src="images/drainageroute.png" alt="Drainage Pro" class="header-image">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône Drainage Pro" class="software-icon-image">
+                            <h4 class="software-name">Drainage Pro</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">HYDRAULIQUE • VV3.2</div>
+                        <p>Logiciel professionnel pour la conception et l'analyse des systèmes de drainage routier et urbain.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="software-card">
+                    <div class="software-header-image">
+                        <img src="images/drainageroute.png" alt="Pillar" class="header-image">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône Pillar" class="software-icon-image">
+                            <h4 class="software-name">Pillar</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">HYDRAULIQUE • V2024</div>
+                        <p>Logiciel professionnel pour la conception et l'analyse des systèmes de drainage et d'assainissement.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="verification-section">
+            <h3>✅ Vérifications à Effectuer</h3>
+            
+            <div class="verification-item">
+                <div class="verification-icon success">✅</div>
+                <div>
+                    <div class="verification-text">Hauteur des images d'en-tête</div>
+                    <div class="verification-details">Doit être de 140px (au lieu de 90px) - vérifiez avec l'inspecteur</div>
+                </div>
+            </div>
+            
+            <div class="verification-item">
+                <div class="verification-icon success">✅</div>
+                <div>
+                    <div class="verification-text">Taille des icônes</div>
+                    <div class="verification-details">Doit être de 40px x 40px (au lieu de 35px) avec padding et bordure</div>
+                </div>
+            </div>
+            
+            <div class="verification-item">
+                <div class="verification-icon success">✅</div>
+                <div>
+                    <div class="verification-text">Object-fit des images</div>
+                    <div class="verification-details">Les images doivent remplir complètement leur conteneur (object-fit: cover)</div>
+                </div>
+            </div>
+            
+            <div class="verification-item">
+                <div class="verification-icon success">✅</div>
+                <div>
+                    <div class="verification-text">Responsive design</div>
+                    <div class="verification-details">Redimensionnez la fenêtre pour voir l'adaptation automatique</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-info">
+            <h3>🚀 Prochaines Étapes</h3>
+            <ol>
+                <li><strong>Testez ce fichier :</strong> Vérifiez que les styles s'appliquent correctement</li>
+                <li><strong>Vérifiez la vraie page :</strong> Ouvrez <code>nos-logiciels.html</code> pour voir les changements</li>
+                <li><strong>Testez les données dynamiques :</strong> Vérifiez que les logiciels chargés via l'API utilisent le nouveau CSS</li>
+                <li><strong>Validation complète :</strong> Si tout fonctionne, déployez sur votre site</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Animation d'apparition des cartes
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.software-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
