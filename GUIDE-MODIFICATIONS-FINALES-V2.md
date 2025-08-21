@@ -7,9 +7,9 @@ Ce guide résume les modifications finales apportées aux logiciels, avec les no
 ## 🎯 Modifications effectuées
 
 ### **1. Formatage des catégories (`js/logiciels-loader.js`)**
-- ✅ **Avant** : Première lettre majuscule, reste en minuscules (ex: "Hydraulique")
-- ✅ **Après** : Toutes en minuscules (ex: "hydraulique")
-- ✅ **Code** : `categorie.toLowerCase()`
+- ✅ **Avant** : Toutes en minuscules (ex: "hydraulique")
+- ✅ **Après** : Première lettre de chaque mot en majuscule (ex: "Hydraulique", "Eau et Assainissement")
+- ✅ **Code** : `categorie.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')`
 
 ### **2. Logique spécifique des boutons "En cours de développement"**
 - ✅ **Drainage Pro** : Bouton "🔄 En cours de développement" (désactivé)
@@ -58,12 +58,12 @@ const isEnDeveloppement = nom.toLowerCase().includes('drainage') || nom.toLowerC
 ## 📱 Résultat attendu
 
 ### **Avec 3 logiciels :**
-1. **OH-Route V1** : "eau et assainissement • 2025" + Bouton "📥 Télécharger" ✅
-2. **Drainage Pro** : "hydraulique • 2025" + Bouton "🔄 En cours de développement" 🔄
-3. **Pillar** : "hydraulique • 2025" + Bouton "🔄 En cours de développement" 🔄
+1. **OH-Route V1** : "Eau et Assainissement • 2025" + Bouton "📥 Télécharger" ✅
+2. **Drainage Pro** : "Hydraulique • 2025" + Bouton "🔄 En cours de développement" 🔄
+3. **Pillar** : "Hydraulique • 2025" + Bouton "🔄 En cours de développement" 🔄
 
 ### **Avec plus de logiciels :**
-- **Tous les logiciels** : Catégories en minuscules + Année 2025
+- **Tous les logiciels** : Catégories avec première lettre de chaque mot en majuscule + Année 2025
 - **Seulement Drainage Pro et Pillar** : Boutons "En cours de développement"
 - **Tous les autres** : Boutons "Télécharger" actifs
 
@@ -77,7 +77,7 @@ const isEnDeveloppement = nom.toLowerCase().includes('drainage') || nom.toLowerC
 ```
 
 **Vérifications :**
-- [ ] Catégories en minuscules (ex: "hydraulique" au lieu de "Hydraulique")
+- [ ] Catégories avec première lettre de chaque mot en majuscule (ex: "Hydraulique", "Eau et Assainissement")
 - [ ] Année 2025 affichée après chaque catégorie
 - [ ] Seuls "Drainage Pro" et "Pillar" ont des boutons désactivés
 - [ ] "OH-Route V1" et autres logiciels ont des boutons "Télécharger" actifs
@@ -112,7 +112,7 @@ const isEnDeveloppement = nom.toLowerCase().includes('drainage') || nom.toLowerC
 ## ✅ Checklist de validation
 
 ### **Avant le déploiement :**
-- [ ] Toutes les catégories sont en minuscules
+- [ ] Toutes les catégories ont la première lettre de chaque mot en majuscule
 - [ ] Année 2025 affichée après chaque catégorie
 - [ ] Seuls "Drainage Pro" et "Pillar" ont "En cours de développement"
 - [ ] "OH-Route V1" et autres logiciels ont des boutons "Télécharger" actifs
@@ -144,10 +144,15 @@ const isEnDeveloppement = nom.toLowerCase().includes('drainage') ||
 
 ### **Pour personnaliser le format des catégories :**
 ```javascript
-// Alternative 1 : Première lettre majuscule
-const categorieFormatee = categorie.charAt(0).toUpperCase() + categorie.slice(1).toLowerCase();
+// Alternative 1 : Première lettre de chaque mot en majuscule (actuel)
+const categorieFormatee = categorie.split(' ').map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+).join(' ');
 
-// Alternative 2 : Toutes majuscules
+// Alternative 2 : Toutes en minuscules
+const categorieFormatee = categorie.toLowerCase();
+
+// Alternative 3 : Toutes majuscules
 const categorieFormatee = categorie.toUpperCase();
 ```
 

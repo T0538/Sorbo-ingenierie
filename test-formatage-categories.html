@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Formatage Catégories | Sorbo-Ingénierie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .original {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+        }
+        .formatted {
+            background: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        .code {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test Formatage des Catégories</h1>
+        <p>Ce test vérifie que le formatage des catégories fonctionne correctement.</p>
+        
+        <div class="test-item original">
+            <h3>📥 Catégories Originales (depuis l'API)</h3>
+            <div id="original-categories"></div>
+        </div>
+        
+        <div class="test-item formatted">
+            <h3>✨ Catégories Formatées (après traitement)</h3>
+            <div id="formatted-categories"></div>
+        </div>
+        
+        <div class="code">
+            <strong>Code utilisé :</strong><br>
+            <code>
+            const categorieFormatee = categorie.split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            ).join(' ');
+            </code>
+        </div>
+    </div>
+
+    <script>
+        // Simuler les catégories de l'API
+        const categoriesOriginales = [
+            'EAU ET ASSAINISSEMENT',
+            'HYDRAULIQUE',
+            'GÉOTECHNIQUE',
+            'FONDATIONS',
+            'STRUCTURES',
+            'BIM ET CAO'
+        ];
+
+        // Fonction de formatage (identique à celle du chargeur)
+        function formaterCategorie(categorie) {
+            return categorie.split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            ).join(' ');
+        }
+
+        // Afficher les résultats
+        function afficherCategories() {
+            const originalDiv = document.getElementById('original-categories');
+            const formattedDiv = document.getElementById('formatted-categories');
+            
+            let originalHTML = '';
+            let formattedHTML = '';
+            
+            categoriesOriginales.forEach(cat => {
+                const formatted = formaterCategorie(cat);
+                originalHTML += `<div>• ${cat}</div>`;
+                formattedHTML += `<div>• ${formatted}</div>`;
+            });
+            
+            originalDiv.innerHTML = originalHTML;
+            formattedDiv.innerHTML = formattedHTML;
+        }
+
+        // Initialiser l'affichage
+        document.addEventListener('DOMContentLoaded', afficherCategories);
+    </script>
+</body>
+</html>
