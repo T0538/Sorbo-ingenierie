@@ -48,22 +48,28 @@ function displayLogiciels(logiciels) {
         return;
     }
 
-    const logicielsHTML = logiciels.map(logiciel => createLogicielCard(logiciel)).join('');
+         const logicielsHTML = logiciels.map((logiciel, index) => createLogicielCard(logiciel, index, logiciels.length)).join('');
     container.innerHTML = logicielsHTML;
     
     // Ajouter les event listeners pour les boutons
     addDownloadListeners();
 }
 
-function createLogicielCard(logiciel) {
-    const nom = logiciel.nom || 'Logiciel';
-    const description = logiciel.description || '';
-    const categorie = logiciel.categorie || '';
-    const version = logiciel.version ? `v${logiciel.version}` : '';
-    const prix = logiciel.prix || 'Gratuit';
-    // Le logo est toujours chargé depuis le dossier local images/
-    const image = 'images/image1.png';
-    const headerImage = logiciel.headerImage || 'images/drainageroute.png';
+function createLogicielCard(logiciel, index, total) {
+     const nom = logiciel.nom || 'Logiciel';
+     const description = logiciel.description || '';
+     const categorie = logiciel.categorie || '';
+     const version = logiciel.version ? `v${logiciel.version}` : '';
+     const prix = logiciel.prix || 'Gratuit';
+     // Le logo est toujours chargé depuis le dossier local images/
+     const image = 'images/image1.png';
+     const headerImage = logiciel.headerImage || 'images/drainageroute.png';
+     
+     // Formater la catégorie (toutes en minuscules)
+     const categorieFormatee = categorie.toLowerCase();
+     
+     // Déterminer si c'est Drainage Pro ou Pillar (en cours de développement)
+     const isEnDeveloppement = nom.toLowerCase().includes('drainage') || nom.toLowerCase().includes('pillar');
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
@@ -92,32 +98,37 @@ function createLogicielCard(logiciel) {
           </div>
         </div>
 
-        <div class="software-content">
-          <div class="software-category">${[categorie, version].filter(Boolean).join(' • ')}</div>
-          <p>${description}</p>
-          <div class="features-list">
-            ${featuresHTML}
-          </div>
-          <div class="software-buttons">
-            <a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="${logiciel.id}">📥 Télécharger</a>
-                         <a href="logiciel-details.html" class="software-btn secondary-btn info-btn" target="_blank">
-               <i class="fas fa-info-circle"></i> Consulter les informations
-             </a>
-          </div>
-        </div>
+                         <div class="software-content">
+            <div class="software-category">${categorieFormatee} • 2025</div>
+            <p>${description}</p>
+           <div class="features-list">
+             ${featuresHTML}
+           </div>
+           <div class="software-buttons">
+             ${isEnDeveloppement 
+               ? '<button class="software-btn primary-btn" disabled style="opacity: 0.6; cursor: not-allowed;">🔄 En cours de développement</button>'
+               : '<a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="' + logiciel.id + '">📥 Télécharger</a>'
+             }
+                          <a href="logiciel-details.html" class="software-btn secondary-btn info-btn" target="_blank">
+                <i class="fas fa-info-circle"></i> Consulter les informations
+              </a>
+           </div>
+         </div>
       </div>
     `;
 }
 
 function addDownloadListeners() {
-    // Boutons de téléchargement
-    document.querySelectorAll('.download-btn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const logicielId = btn.getAttribute('data-logiciel-id');
-            await handleDownload(logicielId, 'download');
-        });
-    });
+     // Boutons de téléchargement pour les logiciels disponibles
+     document.querySelectorAll('.download-btn').forEach(btn => {
+         btn.addEventListener('click', async (e) => {
+             e.preventDefault();
+             const logicielId = btn.getAttribute('data-logiciel-id');
+             await handleDownload(logicielId, 'download');
+         });
+     });
+     
+     console.log('ℹ️ Boutons de téléchargement configurés pour les logiciels disponibles');
 }
 
 async function handleDownload(logicielId, type) {
@@ -188,7 +199,7 @@ function displayNoLogiciels() {
             }
         ];
         
-        const logicielsHTML = demoLogiciels.map(logiciel => createLogicielCard(logiciel)).join('');
+                 const logicielsHTML = demoLogiciels.map((logiciel, index) => createLogicielCard(logiciel, index, demoLogiciels.length)).join('');
         container.innerHTML = logicielsHTML;
         
         // Ajouter les event listeners pour les boutons
