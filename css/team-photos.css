@@ -1,0 +1,197 @@
+/* Styles pour les photos de l'équipe Sorbo Ingénierie */
+
+/* Conteneur des photos */
+.org-icon {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Image de profil */
+.org-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    background: #f8f9fa;
+    padding: 5px;
+}
+
+/* État de chargement */
+.org-icon.loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    border: 3px solid #e9ecef;
+    border-top: 3px solid #d10000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 5;
+}
+
+/* Animation de rotation pour le chargement */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Photo chargée avec succès */
+.org-icon img.photo-loaded {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Photo de fallback (logo) */
+.org-icon img.fallback-photo {
+    object-fit: contain;
+    padding: 15px;
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+}
+
+/* Indicateur de fallback */
+.fallback-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #d10000;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+}
+
+/* Animation de pulsation pour l'indicateur */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Hover effects */
+.org-card:hover .org-icon {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.org-card:hover .org-icon img {
+    transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .org-icon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .fallback-indicator {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .org-icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .fallback-indicator {
+        width: 16px;
+        height: 16px;
+        font-size: 8px;
+    }
+}
+
+/* Amélioration de l'accessibilité */
+.org-icon img[alt*="fallback"],
+.org-icon img[alt*="temporaire"] {
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+/* Message d'information pour les photos manquantes */
+.org-card .photo-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Animation d'apparition des photos */
+.org-card[data-aos] .org-icon {
+    animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Gestion des erreurs de chargement */
+.org-icon img:not([src]),
+.org-icon img[src=""],
+.org-icon img[src="undefined"] {
+    display: none;
+}
+
+.org-icon img:not([src]):after,
+.org-icon img[src=""]:after,
+.org-icon img[src="undefined"]:after {
+    content: '🖼️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: #6c757d;
+}
+
+/* Optimisation pour les écrans haute résolution */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .org-icon img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Support pour le mode sombre */
+@media (prefers-color-scheme: dark) {
+    .org-icon {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .org-icon img.fallback-photo {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+}
