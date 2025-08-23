@@ -65,10 +65,16 @@ function createLogicielCard(logiciel, index, total) {
      const image = 'images/image1.png';
      const headerImage = logiciel.headerImage || 'images/drainageroute.png';
      
-     // Formater la catégorie (première lettre de chaque mot en majuscule)
-     const categorieFormatee = categorie.split(' ').map(word => 
-         word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-     ).join(' ');
+         // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
+    const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
+    const categorieFormatee = categorie.split(' ').map((word, index) => {
+        const motMinuscule = word.toLowerCase();
+        // Garder les mots de liaison en minuscules, sauf s'ils sont en première position
+        if (index > 0 && motsLiaison.includes(motMinuscule)) {
+            return motMinuscule;
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
      
      // Déterminer si c'est Drainage Pro ou Pillar (en cours de développement)
      const isEnDeveloppement = nom.toLowerCase().includes('drainage') || nom.toLowerCase().includes('pillar');
