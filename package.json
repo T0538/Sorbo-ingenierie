@@ -4,7 +4,7 @@
   "description": "Backend Sorbo Ingénierie avec MongoDB Atlas",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server-production.js",
+    "start": "node server-railway.js",
     "dev": "nodemon server.js",
     "test": "node test-mongodb.js"
   },
