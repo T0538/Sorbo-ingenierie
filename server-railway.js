@@ -46,16 +46,46 @@ app.use(express.static(path.join(__dirname)));
 
 // Route racine pour index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    const indexPath = path.join(__dirname, 'index.html');
+    console.log(`📁 Tentative d'accès à: ${indexPath}`);
+    
+    // Vérifier si le fichier existe
+    if (require('fs').existsSync(indexPath)) {
+        res.sendFile(indexPath);
+    } else {
+        console.log('❌ index.html non trouvé, envoi d\'une réponse JSON');
+        res.json({
+            success: false,
+            message: 'Page d\'accueil non disponible',
+            availableFiles: require('fs').readdirSync(__dirname).filter(file => file.endsWith('.html'))
+        });
+    }
 });
 
 // Route pour les pages HTML
 app.get('/:page', (req, res) => {
     const page = req.params.page;
+    let filePath;
+    
     if (page.endsWith('.html')) {
-        res.sendFile(path.join(__dirname, page));
+        filePath = path.join(__dirname, page);
     } else {
-        res.sendFile(path.join(__dirname, `${page}.html`));
+        filePath = path.join(__dirname, `${page}.html`);
+    }
+    
+    console.log(`📁 Tentative d'accès à: ${filePath}`);
+    
+    // Vérifier si le fichier existe
+    if (require('fs').existsSync(filePath)) {
+        res.sendFile(filePath);
+    } else {
+        console.log(`❌ Fichier non trouvé: ${filePath}`);
+        res.status(404).json({
+            success: false,
+            message: 'Page non trouvée',
+            requestedPage: page,
+            availableFiles: require('fs').readdirSync(__dirname).filter(file => file.endsWith('.html'))
+        });
     }
 });
 
@@ -98,6 +128,34 @@ app.get('/api/actualites-test', (req, res) => {
             message: 'Erreur dans la route de test',
             source: 'test-error',
             count: 0
+        });
+    }
+});
+
+// Route de diagnostic des fichiers
+app.get('/api/debug/files', (req, res) => {
+    try {
+        const fs = require('fs');
+        const currentDir = __dirname;
+        const parentDir = path.dirname(__dirname);
+        
+        const currentDirFiles = fs.readdirSync(currentDir);
+        const parentDirFiles = fs.existsSync(parentDir) ? fs.readdirSync(parentDir) : [];
+        
+        res.json({
+            success: true,
+            currentDirectory: currentDir,
+            parentDirectory: parentDir,
+            currentDirFiles: currentDirFiles.filter(file => file.endsWith('.html')),
+            parentDirFiles: parentDirFiles.filter(file => file.endsWith('.html')),
+            indexExists: fs.existsSync(path.join(currentDir, 'index.html')),
+            indexPath: path.join(currentDir, 'index.html')
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+            stack: error.stack
         });
     }
 });
