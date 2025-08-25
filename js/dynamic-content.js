@@ -69,22 +69,52 @@ class DynamicContentLoader {
             return;
         }
 
-        container.innerHTML = actualites.map(actualite => `
-            <div class="actualite-card">
-                <div class="actualite-image">
-                    <img src="${actualite.image || '/images/actualites/default.jpg'}" alt="${actualite.titre}">
-                </div>
-                <div class="actualite-content">
-                    <h3>${actualite.titre}</h3>
-                    <p class="actualite-resume">${actualite.resume}</p>
-                    <div class="actualite-meta">
-                        <span class="categorie">${actualite.categorie}</span>
-                        <span class="date">${new Date(actualite.datePublication).toLocaleDateString()}</span>
+        // Nombre d'articles visibles initialement (les autres seront marqués hidden-post)
+        const initialVisible = 6;
+
+        const toHtml = (actualite, index) => {
+            const image = actualite.image || '/images/actualites/default.jpg';
+            const titre = actualite.titre || 'Article';
+            const resume = actualite.resume || actualite.description || '';
+            const categorie = actualite.categorie || 'actualites';
+            const auteur = actualite.auteur || 'Équipe Sorbo-Ingénierie';
+            const datePub = actualite.datePublication || actualite.date || Date.now();
+            const dateStr = new Date(datePub).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+            // Calcul simple du temps de lecture (225 mots/min + 2 minutes pour l'article complet)
+            const wordCount = (resume || '').split(/\s+/).filter(Boolean).length;
+            const readingMinutes = Math.max(1, Math.ceil(wordCount / 225) + 2);
+            const hiddenClass = index >= initialVisible ? ' hidden-post' : '';
+            const dataContent = `${titre} ${categorie} ${resume} ${auteur}`.toLowerCase();
+
+            return `
+                <article class="blog-post${hiddenClass}" data-category="${categorie}" data-content="${dataContent}" style="${index >= initialVisible ? 'display:none;opacity:0;' : ''}">
+                    <div class="blog-image">
+                        <img src="${image}" alt="${titre}" class="lazy-image" loading="lazy" onerror="this.src='images/default-news.jpg'">
+                        <div class="blog-category-tag">${categorie}</div>
                     </div>
-                    <a href="/actualite/${actualite.slug}" class="btn-lire-plus">Lire plus</a>
-                </div>
-            </div>
-        `).join('');
+                    <div class="blog-content">
+                        <h3 class="blog-title">${titre}</h3>
+                        <div class="blog-author"><i class="fas fa-user"></i> ${auteur}</div>
+                        <div class="reading-time"><i class="far fa-clock"></i> <span class="time-value">${readingMinutes} min de lecture</span></div>
+                        <div class="blog-excerpt"><p>${resume}</p></div>
+                        <div class="blog-meta">
+                            <span class="blog-date">${dateStr}</span>
+                            <a href="#" class="read-more">Lire plus</a>
+                        </div>
+                    </div>
+                </article>
+            `;
+        };
+
+        container.innerHTML = actualites.map((a, i) => toHtml(a, i)).join('');
+
+        // Émettre un événement personnalisé pour signaler que les actualités ont été chargées
+        try {
+            const event = new CustomEvent('actualitesLoaded', { detail: { count: actualites.length } });
+            document.dispatchEvent(event);
+        } catch (e) {
+            // Environnements anciens sans CustomEvent
+        }
     }
 
     // Charger les logiciels
