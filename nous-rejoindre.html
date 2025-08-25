@@ -650,6 +650,27 @@
             display: none;
         }
         
+        .job-deadline {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #d10000;
+        }
+        
+        .job-deadline i {
+            color: #d10000;
+            font-size: 0.9rem;
+        }
+        
+        .job-deadline strong {
+            color: #374151;
+            font-size: 0.85rem;
+        }
+        
         .job-card-footer {
             padding: 0;
             margin-top: 15px;
@@ -715,10 +736,11 @@
             height: 100%;
         }
         
-        .team-member:hover {
+        /* Suppression de l'effet de survol pour éviter que les cartes semblent cliquables */
+        /* .team-member:hover {
             transform: translateY(-15px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
+        } */
         
         .team-image {
             height: 200px;
@@ -747,10 +769,11 @@
             transition: all 0.3s ease;
         }
         
-        .team-member:hover .team-image i {
+        /* Suppression de l'effet de survol sur l'icône */
+        /* .team-member:hover .team-image i {
             transform: scale(1.2) rotate(5deg);
             opacity: 1;
-        }
+        } */
         
         .team-details {
             padding: 30px;
@@ -763,9 +786,10 @@
             transition: color 0.3s ease;
         }
         
-        .team-member:hover .team-name {
+        /* Suppression de l'effet de survol sur le nom */
+        /* .team-member:hover .team-name {
             color: var(--primary-color);
-        }
+        } */
         
         .team-position {
             color: #888;
@@ -777,7 +801,8 @@
             padding-bottom: 10px;
         }
         
-        .team-position::after {
+        /* Suppression de la ligne rouge sous les positions */
+        /* .team-position::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -787,11 +812,12 @@
             height: 2px;
             background-color: var(--primary-color);
             transition: width 0.3s ease;
-        }
+        } */
         
-        .team-member:hover .team-position::after {
+        /* Suppression de l'effet de survol sur la ligne */
+        /* .team-member:hover .team-position::after {
             width: 60px;
-        }
+        } */
         
         .team-bio {
             font-size: 1rem;
@@ -1023,6 +1049,8 @@
                 height: 180px;
             }
         }
+        
+
         
         /* Style du formulaire de candidature modal */
         .modal-overlay {
@@ -1630,6 +1658,10 @@
     <section id="offres" class="jobs-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Rechercher une offre</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">
+                <i class="fas fa-info-circle"></i>
+                Nos offres de stage sont actuellement affichées de manière statique. Utilisez les filtres ci-dessous pour explorer les opportunités disponibles.
+            </p>
             
             <!-- Barre de recherche et filtres -->
             <div class="job-search-container" data-aos="fade-up" data-aos-delay="100">
@@ -1695,14 +1727,72 @@
             <div class="jobs-results" data-aos="fade-up" data-aos-delay="150">
                 <div class="results-header">
                     <h3>Résultats de recherche</h3>
-                    <span class="results-count" id="jobs-count">Chargement...</span>
+                    <span class="results-count" id="jobs-count">2 offres trouvées</span>
                 </div>
                 <div id="emplois-container" class="jobs-container">
-                    <div style="text-align:center; padding:20px; color:#666;">Chargement des offres...</div>
+                    <!-- Offre de Stage 1 : Étude statistique appliquée à l'hydrologie -->
+                    <div class="job-card" data-department="ingenierie" data-contract="STAGE" data-location="cote-ivoire">
+                        <div class="job-card-header">
+                            <div class="job-type-badge stage">Stage</div>
+                            <div class="job-department">Ingénierie</div>
+                        </div>
+                                            <div class="job-card-content">
+                        <h3 class="job-title">Étude statistique appliquée à l'hydrologie</h3>
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Cité SOPIM, Yopougon Millionnaire - Abidjan, Côte d'Ivoire
+                        </div>
+                        <div class="job-deadline">
+                            <i class="fas fa-calendar-alt"></i>
+                            <strong>Date limite :</strong> 16 Juillet 2025
+                        </div>
+                        <div class="job-description">
+                            <p><strong>Contexte :</strong> Dans le cadre de ses activités de recherche appliquée en génie civil, Sorbo-Ingénierie recherche un stagiaire motivé et rigoureux pour une étude statistique appliquée à l'hydrologie.</p>
+                            <p><strong>Objectifs :</strong> Appliquer diverses méthodes d'analyse fréquentielle aux séries hydrologiques, étudier les lois de probabilité courantes en hydrologie, traiter et interpréter des bases de données hydrologiques.</p>
+                            <p><strong>Profil recherché :</strong> Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées. Maîtrise des outils numériques (Excel avancé, Python, R).</p>
+                        </div>
+                    </div>
+                    <div class="job-card-footer">
+                        <a href="stage-hydrologie.html" class="view-job-btn" data-job="Étude statistique appliquée à l'hydrologie" data-type="STAGE">
+                            En savoir plus sur l'offre
+                        </a>
+                    </div>
+                    </div>
+
+                    <!-- Offre de Stage 2 : Étude mécanique des plaques -->
+                    <div class="job-card" data-department="ingenierie" data-contract="STAGE" data-location="cote-ivoire">
+                        <div class="job-card-header">
+                            <div class="job-type-badge stage">Stage</div>
+                            <div class="job-department">Ingénierie</div>
+                        </div>
+                                            <div class="job-card-content">
+                        <h3 class="job-title">Étude mécanique des plaques</h3>
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Cité SOPIM, Yopougon Millionnaire - Abidjan, Côte d'Ivoire
+                        </div>
+                        <div class="job-deadline">
+                            <i class="fas fa-calendar-alt"></i>
+                            <strong>Date limite :</strong> 16 Juillet 2025
+                        </div>
+                        <div class="job-description">
+                            <p><strong>Contexte :</strong> Sorbo-Ingénierie recherche un stagiaire motivé et rigoureux dans le domaine de la modélisation numérique pour étudier le comportement mécanique des plaques.</p>
+                            <p><strong>Objectifs :</strong> Modéliser des plaques en flexion pour diverses conditions de chargement, implémenter des approches numériques (éléments finis, différences finies), comparer les résultats avec les solutions analytiques classiques.</p>
+                            <p><strong>Profil recherché :</strong> Étudiant en dernière année d'école d'ingénieur ou Master 2 (Génie Civil, Mécanique, Structures). Solides connaissances en mécanique des structures et maîtrise des méthodes numériques.</p>
+                        </div>
+                    </div>
+                    <div class="job-card-footer">
+                        <a href="stage-mecanique.html" class="view-job-btn" data-job="Étude mécanique des plaques" data-type="STAGE">
+                            En savoir plus sur l'offre
+                        </a>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+
 
     <section class="team-section">
         <div class="container">
@@ -2245,23 +2335,10 @@
                 locationFilter.addEventListener('change', filterJobs);
             }
             
-            // Événements pour les boutons "Voir l'offre"
-            const viewJobBtns = document.querySelectorAll('.view-job-btn');
-            viewJobBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const jobTitle = this.getAttribute('data-job');
-                    
-                    // Mettre à jour les champs du formulaire
-                    jobTitleSpan.textContent = jobTitle;
-                    jobPositionInput.value = jobTitle;
-                    jobTypeInput.value = "";
-                    
-                    // Afficher le modal
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
+            // Les boutons "En savoir plus sur l'offre" redirigent maintenant directement vers les pages dédiées
+            // Pas besoin de JavaScript supplémentaire car ce sont des liens <a> normaux
+            
+
         });
     </script>
     <script src="js/script.js"></script>

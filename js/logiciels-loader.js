@@ -76,8 +76,8 @@ function createLogicielCard(logiciel, index, total) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
      
-     // Déterminer si c'est Drainage Pro ou Pillar (en cours de développement)
-     const isEnDeveloppement = nom.toLowerCase().includes('drainage') || nom.toLowerCase().includes('pillar');
+     // Déterminer si le logiciel est disponible au téléchargement (seul TALREN est disponible)
+     const isDisponible = nom.toLowerCase().includes('talren');
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
@@ -113,9 +113,9 @@ function createLogicielCard(logiciel, index, total) {
              ${featuresHTML}
            </div>
            <div class="software-buttons">
-             ${isEnDeveloppement 
-               ? '<button class="software-btn primary-btn" disabled style="opacity: 0.6; cursor: not-allowed;">🔄 En cours de développement</button>'
-               : '<a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="' + logiciel.id + '">📥 Télécharger</a>'
+             ${isDisponible 
+               ? '<a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="' + logiciel.id + '">📥 Télécharger</a>'
+               : '<button class="software-btn primary-btn" disabled style="opacity: 0.6; cursor: not-allowed;">🔄 En cours de développement</button>'
              }
                           <a href="logiciel-details.html" class="software-btn secondary-btn info-btn" target="_blank">
                 <i class="fas fa-info-circle"></i> Consulter les informations
@@ -143,6 +143,19 @@ async function handleDownload(logicielId, type) {
     try {
         console.log(`📥 Téléchargement ${type} pour logiciel ${logicielId}...`);
         
+        // Vérifier si c'est le logiciel TALREN (disponible en local)
+        if (logicielId === 'demo1') {
+            // Téléchargement direct du fichier local
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'downloads/TALREN_v2024.pdf';
+            downloadLink.download = 'TALREN_v2024.pdf';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            return;
+        }
+        
+        // Pour les autres logiciels, continuer avec l'API
         const response = await fetch(`${API_BASE_URL}/api/logiciels/${logicielId}/download`, {
             method: 'GET',
             headers: {
@@ -179,13 +192,13 @@ function displayNoLogiciels() {
         // Afficher 3 logiciels de démonstration
         const demoLogiciels = [
             {
-                id: 'demo1',
+                id: 'demo1', // ID utilisé pour le téléchargement direct
                 nom: 'TALREN',
                 description: 'Stabilité des ouvrages géotechniques, avec ou sans renforcements',
                 categorie: 'GÉOTECHNIQUE',
                 version: '2024',
                 fonctionnalites: ['Analyse de stabilité', 'Calculs géotechniques', 'Modélisation 3D'],
-                headerImage: 'images/talren-header.jpg'
+                headerImage: 'images/image1.jpg'
             },
             {
                 id: 'demo2',
@@ -194,7 +207,7 @@ function displayNoLogiciels() {
                 categorie: 'FONDATIONS',
                 version: '3.2',
                 fonctionnalites: ['Fondations superficielles', 'Pieux et micropieux', 'Calculs de portance'],
-                headerImage: 'images/foxta-header.jpg'
+                headerImage: 'images/image2.jpg'
             },
             {
                 id: 'demo3',
@@ -203,7 +216,7 @@ function displayNoLogiciels() {
                 categorie: 'STRUCTURES',
                 version: '2024.1',
                 fonctionnalites: ['Murs de soutènement', 'Écrans de sécurité', 'Calculs de stabilité'],
-                headerImage: 'images/krea-header.jpg'
+                headerImage: 'images/image3.jpg'
             }
         ];
         
@@ -245,4 +258,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 
-console.log('✅ Script chargeur de logiciels chargé'); 
+console.log('✅ Script chargeur de logiciels chargé');

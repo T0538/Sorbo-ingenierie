@@ -153,10 +153,12 @@ class DynamicContentLoader {
         `).join('');
     }
 
-    // Charger les emplois
+    // Charger les emplois - DÉSACTIVÉ TEMPORAIREMENT (offres statiques)
     async loadEmplois() {
-        const emplois = await this.apiCall('/emplois');
-        this.displayEmplois(emplois);
+        console.log('📋 Chargement des emplois désactivé - utilisation des offres statiques');
+        // const emplois = await this.apiCall('/emplois');
+        // this.displayEmplois(emplois);
+        return;
     }
 
     displayEmplois(emplois) {
