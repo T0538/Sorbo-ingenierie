@@ -71,6 +71,37 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// Route de test simple pour les actualités
+app.get('/api/actualites-test', (req, res) => {
+    try {
+        const testData = [
+            {
+                id: 1,
+                titre: "Test Actualité 1",
+                resume: "Ceci est un test",
+                date: new Date().toISOString(),
+                source: 'test-route'
+            }
+        ];
+        
+        res.json({
+            success: true,
+            data: testData,
+            message: 'Route de test des actualités fonctionne',
+            source: 'test-route',
+            count: testData.length
+        });
+    } catch (error) {
+        res.status(200).json({
+            success: true,
+            data: [],
+            message: 'Erreur dans la route de test',
+            source: 'test-error',
+            count: 0
+        });
+    }
+});
+
 // Route pour les formations
 app.get('/api/formations', async (req, res) => {
     try {
@@ -196,8 +227,36 @@ app.get('/api/actualites', async (req, res) => {
     try {
         console.log('📰 Récupération des actualités depuis MongoDB Atlas...');
         
+        // Vérifier que MongoDB est connecté
+        if (mongoose.connection.readyState !== 1) {
+            console.log('❌ MongoDB non connecté, utilisation des données statiques');
+            return res.json({
+                success: true,
+                data: [],
+                message: 'MongoDB non disponible, données statiques utilisées',
+                source: 'static-fallback',
+                count: 0
+            });
+        }
+        
         // Récupérer depuis la collection actualites
         const db = mongoose.connection.db;
+        
+        // Vérifier si la collection existe
+        const collections = await db.listCollections().toArray();
+        const actualitesCollection = collections.find(col => col.name === 'actualites');
+        
+        if (!actualitesCollection) {
+            console.log('❌ Collection actualites non trouvée');
+            return res.json({
+                success: true,
+                data: [],
+                message: 'Collection actualites non trouvée',
+                source: 'static-fallback',
+                count: 0
+            });
+        }
+        
         const actualites = await db.collection('actualites').find({ statut: 'publie' }).toArray();
         
         console.log(`📰 ${actualites.length} actualités trouvées`);
@@ -221,10 +280,16 @@ app.get('/api/actualites', async (req, res) => {
         }
     } catch (error) {
         console.error('❌ Erreur API actualités:', error.message);
-        res.status(500).json({
-            success: false,
-            message: 'Erreur lors de la récupération des actualités',
-            error: error.message
+        console.error('🔍 Stack trace:', error.stack);
+        
+        // En cas d'erreur, renvoyer un tableau vide plutôt qu'une erreur 500
+        res.status(200).json({
+            success: true,
+            data: [],
+            message: 'Erreur lors de la récupération des actualités, données vides retournées',
+            source: 'error-fallback',
+            count: 0,
+            error: process.env.NODE_ENV === 'development' ? error.message : 'Erreur interne'
         });
     }
 });
