@@ -76,8 +76,9 @@ function createLogicielCard(logiciel, index, total) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
      
-     // Déterminer si le logiciel est disponible au téléchargement (seul TALREN est disponible)
-     const isDisponible = nom.toLowerCase().includes('talren');
+     // Déterminer si le logiciel est disponible au téléchargement
+     // TALREN et OH-Route sont disponibles
+     const isDisponible = nom.toLowerCase().includes('talren') || nom.toLowerCase().includes('oh-route');
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
@@ -147,8 +148,20 @@ async function handleDownload(logicielId, type) {
         if (logicielId === 'demo1') {
             // Téléchargement direct du fichier local
             const downloadLink = document.createElement('a');
-            downloadLink.href = 'downloads/TALREN_v2024.pdf';
-            downloadLink.download = 'TALREN_v2024.pdf';
+            downloadLink.href = 'OH-Route v1.1.exe';
+            downloadLink.download = 'H-Route v1.1.exe';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            return;
+        }
+        
+        // Vérifier si c'est OH-Route (disponible en local)
+        if (logicielId === 'oh-route' || logicielId === 'demo2') {
+            // Téléchargement direct du fichier local OH-Route
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'OH-Route v1.1.exe';
+            downloadLink.download = 'OH-Route v1.1.exe';
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
@@ -202,12 +215,12 @@ function displayNoLogiciels() {
             },
             {
                 id: 'demo2',
-                nom: 'FOXTA',
-                description: 'Dimensionnement des fondations superficielles et profondes',
-                categorie: 'FONDATIONS',
-                version: '3.2',
-                fonctionnalites: ['Fondations superficielles', 'Pieux et micropieux', 'Calculs de portance'],
-                headerImage: 'images/image2.jpg'
+                nom: 'OH-Route',
+                description: 'Outil spécialisé pour les études hydrologiques et hydrauliques en génie routier',
+                categorie: 'HYDROLOGIE',
+                version: '1.0',
+                fonctionnalites: ['Études hydrologiques', 'Calculs hydrauliques', 'Génie routier'],
+                headerImage: 'images/drainageroute.png'
             },
             {
                 id: 'demo3',
