@@ -41,6 +41,24 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+// Servir les fichiers statiques (HTML, CSS, JS, images)
+app.use(express.static(path.join(__dirname)));
+
+// Route racine pour index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Route pour les pages HTML
+app.get('/:page', (req, res) => {
+    const page = req.params.page;
+    if (page.endsWith('.html')) {
+        res.sendFile(path.join(__dirname, page));
+    } else {
+        res.sendFile(path.join(__dirname, `${page}.html`));
+    }
+});
+
 // Route de santé
 app.get('/api/health', (req, res) => {
     res.json({
@@ -173,6 +191,44 @@ app.get('/api/logiciels', async (req, res) => {
     }
 });
 
+// Route pour les actualités
+app.get('/api/actualites', async (req, res) => {
+    try {
+        console.log('📰 Récupération des actualités depuis MongoDB Atlas...');
+        
+        // Récupérer depuis la collection actualites
+        const db = mongoose.connection.db;
+        const actualites = await db.collection('actualites').find({ statut: 'publie' }).toArray();
+        
+        console.log(`📰 ${actualites.length} actualités trouvées`);
+        
+        if (actualites && actualites.length > 0) {
+            res.json({
+                success: true,
+                data: actualites,
+                message: 'Actualités récupérées depuis MongoDB Atlas',
+                source: 'mongodb',
+                count: actualites.length
+            });
+        } else {
+            res.json({
+                success: true,
+                data: [],
+                message: 'Aucune actualité publiée trouvée',
+                source: 'mongodb',
+                count: 0
+            });
+        }
+    } catch (error) {
+        console.error('❌ Erreur API actualités:', error.message);
+        res.status(500).json({
+            success: false,
+            message: 'Erreur lors de la récupération des actualités',
+            error: error.message
+        });
+    }
+});
+
 // Gestion des erreurs 404
 app.use('*', (req, res) => {
     res.status(404).json({
@@ -205,7 +261,9 @@ async function startServer() {
         console.log(`🔌 API Health: http://localhost:${PORT}/api/health`);
         console.log(`🔌 API Formations: http://localhost:${PORT}/api/formations`);
         console.log(`🔌 API Logiciels: http://localhost:${PORT}/api/logiciels`);
+        console.log(`🔌 API Actualités: http://localhost:${PORT}/api/actualites`);
         console.log(`🌍 CORS activé pour: https://sorbo-ingenierie.netlify.app`);
+        console.log(`📁 Fichiers statiques servis depuis: ${__dirname}`);
     });
 }
 
