@@ -133,6 +133,21 @@ function addDownloadListeners() {
          btn.addEventListener('click', async (e) => {
              e.preventDefault();
              const logicielId = btn.getAttribute('data-logiciel-id');
+             
+             // Détecter OH-Route par son nom affiché sur la carte
+             const softwareCard = btn.closest('.software-card');
+             const softwareName = softwareCard.querySelector('.software-name');
+             if (softwareName && softwareName.textContent.toLowerCase().includes('oh-route')) {
+                 // C'est OH-Route, télécharger directement
+                 const downloadLink = document.createElement('a');
+                 downloadLink.href = 'OH-Route v1.1.exe';
+                 downloadLink.download = 'OH-Route v1.1.exe';
+                 document.body.appendChild(downloadLink);
+                 downloadLink.click();
+                 document.body.removeChild(downloadLink);
+                 return;
+             }
+             
              await handleDownload(logicielId, 'download');
          });
      });
@@ -154,6 +169,51 @@ async function handleDownload(logicielId, type) {
             downloadLink.click();
             document.body.removeChild(downloadLink);
             return;
+        }
+        
+        // Vérifier si c'est OH-Route (disponible en local)
+        // Rechercher par nom dans la base de données pour trouver l'ID d'OH-Route
+        if (logicielId && (logicielId === 'oh-route' || logicielId === 'demo2' || 
+            logicielId.toString().toLowerCase().includes('oh-route') ||
+            logicielId.toString().toLowerCase().includes('ohroute'))) {
+            // Téléchargement direct du fichier local OH-Route
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'OH-Route v1.1.exe';
+            downloadLink.download = 'OH-Route v1.1.exe';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            return;
+        }
+        
+        // Solution alternative : chercher OH-Route par son nom dans la base de données
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/logiciels`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success && result.data) {
+                    const ohRoute = result.data.find(logiciel => 
+                        logiciel.nom && logiciel.nom.toLowerCase().includes('oh-route')
+                    );
+                    
+                    if (ohRoute && ohRoute.id === logicielId) {
+                        // C'est bien OH-Route, télécharger le fichier local
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = 'OH-Route v1.1.exe';
+                        downloadLink.download = 'OH-Route v1.1.exe';
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+                        document.body.removeChild(downloadLink);
+                        return;
+                    }
+                }
+            }
+        } catch (apiError) {
+            console.log('API non disponible, tentative de téléchargement local...');
         }
         
         // Vérifier si c'est OH-Route (disponible en local)
