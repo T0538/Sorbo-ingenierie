@@ -3,9 +3,17 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Connexion MongoDB
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('✅ Connecté à MongoDB Atlas'))
+    .catch(err => console.error('❌ Erreur MongoDB:', err.message));
+}
 
 // Middleware de sécurité
 app.use(helmet());
@@ -15,6 +23,15 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Servir les fichiers statiques
 app.use(express.static(path.join(__dirname)));
+
+// Routes API
+const actualiteRoutes = require('./backend/routes/actualiteRoutes');
+const formationRoutes = require('./backend/routes/formationRoutes');
+const logicielRoutes = require('./backend/routes/logicielRoutes');
+
+app.use('/api/actualites', actualiteRoutes);
+app.use('/api/formations', formationRoutes);
+app.use('/api/logiciels', logicielRoutes);
 
 // Route racine
 app.get('/', (req, res) => {
