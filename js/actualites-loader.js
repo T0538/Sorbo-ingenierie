@@ -50,8 +50,8 @@ async function loadActualitesFromAPI() {
                 displayError(`L'API prend du temps à répondre. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
                 setTimeout(loadActualitesFromAPI, 2000); // Réessayer après 2 secondes
             } else {
-                console.log('⚠️ Nombre maximum de tentatives atteint, chargement des actualités de démonstration...');
-                displayDemoActualites();
+                console.log('⚠️ Nombre maximum de tentatives atteint, l\'API reste inaccessible. Aucune donnée locale ne sera affichée.');
+                displayError("Le serveur des actualités est temporairement indisponible après plusieurs tentatives. Veuillez réessayer plus tard.");
             }
         } else if (error.message.includes('Failed to fetch') || error.message.includes('500')) {
             if (retryCount < MAX_RETRIES - 1) {
@@ -60,8 +60,8 @@ async function loadActualitesFromAPI() {
                 displayError(`Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
                 setTimeout(loadActualitesFromAPI, 3000); // Réessayer après 3 secondes
             } else {
-                console.log('⚠️ Nombre maximum de tentatives atteint, chargement des actualités de démonstration...');
-                displayDemoActualites();
+                console.log('⚠️ Nombre maximum de tentatives atteint, l\'API reste inaccessible. Aucune donnée locale ne sera affichée.');
+                displayError("Le serveur des actualités est temporairement indisponible après plusieurs tentatives. Veuillez réessayer plus tard.");
             }
         } else {
             displayError(error.message);
