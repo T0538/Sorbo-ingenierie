@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,10 +12,19 @@ const PORT = process.env.PORT || 5000;
 async function connectDB() {
     try {
         console.log('📡 Connexion à MongoDB Atlas...');
+        
+        // Vérifier que l'URI MongoDB est définie
+        if (!process.env.MONGODB_URI) {
+            console.error('❌ MONGODB_URI non définie dans les variables d\'environnement');
+            console.log('💡 Créez un fichier .env avec MONGODB_URI=mongodb+srv://...');
+            process.exit(1);
+        }
+        
         await mongoose.connect(process.env.MONGODB_URI);
         console.log('✅ Connexion MongoDB Atlas réussie !');
     } catch (error) {
         console.error('❌ Erreur de connexion MongoDB:', error.message);
+        console.log('💡 Vérifiez votre URI MongoDB et votre connexion internet');
         process.exit(1);
     }
 }
@@ -22,7 +32,7 @@ async function connectDB() {
 // Middleware de sécurité
 app.use(helmet());
 app.use(cors({
-    origin: ['https://sorbo-ingenierie.netlify.app', 'http://localhost:3000'],
+    origin: ['https://sorbo-ingenierie.netlify.app', 'http://localhost:3000', 'http://localhost:5000'],
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -32,15 +42,16 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.get('/', (req, res) => {
     res.json({
         success: true,
-        message: '🚀 API Sorbo Ingénierie - Railway',
-        version: '1.0.0',
+        message: '🚀 API Sorbo Ingénierie - Railway (Corrigée)',
+        version: '2.0.0',
         endpoints: {
             health: '/api/health',
             actualites: '/api/actualites',
             formations: '/api/formations',
             logiciels: '/api/logiciels'
         },
-        status: 'opérationnel'
+        status: 'opérationnel',
+        mongodb: mongoose.connection.readyState === 1 ? 'connecté' : 'déconnecté'
     });
 });
 
@@ -55,13 +66,15 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Route pour les actualités
+// Route pour les actualités (utilisant le modèle et contrôleur appropriés)
 app.get('/api/actualites', async (req, res) => {
     try {
         console.log('📰 Récupération des actualités...');
         
+        // Vérifier la connexion MongoDB
         if (mongoose.connection.readyState !== 1) {
-            return res.json({
+            console.log('⚠️ MongoDB non connecté, utilisation du fallback');
+            return res.status(200).json({
                 success: true,
                 data: [],
                 message: 'MongoDB non disponible',
@@ -69,27 +82,38 @@ app.get('/api/actualites', async (req, res) => {
             });
         }
         
-        const db = mongoose.connection.db;
-        const actualites = await db.collection('actualites').find({ statut: 'publie' }).toArray();
+        // Utiliser le modèle Actualite au lieu de la collection brute
+        const Actualite = require('./backend/models/Actualite');
+        
+        const limitParam = parseInt(req.query.limit, 10);
+        const limit = Number.isFinite(limitParam) ? Math.min(Math.max(limitParam, 1), 100) : 50;
+        
+        const actualites = await Actualite.find({ statut: 'publie' })
+            .sort({ datePublication: -1, createdAt: -1 })
+            .limit(limit)
+            .lean();
         
         console.log(`📰 ${actualites.length} actualités trouvées`);
         
         res.json({
             success: true,
             data: actualites,
-            message: 'Actualités récupérées',
+            message: 'Actualités récupérées avec succès',
             source: 'mongodb',
             count: actualites.length
         });
         
     } catch (error) {
         console.error('❌ Erreur API actualités:', error.message);
+        
+        // En cas d'erreur, renvoyer un tableau vide au lieu d'une erreur 500
         res.status(200).json({
             success: true,
             data: [],
-            message: 'Erreur lors de la récupération',
+            message: 'Erreur lors de la récupération des actualités',
             source: 'error-fallback',
-            count: 0
+            count: 0,
+            error: error.message
         });
     }
 });
@@ -192,6 +216,7 @@ async function startServer() {
         console.log(`   - /api/actualites`);
         console.log(`   - /api/formations`);
         console.log(`   - /api/logiciels`);
+        console.log(`📡 MongoDB: ${mongoose.connection.readyState === 1 ? 'Connecté' : 'Déconnecté'}`);
     });
 }
 
