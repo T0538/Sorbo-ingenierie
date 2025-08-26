@@ -1,7 +1,7 @@
 // Chargeur d'actualités depuis MongoDB Atlas
 console.log('📰 Démarrage du chargeur d\'actualités...');
-// const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
-const API_BASE_URL = 'http://localhost:5000'; // Développement local
+const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
+// const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
 async function loadActualitesFromAPI() {
     try {
@@ -95,16 +95,16 @@ function createActualiteCard(actualite) {
     card.className = 'blog-post';
     card.setAttribute('data-category', actualite.categorie.toLowerCase().replace(/\s+/g, '-'));
     
-    // Formater la date
-    const date = new Date(actualite.date);
+    // Formater la date (MongoDB utilise datePublication)
+    const date = new Date(actualite.datePublication || actualite.date || actualite.createdAt);
     const formattedDate = date.toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
     
-    // Calculer le temps de lecture (estimation basée sur la description)
-    const wordCount = actualite.description.split(/\s+/).length;
+    // Calculer le temps de lecture (estimation basée sur le résumé)
+    const wordCount = (actualite.resume || actualite.description || '').split(/\s+/).length;
     const readingTime = Math.ceil(wordCount / 225) + 2; // 225 mots/minute + 2 min pour l'article complet
     
     // Gérer les tags (s'assurer qu'ils existent)
@@ -124,7 +124,7 @@ function createActualiteCard(actualite) {
             <div class="reading-time">
                 <i class="far fa-clock"></i> <span class="time-value">${readingTime} min de lecture</span>
             </div>
-            <p class="blog-excerpt">${actualite.description}</p>
+            <p class="blog-excerpt">${actualite.resume || actualite.description || 'Aucun résumé disponible'}</p>
             <div class="blog-meta">
                 <div class="blog-date">${formattedDate}</div>
                 <a href="#" class="read-more" onclick="showActualiteDetails('${actualite._id || actualite.id}')">
