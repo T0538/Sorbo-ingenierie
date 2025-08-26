@@ -38,8 +38,17 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Route racine - API info
+// Servir les fichiers statiques
+app.use(express.static(path.join(__dirname)));
+
+
+// Route racine - Servir index.html
 app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Route API info
+app.get('/api/info', (req, res) => {
     res.json({
         success: true,
         message: '🚀 API Sorbo Ingénierie - Railway (Corrigée)',
@@ -196,11 +205,28 @@ app.get('/api/logiciels', async (req, res) => {
     }
 });
 
-// Gestion des erreurs 404
-app.use('*', (req, res) => {
+// Gestion des routes HTML pour le routage côté client
+app.get('/*.html', (req, res) => {
+    const htmlFile = req.path.substring(1); // Enlever le slash initial
+    res.sendFile(path.join(__dirname, htmlFile));
+});
+
+// Redirection des routes non-API vers index.html pour le routage côté client
+app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api/')) {
+        // Si c'est une route API, passer au gestionnaire d'erreur 404
+        next();
+    } else {
+        // Sinon, servir index.html pour le routage côté client
+        res.sendFile(path.join(__dirname, 'index.html'));
+    }
+});
+
+// Gestion des erreurs 404 pour les routes API
+app.use('/api/*', (req, res) => {
     res.status(404).json({
         success: false,
-        message: 'Route non trouvée',
+        message: 'Route API non trouvée',
         path: req.originalUrl
     });
 });
