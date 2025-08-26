@@ -13,86 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    
-
     <style>
-        /* Loader Styles */
-        .page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .page-loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-content {
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .loader-logo {
-            width: 120px;
-            height: auto;
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
-
-        .loader-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #d10000;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-            animation: slideInFromLeft 1s ease-out 0.3s both;
-        }
-
-        .loader-subtitle {
-            font-size: 1.2rem;
-            color: #6b7280;
-            margin-bottom: 3rem;
-            font-weight: 300;
-            animation: slideInFromRight 1s ease-out 0.6s both;
-        }
-
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid #d10000;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        .loader-progress {
-            width: 200px;
-            height: 4px;
-            background: #e5e7eb;
-            border-radius: 2px;
-            margin: 2rem auto 0;
-            overflow: hidden;
-        }
-
-        .loader-progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #d10000, #b30000);
-            border-radius: 2px;
-            animation: loadProgress 3s ease-out forwards;
-        }
-        
         /* Animations pour le loader */
         @keyframes fadeInUp {
             from {
@@ -104,7 +25,7 @@
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -116,39 +37,39 @@
                 transform: scale(1);
             }
         }
-        
-        @keyframes slideInFromLeft {
+
+        @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
+                transform: translateX(-30px);
             }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
-        
-        @keyframes slideInFromRight {
+
+        @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateX(50px);
+                transform: translateX(30px);
             }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
-        
-        @keyframes spin {
-            0% {
+
+        @keyframes rotate {
+            from {
                 transform: rotate(0deg);
             }
             100% {
                 transform: rotate(360deg);
             }
         }
-        
-        @keyframes loadProgress {
+
+        @keyframes progressBar {
             0% {
                 width: 0%;
             }
@@ -413,9 +334,7 @@
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: 1px solid rgba(209, 0, 0, 0.1);
         }
-        
 
-        
         .value-item::after {
             content: '';
             position: absolute;
@@ -1921,9 +1840,7 @@
             0%, 100% { transform: translateX(-100%); }
             50% { transform: translateX(100%); }
         }
-        
 
-        
         .statistics h2 {
             margin-bottom: 60px;
             color: white;
@@ -1948,9 +1865,7 @@
             position: relative;
             text-align: center;
         }
-        
 
-        
         .stat-item:hover .percentage {
             transform: scale(1.1);
             color: #ff4757;
@@ -2233,77 +2148,69 @@
             line-height: 1.7;
         }
         
-        .testimonials {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .testimonial {
-            padding: 40px;
+        .testimonials-section {
+            padding: 100px 0;
             background-color: #f9f9f9;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .testimonial:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .testimonial::before {
+        .testimonials-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 5px;
+            width: 100%;
             height: 100%;
-            background: var(--primary-color);
-            border-radius: 15px 0 0 15px;
+            background: radial-gradient(circle at 10% 90%, rgba(209, 0, 0, 0.1) 0%, transparent 60%);
         }
         
-        .testimonial h4 {
-            font-size: 1.3rem;
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 120px;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-family: Georgia, serif;
+            color: var(--primary-color);
+            opacity: 0.1;
+        }
+        
+        .testimonial-card h3 {
             color: var(--primary-color);
             margin-bottom: 5px;
+            font-size: 1.4rem;
         }
         
         .testimonial-title {
-            color: var(--accent-color);
-            font-size: 0.95rem;
+            color: #888;
+            font-style: italic;
             margin-bottom: 20px;
-            font-weight: 600;
+            font-size: 0.9rem;
         }
         
         .testimonial-content {
-            font-style: italic;
             position: relative;
-            padding: 0 30px;
-            color: var(--light-text);
+            padding: 0;
+            font-style: italic;
             line-height: 1.8;
-        }
-        
-        .testimonial-content::before,
-        .testimonial-content::after {
-            font-size: 3rem;
-            color: var(--primary-color);
-            opacity: 0.2;
-            position: absolute;
-            font-family: Georgia, serif;
-        }
-        
-        .testimonial-content::before {
-            content: "\201C";
-            left: 0;
-            top: -20px;
-        }
-        
-        .testimonial-content::after {
-            content: "\201D";
-            right: 0;
-            bottom: -30px;
+            color: #555;
         }
         
         .cta {
@@ -2931,38 +2838,23 @@
             animation: fadeInUp 0.6s ease-out forwards;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
         /* Styles modernes pour les témoignages */
-        .testimonials {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: 40px;
+        .testimonials-container {
             max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
         
         .testimonial-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 35px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
-            border: 1px solid #f0f0f0;
-            height: fit-content;
-            min-height: 200px;
         }
         
         .testimonial-card:hover {
@@ -2970,44 +2862,40 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
         
-        .quote-icon {
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 120px;
             position: absolute;
-            top: 15px;
-            left: 20px;
-            font-size: 3.5rem;
-            color: rgba(209, 0, 0, 0.15);
+            top: -20px;
+            left: 10px;
             font-family: Georgia, serif;
-            font-weight: bold;
-            line-height: 1;
+            color: #d10000;
+            opacity: 0.1;
         }
         
-        .testimonial-name {
+        .testimonial-card h3 {
             color: #d10000;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0 0 6px 0;
-            padding-left: 35px;
+            margin-bottom: 5px;
+            font-size: 1.4rem;
         }
         
         .testimonial-title {
-            color: #666;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 20px;
             font-size: 0.9rem;
-            font-weight: 500;
-            margin: 0 0 15px 0;
-            padding-left: 35px;
         }
         
         .testimonial-content {
-            color: #333;
-            line-height: 1.5;
-            font-size: 0.95rem;
-            text-align: left;
-            margin: 0;
-            padding-left: 35px;
+            position: relative;
+            padding: 0;
+            font-style: italic;
+            line-height: 1.8;
+            color: #555;
         }
         
         @media (max-width: 992px) {
-            .testimonials {
+            .testimonials-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
                 max-width: 100%;
@@ -3015,38 +2903,11 @@
             
             .testimonial-card {
                 padding: 30px 25px;
-                min-height: auto;
-            }
-            
-            .quote-icon {
-                font-size: 3rem;
-                top: 15px;
-                left: 20px;
-            }
-            
-            .testimonial-name,
-            .testimonial-title,
-            .testimonial-content {
-                padding-left: 35px;
             }
         }
-        
-
     </style>
 </head>
 <body>
-
-    <div class="page-loader" id="pageLoader">
-        <div class="loader-content">
-            <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie" class="loader-logo">
-            <h1 class="loader-title">SORBO-INGÉNIERIE</h1>
-            <p class="loader-subtitle">Solutions d'ingénierie innovantes</p>
-            <div class="loader-spinner"></div>
-            <div class="loader-progress">
-                <div class="loader-progress-bar"></div>
-            </div>
-        </div>
-    </div>
 
     <header>
         <div class="container">
@@ -3100,7 +2961,7 @@
             <div class="hero-content">
                 <h1>Des outils concrets</h1>
                 <p>
-                    Chaque session repose sur des cas réels et l’utilisation de logiciels spécialisés en génie civil.l</p>
+                    Chaque session repose sur des cas réels et l'utilisation de logiciels spécialisés en génie civil.l</p>
             </div>
         </div>
         <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/image\ 30.jpg');">
@@ -3468,17 +3329,15 @@
             </div> -->
             
             <h3 style="text-align: center; margin-top: 60px; margin-bottom: 30px;" data-aos="fade-up" data-aos-duration="800">Ce que nos apprenants disent de nous</h3>
-            <div class="testimonials">
-                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
-                    <div class="quote-icon">"</div>
-                    <h4 class="testimonial-name">KOFFI KOUADIO</h4>
+            <div class="testimonials-container">
+                <div class="testimonial-card" data-aos="fade-right" data-aos-delay="150">
+                    <h3>KOFFI KOUADIO</h3>
                     <div class="testimonial-title">Expert en chef en agriculture et aménagement</div>
                     <div class="testimonial-content">Les formations de Sorbo-ingénierie m'ont permis de renforcer mes compétences techniques tout en me familiarisant avec les dernières normes du secteur, ce qui a considérablement amélioré mes performances sur le terrain.</div>
                 </div>
                 
-                <div class="testimonial-card fade-in" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                    <div class="quote-icon">"</div>
-                    <h4 class="testimonial-name">TRAORE</h4>
+                <div class="testimonial-card" data-aos="fade-left" data-aos-delay="200">
+                    <h3>TRAORE</h3>
                     <div class="testimonial-title">Ingénieur des travaux publics</div>
                     <div class="testimonial-content">Grâce à la pédagogie interactive et à l'expertise des formateurs de Sorbo-ingénierie, j'ai acquis des connaissances pratiques et des outils concrets professionnels.</div>
                 </div>
@@ -3491,23 +3350,23 @@
             <h2 data-aos="fade-up" data-aos-duration="800">Nos chiffres en 2024</h2>
             <div class="stats-container">
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
-                    <div class="percentage">95%</div>
+                    <div class="percentage" data-value="95">95</div>
                     <div class="description">Satisfaction des participants</div>
                 </div>
                 
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-                    <div class="percentage number">+500</div>
+                    <div class="percentage number" data-value="+500">+500</div>
                     <div class="description">Professionnels formés</div>
                 </div>
                 
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
-                    <div class="percentage number">+25</div>
+                    <div class="percentage number" data-value="+25">+25</div>
                     <div class="description">Sessions de formation organisées
                     </div>
                 </div>
                 
                 <div class="stat-item" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
-                    <div class="percentage number">+1200</div>
+                    <div class="percentage number" data-value="+1200">+1200</div>
                     <div class="description"> Heures de formation dispensées</div>
                 </div>
             </div>
@@ -3586,24 +3445,21 @@
     <script>
         // Page Loader
         window.addEventListener('load', function() {
-            const loader = document.getElementById('pageLoader');
-            const progressBar = document.querySelector('.loader-progress-bar');
-            
+
             // Animation de la barre de progression
             if (progressBar) {
-                progressBar.style.width = '0%';
+                
                 setTimeout(() => {
-                    progressBar.style.width = '100%';
+                    
                 }, 100);
             }
             
             // Attendre un minimum de 2 secondes pour l'effet visuel
             setTimeout(function() {
-                loader.classList.add('hidden');
-                
+
                 // Supprimer complètement le loader après la transition
                 setTimeout(function() {
-                    loader.style.display = 'none';
+                    
                 }, 500);
             }, 2000);
         });
@@ -3618,12 +3474,6 @@
                     once: true
                 });
             }, 2500);
-        });
-
-        // Afficher le loader immédiatement si la page se recharge
-        document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('pageLoader');
-            loader.style.display = 'flex';
         });
 
         // Initialisation de AOS avec des paramètres améliorés
@@ -3999,7 +3849,12 @@
                 const percentage = item.querySelector('.percentage');
                 if (!percentage) return;
                 
-                const finalValue = parseInt(percentage.getAttribute('data-value'));
+                // Extraire la valeur numérique en supprimant les symboles + et %
+                let finalValueText = percentage.getAttribute('data-value') || percentage.textContent;
+                let finalValue = parseInt(finalValueText.replace(/[+%]/g, ''));
+                
+                if (isNaN(finalValue)) return;
+                
                 let currentValue = 0;
                 const increment = Math.ceil(finalValue / 50); // 50 étapes pour une animation fluide
                 const stepTime = 40; // 40ms entre chaque étape
@@ -4010,7 +3865,15 @@
                         currentValue = finalValue;
                         clearInterval(timer);
                     }
-                    percentage.textContent = currentValue;
+                    
+                    // Restaurer le format original (+ ou %)
+                    if (finalValueText.includes('+')) {
+                        percentage.textContent = '+' + currentValue;
+                    } else if (finalValueText.includes('%')) {
+                        percentage.textContent = currentValue + '%';
+                    } else {
+                        percentage.textContent = currentValue;
+                    }
                 }, stepTime);
             }
         }
@@ -4441,8 +4304,4 @@
     </script>
 </body>
 </html>
-
-
-
-
 
