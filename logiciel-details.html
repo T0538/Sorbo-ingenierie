@@ -554,7 +554,7 @@
                     <div class="logiciel-section">
                         <h3 class="section-title">
                             <i class="fas fa-file-alt"></i>
-                            Au-delà des calculs
+                            Notes de calculs detaillées
                         </h3>
                         <div class="logiciel-description">
                             <p>OH-Route produit également une note de calcul synthétique et structurée, présentant clairement les 
@@ -595,12 +595,12 @@
                     <div class="logiciel-actions">
                         <h3>Prêt à utiliser OH-Route v1 ?</h3>
                         <p>Téléchargez ce logiciel professionnel spécialisé dans les études d'assainissement et de drainage routier</p>
-                        <div class="action-buttons">
-                            <a href="#" class="btn-action" onclick="handleDownload()">
-                                <i class="fas fa-download"></i>
-                                Télécharger maintenant
-                            </a>
-                        </div>
+                                                 <div class="action-buttons">
+                             <a href="#" class="btn-action" onclick="handleDownload()">
+                                 <i class="fas fa-download"></i>
+                                 Télécharger OH-Route v1.1 (52 MB)
+                             </a>
+                         </div>
                     </div>
                 </div>
             </div>
@@ -684,16 +684,31 @@
             });
         });
         
-        // Fonction simple pour le téléchargement
-        function handleDownload() {
-            // Simuler un téléchargement (en production, remplacez par l'URL réelle)
-            const downloadUrl = 'https://example.com/oh-route-download';
-            const logicielName = 'OH-Route';
-            
-            if (confirm(`Vous allez être redirigé vers ${logicielName} pour le téléchargement. Continuer ?`)) {
-                window.open(downloadUrl, '_blank');
-            }
-        }
+                 // Fonction de téléchargement fonctionnelle
+         function handleDownload() {
+             const logicielName = 'OH-Route v1.1';
+             const fileName = 'OH-Route v1.1.exe';
+             
+             if (confirm(`Voulez-vous télécharger ${logicielName} ?\n\nFichier : ${fileName}\nTaille : 52 MB`)) {
+                 // Créer un lien de téléchargement temporaire
+                 const downloadLink = document.createElement('a');
+                 downloadLink.href = 'downloads/' + fileName;
+                 downloadLink.download = fileName;
+                 downloadLink.style.display = 'none';
+                 
+                 // Ajouter au DOM et déclencher le téléchargement
+                 document.body.appendChild(downloadLink);
+                 downloadLink.click();
+                 
+                 // Nettoyer le DOM
+                 document.body.removeChild(downloadLink);
+                 
+                 // Message de confirmation
+                 setTimeout(() => {
+                     alert(`Téléchargement de ${logicielName} démarré !\n\nLe fichier sera sauvegardé dans votre dossier de téléchargements.`);
+                 }, 1000);
+             }
+         }
     </script>
 </body>
 </html>
