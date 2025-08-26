@@ -3,6 +3,9 @@ console.log('📰 Démarrage de l\'admin des actualités...');
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
+
 // Gestion du formulaire d'ajout
 document.getElementById('actualite-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -44,19 +47,30 @@ document.getElementById('actualite-form').addEventListener('submit', async funct
     }
 });
 
-// Charger les actualités existantes
+// Charger les actualités existantes avec mécanisme de tentatives
 async function loadActualites() {
     try {
-        console.log('📡 Chargement des actualités...');
+        console.log(`📡 Chargement des actualités... (Tentative ${retryCount + 1}/${MAX_RETRIES})`);
+        
+        // Créer un contrôleur d'abandon avec timeout de 15 secondes
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
         
         const response = await fetch(`${API_BASE_URL}/api/actualites`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            signal: controller.signal,
+            cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
         });
+        
+        clearTimeout(timeoutId);
 
         const result = await response.json();
+        
+        // Réinitialiser le compteur de tentatives en cas de succès
+        retryCount = 0;
         
         if (result.success) {
             displayActualites(result.data);
@@ -65,13 +79,36 @@ async function loadActualites() {
             throw new Error(result.message);
         }
     } catch (error) {
-        console.error('❌ Erreur lors du chargement:', error);
-        document.getElementById('actualites-container').innerHTML = `
-            <div class="status-error">
-                <i class="fas fa-exclamation-triangle"></i>
-                Erreur lors du chargement des actualités. Vérifiez que le serveur est démarré.
-            </div>
-        `;
+        console.error(`❌ Erreur lors du chargement (Tentative ${retryCount + 1}/${MAX_RETRIES}):`, error);
+        
+        if (error.name === 'AbortError' || error.message.includes('Failed to fetch')) {
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                document.getElementById('actualites-container').innerHTML = `
+                    <div class="status-warning">
+                        <i class="fas fa-sync fa-spin"></i>
+                        Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...
+                    </div>
+                `;
+                setTimeout(loadActualites, 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint');
+                document.getElementById('actualites-container').innerHTML = `
+                    <div class="status-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Erreur lors du chargement des actualités. Le serveur semble inaccessible après plusieurs tentatives.
+                    </div>
+                `;
+            }
+        } else {
+            document.getElementById('actualites-container').innerHTML = `
+                <div class="status-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Erreur lors du chargement des actualités: ${error.message}
+                </div>
+            `;
+        }
     }
 }
 
@@ -136,4 +173,4 @@ document.addEventListener('DOMContentLoaded', function() {
     loadActualites();
 });
 
-console.log('✅ Script d\'administration des actualités chargé'); 
+console.log('✅ Script d\'administration des actualités chargé');

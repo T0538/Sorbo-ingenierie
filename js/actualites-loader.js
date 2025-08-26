@@ -2,13 +2,15 @@
 console.log('📰 Démarrage du chargeur d\'actualités...');
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
 
 async function loadActualitesFromAPI() {
     try {
-        console.log('📡 Connexion à l\'API actualités...');
+        console.log(`📡 Connexion à l\'API actualités... (Tentative ${retryCount + 1}/${MAX_RETRIES})`);
         
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // Augmentation du timeout à 15 secondes
         
         const response = await fetch(`${API_BASE_URL}/api/actualites`, {
             method: 'GET',
@@ -16,7 +18,8 @@ async function loadActualitesFromAPI() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            signal: controller.signal
+            signal: controller.signal,
+            cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
         });
 
         clearTimeout(timeoutId);
@@ -28,6 +31,9 @@ async function loadActualitesFromAPI() {
         const data = await response.json();
         console.log('✅ Données actualités reçues:', data);
         
+        // Réinitialiser le compteur de tentatives en cas de succès
+        retryCount = 0;
+        
         if (data.success && data.data && data.data.length > 0) {
             displayActualites(data.data);
         } else {
@@ -35,12 +41,28 @@ async function loadActualitesFromAPI() {
         }
         
     } catch (error) {
-        console.error('❌ Erreur:', error);
+        console.error(`❌ Erreur (Tentative ${retryCount + 1}/${MAX_RETRIES}):`, error);
+        
         if (error.name === 'AbortError') {
-            displayError('L\'API prend du temps à répondre. Veuillez patienter.');
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 2 secondes...`);
+                displayError(`L'API prend du temps à répondre. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(loadActualitesFromAPI, 2000); // Réessayer après 2 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint, chargement des actualités de démonstration...');
+                displayDemoActualites();
+            }
         } else if (error.message.includes('Failed to fetch') || error.message.includes('500')) {
-            console.log('⚠️ API non disponible, chargement des actualités de démonstration...');
-            displayDemoActualites();
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                displayError(`Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(loadActualitesFromAPI, 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint, chargement des actualités de démonstration...');
+                displayDemoActualites();
+            }
         } else {
             displayError(error.message);
         }
@@ -484,4 +506,4 @@ if (document.readyState === 'loading') {
     // La page est déjà chargée
     console.log('📰 Page déjà chargée, démarrage immédiat du chargement des actualités...');
     loadActualitesFromAPI();
-} 
+}

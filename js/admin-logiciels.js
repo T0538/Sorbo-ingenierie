@@ -3,6 +3,9 @@ console.log('💻 Démarrage de l\'admin des logiciels...');
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
+
 // Gestion du formulaire d'ajout
 document.getElementById('logiciel-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -46,19 +49,30 @@ document.getElementById('logiciel-form').addEventListener('submit', async functi
     }
 });
 
-// Charger les logiciels existants
+// Charger les logiciels existants avec mécanisme de tentatives
 async function loadLogiciels() {
     try {
-        console.log('📡 Chargement des logiciels...');
+        console.log(`📡 Chargement des logiciels... (Tentative ${retryCount + 1}/${MAX_RETRIES})`);
+        
+        // Créer un contrôleur d'abandon avec timeout de 15 secondes
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
         
         const response = await fetch(`${API_BASE_URL}/api/logiciels`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            signal: controller.signal,
+            cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
         });
+        
+        clearTimeout(timeoutId);
 
         const result = await response.json();
+        
+        // Réinitialiser le compteur de tentatives en cas de succès
+        retryCount = 0;
         
         if (result.success) {
             displayLogiciels(result.data);
@@ -67,13 +81,36 @@ async function loadLogiciels() {
             throw new Error(result.message);
         }
     } catch (error) {
-        console.error('❌ Erreur lors du chargement:', error);
-        document.getElementById('logiciels-container').innerHTML = `
-            <div class="status-error">
-                <i class="fas fa-exclamation-triangle"></i>
-                Erreur lors du chargement des logiciels. Vérifiez que le serveur est démarré.
-            </div>
-        `;
+        console.error(`❌ Erreur lors du chargement (Tentative ${retryCount + 1}/${MAX_RETRIES}):`, error);
+        
+        if (error.name === 'AbortError' || error.message.includes('Failed to fetch')) {
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                document.getElementById('logiciels-container').innerHTML = `
+                    <div class="status-warning">
+                        <i class="fas fa-sync fa-spin"></i>
+                        Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...
+                    </div>
+                `;
+                setTimeout(loadLogiciels, 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint');
+                document.getElementById('logiciels-container').innerHTML = `
+                    <div class="status-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Erreur lors du chargement des logiciels. Le serveur semble inaccessible après plusieurs tentatives.
+                    </div>
+                `;
+            }
+        } else {
+            document.getElementById('logiciels-container').innerHTML = `
+                <div class="status-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Erreur lors du chargement des logiciels: ${error.message}
+                </div>
+            `;
+        }
     }
 }
 
@@ -128,4 +165,4 @@ document.addEventListener('DOMContentLoaded', function() {
     loadLogiciels();
 });
 
-console.log('✅ Script d\'administration des logiciels chargé'); 
+console.log('✅ Script d\'administration des logiciels chargé');

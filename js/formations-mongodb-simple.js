@@ -5,10 +5,13 @@ console.log('🚀 Démarrage du chargeur MongoDB simplifié...');
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
-// Fonction principale avec timeout amélioré
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
+
+// Fonction principale avec timeout amélioré et mécanisme de tentatives
 async function loadFormationsFromMongoDB() {
     try {
-        console.log('📡 Connexion à l\'API MongoDB...');
+        console.log(`📡 Connexion à l\'API MongoDB... (Tentative ${retryCount + 1}/${MAX_RETRIES})`);
         
         // Créer un contrôleur d'abandon avec timeout de 20 secondes
         const controller = new AbortController();
@@ -20,7 +23,8 @@ async function loadFormationsFromMongoDB() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            signal: controller.signal
+            signal: controller.signal,
+            cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
         });
 
         clearTimeout(timeoutId);
@@ -32,6 +36,9 @@ async function loadFormationsFromMongoDB() {
         const data = await response.json();
         console.log('✅ Données reçues:', data);
         
+        // Réinitialiser le compteur de tentatives en cas de succès
+        retryCount = 0;
+        
         if (data.success && data.data && data.data.length > 0) {
             console.log(`📊 ${data.data.length} formations trouvées`);
             displayFormations(data.data);
@@ -41,12 +48,28 @@ async function loadFormationsFromMongoDB() {
         }
         
     } catch (error) {
-        console.error('❌ Erreur:', error);
+        console.error(`❌ Erreur (Tentative ${retryCount + 1}/${MAX_RETRIES}):`, error);
         
         if (error.name === 'AbortError') {
-            displayRenderStarting();
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                displayError(`L'API prend du temps à répondre. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(loadFormationsFromMongoDB, 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint, affichage du message de démarrage...');
+                displayRenderStarting();
+            }
         } else if (error.message.includes('Failed to fetch')) {
-            displayRenderStarting();
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                displayError(`Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(loadFormationsFromMongoDB, 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint, affichage du message de démarrage...');
+                displayRenderStarting();
+            }
         } else {
             displayError(error.message);
         }
@@ -218,4 +241,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 
-console.log('✅ Script MongoDB simplifié chargé'); 
+console.log('✅ Script MongoDB simplifié chargé');

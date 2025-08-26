@@ -3,15 +3,19 @@ console.log('💻 Démarrage du chargeur de logiciels...');
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
+
 async function loadLogicielsFromAPI() {
     try {
-        console.log('📡 Récupération des logiciels depuis l\'API...');
+        console.log(`📡 Récupération des logiciels depuis l\'API... (Tentative ${retryCount + 1}/${MAX_RETRIES})`);
         const response = await fetch(`${API_BASE_URL}/api/logiciels`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            signal: AbortSignal.timeout(10000) // 10 secondes
+            signal: AbortSignal.timeout(15000), // 15 secondes
+            cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
         });
 
         if (!response.ok) {
@@ -20,6 +24,9 @@ async function loadLogicielsFromAPI() {
 
         const result = await response.json();
         
+        // Réinitialiser le compteur de tentatives en cas de succès
+        retryCount = 0;
+        
         if (result.success) {
             console.log(`✅ ${result.data.length} logiciels récupérés`);
             displayLogiciels(result.data);
@@ -27,11 +34,28 @@ async function loadLogicielsFromAPI() {
             throw new Error(result.message || 'Erreur lors de la récupération');
         }
     } catch (error) {
-        console.error('❌ Erreur lors du chargement des logiciels:', error);
+        console.error(`❌ Erreur lors du chargement des logiciels (Tentative ${retryCount + 1}/${MAX_RETRIES}):`, error);
+        
         if (error.name === 'AbortError' || error.message.includes('Failed to fetch')) {
-            displayError('⏰ API en cours de démarrage... Rechargez la page dans quelques secondes.');
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                displayError(`Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(loadLogicielsFromAPI, 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint, chargement des logiciels de démonstration...');
+                displayNoLogiciels();
+            }
         } else {
-            displayError('Erreur lors du chargement des logiciels. Vérifiez que le serveur est démarré.');
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 2 secondes...`);
+                displayError(`Erreur lors du chargement. Nouvelle tentative ${retryCount}/${MAX_RETRIES}...`);
+                setTimeout(loadLogicielsFromAPI, 2000); // Réessayer après 2 secondes
+            } else {
+                displayError('Erreur lors du chargement des logiciels. Vérifiez que le serveur est démarré.');
+                displayNoLogiciels();
+            }
         }
     }
 }

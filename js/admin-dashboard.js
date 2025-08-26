@@ -2,6 +2,9 @@
 console.log('🎛️ Démarrage du dashboard d\'administration...');
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
 // const API_BASE_URL = 'http://localhost:5000'; // Développement local
+
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
 const ADMIN_TOKEN = 'admin123';
 let currentSection = 'stats';
 let editingItem = null;
@@ -56,33 +59,59 @@ function showSection(section) {
     }
 }
 
-// Fonctions API
+// Fonctions API avec mécanisme de tentatives
 async function apiCall(endpoint, method = 'GET', data = null) {
-    try {
-        const options = {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ADMIN_TOKEN}`
+    let currentRetry = 0;
+    
+    while (currentRetry < MAX_RETRIES) {
+        try {
+            console.log(`📡 Appel API ${endpoint}... (Tentative ${currentRetry + 1}/${MAX_RETRIES})`);
+            
+            // Créer un contrôleur d'abandon avec timeout de 15 secondes
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ADMIN_TOKEN}`
+                },
+                signal: controller.signal,
+                cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
+            };
+
+            if (data) {
+                options.body = JSON.stringify(data);
             }
-        };
 
-        if (data) {
-            options.body = JSON.stringify(data);
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+            clearTimeout(timeoutId);
+            
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Erreur API');
+            }
+
+            return result;
+        } catch (error) {
+            console.error(`❌ Erreur API (Tentative ${currentRetry + 1}/${MAX_RETRIES}):`, error);
+            
+            if ((error.name === 'AbortError' || error.message.includes('Failed to fetch')) && currentRetry < MAX_RETRIES - 1) {
+                currentRetry++;
+                console.log(`🔄 Nouvelle tentative ${currentRetry}/${MAX_RETRIES} dans 3 secondes...`);
+                showAlert(`Connexion à l'API impossible. Nouvelle tentative ${currentRetry}/${MAX_RETRIES}...`, 'warning');
+                await new Promise(resolve => setTimeout(resolve, 3000)); // Attendre 3 secondes avant de réessayer
+            } else {
+                if (currentRetry === MAX_RETRIES - 1) {
+                    showAlert('Erreur: Le serveur semble inaccessible après plusieurs tentatives.', 'error');
+                } else {
+                    showAlert('Erreur: ' + error.message, 'error');
+                }
+                throw error;
+            }
         }
-
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || 'Erreur API');
-        }
-
-        return result;
-    } catch (error) {
-        console.error('Erreur API:', error);
-        showAlert('Erreur: ' + error.message, 'error');
-        throw error;
     }
 }
 
@@ -658,4 +687,4 @@ window.onclick = function(event) {
     if (event.target === modal) {
         closeModal();
     }
-} 
+}

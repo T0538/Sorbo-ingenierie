@@ -3,29 +3,43 @@ console.log('💻 Démarrage du chargeur de détails de logiciel...');
 
 const API_BASE_URL = 'https://sorbo-api-production.up.railway.app';
 
+const MAX_RETRIES = 3; // Nombre maximum de tentatives de connexion à l'API
+let retryCount = 0; // Compteur de tentatives
+
 // Récupérer l'ID du logiciel depuis l'URL
 function getLogicielIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('id');
 }
 
-// Charger les détails du logiciel depuis l'API
+// Charger les détails du logiciel depuis l'API avec mécanisme de tentatives
 async function loadLogicielDetails(logicielId) {
     try {
-        console.log(`📡 Récupération des détails du logiciel ${logicielId}...`);
+        console.log(`📡 Récupération des détails du logiciel ${logicielId}... (Tentative ${retryCount + 1}/${MAX_RETRIES})`);
+        
+        // Créer un contrôleur d'abandon avec timeout de 15 secondes
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
         
         const response = await fetch(`${API_BASE_URL}/api/logiciels/${logicielId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            signal: controller.signal,
+            cache: 'no-store' // Désactiver le cache pour forcer une nouvelle requête
         });
+        
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
         const result = await response.json();
+        
+        // Réinitialiser le compteur de tentatives en cas de succès
+        retryCount = 0;
         
         if (result.success) {
             console.log('✅ Détails du logiciel récupérés:', result.data);
@@ -34,8 +48,21 @@ async function loadLogicielDetails(logicielId) {
             throw new Error(result.message || 'Erreur lors de la récupération');
         }
     } catch (error) {
-        console.error('❌ Erreur lors du chargement des détails:', error);
-        displayError('Erreur lors du chargement des détails du logiciel. Vérifiez que le serveur est démarré.');
+        console.error(`❌ Erreur lors du chargement des détails (Tentative ${retryCount + 1}/${MAX_RETRIES}):`, error);
+        
+        if (error.name === 'AbortError' || error.message.includes('Failed to fetch')) {
+            if (retryCount < MAX_RETRIES - 1) {
+                retryCount++;
+                console.log(`🔄 Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                displayError(`Connexion à l'API impossible. Nouvelle tentative ${retryCount}/${MAX_RETRIES} dans 3 secondes...`);
+                setTimeout(() => loadLogicielDetails(logicielId), 3000); // Réessayer après 3 secondes
+            } else {
+                console.log('⚠️ Nombre maximum de tentatives atteint');
+                displayError('Erreur lors du chargement des détails du logiciel. Le serveur semble inaccessible après plusieurs tentatives.');
+            }
+        } else {
+            displayError('Erreur lors du chargement des détails du logiciel: ' + error.message);
+        }
     }
 }
 
