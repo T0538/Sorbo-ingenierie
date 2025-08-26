@@ -1,7 +1,7 @@
 // Chargeur d'actualités depuis MongoDB Atlas
 console.log('📰 Démarrage du chargeur d\'actualités...');
-const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
-// const API_BASE_URL = 'http://localhost:5000'; // Développement local
+// const API_BASE_URL = 'https://sorbo-api-production.up.railway.app'; // Production Railway
+const API_BASE_URL = 'http://localhost:5000'; // Développement local
 
 async function loadActualitesFromAPI() {
     try {
@@ -465,4 +465,23 @@ function displayDemoActualites() {
     displayActualites(demoActualites);
 }
 
-console.log('✅ Script chargeur d\'actualités chargé'); 
+console.log('✅ Script chargeur d\'actualités chargé');
+
+// Déclencher le chargement des actualités au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📰 Page chargée, démarrage du chargement des actualités...');
+    loadActualitesFromAPI();
+});
+
+// Fallback si DOMContentLoaded a déjà été déclenché
+if (document.readyState === 'loading') {
+    // La page est encore en cours de chargement
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📰 Page chargée (fallback), démarrage du chargement des actualités...');
+        loadActualitesFromAPI();
+    });
+} else {
+    // La page est déjà chargée
+    console.log('📰 Page déjà chargée, démarrage immédiat du chargement des actualités...');
+    loadActualitesFromAPI();
+} 
