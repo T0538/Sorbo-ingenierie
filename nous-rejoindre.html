@@ -16,13 +16,21 @@
  -->
     <style>
         /* Animations pour le loader */
-        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
             50% {
                 transform: scale(1.05);
             }
@@ -31,23 +39,41 @@
             }
         }
 
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
             100% {
                 transform: rotate(360deg);
             }
         }
 
+        @keyframes progressBar {
+            from {
+                width: 0%;
+            }
             50% {
                 width: 60%;
             }
@@ -1555,7 +1581,7 @@
             <h2 class="section-title" data-aos="fade-up">Rechercher une offre</h2>
             <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">
                 <i class="fas fa-info-circle"></i>
-                Nos offres de stage sont actuellement affichées de manière statique. Utilisez les filtres ci-dessous pour explorer les opportunités disponibles.
+                Nos offres d'emplois. Utilisez les filtres ci-dessous pour explorer les opportunités disponibles.
             </p>
             
             <!-- Barre de recherche et filtres -->
@@ -2017,8 +2043,6 @@
                 });
             }, 2500);
         });
-
-        );
 
         AOS.init({
             offset: 120,
