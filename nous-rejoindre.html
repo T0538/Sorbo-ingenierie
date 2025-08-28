@@ -387,6 +387,15 @@
         .jobs-section > .container {
             max-width: 1100px;
             margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* S'assurer que tous les éléments enfants respectent la largeur */
+        .jobs-section .job-search-container,
+        .jobs-section .jobs-results {
+            max-width: 100%;
+            box-sizing: border-box;
         }
         
         /* Barre de recherche et filtres */
@@ -883,6 +892,11 @@
                 margin-top: 10px;
             }
             
+            /* Ajuster le padding sur tablet */
+            .jobs-section > .container {
+                padding: 0 15px;
+            }
+            
             .benefits-container,
             .team-grid {
                 grid-template-columns: 1fr;
@@ -951,6 +965,11 @@
         }
         
         @media (max-width: 576px) {
+            /* Ajuster le padding sur mobile */
+            .jobs-section > .container {
+                padding: 0 10px;
+            }
+            
             .job-search-container {
                 padding: 20px;
             }
