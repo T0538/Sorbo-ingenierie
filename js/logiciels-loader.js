@@ -123,15 +123,15 @@ function createLogicielCard(logiciel, index, total) {
       <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}" style="background: #ffffff; border-radius: 14px; box-shadow: 0 8px 30px rgba(20,20,40,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr; max-width: 820px; margin: 0 auto 18px auto;">
         <!-- Illustration / media -->
         <div class="software-media" style="background: transparent; padding: 0; overflow: hidden;">
-          <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:180px; object-fit:cover; display:block;">
+          <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:240px; object-fit:cover; display:block;">
         </div>
 
         <!-- Contenu -->
         <div class="software-content" style="padding: 22px 28px;">
-          <!-- Logo + Nom alignés horizontalement à gauche (sans styles inline sur les éléments) -->
-          <header class="software-header" style="display:flex; align-items:center; gap:12px; margin: 10px 0 10px 0;">
+          <!-- Logo + Nom alignés horizontalement à gauche (sans cadre, sans ombre) -->
+          <header class="software-header" style="display:flex; align-items:center; gap:10px; margin: 8px 0 12px 0; padding: 0; background: transparent; box-shadow: none; border: none;">
             <img src="${image}" alt="Logo ${nom}" class="software-logo">
-            <div class="software-title"><strong>${nom} ${version}</strong></div>
+            <div class="software-title"><strong>${nom}</strong></div>
           </header>
 
           <div class="software-category" style="color:#6b7280; font-size:0.95rem; margin-bottom:14px; font-weight:600;">Eau et Assainissement • 2025</div>
