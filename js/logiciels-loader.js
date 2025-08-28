@@ -122,21 +122,17 @@ function createLogicielCard(logiciel, index, total) {
     return `
       <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}" style="background: #ffffff; border-radius: 14px; box-shadow: 0 8px 30px rgba(20,20,40,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr; max-width: 820px; margin: 0 auto 18px auto;">
         <!-- Illustration / media -->
-        <div class="software-media" style="background: linear-gradient(135deg,#2c3e50,#34495e); padding: 20px; display:flex; align-items:center; justify-content:center;">
-          <div class="drainage-illustration" style="width:85%; max-width:680px; height:180px; display:flex; align-items:center; justify-content:center;">
-            <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:100%; object-fit:cover; display:block; border-radius: 10px;">
-          </div>
+        <div class="software-media" style="background: transparent; padding: 0; overflow: hidden;">
+          <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:180px; object-fit:cover; display:block;">
         </div>
 
         <!-- Contenu -->
         <div class="software-content" style="padding: 22px 28px;">
-          <!-- Header avec logo + titre alignés horizontalement -->
-          <header class="software-header" style="display:flex; align-items:center; gap:14px; margin-bottom:8px;">
-            <img src="${image}" alt="Logo ${nom}" class="software-logo">
-            <div class="software-title-wrap">
-              <div class="software-title">${nom} ${version}</div>
-            </div>
-          </header>
+          <!-- Logo aligné à gauche -->
+          <img src="${image}" alt="Logo ${nom}" class="software-logo" style="float: left; margin-right: 12px; margin-bottom: 8px;">
+          
+          <!-- Titre aligné à gauche -->
+          <div class="software-title" style="text-align: left; margin-bottom: 12px; clear: both;">${nom} ${version}</div>
 
           <div class="software-category" style="color:#6b7280; font-size:0.95rem; margin-bottom:14px; font-weight:600;">${categorieFormatee.toUpperCase()} • 2025</div>
 
