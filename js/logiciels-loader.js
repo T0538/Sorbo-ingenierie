@@ -120,34 +120,37 @@ function createLogicielCard(logiciel, index, total) {
         : '';
 
     return `
-      <div class="software-card modern-card" data-logiciel-id="${logiciel.id}">
-        <div class="software-header-image">
-          <img src="${headerImage}" alt="Image d'en-tête ${nom}" class="header-image" loading="lazy" />
-        </div>
-        <div class="software-header">
-          <div class="software-icon-section">
-            <img src="${image}" alt="Icône ${nom}" class="software-icon-image" loading="lazy" />
-            <h4 class="software-name">${nom}</h4>
-          </div>
+      <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}">
+        <!-- Illustration / media avec largeur réduite -->
+        <div class="software-media" aria-hidden="true">
+          <img src="${headerImage}" alt="Illustration ${nom}" class="drainage-illustration" style="width: 90%; height: 100%; object-fit: cover; margin: 0 auto; display: block;">
         </div>
 
-                         <div class="software-content">
-            <div class="software-category">${categorieFormatee} • 2025</div>
-            <p>${description}</p>
-           <div class="features-list">
-             ${featuresHTML}
-           </div>
-           <div class="software-buttons">
-             ${isDisponible 
-               ? '<a href="#" class="software-btn primary-btn download-btn" data-logiciel-id="' + logiciel.id + '">📥 Télécharger</a>'
-               : '<button class="software-btn primary-btn" disabled style="opacity: 0.6; cursor: not-allowed;">🔄 En cours de développement</button>'
-             }
-                          <a href="logiciel-details.html" class="software-btn secondary-btn info-btn" target="_blank">
-                <i class="fas fa-info-circle"></i> Consulter les informations
-              </a>
-           </div>
-         </div>
-      </div>
+        <!-- Contenu -->
+        <div class="software-content">
+          <!-- HEADER : logo + titre alignés par Flexbox -->
+          <header class="software-header">
+            <img src="${image}" alt="Logo ${nom}" class="software-logo">
+            <div class="software-title-wrap">
+              <div class="software-title">${nom} ${version}</div>
+            </div>
+          </header>
+
+          <div class="software-category">${categorieFormatee} • 2025</div>
+
+          <p class="software-description">
+            ${description}
+          </p>
+
+          <div class="software-buttons">
+            ${isDisponible 
+              ? '<a href="#" class="btn btn-primary download-btn" data-logiciel-id="' + logiciel.id + '"><i class="fas fa-download"></i> Télécharger</a>'
+              : '<button class="btn btn-primary" disabled style="opacity: 0.6; cursor: not-allowed;"><i class="fas fa-clock"></i> En cours de développement</button>'
+            }
+            <a href="logiciel-details.html" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Consulter les informations</a>
+          </div>
+        </div>
+      </article>
     `;
 }
 
@@ -160,7 +163,7 @@ function addDownloadListeners() {
              
              // Détecter OH-Route par son nom affiché sur la carte
              const softwareCard = btn.closest('.software-card');
-             const softwareName = softwareCard.querySelector('.software-name');
+             const softwareName = softwareCard.querySelector('.software-title');
              if (softwareName && softwareName.textContent.toLowerCase().includes('oh-route')) {
                  // C'est OH-Route, télécharger directement
                  const downloadLink = document.createElement('a');
