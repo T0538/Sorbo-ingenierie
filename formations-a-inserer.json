@@ -1,0 +1,84 @@
+[
+  {
+    "title": "ArchiCAD - Conception et dessin de plans 2D/3D de bâtiments",
+    "type": "revit",
+    "price": 150000,
+    "duration": "40 heures",
+    "schedule": "5 séances - samedis ou dimanches de 09h à 16h",
+    "dates": "Du 18 octobre au 15 novembre",
+    "description": "Formation complète à ArchiCAD pour la conception et le dessin de plans 2D/3D de bâtiments.",
+    "location": "Abidjan, Cocody",
+    "objectifs": [
+      "Appréhender la méthodologie du travail sur ArchiCAD",
+      "Organiser l'environnement de travail du logiciel",
+      "Paramétrer et utiliser les outils essentiels pour créer et modifier des dessins",
+      "Présenter les projets avec des mises en pages détaillées",
+      "Préparer les documents pour l'impression"
+    ],
+    "category": "Logiciels",
+    "niveau": "Débutant à intermédiaire"
+  },
+  {
+    "title": "AutoCAD - Conception et dessin de plans 2D de bâtiments",
+    "type": "autocad",
+    "price": 100000,
+    "duration": "32 heures",
+    "schedule": "4 séances - samedis ou dimanches de 09h à 16h",
+    "dates": "Du 25 octobre au 15 novembre",
+    "description": "Maîtrisez AutoCAD pour la conception et le dessin de plans 2D de bâtiments avec précision.",
+    "location": "Abidjan, Cocody",
+    "objectifs": [
+      "Appréhender la méthodologie du travail sur AutoCAD",
+      "Organiser l'interface de travail",
+      "Utiliser les outils essentiels pour créer des dessins de précision",
+      "Créer et gérer les calques et blocs de dessins",
+      "Gérer les annotations, les cotations et les échelles",
+      "Modifier et importer des éléments préexistants",
+      "Présenter les projets avec des mises en pages détaillées",
+      "Préparer les documents pour l'impression"
+    ],
+    "category": "Logiciels",
+    "niveau": "Débutant à intermédiaire"
+  },
+  {
+    "title": "Robot - Conception et dimensionnement des bâtiments en BA",
+    "type": "robot",
+    "price": 150000,
+    "duration": "40 heures",
+    "schedule": "4 séances - samedis ou dimanches de 09h à 16h",
+    "dates": "Du 19 octobre au 16 novembre 2025",
+    "description": "Formation approfondie au logiciel Robot pour la conception et le dimensionnement des structures en béton armé.",
+    "location": "Abidjan, Cocody",
+    "objectifs": [
+      "Définir les hypothèses de calculs et de vérifications des structures bâtiments en béton armé",
+      "Réaliser le pré-dimensionnement de la structure porteuse d'un bâtiment",
+      "Modéliser et faire la descente de charges à l'aide du logiciel Robot",
+      "Réaliser l'analyse structurelle conformément aux normes internationales",
+      "Générer les plans d'exécution et les notes de calculs détaillés"
+    ],
+    "category": "Logiciels",
+    "niveau": "Intermédiaire à avancé"
+  },
+  {
+    "title": "Gestion de projet - Microsoft Project",
+    "type": "genie-civil",
+    "price": 100000,
+    "duration": "32 heures",
+    "schedule": "4 séances - samedis ou dimanches de 09h à 16h",
+    "dates": "Du 02 au 23 novembre",
+    "description": "Maîtrisez Microsoft Project pour une gestion de projet efficace dans le BTP et l'ingénierie.",
+    "location": "Abidjan, Cocody",
+    "objectifs": [
+      "Maîtriser les bases de Microsoft Project",
+      "Planifier des projets",
+      "Gérer des ressources",
+      "Suivre et contrôler des projets",
+      "Analyser des données de projet",
+      "Utiliser des fonctionnalités avancées du logiciel",
+      "Élaborer un devis quantitatif et estimatif (D.Q.E)",
+      "Faire des sous-détails des prix unitaires"
+    ],
+    "category": "Gestion de projet",
+    "niveau": "Débutant à intermédiaire"
+  }
+]
