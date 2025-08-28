@@ -108,25 +108,34 @@ function createFormationCard(formation, index) {
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', `${(index + 1) * 100}`);
     card.setAttribute('data-aos-duration', '800');
-    
-    const category = getCategoryFromType(formation.type);
-    const price = formation.price.toLocaleString();
-    
+
+    // Sécuriser/normaliser les données venant de MongoDB
+    const category = getCategoryFromType((formation.type || '').toString().toLowerCase());
+    const priceRaw = formation.price ?? formation.prix ?? formation.cost ?? formation.cout ?? formation['coût'];
+    const priceNum = typeof priceRaw === 'number' ? priceRaw : Number(String(priceRaw).replace(/[^0-9.-]/g, ''));
+    const priceDisplay = Number.isFinite(priceNum) ? priceNum.toLocaleString() : (priceRaw ?? '—');
+
+    const durationRaw = formation.duration ?? formation.duree ?? formation['durée'] ?? formation.hours ?? formation.heures;
+    const durationDisplay = durationRaw != null ? durationRaw : 'À définir';
+
+    const title = formation.title || formation.nom || 'Formation';
+    const description = formation.description || '';
+
     card.innerHTML = `
         <div class="formation-header">
             <div class="formation-category">${category}</div>
-            <div class="formation-price">${price} FCFA</div>
+            <div class="formation-price">${priceDisplay} FCFA</div>
         </div>
-        <h3>${formation.title}</h3>
+        <h3>${title}</h3>
         <div class="formation-details">
             <div class="detail"><i class="fas fa-calendar-alt"></i> Prochaine session à définir</div>
-            <div class="detail"><i class="fas fa-clock"></i> ${formation.duration} jours</div>
+            <div class="detail"><i class="fas fa-clock"></i> ${durationDisplay} ${/jour|h/i.test(String(durationRaw)) ? '' : 'jours'}</div>
             <div class="detail"><i class="fas fa-map-marker-alt"></i> Abidjan, Cocody</div>
             <div class="detail"><i class="fas fa-users"></i> Places disponibles</div>
         </div>
-        <p>${formation.description}</p>
+        <p>${description}</p>
         <div class="formation-footer">
-            <button class="btn primary-btn inscription-btn" onclick="handleInscription('${formation.title}', ${formation.price})">S'inscrire maintenant</button>
+            <button class="btn primary-btn inscription-btn" onclick="handleInscription('${title.replace(/'/g, "\'")}', ${Number.isFinite(priceNum) ? priceNum : 0})">S'inscrire maintenant</button>
             <a href="#" class="more-info">En savoir plus</a>
         </div>
     `;
