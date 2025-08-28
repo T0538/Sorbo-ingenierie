@@ -128,13 +128,13 @@ function createLogicielCard(logiciel, index, total) {
 
         <!-- Contenu -->
         <div class="software-content" style="padding: 22px 28px;">
-          <!-- Logo aligné à gauche -->
-          <img src="${image}" alt="Logo ${nom}" class="software-logo" style="float: left; margin-right: 12px; margin-bottom: 8px;">
-          
-          <!-- Titre aligné à gauche -->
-          <div class="software-title" style="text-align: left; margin-bottom: 12px; clear: both;">${nom} ${version}</div>
+          <!-- Logo + Nom alignés horizontalement à gauche (sans styles inline sur les éléments) -->
+          <header class="software-header" style="display:flex; align-items:center; gap:12px; margin: 10px 0 10px 0;">
+            <img src="${image}" alt="Logo ${nom}" class="software-logo">
+            <div class="software-title"><strong>${nom} ${version}</strong></div>
+          </header>
 
-          <div class="software-category" style="color:#6b7280; font-size:0.95rem; margin-bottom:14px; font-weight:600;">${categorieFormatee.toUpperCase()} • 2025</div>
+          <div class="software-category" style="color:#6b7280; font-size:0.95rem; margin-bottom:14px; font-weight:600;">Eau et Assainissement • 2025</div>
 
           <p class="software-description" style="color:#334155; line-height:1.6; font-size:1.02rem; margin-bottom:18px;">
             ${description}
