@@ -131,8 +131,50 @@ class FormationsMongoDBLoader {
                     !titresAPI.some(titre => titre.includes(fr.title.split(' - ')[0].toLowerCase()))
                 );
                 
-                const toutesFormations = [...data.data, ...nouvellesToAjouter];
-                console.log(`🎯 TOTAL: ${toutesFormations.length} formations (${data.data.length} API + ${nouvellesToAjouter.length} réelles ajoutées)`);
+                // Enrichir les formations existantes de l'API avec des objectifs spécifiques
+                const formationsEnrichies = data.data.map(formation => {
+                    // Ajouter des objectifs spécifiques selon le titre
+                    const titreFormatted = (formation.title || formation.nom || '').toLowerCase();
+                    
+                    if (titreFormatted.includes('hydraulique')) {
+                        formation.objectifs = [
+                            'Maîtriser les principes de l\'hydraulique urbaine',
+                            'Concevoir des réseaux d\'eau et d\'assainissement',
+                            'Dimensionner les équipements hydrauliques',
+                            'Analyser les écoulements et pressions',
+                            'Optimiser la gestion des eaux urbaines'
+                        ];
+                    } else if (titreFormatted.includes('revit')) {
+                        formation.objectifs = [
+                            'Maîtriser l\'interface et les outils Revit Architecture',
+                            'Créer et modifier des familles Revit',
+                            'Gérer les phases et options de conception',
+                            'Coordonner les disciplines BIM',
+                            'Produire des plans et documentation techniques'
+                        ];
+                    } else if (titreFormatted.includes('robot')) {
+                        formation.objectifs = [
+                            'Maîtriser la modélisation structurelle avec Robot',
+                            'Effectuer l\'analyse statique et dynamique',
+                            'Dimensionner les éléments en béton et acier',
+                            'Vérifier la conformité aux normes',
+                            'Générer les notes de calcul automatiques'
+                        ];
+                    } else if (titreFormatted.includes('autocad')) {
+                        formation.objectifs = [
+                            'Maîtriser l\'interface et les commandes AutoCAD',
+                            'Créer des dessins 2D précis et cotés',
+                            'Gérer les calques et les blocs',
+                            'Utiliser les outils d\'annotation',
+                            'Préparer les documents pour l\'impression'
+                        ];
+                    }
+                    
+                    return formation;
+                });
+                
+                const toutesFormations = [...formationsEnrichies, ...nouvellesToAjouter];
+                console.log(`🎯 TOTAL: ${toutesFormations.length} formations (${formationsEnrichies.length} API enrichies + ${nouvellesToAjouter.length} réelles ajoutées)`);
                 
                 return toutesFormations;
             } else {
