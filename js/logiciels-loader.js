@@ -127,9 +127,9 @@ function createLogicielCard(logiciel, index, total) {
         </div>
 
         <!-- Contenu -->
-        <div class="software-content" style="padding: 22px 28px;">
+        <div class="software-content" style="padding: 22px 28px; text-align: left;">
           <!-- Logo + Nom alignés horizontalement à gauche (sans cadre, sans ombre) -->
-          <header class="software-header" style="display:flex; align-items:center; gap:10px; margin: 8px 0 12px 0; padding: 0; background: transparent; box-shadow: none; border: none;">
+          <header class="software-header" style="display:flex; align-items:center; justify-content:flex-start; gap:10px; margin: 8px 0 12px 0; padding: 0; background: transparent; box-shadow: none; border: none;">
             <img src="${image}" alt="Logo ${nom}" class="software-logo">
             <div class="software-title"><strong>${nom}</strong></div>
           </header>
