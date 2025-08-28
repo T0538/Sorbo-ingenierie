@@ -31,7 +31,7 @@ class FormationsMongoDBLoader {
             if (data.success && data.data) {
                 console.log(`✅ ${data.data.length} formations chargées depuis MongoDB Atlas`);
                 
-                // SOLUTION TEMPORAIRE: Ajouter vos nouvelles formations réelles
+                // SOLUTION TEMPORAIRE: Ajouter vos nouvelles formations réelles avec tous les détails
                 const formationsReelles = [
                     {
                         _id: 'real_archicad_2024',
@@ -45,7 +45,14 @@ class FormationsMongoDBLoader {
                         location: 'Abidjan, Cocody',
                         category: 'Logiciels',
                         niveau: 'Débutant à intermédiaire',
-                        active: true
+                        active: true,
+                        objectifs: [
+                            'Appréhender la méthodologie du travail sur ArchiCAD',
+                            'Organiser l\'environnement de travail du logiciel',
+                            'Paramétrer et utiliser les outils essentiels pour créer et modifier des dessins',
+                            'Présenter les projets avec des mises en pages détaillées',
+                            'Préparer les documents pour l\'impression'
+                        ]
                     },
                     {
                         _id: 'real_autocad_2024',
@@ -59,7 +66,17 @@ class FormationsMongoDBLoader {
                         location: 'Abidjan, Cocody',
                         category: 'Logiciels',
                         niveau: 'Débutant à intermédiaire',
-                        active: true
+                        active: true,
+                        objectifs: [
+                            'Appréhender la méthodologie du travail sur AutoCAD',
+                            'Organiser l\'interface de travail',
+                            'Utiliser les outils essentiels pour créer des dessins de précision',
+                            'Créer et gérer les calques et blocs de dessins',
+                            'Gérer les annotations, les cotations et les échelles',
+                            'Modifier et importer des éléments préexistants',
+                            'Présenter les projets avec des mises en pages détaillées',
+                            'Préparer les documents pour l\'impression'
+                        ]
                     },
                     {
                         _id: 'real_robot_ba_2024',
@@ -73,7 +90,14 @@ class FormationsMongoDBLoader {
                         location: 'Abidjan, Cocody',
                         category: 'Logiciels',
                         niveau: 'Intermédiaire à avancé',
-                        active: true
+                        active: true,
+                        objectifs: [
+                            'Définir les hypothèses de calculs et de vérifications des structures bâtiments en béton armé',
+                            'Réaliser le pré-dimensionnement de la structure porteuse d\'un bâtiment',
+                            'Modéliser et faire la descente de charges à l\'aide du logiciel Robot',
+                            'Réaliser l\'analyse structurelle conformément aux normes internationales',
+                            'Générer les plans d\'exécution et les notes de calculs détaillés'
+                        ]
                     },
                     {
                         _id: 'real_gestion_projet_2024',
@@ -87,7 +111,17 @@ class FormationsMongoDBLoader {
                         location: 'Abidjan, Cocody',
                         category: 'Logiciels',
                         niveau: 'Débutant à intermédiaire',
-                        active: true
+                        active: true,
+                        objectifs: [
+                            'Maîtriser les bases de Microsoft Project',
+                            'Planifier des projets',
+                            'Gérer des ressources',
+                            'Suivre et contrôler des projets',
+                            'Analyser des données de projet',
+                            'Utiliser des fonctionnalités avancées du logiciel',
+                            'Élaborer un devis quantitatif et estimatif (D.Q.E)',
+                            'Faire des sous-détails des prix unitaires'
+                        ]
                     }
                 ];
                 
@@ -269,8 +303,10 @@ class FormationsMongoDBLoader {
         // Calculer la durée en jours (si disponible)
         const duration = formation.duration || 'À définir';
 
-        // Générer des objectifs basés sur le type de formation
-        const objectives = this.generateObjectives(formation.type);
+        // Utiliser les objectifs réels de la formation ou générer des objectifs par défaut
+        const objectives = formation.objectifs && formation.objectifs.length > 0 
+            ? formation.objectifs 
+            : this.generateObjectives(formation.type);
         
         card.innerHTML = `
             <div class="formation-header">
@@ -285,6 +321,11 @@ class FormationsMongoDBLoader {
             <div class="formation-content">
                 <div class="formation-theme">
                     <h3 class="formation-title">${formation.title}</h3>
+                    ${formation.description ? `
+                    <p class="formation-description" style="font-size: 0.8rem; color: #666; margin: 8px 0; line-height: 1.4;">
+                        ${formation.description}
+                    </p>
+                    ` : ''}
                 </div>
                 
                 <!-- Objectifs de la formation -->
@@ -300,16 +341,28 @@ class FormationsMongoDBLoader {
                 <div class="formation-details">
                     <div class="detail-item">
                         <i class="fas fa-calendar-alt"></i>
-                        <span>Prochaine session à définir</span>
+                        <span>${formation.dates || 'Prochaine session à définir'}</span>
                     </div>
                     <div class="detail-item">
                         <i class="fas fa-clock"></i>
-                        <span>${duration} jours</span>
+                        <span>${duration}</span>
                     </div>
+                    ${formation.schedule ? `
+                    <div class="detail-item">
+                        <i class="fas fa-schedule"></i>
+                        <span>${formation.schedule}</span>
+                    </div>
+                    ` : ''}
                     <div class="detail-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Abidjan, Cocody</span>
+                        <span>${formation.location || 'Abidjan, Cocody'}</span>
                     </div>
+                    ${formation.niveau ? `
+                    <div class="detail-item">
+                        <i class="fas fa-level-up-alt"></i>
+                        <span>Niveau : ${formation.niveau}</span>
+                    </div>
+                    ` : ''}
                 </div>
                 
                 <div class="formation-price-section">
