@@ -28,14 +28,31 @@
 
  -->
     <style>
-        /* Animations pour le loader */
+        /* Variables CSS personnalisées */
+        :root {
+            --primary-color: #d10000;
+            --primary-hover: #b00000;
+            --accent-color: #333;
+            --light-bg: #f5f5f5;
+            --border-radius: 10px;
+        }
         
+        /* Animations pour le loader */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
             50% {
                 transform: scale(1.05);
             }
@@ -44,23 +61,41 @@
             }
         }
 
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
-            100% {
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
                 transform: rotate(360deg);
             }
         }
 
+        @keyframes progressAnimation {
+            from {
+                width: 0%;
+            }
             50% {
                 width: 60%;
             }
@@ -1089,9 +1124,6 @@
                 transform: translateY(0);
             }
         }
-
-            100% { transform: rotate(360deg); }
-        }
         
         @media (max-width: 992px) {
             .news-hero h1 {
@@ -1379,7 +1411,10 @@
     </style>
 </head>
 <body>
-
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
             <div class="loader-progress">
                 <div class="loader-progress-bar"></div>
             </div>
@@ -1653,21 +1688,11 @@
             
             // Page Loader
             window.addEventListener('load', function() {
-
-                // Animation de la barre de progression
-                if (progressBar) {
-                    
-                    setTimeout(() => {
-                        
-                    }, 100);
-                }
-                
                 // Attendre un minimum de 2 secondes pour l'effet visuel
                 setTimeout(function() {
-
                     // Supprimer complètement le loader après la transition
                     setTimeout(function() {
-                        
+                        // Le loader sera supprimé ici
                     }, 500);
                 }, 2000);
             });
@@ -1683,8 +1708,6 @@
                     });
                 }, 2500);
             });
-
-            );
 
             function initAOS() {
                 AOS.init({
@@ -1742,8 +1765,10 @@
                         }
                     });
                     
-                    // Réinitialiser l'index pour "Charger plus"
-                    currentIndex = 0;
+                    // Réinitialiser l'index pour "Charger plus" (utiliser la variable globale)
+                    if (typeof window.currentIndex !== 'undefined') {
+                        window.currentIndex = 0;
+                    }
                     
                     // Afficher le bouton "Charger plus" s'il y a des articles cachés
                     if (loadMoreBtn && hiddenArticles.length > 0) {
@@ -1800,7 +1825,7 @@
             // Lazy loading des images avec Intersection Observer
             if ('IntersectionObserver' in window) {
                 const lazyImages = document.querySelectorAll('.lazy-image');
-                const imageObserver = new IntersectionObserver((entries, observer) => {
+                window.imageObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const img = entry.target;
@@ -1821,7 +1846,7 @@
                 });
                 
                 lazyImages.forEach(img => {
-                    imageObserver.observe(img);
+                    window.imageObserver.observe(img);
                 });
             } else {
                 // Fallback pour les navigateurs qui ne supportent pas Intersection Observer
@@ -1911,7 +1936,7 @@
                 query = query.toLowerCase().trim();
                 let matchCount = 0;
                 
-                // Ru00e9initialiser tout filtrage par catu00e9gorie
+                // Réinitialiser tout filtrage par catégorie
                 const categories = document.querySelectorAll('.blog-category');
                 categories.forEach(cat => cat.classList.remove('active'));
                 document.querySelector('.blog-category[data-filter="tous"]').classList.add('active');
@@ -1921,7 +1946,7 @@
                 blogPosts.forEach(post => {
                     const content = post.getAttribute('data-content');
                     
-                    // Vu00e9rifier si le contenu de l'article contient la requu00eate de recherche
+                    // Vérifier si le contenu de l'article contient la requête de recherche
                     if (content && content.includes(query)) {
                         post.style.display = 'block';
                         post.style.opacity = '1';
@@ -1932,14 +1957,14 @@
                     }
                 });
                 
-                // Afficher les ru00e9sultats de recherche
+                // Afficher les résultats de recherche
                 searchResults.classList.add('active');
                 resetSearch.classList.add('active');
                 
                 if (matchCount > 0) {
-                    resultCount.innerHTML = `<span class="highlight">${matchCount}</span> article${matchCount > 1 ? 's' : ''} trouvu00e9${matchCount > 1 ? 's' : ''} pour "<span class="highlight">${query}</span>"`;
+                    resultCount.innerHTML = `<span class="highlight">${matchCount}</span> article${matchCount > 1 ? 's' : ''} trouvé${matchCount > 1 ? 's' : ''} pour "<span class="highlight">${query}</span>"`;
                 } else {
-                    resultCount.innerHTML = `Aucun ru00e9sultat trouvu00e9 pour "<span class="highlight">${query}</span>". Essayez d'autres mots-clu00e9s.`;
+                    resultCount.innerHTML = `Aucun résultat trouvé pour "<span class="highlight">${query}</span>". Essayez d'autres mots-clés.`;
                 }
                 
                 // Cacher le bouton "Charger plus" pendant la recherche
@@ -1966,11 +1991,11 @@
                 searchResults.classList.remove('active');
                 resetSearch.classList.remove('active');
                 
-                // Obtenir la catu00e9gorie actuellement su00e9lectionnu00e9e
+                // Obtenir la catégorie actuellement sélectionnée
                 const activeCategory = document.querySelector('.blog-category.active');
                 const currentFilter = activeCategory ? activeCategory.getAttribute('data-filter') : 'tous';
                 
-                // Appliquer le filtre de catu00e9gorie actuel
+                // Appliquer le filtre de catégorie actuel
                 filterArticles(currentFilter);
             }
             
@@ -2574,17 +2599,7 @@
             
             // Exécuter le calcul du temps de lecture au chargement de la page
             calculateReadingTime();
-        });
-    </script>
-    <script src="js/script.js"></script>
-    <script src="js/backend-integration.js"></script>
-    <script src="js/lazy-loading.js"></script>
-    <script src="js/performance-optimizer.js"></script>
-    <script src="js/dynamic-content.js"></script>
-    <script src="js/actualites-loader.js"></script>
-    <script>
-        // Hero Banner Carousel et Menu déroulant
-        document.addEventListener('DOMContentLoaded', function() {
+            
             // Hero Banner Carousel
             if (document.querySelector('.hero-banner')) {
                 const slides = document.querySelectorAll('.hero-slide');
@@ -2659,6 +2674,16 @@
                 }
             });
         });
+    </script>
+    <script src="js/script.js"></script>
+    <script src="js/backend-integration.js"></script>
+    <script src="js/lazy-loading.js"></script>
+    <script src="js/performance-optimizer.js"></script>
+    <script src="js/dynamic-content.js"></script>
+    <script src="js/actualites-loader.js"></script>
+    <script>
+        // Hero Banner Carousel et Menu déroulant
+        // Ces fonctionnalités seront initialisées dans le premier event listener DOMContentLoaded
     </script>
     <script src="js/hero-banner-navigation.js"></script>
 </body>
