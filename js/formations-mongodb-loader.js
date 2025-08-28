@@ -30,7 +30,77 @@ class FormationsMongoDBLoader {
             
             if (data.success && data.data) {
                 console.log(`✅ ${data.data.length} formations chargées depuis MongoDB Atlas`);
-                return data.data;
+                
+                // SOLUTION TEMPORAIRE: Ajouter vos nouvelles formations réelles
+                const formationsReelles = [
+                    {
+                        _id: 'real_archicad_2024',
+                        title: 'ArchiCAD - Conception et dessin de plans 2D/3D de bâtiments',
+                        type: 'revit',
+                        price: 150000,
+                        duration: '40 heures',
+                        schedule: '5 séances - samedis ou dimanches de 09h à 16h',
+                        dates: 'Du 18 octobre au 15 novembre',
+                        description: 'Formation complète à ArchiCAD pour la conception et le dessin de plans 2D/3D de bâtiments.',
+                        location: 'Abidjan, Cocody',
+                        category: 'Logiciels',
+                        niveau: 'Débutant à intermédiaire',
+                        active: true
+                    },
+                    {
+                        _id: 'real_autocad_2024',
+                        title: 'AutoCAD - Conception et dessin de plans 2D de bâtiments',
+                        type: 'autocad',
+                        price: 100000,
+                        duration: '32 heures',
+                        schedule: '4 séances - samedis ou dimanches de 09h à 16h',
+                        dates: 'Du 25 octobre au 15 novembre',
+                        description: 'Formation complète à AutoCAD pour la conception et le dessin de plans 2D de bâtiments.',
+                        location: 'Abidjan, Cocody',
+                        category: 'Logiciels',
+                        niveau: 'Débutant à intermédiaire',
+                        active: true
+                    },
+                    {
+                        _id: 'real_robot_ba_2024',
+                        title: 'Robot - Conception et dimensionnement des bâtiments en BA',
+                        type: 'robot',
+                        price: 150000,
+                        duration: '40 heures',
+                        schedule: '4 séances - samedis ou dimanches de 09h à 16h',
+                        dates: 'Du 19 octobre au 16 novembre 2025',
+                        description: 'Formation au calcul et dimensionnement des structures en béton armé avec Robot.',
+                        location: 'Abidjan, Cocody',
+                        category: 'Logiciels',
+                        niveau: 'Intermédiaire à avancé',
+                        active: true
+                    },
+                    {
+                        _id: 'real_gestion_projet_2024',
+                        title: 'Gestion de projet - Microsoft Project',
+                        type: 'genie-civil',
+                        price: 100000,
+                        duration: '32 heures',
+                        schedule: '4 séances - samedis ou dimanches de 09h à 16h',
+                        dates: 'Du 02 au 23 novembre',
+                        description: 'Maîtrise complète de Microsoft Project pour la gestion de projets.',
+                        location: 'Abidjan, Cocody',
+                        category: 'Logiciels',
+                        niveau: 'Débutant à intermédiaire',
+                        active: true
+                    }
+                ];
+                
+                // Vérifier quelles formations de l'API existent déjà pour éviter les doublons
+                const titresAPI = data.data.map(f => (f.title || f.nom || '').toLowerCase());
+                const nouvellesToAjouter = formationsReelles.filter(fr => 
+                    !titresAPI.some(titre => titre.includes(fr.title.split(' - ')[0].toLowerCase()))
+                );
+                
+                const toutesFormations = [...data.data, ...nouvellesToAjouter];
+                console.log(`🎯 TOTAL: ${toutesFormations.length} formations (${data.data.length} API + ${nouvellesToAjouter.length} réelles ajoutées)`);
+                
+                return toutesFormations;
             } else {
                 throw new Error('Format de données invalide');
             }
