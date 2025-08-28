@@ -19,11 +19,11 @@ node test-oh-route.js
 echo
 
 echo "4. Vérification des fichiers..."
-if [ -f "OH-Route v1.1.exe" ]; then
-    echo "    [OK] Fichier OH-Route v1.1.exe présent"
+if [ -f "OH-Route v1.1.rar" ]; then
+    echo "    [OK] Fichier OH-Route v1.1.rar présent"
 else
-    echo "    [ATTENTION] Fichier OH-Route v1.1.exe manquant"
-    echo "    Placez le vrai fichier exécutable dans ce répertoire"
+    echo "    [ATTENTION] Fichier OH-Route v1.1.rar manquant"
+    echo "    Placez le vrai fichier RAR dans ce répertoire"
 fi
 echo
 
@@ -32,7 +32,7 @@ echo "    Configuration terminée !"
 echo "========================================"
 echo
 echo "Prochaines étapes :"
-echo "1. Remplacer le fichier placeholder par le vrai exécutable"
+echo "1. Remplacer le fichier placeholder par le vrai fichier RAR"
 echo "2. Tester le téléchargement sur la page des logiciels"
 echo "3. Vérifier que le bouton affiche 'Télécharger'"
 echo

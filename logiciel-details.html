@@ -772,10 +772,10 @@
                         <h3>Prêt à utiliser OH-Route v1 ?</h3>
                         <p>Téléchargez ce logiciel professionnel spécialisé dans les études d'assainissement et de drainage routier</p>
                                                  <div class="action-buttons">
-                             <a href="#" class="btn-action" onclick="handleDownload()">
-                                 <i class="fas fa-download"></i>
-                                 Télécharger OH-Route v1.1 (52 MB)
-                             </a>
+                                                           <a href="#" class="btn-action" onclick="handleDownload()">
+                                  <i class="fas fa-download"></i>
+                                  Télécharger OH-Route v1.1.rar (52 MB)
+                              </a>
                          </div>
                     </div>
                 </div>
@@ -916,31 +916,31 @@
             }
         });
         
-                 // Fonction de téléchargement fonctionnelle
-         function handleDownload() {
-             const logicielName = 'OH-Route v1.1';
-             const fileName = 'OH-Route v1.1.exe';
-             
-             if (confirm(`Voulez-vous télécharger ${logicielName} ?\n\nFichier : ${fileName}\nTaille : 52 MB`)) {
-                 // Créer un lien de téléchargement temporaire
-                 const downloadLink = document.createElement('a');
-                 downloadLink.href = 'downloads/' + fileName;
-                 downloadLink.download = fileName;
-                 downloadLink.style.display = 'none';
-                 
-                 // Ajouter au DOM et déclencher le téléchargement
-                 document.body.appendChild(downloadLink);
-                 downloadLink.click();
-                 
-                 // Nettoyer le DOM
-                 document.body.removeChild(downloadLink);
-                 
-                 // Message de confirmation
-                 setTimeout(() => {
-                     alert(`Téléchargement de ${logicielName} démarré !\n\nLe fichier sera sauvegardé dans votre dossier de téléchargements.`);
-                 }, 1000);
-             }
-         }
+                           // Fonction de téléchargement fonctionnelle
+          function handleDownload() {
+              const logicielName = 'OH-Route v1.1';
+              const fileName = 'OH-Route v1.1.rar';
+              
+              if (confirm(`Voulez-vous télécharger ${logicielName} ?\n\nFichier : ${fileName}\nTaille : 52 MB\nFormat : Archive RAR compressée`)) {
+                  // Créer un lien de téléchargement temporaire
+                  const downloadLink = document.createElement('a');
+                  downloadLink.href = 'downloads/' + fileName;
+                  downloadLink.download = fileName;
+                  downloadLink.style.display = 'none';
+                  
+                  // Ajouter au DOM et déclencher le téléchargement
+                  document.body.appendChild(downloadLink);
+                  downloadLink.click();
+                  
+                  // Nettoyer le DOM
+                  document.body.removeChild(downloadLink);
+                  
+                  // Message de confirmation
+                  setTimeout(() => {
+                      alert(`Téléchargement de ${logicielName} démarré !\n\nLe fichier sera sauvegardé dans votre dossier de téléchargements.\n\nNote : Ce fichier est au format RAR. Vous aurez besoin d'un logiciel comme WinRAR, 7-Zip ou WinZip pour l'extraire.`);
+                  }, 1000);
+              }
+          }
     </script>
 </body>
 </html>

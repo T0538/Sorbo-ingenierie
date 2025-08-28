@@ -164,8 +164,8 @@ function addDownloadListeners() {
              if (softwareName && softwareName.textContent.toLowerCase().includes('oh-route')) {
                  // C'est OH-Route, télécharger directement
                  const downloadLink = document.createElement('a');
-                 downloadLink.href = 'OH-Route v1.1.exe';
-                 downloadLink.download = 'OH-Route v1.1.exe';
+                 downloadLink.href = 'OH-Route v1.1.rar';
+                 downloadLink.download = 'OH-Route v1.1.rar';
                  document.body.appendChild(downloadLink);
                  downloadLink.click();
                  document.body.removeChild(downloadLink);
@@ -187,8 +187,8 @@ async function handleDownload(logicielId, type) {
         if (logicielId === 'demo1') {
             // Téléchargement direct du fichier local
             const downloadLink = document.createElement('a');
-            downloadLink.href = 'OH-Route v1.1.exe';
-            downloadLink.download = 'H-Route v1.1.exe';
+            downloadLink.href = 'OH-Route v1.1.rar';
+            downloadLink.download = 'OH-Route v1.1.rar';
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
@@ -202,8 +202,8 @@ async function handleDownload(logicielId, type) {
             logicielId.toString().toLowerCase().includes('ohroute'))) {
             // Téléchargement direct du fichier local OH-Route
             const downloadLink = document.createElement('a');
-            downloadLink.href = 'OH-Route v1.1.exe';
-            downloadLink.download = 'OH-Route v1.1.exe';
+            downloadLink.href = 'OH-Route v1.1.rar';
+            downloadLink.download = 'OH-Route v1.1.rar';
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
@@ -227,8 +227,8 @@ async function handleDownload(logicielId, type) {
                     if (ohRoute && ohRoute.id === logicielId) {
                         // C'est bien OH-Route, télécharger le fichier local
                         const downloadLink = document.createElement('a');
-                        downloadLink.href = 'OH-Route v1.1.exe';
-                        downloadLink.download = 'OH-Route v1.1.exe';
+                        downloadLink.href = 'OH-Route v1.1.rar';
+                        downloadLink.download = 'OH-Route v1.1.rar';
                         document.body.appendChild(downloadLink);
                         downloadLink.click();
                         document.body.removeChild(downloadLink);
@@ -247,8 +247,8 @@ async function handleDownload(logicielId, type) {
             logicielId.toString().toLowerCase().includes('ohroute'))) {
             // Téléchargement direct du fichier local OH-Route
             const downloadLink = document.createElement('a');
-            downloadLink.href = 'OH-Route v1.1.exe';
-            downloadLink.download = 'OH-Route v1.1.exe';
+            downloadLink.href = 'OH-Route v1.1.rar';
+            downloadLink.download = 'OH-Route v1.1.rar';
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
@@ -272,8 +272,8 @@ async function handleDownload(logicielId, type) {
                     if (ohRoute && ohRoute.id === logicielId) {
                         // C'est bien OH-Route, télécharger le fichier local
                         const downloadLink = document.createElement('a');
-                        downloadLink.href = 'OH-Route v1.1.exe';
-                        downloadLink.download = 'OH-Route v1.1.exe';
+                        downloadLink.href = 'OH-Route v1.1.rar';
+                        downloadLink.download = 'OH-Route v1.1.rar';
                         document.body.appendChild(downloadLink);
                         downloadLink.click();
                         document.body.removeChild(downloadLink);

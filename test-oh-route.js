@@ -49,15 +49,15 @@ async function testOHRoute() {
         const fs = require('fs');
         const path = require('path');
         
-        const downloadPath = path.join(__dirname, 'OH-Route v1.1.exe');
+        const downloadPath = path.join(__dirname, 'OH-Route v1.1.rar');
         if (fs.existsSync(downloadPath)) {
             const stats = fs.statSync(downloadPath);
-            console.log('   ✅ Fichier OH-Route v1.1.exe trouvé');
+            console.log('   ✅ Fichier OH-Route v1.1.rar trouvé');
             console.log(`   📝 Taille: ${(stats.size / 1024).toFixed(2)} KB`);
             console.log(`   📝 Dernière modification: ${stats.mtime.toLocaleString()}`);
         } else {
-            console.log('   ❌ Fichier OH-Route v1.1.exe non trouvé');
-            console.log('   💡 Placez le fichier exécutable dans ce répertoire');
+            console.log('   ❌ Fichier OH-Route v1.1.rar non trouvé');
+            console.log('   💡 Placez le fichier RAR dans ce répertoire');
         }
         console.log('');
         
@@ -73,7 +73,7 @@ async function testOHRoute() {
                 console.log('   ❌ Logique de disponibilité ne semble pas inclure OH-Route');
             }
             
-            if (content.includes('OH-Route v1.1.exe')) {
+            if (content.includes('OH-Route v1.1.rar')) {
                 console.log('   ✅ Lien de téléchargement configuré');
             } else {
                 console.log('   ❌ Lien de téléchargement non configuré');
@@ -87,7 +87,7 @@ async function testOHRoute() {
         console.log('5️⃣ Résumé des tests...');
         if (ohRoute && ohRoute.disponible && fs.existsSync(downloadPath)) {
             console.log('   🎉 Tous les tests sont passés !');
-            console.log('   📥 OH-Route devrait être disponible au téléchargement');
+            console.log('   📥 OH-Route devrait être disponible au téléchargement (format RAR)');
         } else {
             console.log('   ⚠️ Certains tests ont échoué');
             console.log('   🔧 Vérifiez la configuration');

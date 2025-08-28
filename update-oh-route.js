@@ -38,7 +38,7 @@ async function updateOHRoute() {
                 {
                                          $set: {
                          disponible: true,
-                         lienTelechargement: '/OH-Route v1.1.exe',
+                         lienTelechargement: '/OH-Route v1.1.rar',
                          version: '1.0',
                         categorie: 'hydrologie',
                         fonctionnalites: [
@@ -78,7 +78,7 @@ async function updateOHRoute() {
                 prix: 0,
                 devise: 'FCFA',
                 image: '/images/logiciels/oh-route.png',
-                                 lienTelechargement: '/OH-Route v1.1.exe',
+                                 lienTelechargement: '/OH-Route v1.1.rar',
                 lienDemo: null,
                 fonctionnalites: [
                     'Études hydrologiques',
