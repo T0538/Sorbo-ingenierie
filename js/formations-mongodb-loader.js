@@ -13,7 +13,7 @@ class FormationsMongoDBLoader {
         try {
             console.log('🎓 Chargement des formations depuis MongoDB Atlas...');
             
-            const response = await fetch(`${this.apiBaseUrl}/api/formations`, {
+            const response = await fetch(`${this.apiBaseUrl}/api/formations?limit=50`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',

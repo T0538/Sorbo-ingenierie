@@ -10,8 +10,8 @@ exports.getFormations = async (req, res) => {
     const limit = parseInt(req.query.limit, 10) || 10;
     const startIndex = (page - 1) * limit;
     
-    // Filtres
-    const filter = { active: true };
+    // Filtres (suppression du filtre active pour afficher toutes les formations)
+    const filter = {};
     
     if (req.query.category) {
       filter.category = req.query.category;
