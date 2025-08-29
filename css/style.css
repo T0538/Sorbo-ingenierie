@@ -1047,10 +1047,21 @@ footer h3::after {
 /* ===================== LOGICIELS MODERN CARDS ===================== */
 .software-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 900px;
+  margin: 0;
+  justify-content: start;
+  align-items: start;
+}
+
+/* Responsive: 1 colonne sur mobile */
+@media (max-width: 768px) {
+  .software-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 400px;
+  }
 }
 
 .modern-card {

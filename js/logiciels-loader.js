@@ -120,7 +120,7 @@ function createLogicielCard(logiciel, index, total) {
         : '';
 
     return `
-      <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}" style="background: #ffffff; border-radius: 12px; box-shadow: 0 6px 25px rgba(20,20,40,0.08); overflow: hidden; display: grid; grid-template-columns: 1fr; max-width: 400px; margin: 0 auto 20px auto;">
+      <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}" style="background: #ffffff; border-radius: 12px; box-shadow: 0 6px 25px rgba(20,20,40,0.08); overflow: hidden; display: grid; grid-template-columns: 1fr; max-width: 400px; margin: 0 0 20px 0; width: 100%;">
         <!-- Illustration / media -->
         <div class="software-media" style="background: transparent; padding: 0; overflow: hidden; position: relative; z-index: 1;">
           <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:200px; object-fit:cover; display:block;">
