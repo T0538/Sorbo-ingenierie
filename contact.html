@@ -148,6 +148,47 @@
             cursor: pointer;
         }
         
+        /* Styles pour l'alerte de formation */
+        .formation-info-alert {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196f3;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.15);
+        }
+        
+        .formation-info-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .formation-info-content i {
+            font-size: 2rem;
+            color: #2196f3;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+        }
+        
+        .formation-details h4 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+            font-size: 1.1rem;
+        }
+        
+        .formation-price {
+            margin: 0;
+            color: #1565c0;
+            font-size: 1rem;
+        }
+        
+        .formation-price strong {
+            color: #d10000;
+        }
+        
         .map-container {
             grid-column: 1 / -1;
             height: 400px;
@@ -870,8 +911,55 @@
             const params = new URLSearchParams(window.location.search);
             const subjectParam = (params.get('subject') || '').toLowerCase();
             const fromParam = (params.get('from') || '').toLowerCase();
+            const formationParam = params.get('formation');
+            const prixParam = params.get('prix');
 
-            if (subjectParam === 'rendezvous' || subjectParam === 'rdv') {
+            // Gestion des paramètres de formation
+            if (formationParam && prixParam) {
+                // Pré-remplir le sujet avec "Formation"
+                subjectSelect.value = 'formation';
+                toggleFields();
+
+                // Créer et afficher l'info de formation
+                const formationInfo = document.createElement('div');
+                formationInfo.className = 'formation-info-alert';
+                formationInfo.innerHTML = `
+                    <div class="formation-info-content">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="formation-details">
+                            <h4>Formation sélectionnée : ${formationParam}</h4>
+                            <p class="formation-price"><strong>Prix : ${prixParam} FCFA</strong></p>
+                        </div>
+                    </div>
+                `;
+                
+                // Insérer avant le formulaire
+                const contactForm = document.querySelector('.contact-form');
+                if (contactForm) {
+                    contactForm.insertBefore(formationInfo, contactForm.querySelector('h3'));
+                }
+
+                // Pré-remplir le type de formation si possible
+                const formationTypeSelect = document.getElementById('formation-type');
+                if (formationTypeSelect) {
+                    const formationLower = formationParam.toLowerCase();
+                    if (formationLower.includes('autocad')) formationTypeSelect.value = 'autocad';
+                    else if (formationLower.includes('covadis')) formationTypeSelect.value = 'covadis';
+                    else if (formationLower.includes('robot')) formationTypeSelect.value = 'robot';
+                    else if (formationLower.includes('revit')) formationTypeSelect.value = 'revit';
+                    else if (formationLower.includes('genie-civil')) formationTypeSelect.value = 'genie-civil';
+                    else if (formationLower.includes('hydraulique')) formationTypeSelect.value = 'hydraulique';
+                    else formationTypeSelect.value = 'autre-form';
+                }
+
+                // Pré-remplir le message avec le contexte de formation
+                const message = document.getElementById('message');
+                if (message && !message.value) {
+                    message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (${prixParam} FCFA).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                }
+            }
+            // Gestion des paramètres de rendez-vous
+            else if (subjectParam === 'rendezvous' || subjectParam === 'rdv') {
                 subjectSelect.value = 'rendezvous';
                 toggleFields();
 
