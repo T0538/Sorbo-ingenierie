@@ -623,6 +623,7 @@
     </div>
 
     <!-- Scripts pour le chargement des formations depuis MongoDB Atlas -->
+    <script src="js/script.js"></script>
     <script src="js/formations-mongodb-loader.js"></script>
     <script src="js/backend-integration.js"></script>
     
@@ -642,20 +643,8 @@
             setInterval(()=>{ index = (index+1)%slides.length; show(index); }, 6000);
         });
         
-        // Menu mobile et dropdowns
-        document.addEventListener('DOMContentLoaded', () => {
-            const btn = document.querySelector('.mobile-menu-btn');
-            const nav = document.querySelector('.main-nav');
-            if (btn) btn.addEventListener('click', () => {
-                nav.classList.toggle('active');
-                const exp = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', (!exp).toString());
-            });
-            document.querySelectorAll('.dropdown > a').forEach(a => {
-                const menu = a.parentElement.querySelector('.dropdown-menu');
-                a.addEventListener('click', e => { e.preventDefault(); menu.classList.toggle('show'); });
-            });
-        });
+        // Note: Menu mobile géré par js/script.js
+        console.log('📱 Menu mobile géré par js/script.js');
         
         // Fonctions pour le modal d'inscription
         function openInscriptionForm(formationTitle, prix) {

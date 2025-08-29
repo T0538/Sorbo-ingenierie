@@ -454,21 +454,10 @@
             dots.forEach(d=>d.addEventListener('click',()=>{ index = Number(d.dataset.index); show(index);}));
             setInterval(()=>{ index = (index+1)%slides.length; show(index); }, 6000);
         });
-        // menu mobile & dropdowns multiples
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileBtn = document.querySelector('.mobile-menu-btn');
-            const mainNav = document.querySelector('.main-nav');
-            if (mobileBtn) mobileBtn.addEventListener('click', () => {
-                mainNav.classList.toggle('active');
-                const expanded = mobileBtn.getAttribute('aria-expanded') === 'true';
-                mobileBtn.setAttribute('aria-expanded', (!expanded).toString());
-            });
-            document.querySelectorAll('.dropdown > a').forEach(a => {
-                const menu = a.parentElement.querySelector('.dropdown-menu');
-                a.addEventListener('click', e => { e.preventDefault(); menu.classList.toggle('show'); });
-            });
-        });
+        // Note: Menu mobile géré par js/script.js
+        console.log('📱 Menu mobile géré par js/script.js');
     </script>
+    <script src="js/script.js"></script>
     <script src="js/hero-banner-navigation.js"></script>
 </body>
 </html>
