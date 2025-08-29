@@ -70,18 +70,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Dropdown menus on mobile
     const dropdowns = document.querySelectorAll('.dropdown');
+    console.log('📱 Dropdowns trouvés:', dropdowns.length);
     
-    dropdowns.forEach(dropdown => {
+    dropdowns.forEach((dropdown, index) => {
         const dropdownToggle = dropdown.querySelector('a');
         const dropdownMenu = dropdown.querySelector('.dropdown-menu');
         
+        console.log(`📱 Dropdown ${index + 1}:`, {
+            toggle: !!dropdownToggle,
+            menu: !!dropdownMenu,
+            toggleText: dropdownToggle ? dropdownToggle.textContent.trim() : 'N/A'
+        });
+        
         if (dropdownToggle && dropdownMenu) {
             dropdownToggle.addEventListener('click', function(e) {
+                console.log('🖱️ Clic sur dropdown:', this.textContent.trim());
+                
                 if (window.innerWidth <= 992) {
                     e.preventDefault();
+                    console.log('📱 Mode mobile détecté, gestion du dropdown');
+                    
+                    // Fermer tous les autres dropdowns d'abord
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                            if (otherMenu) {
+                                otherMenu.classList.remove('show');
+                                const otherToggle = otherDropdown.querySelector('a');
+                                if (otherToggle) {
+                                    otherToggle.setAttribute('aria-expanded', 'false');
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Toggle du dropdown actuel
                     dropdownMenu.classList.toggle('show');
                     const isExpanded = this.getAttribute('aria-expanded') === 'true';
                     this.setAttribute('aria-expanded', !isExpanded);
+                    
+                    console.log('📱 Dropdown état:', dropdownMenu.classList.contains('show') ? 'OUVERT' : 'FERMÉ');
+                } else {
+                    console.log('📱 Mode desktop, comportement normal');
                 }
             });
         }
