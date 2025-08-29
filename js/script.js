@@ -13,14 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const mainNav = document.querySelector('.main-nav');
 
+    console.log('📱 Éléments menu mobile trouvés:', { mobileMenuBtn: !!mobileMenuBtn, mainNav: !!mainNav });
+
     if (mobileMenuBtn && mainNav) {
-        mobileMenuBtn.addEventListener('click', function() {
+        console.log('✅ Configuration du menu mobile...');
+        
+        mobileMenuBtn.addEventListener('click', function(e) {
+            console.log('🖱️ Clic sur le bouton menu mobile');
+            e.preventDefault();
+            
             mainNav.classList.toggle('active');
             this.classList.toggle('active');
             
             // Mise à jour de l'attribut aria-expanded
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !isExpanded);
+            
+            console.log('📱 Menu mobile état:', mainNav.classList.contains('active') ? 'OUVERT' : 'FERMÉ');
         });
 
         // Fermer le menu quand on clique sur un lien

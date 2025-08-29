@@ -1039,47 +1039,8 @@
             // Écouter les changements sur le select du sujet
             subjectSelect.addEventListener('change', toggleFields);
             
-            // Gestion du menu mobile
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mainNav = document.querySelector('.main-nav');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                    this.classList.toggle('active');
-                    
-                    // Mise à jour de l'attribut aria-expanded
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !isExpanded);
-                });
-            }
-            
-            // Gestion des liens du menu mobile
-            const navLinks = document.querySelectorAll('.main-nav a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        if (mobileMenuBtn) {
-                            mobileMenuBtn.classList.remove('active');
-                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                        }
-                    }
-                });
-            });
-            
-            // Gestion du menu déroulant sur mobile
-            const dropdownToggle = document.querySelector('.dropdown > a');
-            if (dropdownToggle) {
-                const dropdownMenu = document.querySelector('.dropdown-menu');
-                
-                dropdownToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    dropdownMenu.classList.toggle('show');
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !isExpanded);
-                });
-            }
+            // Note: La gestion du menu mobile est gérée par js/script.js
+            console.log('📱 Menu mobile géré par js/script.js');
 
             // Hero Banner Carousel
             if (document.querySelector('.hero-banner')) {
