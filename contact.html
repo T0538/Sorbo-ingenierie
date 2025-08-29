@@ -914,13 +914,23 @@
             const formationParam = params.get('formation');
             const prixParam = params.get('prix');
 
+            // Debug: Afficher les paramètres dans la console
+            console.log('🔍 Paramètres URL détectés:', {
+                formation: formationParam,
+                prix: prixParam,
+                subject: subjectParam,
+                from: fromParam
+            });
+
             // Gestion des paramètres de formation
             if (formationParam && prixParam) {
+                console.log('✅ Paramètres de formation détectés, traitement en cours...');
                 // Pré-remplir le sujet avec "Formation"
                 subjectSelect.value = 'formation';
                 toggleFields();
 
                 // Créer et afficher l'info de formation
+                console.log('🎨 Création de l\'alerte de formation...');
                 const formationInfo = document.createElement('div');
                 formationInfo.className = 'formation-info-alert';
                 formationInfo.innerHTML = `
@@ -936,7 +946,11 @@
                 // Insérer avant le formulaire
                 const contactForm = document.querySelector('.contact-form');
                 if (contactForm) {
+                    console.log('✅ Conteneur de formulaire trouvé, insertion de l\'alerte...');
                     contactForm.insertBefore(formationInfo, contactForm.querySelector('h3'));
+                    console.log('✅ Alerte de formation insérée avec succès !');
+                } else {
+                    console.error('❌ Conteneur de formulaire non trouvé !');
                 }
 
                 // Pré-remplir le type de formation si possible
