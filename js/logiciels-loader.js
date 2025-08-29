@@ -120,32 +120,32 @@ function createLogicielCard(logiciel, index, total) {
         : '';
 
     return `
-      <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}" style="background: #ffffff; border-radius: 14px; box-shadow: 0 8px 30px rgba(20,20,40,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr; max-width: 820px; margin: 0 auto 18px auto;">
+      <article class="software-card" aria-label="${nom}" data-logiciel-id="${logiciel.id}" style="background: #ffffff; border-radius: 12px; box-shadow: 0 6px 25px rgba(20,20,40,0.08); overflow: hidden; display: grid; grid-template-columns: 1fr; max-width: 400px; margin: 0 auto 20px auto;">
         <!-- Illustration / media -->
         <div class="software-media" style="background: transparent; padding: 0; overflow: hidden; position: relative; z-index: 1;">
-          <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:240px; object-fit:cover; display:block;">
+          <img src="${headerImage}" alt="Illustration ${nom}" style="width:100%; height:200px; object-fit:cover; display:block;">
         </div>
 
         <!-- Contenu -->
-        <div class="software-content" style="padding: 22px 28px; text-align: left; position: relative; z-index: 2;">
+        <div class="software-content" style="padding: 20px 24px; text-align: left; position: relative; z-index: 2;">
           <!-- Logo + Nom alignés horizontalement à gauche (sans cadre, sans ombre) -->
-          <header class="software-header" style="display:flex; align-items:center; justify-content:flex-start; gap:10px; margin: 8px 0 12px 0; padding: 0; background: transparent; box-shadow: none; border: none;">
-            <img src="${image}" alt="Logo ${nom}" class="software-logo">
-            <div class="software-title"><strong>${nom}</strong></div>
+          <header class="software-header" style="display:flex; align-items:center; justify-content:flex-start; gap:8px; margin: 6px 0 10px 0; padding: 0; background: transparent; box-shadow: none; border: none;">
+            <img src="${image}" alt="Logo ${nom}" class="software-logo" style="width: 36px; height: 36px; object-fit: contain; border-radius: 6px;">
+            <div class="software-title" style="font-size: 1.25rem; font-weight: 700; color: #1f2937;"><strong>${nom}</strong></div>
           </header>
 
-          <div class="software-category" style="color:#6b7280; font-size:0.95rem; margin-bottom:14px; font-weight:600;">Eau et Assainissement • 2025</div>
+          <div class="software-category" style="color:#6b7280; font-size:0.85rem; margin-bottom:12px; font-weight:500;">Eau et Assainissement</div>
 
-          <p class="software-description" style="color:#334155; line-height:1.6; font-size:1.02rem; margin-bottom:18px;">
+          <p class="software-description" style="color:#374155; line-height:1.5; font-size:0.95rem; margin-bottom:16px;">
             ${description}
           </p>
 
-          <div class="software-buttons" style="display:flex; flex-wrap:wrap; gap:10px; position: relative; z-index: 3;">
+          <div class="software-buttons" style="display:flex; flex-direction:column; gap:8px; position: relative; z-index: 3;">
             ${isDisponible 
-              ? '<a href="#" class="btn btn-primary download-btn" data-logiciel-id="' + logiciel.id + '" style="padding:10px 16px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-weight:600; cursor:pointer; background:#d10000; color:white; box-shadow: 0 4px 12px rgba(209,0,0,0.15); font-size:0.95rem; pointer-events:auto;"><i class="fas fa-download"></i> Télécharger</a>'
-              : '<button class="btn btn-primary" disabled style="padding:10px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:8px; font-weight:600; opacity: 0.6; cursor: not-allowed; background:#d10000; color:white; font-size:0.95rem; pointer-events:auto;"><i class="fas fa-clock"></i> En cours de développement</button>'
+              ? '<a href="#" class="btn btn-primary download-btn" data-logiciel-id="' + logiciel.id + '" style="padding:8px 14px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; cursor:pointer; background:#d10000; color:white; box-shadow: 0 3px 10px rgba(209,0,0,0.15); font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-download"></i> Télécharger</a>'
+              : '<button class="btn btn-primary" disabled style="padding:8px 14px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; opacity: 0.6; cursor: not-allowed; background:#d10000; color:white; font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-clock"></i> En cours de développement</button>'
             }
-            <a href="logiciel-details.html" class="btn btn-secondary" style="padding:10px 16px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-weight:600; cursor:pointer; background:white; color:#111827; border:1px solid #e6e9ee; font-size:0.95rem; pointer-events:auto;"><i class="fas fa-info-circle"></i> Consulter les informations</a>
+            <a href="logiciel-details.html" class="btn btn-secondary" style="padding:8px 14px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; cursor:pointer; background:white; color:#374155; border:1px solid #d1d5db; font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-info-circle"></i> Infos</a>
           </div>
         </div>
       </article>
