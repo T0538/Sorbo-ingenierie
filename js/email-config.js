@@ -9,7 +9,7 @@ const EMAIL_CONFIG = {
                 contact: 'https://formspree.io/f/mldwgbbp',
     candidature: 'https://formspree.io/f/VOTRE_FORM_ID_CANDIDATURE', 
     devis: 'https://formspree.io/f/VOTRE_FORM_ID_DEVIS',
-    newsletter: 'https://formspree.io/f/VOTRE_FORM_ID_NEWSLETTER',
+    newsletter: 'https://formspree.io/f/xzzadraj',
     
     // Configuration alternative : EmailJS (si vous préférez)
     emailjs: {
