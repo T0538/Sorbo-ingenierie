@@ -863,35 +863,38 @@
     <script>
         // Page Loader
         window.addEventListener('load', function() {
-
             // Animation de la barre de progression
-            if (progressBar) {
-                
+            if (typeof progressBar !== 'undefined' && progressBar) {
                 setTimeout(() => {
-                    
+                    // Animation de la barre
                 }, 100);
             }
             
             // Attendre un minimum de 2 secondes pour l'effet visuel
             setTimeout(function() {
-
                 // Supprimer complètement le loader après la transition
                 setTimeout(function() {
-                    
+                    // Transition terminée
                 }, 500);
             }, 2000);
         });
 
-        );
-
         // JavaScript pour le formulaire de contact dynamique
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM chargé, initialisation du formulaire...');
+            
             const subjectSelect = document.getElementById('subject');
             const dynamicFields = document.querySelectorAll('.dynamic-fields');
+            
+            if (!subjectSelect) {
+                console.error('❌ Élément subject non trouvé');
+                return;
+            }
             
             // Fonction pour afficher les champs en fonction du sujet sélectionné
             function toggleFields() {
                 const selectedValue = subjectSelect.value;
+                console.log('🔄 Changement de sujet:', selectedValue);
                 
                 // Cacher tous les champs dynamiques d'abord
                 dynamicFields.forEach(fields => {
@@ -903,111 +906,136 @@
                     const fieldsToShow = document.getElementById(selectedValue + '-fields');
                     if (fieldsToShow) {
                         fieldsToShow.style.display = 'block';
+                        console.log('✅ Champs affichés pour:', selectedValue);
                     }
                 }
             }
             
-            // Pré-remplissage via paramètres d'URL (rendez-vous depuis Ingénierie)
-            const params = new URLSearchParams(window.location.search);
-            const subjectParam = (params.get('subject') || '').toLowerCase();
-            const fromParam = (params.get('from') || '').toLowerCase();
-            const formationParam = params.get('formation');
-            const prixParam = params.get('prix');
+            // Fonction pour traiter les paramètres de formation
+            function processFormationParams() {
+                // Pré-remplissage via paramètres d'URL
+                const params = new URLSearchParams(window.location.search);
+                const subjectParam = (params.get('subject') || '').toLowerCase();
+                const fromParam = (params.get('from') || '').toLowerCase();
+                const formationParam = params.get('formation');
+                const prixParam = params.get('prix');
 
-            // Debug: Afficher les paramètres dans la console
-            console.log('🔍 Paramètres URL détectés:', {
-                formation: formationParam,
-                prix: prixParam,
-                subject: subjectParam,
-                from: fromParam
-            });
+                // Debug: Afficher les paramètres dans la console
+                console.log('🔍 Paramètres URL détectés:', {
+                    formation: formationParam,
+                    prix: prixParam,
+                    subject: subjectParam,
+                    from: fromParam
+                });
 
-            // Gestion des paramètres de formation
-            if (formationParam && prixParam) {
-                console.log('✅ Paramètres de formation détectés, traitement en cours...');
-                // Pré-remplir le sujet avec "Formation"
-                subjectSelect.value = 'formation';
-                toggleFields();
+                // Gestion des paramètres de formation
+                if (formationParam && prixParam) {
+                    console.log('✅ Paramètres de formation détectés, traitement en cours...');
+                    
+                    // Pré-remplir le sujet avec "Formation"
+                    subjectSelect.value = 'formation';
+                    toggleFields();
 
-                // Créer et afficher l'info de formation
-                console.log('🎨 Création de l\'alerte de formation...');
-                const formationInfo = document.createElement('div');
-                formationInfo.className = 'formation-info-alert';
-                formationInfo.innerHTML = `
-                    <div class="formation-info-content">
-                        <i class="fas fa-graduation-cap"></i>
-                        <div class="formation-details">
-                            <h4>Formation sélectionnée : ${formationParam}</h4>
-                            <p class="formation-price"><strong>Prix : ${prixParam} FCFA</strong></p>
+                    // Créer et afficher l'info de formation
+                    console.log('🎨 Création de l\'alerte de formation...');
+                    const formationInfo = document.createElement('div');
+                    formationInfo.className = 'formation-info-alert';
+                    formationInfo.innerHTML = `
+                        <div class="formation-info-content">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div class="formation-details">
+                                <h4>Formation sélectionnée : ${formationParam}</h4>
+                                <p class="formation-price"><strong>Prix : ${prixParam} FCFA</strong></p>
+                            </div>
                         </div>
-                    </div>
-                `;
-                
-                // Insérer avant le formulaire
-                const contactForm = document.querySelector('.contact-form');
-                if (contactForm) {
-                    console.log('✅ Conteneur de formulaire trouvé, insertion de l\'alerte...');
-                    contactForm.insertBefore(formationInfo, contactForm.querySelector('h3'));
-                    console.log('✅ Alerte de formation insérée avec succès !');
-                } else {
-                    console.error('❌ Conteneur de formulaire non trouvé !');
-                }
+                    `;
+                    
+                    // Insérer avant le formulaire
+                    const contactForm = document.querySelector('.contact-form');
+                    if (contactForm) {
+                        console.log('✅ Conteneur de formulaire trouvé, insertion de l\'alerte...');
+                        const formTitle = contactForm.querySelector('h3');
+                        if (formTitle) {
+                            contactForm.insertBefore(formationInfo, formTitle);
+                            console.log('✅ Alerte de formation insérée avec succès !');
+                        } else {
+                            console.error('❌ Titre du formulaire non trouvé');
+                        }
+                    } else {
+                        console.error('❌ Conteneur de formulaire non trouvé !');
+                    }
 
-                // Pré-remplir le type de formation si possible
-                const formationTypeSelect = document.getElementById('formation-type');
-                if (formationTypeSelect) {
-                    const formationLower = formationParam.toLowerCase();
-                    if (formationLower.includes('autocad')) formationTypeSelect.value = 'autocad';
-                    else if (formationLower.includes('covadis')) formationTypeSelect.value = 'covadis';
-                    else if (formationLower.includes('robot')) formationTypeSelect.value = 'robot';
-                    else if (formationLower.includes('revit')) formationTypeSelect.value = 'revit';
-                    else if (formationLower.includes('genie-civil')) formationTypeSelect.value = 'genie-civil';
-                    else if (formationLower.includes('hydraulique')) formationTypeSelect.value = 'hydraulique';
-                    else formationTypeSelect.value = 'autre-form';
-                }
+                    // Pré-remplir le type de formation si possible
+                    const formationTypeSelect = document.getElementById('formation-type');
+                    if (formationTypeSelect) {
+                        const formationLower = formationParam.toLowerCase();
+                        if (formationLower.includes('autocad')) formationTypeSelect.value = 'autocad';
+                        else if (formationLower.includes('covadis')) formationTypeSelect.value = 'covadis';
+                        else if (formationLower.includes('robot')) formationTypeSelect.value = 'robot';
+                        else if (formationLower.includes('revit')) formationTypeSelect.value = 'revit';
+                        else if (formationLower.includes('genie-civil')) formationTypeSelect.value = 'genie-civil';
+                        else if (formationLower.includes('hydraulique')) formationTypeSelect.value = 'hydraulique';
+                        else formationTypeSelect.value = 'autre-form';
+                        console.log('✅ Type de formation pré-rempli:', formationTypeSelect.value);
+                    }
 
-                // Pré-remplir le message avec le contexte de formation
-                const message = document.getElementById('message');
-                if (message && !message.value) {
-                    message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (${prixParam} FCFA).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                    // Pré-remplir le message avec le contexte de formation
+                    const message = document.getElementById('message');
+                    if (message && !message.value) {
+                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (${prixParam} FCFA).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                        console.log('✅ Message pré-rempli avec le contexte de formation');
+                    }
+                    
+                    // Scroll vers le formulaire
+                    setTimeout(() => {
+                        const formEl = document.getElementById('contact-form');
+                        if (formEl) {
+                            formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            console.log('✅ Scroll vers le formulaire effectué');
+                        }
+                    }, 500);
+                    
+                } else if (subjectParam === 'rendezvous' || subjectParam === 'rdv') {
+                    // Gestion des paramètres de rendez-vous
+                    console.log('📅 Paramètres de rendez-vous détectés');
+                    subjectSelect.value = 'rendezvous';
+                    toggleFields();
+
+                    // Préremplir le motif en fonction de la page d'origine
+                    const rdvMotif = document.getElementById('rdv-motif');
+                    if (rdvMotif) {
+                        if (fromParam === 'ingenierie') rdvMotif.value = 'ingenierie';
+                        else if (fromParam === 'formation') rdvMotif.value = 'formation';
+                        else if (fromParam === 'logiciel') rdvMotif.value = 'logiciel';
+                    }
+
+                    // Optionnel: proposer une date par défaut (demain)
+                    const rdvDate = document.getElementById('rdv-date');
+                    if (rdvDate && !rdvDate.value) {
+                        const d = new Date();
+                        d.setDate(d.getDate() + 1);
+                        const yyyy = d.getFullYear();
+                        const mm = String(d.getMonth() + 1).padStart(2, '0');
+                        const dd = String(d.getDate()).padStart(2, '0');
+                        rdvDate.value = `${yyyy}-${mm}-${dd}`;
+                    }
+
+                    // Pré-remplir le message pour contextualiser
+                    const message = document.getElementById('message');
+                    if (message && !message.value) {
+                        const origin = fromParam ? ` via la page ${fromParam}` : '';
+                        message.value = `Demande de rendez-vous${origin}. Merci de confirmer la date et l'heure proposées, ou de nous suggérer une alternative.`;
+                    }
+
+                    // Focus sur le formulaire
+                    const formEl = document.getElementById('contact-form');
+                    if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }
-            // Gestion des paramètres de rendez-vous
-            else if (subjectParam === 'rendezvous' || subjectParam === 'rdv') {
-                subjectSelect.value = 'rendezvous';
-                toggleFields();
-
-                // Préremplir le motif en fonction de la page d'origine
-                const rdvMotif = document.getElementById('rdv-motif');
-                if (rdvMotif) {
-                    if (fromParam === 'ingenierie') rdvMotif.value = 'ingenierie';
-                    else if (fromParam === 'formation') rdvMotif.value = 'formation';
-                    else if (fromParam === 'logiciel') rdvMotif.value = 'logiciel';
-                }
-
-                // Optionnel: proposer une date par défaut (demain)
-                const rdvDate = document.getElementById('rdv-date');
-                if (rdvDate && !rdvDate.value) {
-                    const d = new Date();
-                    d.setDate(d.getDate() + 1);
-                    const yyyy = d.getFullYear();
-                    const mm = String(d.getMonth() + 1).padStart(2, '0');
-                    const dd = String(d.getDate()).padStart(2, '0');
-                    rdvDate.value = `${yyyy}-${mm}-${dd}`;
-                }
-
-                // Pré-remplir le message pour contextualiser
-                const message = document.getElementById('message');
-                if (message && !message.value) {
-                    const origin = fromParam ? ` via la page ${fromParam}` : '';
-                    message.value = `Demande de rendez-vous${origin}. Merci de confirmer la date et l'heure proposées, ou de nous suggérer une alternative.`;
-                }
-
-                // Focus sur le formulaire
-                const formEl = document.getElementById('contact-form');
-                if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-
+            
+            // Traiter les paramètres immédiatement
+            processFormationParams();
+            
             // Écouter les changements sur le select du sujet
             subjectSelect.addEventListener('change', toggleFields);
             
@@ -1081,6 +1109,8 @@
                     showSlide(currentSlide);
                 }, 6000);
             }
+            
+            console.log('✅ Initialisation du formulaire terminée');
         });
     </script>
     <script src="js/hero-banner-navigation.js"></script>
