@@ -151,6 +151,12 @@ class ActualitesStatiques {
     container.innerHTML = actualites.map((actualite, index) => `
       <div class="news-card" data-aos="fade-up" data-aos-delay="${100 + (index * 100)}">
         <div class="news-image">
+          <!-- Image pour ${actualite.title} -->
+          <img src="" alt="${actualite.imageAlt || actualite.title}" loading="lazy" 
+               data-actualite-id="${actualite.id}" 
+               data-image-path="images/actualites/${actualite.id}.jpg"
+               style="display: none;">
+          <!-- Image de fallback temporaire -->
           <img src="${actualite.image || '/images/actualites/default.jpg'}" alt="${actualite.imageAlt || actualite.title}" loading="lazy">
         </div>
         <div class="news-content">
@@ -183,7 +189,13 @@ class ActualitesStatiques {
     container.innerHTML = actualites.map((actualite, index) => `
       <article class="blog-post" data-aos="fade-up" data-aos-delay="${index * 50}" data-category="${actualite.categorie.toLowerCase()}">
         <div class="blog-image">
-          <img src="${actualite.image || '/images/actualites/default.jpg'}" alt="${actualite.imageAlt || actualite.title}" loading="lazy" class="lazy-image">
+          <!-- Image pour ${actualite.title} -->
+          <img src="images/imag 16.jpg" alt="${actualite.imageAlt || actualite.title}" loading="lazy" class="lazy-image" 
+               data-actualite-id="${actualite.id}" 
+               data-image-path="images/actualites/${actualite.id}.jpg"
+               style="display: none;">
+          <!-- Image de fallback temporaire -->
+          <img src="${actualite.image || '/images/actualites/image1.jpg'}" alt="${actualite.imageAlt || actualite.title}" loading="lazy" class="lazy-image">
           <div class="blog-category-tag">${actualite.categorie}</div>
         </div>
         <div class="blog-content">
