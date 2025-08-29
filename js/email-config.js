@@ -5,8 +5,8 @@
 
 // Configuration Formspree (recommandé pour commencer)
 const EMAIL_CONFIG = {
-    // Remplacez ces URLs par celles de vos formulaires Formspree
-    contact: 'https://formspree.io/f/VOTRE_FORM_ID_CONTACT',
+                    // Remplacez ces URLs par celles de vos formulaires Formspree
+                contact: 'https://formspree.io/f/mldwgbbp',
     candidature: 'https://formspree.io/f/VOTRE_FORM_ID_CANDIDATURE', 
     devis: 'https://formspree.io/f/VOTRE_FORM_ID_DEVIS',
     newsletter: 'https://formspree.io/f/VOTRE_FORM_ID_NEWSLETTER',
