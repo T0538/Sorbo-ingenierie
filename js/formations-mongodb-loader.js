@@ -415,7 +415,7 @@ class FormationsMongoDBLoader {
                 </div>
                 
                 <div class="formation-actions">
-                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}" onclick="openInscriptionForm('${formation.title}', '${formation.price}')">
+                    <button class="btn primary-btn inscription-btn" data-formation-id="${formation._id}">
                         <i class="fas fa-user-plus"></i>
                         S'INSCRIRE MAINTENANT
                     </button>
