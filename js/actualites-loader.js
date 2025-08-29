@@ -491,19 +491,33 @@ console.log('✅ Script chargeur d\'actualités chargé');
 
 // Déclencher le chargement des actualités au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📰 Page chargée, démarrage du chargement des actualités...');
-    loadActualitesFromAPI();
+    // Ne pas charger si les actualités statiques sont disponibles
+    if (typeof actualitesManager === 'undefined') {
+        console.log('📰 Page chargée, démarrage du chargement des actualités via API...');
+        loadActualitesFromAPI();
+    } else {
+        console.log('📰 Actualités statiques disponibles, ignorer le chargement API');
+    }
 });
 
 // Fallback si DOMContentLoaded a déjà été déclenché
 if (document.readyState === 'loading') {
     // La page est encore en cours de chargement
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('📰 Page chargée (fallback), démarrage du chargement des actualités...');
-        loadActualitesFromAPI();
+        // Ne pas charger si les actualités statiques sont disponibles
+        if (typeof actualitesManager === 'undefined') {
+            console.log('📰 Page chargée (fallback), démarrage du chargement des actualités via API...');
+            loadActualitesFromAPI();
+        } else {
+            console.log('📰 Actualités statiques disponibles, ignorer le chargement API');
+        }
     });
 } else {
     // La page est déjà chargée
-    console.log('📰 Page déjà chargée, démarrage immédiat du chargement des actualités...');
-    loadActualitesFromAPI();
+    if (typeof actualitesManager === 'undefined') {
+        console.log('📰 Page déjà chargée, démarrage immédiat du chargement des actualités via API...');
+        loadActualitesFromAPI();
+    } else {
+        console.log('📰 Actualités statiques disponibles, ignorer le chargement API');
+    }
 }

@@ -11,7 +11,13 @@ class DynamicContentLoader {
         
         switch(currentPage) {
             case 'actualites':
-                await this.loadActualites();
+                // Ne pas charger si les actualités statiques sont disponibles
+                if (typeof actualitesManager === 'undefined') {
+                    console.log('📡 Chargement actualités page via API MongoDB');
+                    await this.loadActualites();
+                } else {
+                    console.log('📰 Actualités statiques déjà disponibles pour la page actualités');
+                }
                 break;
             case 'logiciels':
                 await this.loadLogiciels();
@@ -23,8 +29,13 @@ class DynamicContentLoader {
                 await this.loadFormations();
                 break;
             default:
-                // Page d'accueil - charger les dernières actualités
-                await this.loadLatestActualites();
+                // Page d'accueil - charger les dernières actualités seulement si pas de gestionnaire statique
+                if (typeof actualitesManager === 'undefined') {
+                    console.log('📡 Chargement actualités via API MongoDB');
+                    await this.loadLatestActualites();
+                } else {
+                    console.log('📰 Actualités statiques déjà disponibles, ignorer le chargement API');
+                }
                 break;
         }
     }

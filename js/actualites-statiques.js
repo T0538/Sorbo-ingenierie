@@ -147,8 +147,9 @@ class ActualitesStatiques {
       return;
     }
 
-    container.innerHTML = actualites.map(actualite => `
-      <div class="news-card" data-aos="fade-up" data-aos-delay="100">
+    // Utiliser le format compatible avec le CSS news-grid existant
+    container.innerHTML = actualites.map((actualite, index) => `
+      <div class="news-card" data-aos="fade-up" data-aos-delay="${100 + (index * 100)}">
         <div class="news-image">
           <img src="${actualite.image || '/images/actualites/default.jpg'}" alt="${actualite.imageAlt || actualite.title}" loading="lazy">
         </div>
@@ -156,7 +157,7 @@ class ActualitesStatiques {
           <span class="date">${this.formatDate(actualite.datePublication)}</span>
           <h3>${actualite.title}</h3>
           <p>${actualite.resume}</p>
-          <a href="/actualites.html#${actualite.slug}" class="text-btn">Lire la suite</a>
+          <a href="actualites.html#${actualite.slug}" class="text-btn">Lire la suite</a>
         </div>
       </div>
     `).join('');
@@ -178,25 +179,43 @@ class ActualitesStatiques {
       return;
     }
 
-    container.innerHTML = actualites.map(actualite => `
-      <article class="actualite-card" data-aos="fade-up">
-        <div class="actualite-image">
-          <img src="${actualite.image || '/images/actualites/default.jpg'}" alt="${actualite.imageAlt || actualite.title}" loading="lazy">
+    // Utiliser le format blog-post compatible avec le CSS existant
+    container.innerHTML = actualites.map((actualite, index) => `
+      <article class="blog-post" data-aos="fade-up" data-aos-delay="${index * 50}" data-category="${actualite.categorie.toLowerCase()}">
+        <div class="blog-image">
+          <img src="${actualite.image || '/images/actualites/default.jpg'}" alt="${actualite.imageAlt || actualite.title}" loading="lazy" class="lazy-image">
+          <div class="blog-category-tag">${actualite.categorie}</div>
         </div>
-        <div class="actualite-content">
-          <div class="actualite-meta">
-            <span class="actualite-date">${this.formatDate(actualite.datePublication)}</span>
-            <span class="actualite-categorie">${actualite.categorie}</span>
+        <div class="blog-content">
+          <h2 class="blog-title">${actualite.title}</h2>
+          <div class="blog-author">
+            <i class="fas fa-user"></i>
+            Par ${actualite.auteur}
           </div>
-          <h2 class="actualite-title">${actualite.title}</h2>
-          <p class="actualite-resume">${actualite.resume}</p>
-          <div class="actualite-tags">
-            ${actualite.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          <div class="reading-time">
+            <i class="fas fa-clock"></i>
+            ${this.calculateReadingTime(actualite.content)} min de lecture
           </div>
-          <a href="#${actualite.slug}" class="actualite-lien">Lire l'article complet</a>
+          <p class="blog-excerpt">${actualite.resume}</p>
+          <div class="blog-meta">
+            <span class="blog-date">
+              <i class="fas fa-calendar"></i>
+              ${this.formatDate(actualite.datePublication)}
+            </span>
+            <a href="#${actualite.slug}" class="read-more" onclick="openArticleModal('${actualite.id}')">
+              Lire la suite
+            </a>
+          </div>
         </div>
       </article>
     `).join('');
+  }
+
+  // Calculer le temps de lecture approximatif
+  calculateReadingTime(content) {
+    const wordsPerMinute = 200;
+    const wordCount = content.split(' ').length;
+    return Math.ceil(wordCount / wordsPerMinute);
   }
 }
 
