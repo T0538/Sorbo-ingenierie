@@ -18,12 +18,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mobileMenuBtn && mainNav) {
         console.log('✅ Configuration du menu mobile...');
         
+        // Debug: Vérifier l'état initial du menu
+        console.log('📱 État initial du menu:', {
+            mainNavClasses: mainNav.className,
+            mainNavStyle: mainNav.style.cssText,
+            mainNavComputedStyle: window.getComputedStyle(mainNav).display,
+            mainNavComputedVisibility: window.getComputedStyle(mainNav).visibility,
+            mainNavComputedOpacity: window.getComputedStyle(mainNav).opacity
+        });
+        
         mobileMenuBtn.addEventListener('click', function(e) {
             console.log('🖱️ Clic sur le bouton menu mobile');
             e.preventDefault();
             
+            // Debug: Vérifier l'état avant
+            console.log('📱 État AVANT toggle:', {
+                mainNavActive: mainNav.classList.contains('active'),
+                mainNavClasses: mainNav.className,
+                mainNavStyle: mainNav.style.cssText
+            });
+            
             mainNav.classList.toggle('active');
             this.classList.toggle('active');
+            
+            // Debug: Vérifier l'état après
+            console.log('📱 État APRÈS toggle:', {
+                mainNavActive: mainNav.classList.contains('active'),
+                mainNavClasses: mainNav.className,
+                mainNavStyle: mainNav.style.cssText
+            });
             
             // Mise à jour de l'attribut aria-expanded
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
