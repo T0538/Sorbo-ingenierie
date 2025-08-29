@@ -224,15 +224,46 @@ const actualitesManager = new ActualitesStatiques();
 
 // Auto-chargement selon la page
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('📰 ActualitesStatiques: DOMContentLoaded déclenché');
+  
   // Page d'accueil
-  if (document.getElementById('latest-actualites')) {
+  const homepageContainer = document.getElementById('latest-actualites');
+  if (homepageContainer) {
     console.log('🏠 Chargement des actualités pour la page d\'accueil');
     actualitesManager.displayLatestActualites();
+    
+    // Marquer le conteneur comme géré par les actualités statiques
+    homepageContainer.setAttribute('data-static-loaded', 'true');
   }
   
   // Page actualités
-  if (document.getElementById('actualites-container')) {
+  const newsPageContainer = document.getElementById('actualites-container');
+  if (newsPageContainer) {
     console.log('📰 Chargement des actualités pour la page actualités');
     actualitesManager.displayAllActualites();
+    
+    // Marquer le conteneur comme géré par les actualités statiques
+    newsPageContainer.setAttribute('data-static-loaded', 'true');
+    
+    // Forcer un re-affichage toutes les 2 secondes pendant 10 secondes pour contrer les écrasements
+    let attempts = 0;
+    const forceDisplay = setInterval(() => {
+      attempts++;
+      console.log(`🔄 ActualitesStatiques: Force affichage ${attempts}/5`);
+      
+      // Vérifier si le contenu a été écrasé
+      if (newsPageContainer.children.length === 0 || 
+          newsPageContainer.innerHTML.includes('loading-actualites') ||
+          newsPageContainer.innerHTML.includes('Chargement des actualités')) {
+        console.log('⚠️ ActualitesStatiques: Contenu écrasé détecté, restauration...');
+        actualitesManager.displayAllActualites();
+        newsPageContainer.setAttribute('data-static-loaded', 'true');
+      }
+      
+      if (attempts >= 5) {
+        clearInterval(forceDisplay);
+        console.log('✅ ActualitesStatiques: Protection terminée');
+      }
+    }, 2000);
   }
 });

@@ -76,6 +76,12 @@ function displayActualites(actualites) {
         return;
     }
 
+    // Vérifier si le conteneur est déjà géré par les actualités statiques
+    if (container.getAttribute('data-static-loaded') === 'true') {
+        console.log('📰 Actualités statiques déjà chargées, ignorer l\'écrasement API');
+        return;
+    }
+
     container.innerHTML = '';
     
     // Afficher les 3 premières actualités
@@ -199,6 +205,11 @@ function displayNoActualites() {
 function displayError(message) {
     const container = document.getElementById('actualites-container');
     if (container) {
+        // Vérifier si le conteneur est déjà géré par les actualités statiques
+        if (container.getAttribute('data-static-loaded') === 'true') {
+            console.log('📰 Actualités statiques actives, ignorer l\'affichage d\'erreur API');
+            return;
+        }
         container.innerHTML = `
             <div class="error-message" style="text-align: center; padding: 40px; color: #e74c3c;">
                 <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>

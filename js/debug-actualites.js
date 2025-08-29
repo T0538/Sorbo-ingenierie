@@ -41,8 +41,39 @@ document.addEventListener('DOMContentLoaded', function() {
       if (newsPageContainer) {
         console.log('📰 DEBUG: Affichage forcé page actualités');
         actualitesManager.displayAllActualites();
+        
+        // Surveiller les changements de contenu
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+              console.log('🔍 DEBUG: Contenu du conteneur actualités modifié:', mutation);
+              console.log('🔍 DEBUG: Nouveau contenu:', newsPageContainer.innerHTML.substring(0, 100) + '...');
+            }
+          });
+        });
+        
+        observer.observe(newsPageContainer, { childList: true, subtree: true });
       }
     }, 1000);
+    
+    // Surveiller toutes les 5 secondes pendant 30 secondes
+    let checkInterval = 0;
+    const intervalId = setInterval(() => {
+      checkInterval++;
+      console.log(`🕒 DEBUG: Vérification ${checkInterval}/6`);
+      
+      if (newsPageContainer) {
+        console.log('📰 DEBUG: Contenu actuel:', newsPageContainer.children.length, 'éléments');
+        if (newsPageContainer.children.length === 0 || newsPageContainer.innerHTML.includes('loading-actualites')) {
+          console.log('⚠️ DEBUG: Contenu vide ou loader détecté');
+        }
+      }
+      
+      if (checkInterval >= 6) {
+        clearInterval(intervalId);
+        console.log('✅ DEBUG: Surveillance terminée');
+      }
+    }, 5000);
     
   } else {
     console.error('❌ DEBUG: actualitesManager non disponible');
