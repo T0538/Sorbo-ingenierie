@@ -1743,42 +1743,8 @@
             }
         });
         
-        // Gestion du menu mobile
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mainNav = document.querySelector('.main-nav');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            this.classList.toggle('active');
-            
-            // Mise à jour de l'attribut aria-expanded
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-        });
-        
-        // Gestion des liens du menu mobile
-        const navLinks = document.querySelectorAll('.main-nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.classList.remove('active');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-        
-        // Gestion du menu déroulant sur mobile
-        const dropdownToggles = document.querySelectorAll('.dropdown > a');
-        dropdownToggles.forEach(toggle => {
-            const menu = toggle.parentElement.querySelector('.dropdown-menu');
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                menu.classList.toggle('show');
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !isExpanded);
-            });
-        });
+        // Note: Gestion du menu mobile déplacée vers js/script.js pour éviter les conflits
+        console.log('🏠 Menu mobile géré par js/script.js');
         
         // Smooth scroll pour les liens d'ancrage
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
