@@ -321,6 +321,30 @@
             animation: fadeIn 0.3s ease-in-out;
         }
         
+        /* Organisation des champs formation en grille */
+        #formation-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            align-items: start;
+        }
+        
+        #formation-fields .form-group {
+            margin-bottom: 0;
+        }
+        
+        /* Champs spécifiques qui prennent toute la largeur */
+        #formation-fields .form-group:has(#formation-adresse),
+        #formation-fields .form-group:has(#formation-email) {
+            grid-column: 1 / -1;
+        }
+        
+        /* Style pour les champs obligatoires */
+        #formation-fields label {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -615,43 +639,110 @@
                         <!-- Champs dynamiques pour Formation -->
                         <div id="formation-fields" class="dynamic-fields" style="display: none;">
                             <div class="form-group">
-                                <label for="formation-pays">Pays *</label>
-                                <select id="formation-pays" name="formation-pays" required>
-                                    <option value="">Sélectionnez votre pays</option>
-                                    <option value="Côte d'Ivoire">Côte d'Ivoire</option>
-                                    <option value="Sénégal">Sénégal</option>
-                                    <option value="Mali">Mali</option>
-                                    <option value="Burkina Faso">Burkina Faso</option>
-                                    <option value="Niger">Niger</option>
-                                    <option value="Togo">Togo</option>
-                                    <option value="Bénin">Bénin</option>
-                                    <option value="Ghana">Ghana</option>
-                                    <option value="Guinée">Guinée</option>
-                                    <option value="Cameroun">Cameroun</option>
-                                    <option value="Gabon">Gabon</option>
-                                    <option value="République Démocratique du Congo">République Démocratique du Congo</option>
+                                <label for="formation-nom">Nom *</label>
+                                <input type="text" id="formation-nom" name="formation-nom" required placeholder="Votre nom de famille">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-prenom">Prénom *</label>
+                                <input type="text" id="formation-prenom" name="formation-prenom" required placeholder="Votre prénom">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-nationalite">Nationalité *</label>
+                                <select id="formation-nationalite" name="formation-nationalite" required>
+                                    <option value="">Sélectionnez votre nationalité</option>
+                                    <option value="Ivoirienne">Ivoirienne</option>
+                                    <option value="Sénégalaise">Sénégalaise</option>
+                                    <option value="Malienne">Malienne</option>
+                                    <option value="Burkinabé">Burkinabé</option>
+                                    <option value="Nigérienne">Nigérienne</option>
+                                    <option value="Togolaise">Togolaise</option>
+                                    <option value="Béninoise">Béninoise</option>
+                                    <option value="Ghanéenne">Ghanéenne</option>
+                                    <option value="Guinéenne">Guinéenne</option>
+                                    <option value="Camerounaise">Camerounaise</option>
+                                    <option value="Gabonaise">Gabonaise</option>
+                                    <option value="Congolaise (RDC)">Congolaise (RDC)</option>
                                     <option value="Autre">Autre</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <label for="formation-modalite">Modalité souhaitée *</label>
-                                <select id="formation-modalite" name="formation-modalite" required>
-                                    <option value="">Sélectionnez une modalité</option>
-                                    <option value="en-ligne">En ligne (formation à distance)</option>
-                                    <option value="presentiel">Présentiel (sur site)</option>
-                                    <option value="hybride">Hybride (mixte)</option>
+                                <label for="formation-cni">Numéro CNI *</label>
+                                <input type="text" id="formation-cni" name="formation-cni" required placeholder="Numéro de votre carte nationale d'identité">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-email">E-mail *</label>
+                                <input type="email" id="formation-email" name="formation-email" required placeholder="votre.email@exemple.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-adresse">Adresse postale *</label>
+                                <textarea id="formation-adresse" name="formation-adresse" required rows="3" placeholder="Votre adresse complète (rue, quartier, ville, pays)"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-fonction">Fonction *</label>
+                                <input type="text" id="formation-fonction" name="formation-fonction" required placeholder="Votre fonction/poste actuel">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-secteur">Secteur d'activité *</label>
+                                <select id="formation-secteur" name="formation-secteur" required>
+                                    <option value="">Sélectionnez votre secteur</option>
+                                    <option value="Génie civil">Génie civil</option>
+                                    <option value="BTP">BTP</option>
+                                    <option value="Architecture">Architecture</option>
+                                    <option value="Topographie">Topographie</option>
+                                    <option value="Hydraulique">Hydraulique</option>
+                                    <option value="Géotechnique">Géotechnique</option>
+                                    <option value="Environnement">Environnement</option>
+                                    <option value="Urbanisme">Urbanisme</option>
+                                    <option value="Informatique">Informatique</option>
+                                    <option value="Enseignement">Enseignement</option>
+                                    <option value="Administration publique">Administration publique</option>
+                                    <option value="Secteur privé">Secteur privé</option>
+                                    <option value="Autre">Autre</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <label for="formation-entreprise">Entreprise / Organisation</label>
-                                <input type="text" id="formation-entreprise" name="formation-entreprise" placeholder="Nom de votre entreprise ou organisation">
+                                <label for="formation-niveau">Niveau *</label>
+                                <select id="formation-niveau" name="formation-niveau" required>
+                                    <option value="">Sélectionnez votre niveau</option>
+                                    <option value="Débutant">Débutant</option>
+                                    <option value="Moyen">Moyen</option>
+                                    <option value="Intermédiaire">Intermédiaire</option>
+                                    <option value="Avancé">Avancé</option>
+                                </select>
                             </div>
                             
                             <div class="form-group">
-                                <label for="formation-fonction">Fonction / Poste</label>
-                                <input type="text" id="formation-fonction" name="formation-fonction" placeholder="Votre fonction dans l'entreprise">
+                                <label for="formation-prise-charge">Prise en charge *</label>
+                                <select id="formation-prise-charge" name="formation-prise-charge" required>
+                                    <option value="">Qui prend en charge la formation ?</option>
+                                    <option value="Entreprise">Entreprise</option>
+                                    <option value="Apprenant">Apprenant (financement personnel)</option>
+                                    <option value="Organisation">Organisation/Institution</option>
+                                    <option value="Bourse">Bourse/Subvention</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-paiement">Mode de paiement *</label>
+                                <select id="formation-paiement" name="formation-paiement" required>
+                                    <option value="">Sélectionnez le mode de paiement</option>
+                                    <option value="Virement bancaire">Virement bancaire</option>
+                                    <option value="Mobile Money">Mobile Money (Orange Money, MTN Money, etc.)</option>
+                                    <option value="Espèces">Espèces</option>
+                                    <option value="Chèque">Chèque</option>
+                                    <option value="Carte bancaire">Carte bancaire</option>
+                                    <option value="Paiement échelonné">Paiement échelonné</option>
+                                    <option value="À définir">À définir lors de l'entretien</option>
+                                </select>
                             </div>
                         </div>
                         
@@ -905,6 +996,21 @@
                 }
             }
             
+            // Fonction pour formater le prix au format souhaité
+            function formatPrice(price) {
+                if (!price) return price;
+                
+                // Supprimer tous les espaces et caractères non numériques pour obtenir le nombre
+                const numericPrice = price.replace(/[^\d]/g, '');
+                
+                if (!numericPrice) return price;
+                
+                // Ajouter des espaces tous les 3 chiffres en partant de la droite
+                const formattedNumber = numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+                
+                return `${formattedNumber} F CFA`;
+            }
+
             // Fonction pour traiter les paramètres de formation
             function processFormationParams() {
                 // Pré-remplissage via paramètres d'URL
@@ -929,9 +1035,19 @@
                     // Pré-remplir le sujet avec "Formation"
                     subjectSelect.value = 'formation';
                     toggleFields();
+                    
+                    // Pré-remplir les champs de formation avec les données principales du formulaire
+                    setTimeout(() => {
+                        const mainEmail = document.getElementById('email');
+                        const formationEmail = document.getElementById('formation-email');
+                        if (mainEmail && formationEmail && mainEmail.value) {
+                            formationEmail.value = mainEmail.value;
+                        }
+                    }, 100);
 
                     // Créer et afficher l'info de formation
                     console.log('🎨 Création de l\'alerte de formation...');
+                    const formattedPrice = formatPrice(prixParam);
                     const formationInfo = document.createElement('div');
                     formationInfo.className = 'formation-info-alert';
                     formationInfo.innerHTML = `
@@ -939,7 +1055,7 @@
                             <i class="fas fa-graduation-cap"></i>
                             <div class="formation-details">
                                 <h4>Formation sélectionnée : ${formationParam}</h4>
-                                <p class="formation-price"><strong>Coût : ${prixParam} FCFA</strong></p>
+                                <p class="formation-price"><strong>Coût : ${formattedPrice}</strong></p>
                             </div>
                         </div>
                     `;
@@ -965,7 +1081,7 @@
                     // Pré-remplir le message avec le contexte de formation
                     const message = document.getElementById('message');
                     if (message && !message.value) {
-                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (coût : ${prixParam} FCFA).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (coût : ${formattedPrice}).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
                         console.log('✅ Message pré-rempli avec le contexte de formation');
                     }
                     
@@ -1021,6 +1137,17 @@
             
             // Écouter les changements sur le select du sujet
             subjectSelect.addEventListener('change', toggleFields);
+            
+            // Synchroniser l'email principal avec celui de formation
+            const mainEmail = document.getElementById('email');
+            if (mainEmail) {
+                mainEmail.addEventListener('input', function() {
+                    const formationEmail = document.getElementById('formation-email');
+                    if (formationEmail && subjectSelect.value === 'formation') {
+                        formationEmail.value = this.value;
+                    }
+                });
+            }
             
             // Note: La gestion du menu mobile est gérée par js/script.js
             console.log('📱 Menu mobile géré par js/script.js');
