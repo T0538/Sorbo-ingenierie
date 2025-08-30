@@ -615,49 +615,43 @@
                         <!-- Champs dynamiques pour Formation -->
                         <div id="formation-fields" class="dynamic-fields" style="display: none;">
                             <div class="form-group">
-                                <label for="formation-type">Type de formation</label>
-                                <select id="formation-type" name="formation-type">
-                                    <option value="">Sélectionnez une formation</option>
-                                    <option value="covadis">Covadis</option>
-                                    <option value="autocad">AutoCAD</option>
-                                    <option value="robot">Robot Structural Analysis</option>
-                                    <option value="revit">Revit</option>
-                                    <option value="genie-civil">Génie civil</option>
-                                    <option value="hydraulique">Hydraulique</option>
-                                    <option value="autre-form">Autre</option>
+                                <label for="formation-pays">Pays *</label>
+                                <select id="formation-pays" name="formation-pays" required>
+                                    <option value="">Sélectionnez votre pays</option>
+                                    <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                                    <option value="Sénégal">Sénégal</option>
+                                    <option value="Mali">Mali</option>
+                                    <option value="Burkina Faso">Burkina Faso</option>
+                                    <option value="Niger">Niger</option>
+                                    <option value="Togo">Togo</option>
+                                    <option value="Bénin">Bénin</option>
+                                    <option value="Ghana">Ghana</option>
+                                    <option value="Guinée">Guinée</option>
+                                    <option value="Cameroun">Cameroun</option>
+                                    <option value="Gabon">Gabon</option>
+                                    <option value="République Démocratique du Congo">République Démocratique du Congo</option>
+                                    <option value="Autre">Autre</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <label for="formation-participants">Nombre de participants</label>
-                                <input type="number" id="formation-participants" name="formation-participants" min="1" max="30">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="formation-start">Date souhaitée de début</label>
-                                <input type="date" id="formation-start" name="formation-start">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="formation-duration">Durée souhaitée</label>
-                                <select id="formation-duration" name="formation-duration">
-                                    <option value="">Sélectionnez une durée</option>
-                                    <option value="1-jour">1 jour</option>
-                                    <option value="2-3-jours">2-3 jours</option>
-                                    <option value="1-semaine">1 semaine</option>
-                                    <option value="2-semaines">2 semaines</option>
-                                    <option value="personnalise">Personnalisée</option>
+                                <label for="formation-modalite">Modalité souhaitée *</label>
+                                <select id="formation-modalite" name="formation-modalite" required>
+                                    <option value="">Sélectionnez une modalité</option>
+                                    <option value="en-ligne">En ligne (formation à distance)</option>
+                                    <option value="presentiel">Présentiel (sur site)</option>
+                                    <option value="hybride">Hybride (mixte)</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
-                                <label for="formation-location">Lieu préféré</label>
-                                <select id="formation-location" name="formation-location">
-                                    <option value="">Sélectionnez un lieu</option>
-                                    <option value="nos-locaux">Dans nos locaux</option>
-                                    <option value="votre-site">Sur votre site</option>
-                                    <option value="distance">À distance</option>
-                                </select>
+                                <label for="formation-entreprise">Entreprise / Organisation</label>
+                                <input type="text" id="formation-entreprise" name="formation-entreprise" placeholder="Nom de votre entreprise ou organisation">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-fonction">Fonction / Poste</label>
+                                <input type="text" id="formation-fonction" name="formation-fonction" placeholder="Votre fonction dans l'entreprise">
                             </div>
                         </div>
                         
@@ -945,7 +939,7 @@
                             <i class="fas fa-graduation-cap"></i>
                             <div class="formation-details">
                                 <h4>Formation sélectionnée : ${formationParam}</h4>
-                                <p class="formation-price"><strong>Prix : ${prixParam} FCFA</strong></p>
+                                <p class="formation-price"><strong>Coût : ${prixParam} FCFA</strong></p>
                             </div>
                         </div>
                     `;
@@ -965,24 +959,13 @@
                         console.error('❌ Conteneur de formulaire non trouvé !');
                     }
 
-                    // Pré-remplir le type de formation si possible
-                    const formationTypeSelect = document.getElementById('formation-type');
-                    if (formationTypeSelect) {
-                        const formationLower = formationParam.toLowerCase();
-                        if (formationLower.includes('autocad')) formationTypeSelect.value = 'autocad';
-                        else if (formationLower.includes('covadis')) formationTypeSelect.value = 'covadis';
-                        else if (formationLower.includes('robot')) formationTypeSelect.value = 'robot';
-                        else if (formationLower.includes('revit')) formationTypeSelect.value = 'revit';
-                        else if (formationLower.includes('genie-civil')) formationTypeSelect.value = 'genie-civil';
-                        else if (formationLower.includes('hydraulique')) formationTypeSelect.value = 'hydraulique';
-                        else formationTypeSelect.value = 'autre-form';
-                        console.log('✅ Type de formation pré-rempli:', formationTypeSelect.value);
-                    }
+                    // Le nom de la formation est maintenant affiché dans l'alerte au-dessus du formulaire
+                    console.log('✅ Nom de formation affiché dans l\'alerte:', formationParam);
 
                     // Pré-remplir le message avec le contexte de formation
                     const message = document.getElementById('message');
                     if (message && !message.value) {
-                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (${prixParam} FCFA).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (coût : ${prixParam} FCFA).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
                         console.log('✅ Message pré-rempli avec le contexte de formation');
                     }
                     

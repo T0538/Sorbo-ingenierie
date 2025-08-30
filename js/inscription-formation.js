@@ -233,16 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
     new FormationInscription();
 });
 
-// Fonction pour ouvrir la page d'inscription depuis les autres pages
+// Fonction pour ouvrir la page de contact avec les informations de formation
 function openInscriptionForm(formationName, duration, price, id) {
     const params = new URLSearchParams({
-        name: encodeURIComponent(formationName),
-        duration: encodeURIComponent(duration),
-        price: encodeURIComponent(price),
-        id: encodeURIComponent(id)
+        formation: encodeURIComponent(formationName),
+        prix: encodeURIComponent(price),
+        subject: 'formation'
     });
     
-    window.open(`inscription-formation.html?${params.toString()}`, '_blank');
+    window.location.href = `contact.html?${params.toString()}`;
 }
 
 

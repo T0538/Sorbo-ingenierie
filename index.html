@@ -102,6 +102,127 @@
                 transform: translateY(0);
             }
         }
+
+        /* Styles pour les modals de newsletter */
+        .newsletter-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .newsletter-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .newsletter-modal h2 {
+            color: #2c3e50;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .newsletter-modal p {
+            color: #6c757d;
+            margin: 0 0 25px 0;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+            transform: translateY(-2px);
+        }
+
+        .modal-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .modal-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .modal-info a:hover {
+            text-decoration: underline;
+        }
         
         @keyframes pulse {
             0% {
@@ -1590,9 +1711,9 @@
                 <div class="footer-column footer-newsletter fade-in">
                     <h3>Newsletter</h3>
                     <p>Restez informé de nos dernières actualités</p>
-                    <form class="footer-newsletter-form">
-                        <input type="email" placeholder="Votre email" required>
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    <form class="footer-newsletter-form" onsubmit="return false;">
+                        <input type="email" name="email" placeholder="Votre email" required>
+                        <button type="button" onclick="handleNewsletterSubmit(this)"><i class="fas fa-paper-plane"></i></button>
                     </form>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -1618,6 +1739,15 @@
     <script src="js/dynamic-content.js"></script>
     <script src="js/email-config.js"></script>
     <script src="js/form-handler.js"></script>
+    
+    <!-- Système Newsletter Avancé -->
+    <script src="js/newsletter-validator.js"></script>
+    <script src="js/newsletter-categories.js"></script>
+    <script src="js/newsletter-database.js"></script>
+    <script src="js/newsletter-double-optin.js"></script>
+    <script src="js/newsletter-emailjs-config.js"></script>
+    <script src="js/newsletter-dashboard.js"></script>
+    <script src="js/newsletter-main.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
 
@@ -1674,6 +1804,170 @@
             anchorPlacement: 'top-bottom',
             disable: 'mobile'
         });
+        
+        // Fonction pour gérer la soumission de la newsletter
+        function handleNewsletterSubmit(button) {
+            const form = button.closest('.footer-newsletter-form');
+            const emailInput = form.querySelector('input[name="email"]');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                alert('Veuillez saisir une adresse email valide');
+                return;
+            }
+            
+            // Vérifier si le nouveau système newsletter est disponible
+            if (window.newsletterManager && window.newsletterManager.isInitialized) {
+                console.log('📧 Utilisation du nouveau système newsletter...');
+                // Simuler une soumission de formulaire
+                const formData = new FormData();
+                formData.append('email', email);
+                
+                // Créer un événement de soumission
+                const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+                form.dispatchEvent(submitEvent);
+            } else {
+                console.log('📧 Utilisation du système de fallback...');
+                showNewsletterMessage('Inscription en cours...', 'info');
+                
+                // Traitement réel avec la base de données
+                handleRealNewsletterSubmission(email, emailInput);
+            }
+        }
+        
+        // Fonction pour traitement réel de l'inscription newsletter
+        async function handleRealNewsletterSubmission(email, emailInput) {
+            try {
+                // 1. Sauvegarder en base de données locale
+                const subscriberData = {
+                    email: email,
+                    subscribedAt: new Date().toISOString(),
+                    status: 'pending',
+                    categories: ['actualites'], // Catégorie par défaut
+                    confirmed: false
+                };
+                
+                // Utiliser la base de données si disponible
+                if (window.newsletterDB || window.NewsletterDatabase) {
+                    const db = window.newsletterDB || new window.NewsletterDatabase();
+                    await db.addSubscriber(subscriberData);
+                    console.log('✅ Abonné sauvegardé en base locale');
+                } else {
+                    // Sauvegarde dans localStorage comme fallback
+                    const subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+                    subscribers.push(subscriberData);
+                    localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+                    console.log('✅ Abonné sauvegardé dans localStorage');
+                }
+                
+                // 2. Essayer d'envoyer l'email de confirmation
+                let emailSent = false;
+                if (window.newsletterEmailJS && window.newsletterEmailJS.isConfigured) {
+                    try {
+                        const emailResult = await window.newsletterEmailJS.sendEmail({
+                            title: 'Confirmez votre abonnement - Sorbo Ingénierie',
+                            name: email.split('@')[0],
+                            email: email,
+                            date: new Date().toLocaleDateString('fr-FR'),
+                            confirmation_link: `${window.location.origin}/?confirm=${btoa(email)}`
+                        });
+                        
+                        if (emailResult.success) {
+                            emailSent = true;
+                            console.log('✅ Email de confirmation envoyé');
+                        }
+                    } catch (error) {
+                        console.warn('⚠️ Erreur envoi email:', error);
+                    }
+                }
+                
+                // 3. Afficher le message approprié
+                if (emailSent) {
+                    showNewsletterMessage('✅ Inscription réussie ! Vérifiez votre email pour confirmer.', 'success');
+                } else {
+                    showNewsletterMessage('✅ Inscription enregistrée ! (Email de confirmation non envoyé - vérifiez la configuration EmailJS)', 'info');
+                }
+                
+                // 4. Vider le champ
+                emailInput.value = '';
+                
+                // 5. Mettre à jour le dashboard
+                if (window.newsletterDashboard && window.newsletterDashboard.isVisible) {
+                    window.newsletterDashboard.refresh();
+                    console.log('🔄 Dashboard mis à jour');
+                }
+                
+                // 6. Notification de mise à jour du dashboard
+                if (window.newsletterDashboard) {
+                    showDashboardUpdateNotification();
+                }
+                
+            } catch (error) {
+                console.error('❌ Erreur lors de l\'inscription:', error);
+                showNewsletterMessage('❌ Erreur lors de l\'inscription. Veuillez réessayer.', 'error');
+            }
+        }
+        
+        // Fonction pour afficher une notification de mise à jour du dashboard
+        function showDashboardUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 12px 18px;
+                border-radius: 8px;
+                z-index: 10001;
+                animation: slideInRight 0.3s ease;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Dashboard mis à jour !</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+        
+        // Fonction pour afficher les messages de newsletter
+        function showNewsletterMessage(message, type) {
+            // Supprimer les anciens messages
+            const existingMessages = document.querySelectorAll('.newsletter-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `newsletter-message newsletter-message-${type}`;
+            messageDiv.style.cssText = `
+                margin-top: 15px;
+                padding: 12px 15px;
+                border-radius: 6px;
+                font-size: 14px;
+                animation: slideDown 0.3s ease;
+                ${type === 'success' ? 'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : ''}
+                ${type === 'info' ? 'background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;' : ''}
+                ${type === 'error' ? 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;' : ''}
+            `;
+            messageDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'info' ? 'info-circle' : 'exclamation-triangle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            const form = document.querySelector('.footer-newsletter-form');
+            form.parentNode.insertBefore(messageDiv, form.nextSibling);
+            
+            // Auto-suppression après 5 secondes
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
         
         // Gestion du lazy loading des images
         document.addEventListener('DOMContentLoaded', function() {

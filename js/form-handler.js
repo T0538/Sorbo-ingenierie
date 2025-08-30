@@ -35,12 +35,18 @@ class FormHandler {
         }
     }
 
-    // Configuration des newsletters
+    // Configuration des newsletters - DÉSACTIVÉ pour le nouveau système
     setupNewsletterListeners() {
-        const newsletterForms = document.querySelectorAll('.footer-newsletter-form');
-        newsletterForms.forEach(form => {
-            form.addEventListener('submit', (e) => this.handleNewsletterForm(e));
-        });
+        // Le nouveau système NewsletterManager gère maintenant les newsletters
+        // Ancien code désactivé pour éviter les conflits
+        console.log('📧 Ancien gestionnaire newsletter désactivé - Nouveau système actif');
+        
+        // Vérifier si le nouveau système est disponible
+        if (window.newsletterManager && window.newsletterManager.isInitialized) {
+            console.log('✅ Nouveau système newsletter actif');
+        } else {
+            console.warn('⚠️ Nouveau système newsletter non initialisé');
+        }
     }
 
     // Gestion du formulaire de contact
