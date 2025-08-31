@@ -105,7 +105,7 @@ class FormationsMongoDBLoader {
                         type: 'genie-civil',
                         price: 100000,
                         duration: '32 heures',
-                        schedule: '4 séances - samedis ou dimanches de 09h à 16h',
+                        schedule: '',
                         dates: 'Du 02 au 23 novembre',
                         description: 'Maîtrise complète de Microsoft Project pour la gestion de projets.',
                         location: 'Abidjan, Cocody',
