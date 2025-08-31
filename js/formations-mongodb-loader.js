@@ -389,12 +389,6 @@ class FormationsMongoDBLoader {
                         <i class="fas fa-clock"></i>
                         <span>${duration}</span>
                     </div>
-                    ${formation.schedule ? `
-                    <div class="detail-item">
-                        <i class="fas fa-schedule"></i>
-                        <span>${formation.schedule}</span>
-                    </div>
-                    ` : ''}
                     <div class="detail-item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>${formation.location || 'Abidjan, Cocody'}</span>
