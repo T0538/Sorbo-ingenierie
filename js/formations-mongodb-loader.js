@@ -343,7 +343,7 @@ class FormationsMongoDBLoader {
         const defaultImage = this.getDefaultImage(formation.type);
         
         // Calculer la durée en jours (si disponible)
-        const duration = formation.duration || 'À définir';
+        const duration = formation.duration || '4 séances - samedis ou dimanches de 09h à 16h';
 
         // Utiliser les objectifs réels de la formation ou générer des objectifs par défaut
         const objectives = formation.objectifs && formation.objectifs.length > 0 

@@ -116,7 +116,7 @@ function createFormationCard(formation, index) {
     const priceDisplay = Number.isFinite(priceNum) ? priceNum.toLocaleString() : (priceRaw ?? '—');
 
     const durationRaw = formation.duration ?? formation.duree ?? formation['durée'] ?? formation.hours ?? formation.heures;
-    const durationDisplay = durationRaw != null ? durationRaw : 'À définir';
+    const durationDisplay = durationRaw != null ? durationRaw : '4 séances - samedis ou dimanches de 09h à 16h';
 
     const title = formation.title || formation.nom || 'Formation';
     const description = formation.description || '';
