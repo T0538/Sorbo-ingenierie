@@ -981,6 +981,20 @@
                 const selectedValue = subjectSelect.value;
                 console.log('🔄 Changement de sujet:', selectedValue);
                 
+                // Gérer la visibilité des champs principaux pour les formations
+                const nameField = document.getElementById('name')?.closest('.form-group');
+                const emailField = document.getElementById('email')?.closest('.form-group');
+                
+                if (selectedValue === 'formation') {
+                    // Masquer les champs nom et email pour éviter la duplication
+                    if (nameField) nameField.style.display = 'none';
+                    if (emailField) emailField.style.display = 'none';
+                } else {
+                    // Afficher les champs nom et email pour les autres sujets
+                    if (nameField) nameField.style.display = 'block';
+                    if (emailField) emailField.style.display = 'block';
+                }
+                
                 // Cacher tous les champs dynamiques d'abord
                 dynamicFields.forEach(fields => {
                     fields.style.display = 'none';
