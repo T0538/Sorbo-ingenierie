@@ -84,35 +84,25 @@ function displayActualites(actualites) {
 
     container.innerHTML = '';
     
-    // Afficher les 3 premières actualités
-    const initialCount = Math.min(3, actualites.length);
+    // Afficher seulement les 3 premières actualités - masquer toutes les autres
+    const maxActualites = 3;
+    const actualitesToShow = actualites.slice(0, maxActualites);
     
-    actualites.forEach((actualite, index) => {
+    actualitesToShow.forEach((actualite, index) => {
         const actualiteCard = createActualiteCard(actualite);
-        
-        // Marquer les articles après les 3 premiers comme "cachés"
-        if (index >= initialCount) {
-            actualiteCard.classList.add('hidden-post');
-            actualiteCard.style.display = 'none';
-            actualiteCard.style.opacity = '0';
-        }
-        
         container.appendChild(actualiteCard);
     });
+    
+    console.log(`📰 Actualités limitées: ${actualitesToShow.length}/${actualites.length} affichées`);
 
-    // Gérer le bouton "Charger plus"
+    // Masquer le bouton "Charger plus" puisqu'on affiche seulement 3 actualités
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     if (loadMoreBtn) {
-        if (actualites.length > initialCount) {
-            loadMoreBtn.style.display = 'inline-flex';
-            // Réinitialiser l'index pour le chargement progressif
-            window.currentIndex = initialCount;
-        } else {
-            loadMoreBtn.style.display = 'none';
-        }
+        loadMoreBtn.style.display = 'none';
+        console.log('🔒 Bouton "Charger plus" masqué - limitation à 3 actualités');
     }
 
-    console.log(`✅ ${actualites.length} actualités chargées (${initialCount} visibles)`);
+    console.log(`✅ ${actualitesToShow.length} actualités chargées et visibles`);
     
     // Réinitialiser les filtres de catégorie
     resetCategoryFilters();
@@ -155,7 +145,7 @@ function createActualiteCard(actualite) {
             <p class="blog-excerpt">${actualite.resume || actualite.description || 'Aucun résumé disponible'}</p>
             <div class="blog-meta">
                 <div class="blog-date">${formattedDate}</div>
-                <a href="#" class="read-more" onclick="showActualiteDetails('${actualite._id || actualite.id}')">
+                <a href="article-template.html?id=${actualite._id || actualite.id}" class="read-more lire-plus">
                     Lire la suite
                 </a>
             </div>

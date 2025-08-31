@@ -13,6 +13,7 @@ class ActualitesStatiques {
         slug: 'formation-autocad-2025',
         resume: 'Découvrez les nouvelles fonctionnalités d\'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.',
         content: 'Sorbo-Ingénierie est fier d\'annoncer le lancement de sa nouvelle formation AutoCAD 2025. Cette formation intègre toutes les dernières fonctionnalités du logiciel, notamment les nouveaux outils de modélisation 3D, l\'intelligence artificielle intégrée et les améliorations d\'interface.',
+        description: 'Découvrez notre programme de formation complet sur AutoCAD 2025 avec les dernières fonctionnalités et techniques avancées. Notre équipe de formateurs experts vous accompagne dans la maîtrise des nouveaux outils d\'IA, de la collaboration cloud et des workflows optimisés.',
         datePublication: '2024-12-20T10:00:00.000Z',
         date: '2024-12-20T10:00:00.000Z',
         auteur: 'Alexis KOFFI',
@@ -30,6 +31,7 @@ class ActualitesStatiques {
         slug: 'prix-excellence-2024',
         resume: 'Notre entreprise a été récompensée pour ses innovations dans le domaine de l\'ingénierie civile en Afrique de l\'Ouest.',
         content: 'C\'est avec une immense fierté que Sorbo-Ingénierie annonce avoir remporté le Prix d\'Excellence 2024 de l\'Association des Ingénieurs d\'Afrique de l\'Ouest. Cette distinction reconnaît notre engagement constant envers l\'innovation et la qualité dans nos projets d\'ingénierie.',
+        description: 'Notre entreprise a été récompensée pour ses innovations dans le domaine de l\'ingénierie civile en Afrique de l\'Ouest. Cette reconnaissance témoigne de notre expertise technique et de notre engagement envers l\'excellence dans tous nos projets.',
         datePublication: '2024-12-18T14:30:00.000Z',
         date: '2024-12-18T14:30:00.000Z',
         auteur: 'Direction Générale',
@@ -96,15 +98,18 @@ class ActualitesStatiques {
 
   // Récupérer les actualités récentes (pour la page d'accueil)
   getLatestActualites(limit = 3) {
-    return this.actualites
+    // Garder seulement les 3 premières actualités spécifiques
+    const actualitesPrincipales = this.actualites.slice(0, 3);
+    return actualitesPrincipales
       .filter(actualite => actualite.publié)
-      .sort((a, b) => new Date(b.datePublication) - new Date(a.datePublication))
       .slice(0, limit);
   }
 
-  // Récupérer toutes les actualités (pour la page actualités)
+  // Récupérer toutes les actualités (pour la page actualités) - limité aux 3 principales
   getAllActualites() {
-    return this.actualites
+    // Retourner seulement les 3 premières actualités 
+    const actualitesPrincipales = this.actualites.slice(0, 3);
+    return actualitesPrincipales
       .filter(actualite => actualite.publié)
       .sort((a, b) => new Date(b.datePublication) - new Date(a.datePublication));
   }
@@ -140,7 +145,7 @@ class ActualitesStatiques {
     }
 
     const actualites = this.getLatestActualites(3);
-    console.log(`📰 ${actualites.length} actualités récentes chargées`);
+    console.log(`📰 ${actualites.length} actualités récentes chargées pour la page d'accueil`);
 
     if (actualites.length === 0) {
       container.innerHTML = '<p class="no-data">Aucune actualité récente.</p>';
@@ -151,10 +156,8 @@ class ActualitesStatiques {
     container.innerHTML = actualites.map((actualite, index) => `
       <div class="news-card" data-aos="fade-up" data-aos-delay="${100 + (index * 100)}">
         <div class="news-image">
-          <!-- Image spécifique pour ${actualite.title} -->
           <img src="images/actualites/${actualite.id}.jpg" alt="${actualite.imageAlt || actualite.title}" loading="lazy" 
-               data-actualite-id="${actualite.id}" 
-               data-image-path="images/actualites/${actualite.id}.jpg">
+               onerror="this.src='images/default-news.jpg'">
         </div>
         <div class="news-content">
           <span class="date">${this.formatDate(actualite.datePublication)}</span>
@@ -208,7 +211,7 @@ class ActualitesStatiques {
               <i class="fas fa-calendar"></i>
               ${this.formatDate(actualite.datePublication)}
             </span>
-            <a href="#${actualite.slug}" class="read-more" onclick="openArticleModal('${actualite.id}')">
+            <a href="article-template.html?id=${actualite.id}" class="read-more lire-plus">
               Lire la suite
             </a>
           </div>

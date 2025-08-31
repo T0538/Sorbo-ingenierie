@@ -240,7 +240,7 @@ class DynamicContentLoader {
     // Charger les dernières actualités pour la page d'accueil
     async loadLatestActualites() {
         console.log('🔄 Chargement des dernières actualités...');
-        const actualites = await this.apiCall('/actualites?limit=3');
+        const actualites = await this.apiCall('/actualites?limit=3'); // Limité aux 3 principales
         console.log('📰 Actualités récupérées:', actualites);
         this.displayLatestActualites(actualites);
     }
@@ -272,7 +272,7 @@ class DynamicContentLoader {
                             <p>${actualite.resume}</p>
                             <div class="actualite-meta">
                                 <span class="date">${new Date(actualite.datePublication).toLocaleDateString()}</span>
-                                <a href="/actualite/${actualite.slug}" class="lire-plus">Lire plus →</a>
+                                <a href="article-template.html?id=${actualite.id || actualite.slug}" class="lire-plus">Lire plus →</a>
                             </div>
                         </div>
                     </div>
