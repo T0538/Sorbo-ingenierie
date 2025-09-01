@@ -946,6 +946,32 @@
     <script src="js/email-config.js"></script>
     <script src="js/form-handler.js"></script>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const subjectParam = params.get('subject');
+        const formationParam = params.get('formation');
+        const subjectSelect = document.getElementById('subject');
+
+        // Vérifie si on vient d'une page de formation
+        if (subjectSelect && (subjectParam === 'formation' || formationParam)) {
+            console.log('✅ Paramètre de formation détecté. Sélection automatique du sujet.');
+
+            // Attendre un court instant pour s'assurer que tous les autres scripts sont initialisés
+            setTimeout(() => {
+                // 1. Définir la valeur sur 'formation'
+                subjectSelect.value = 'formation';
+
+                // 2. Déclencher manuellement l'événement 'change'
+                // C'est l'étape cruciale pour forcer la mise à jour de l'UI
+                const event = new Event('change', { bubbles: true });
+                subjectSelect.dispatchEvent(event);
+
+                console.log('🚀 Sujet défini sur "Formation" et événement "change" déclenché.');
+            }, 100); // Un petit délai de 100ms pour plus de robustesse
+        }
+    });
+    </script>
+    <script>
         // Page Loader
         window.addEventListener('load', function() {
             // Animation de la barre de progression
