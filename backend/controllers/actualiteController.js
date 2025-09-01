@@ -58,3 +58,48 @@ exports.createActualite = async (req, res) => {
   }
 };
 
+// @desc    Mettre à jour une actualité
+// @route   PUT /api/actualites/:id
+// @access  Private (Admin)
+exports.updateActualite = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const payload = { ...req.body };
+    delete payload._id;
+    delete payload.id;
+
+    const actualite = await Actualite.findByIdAndUpdate(id, payload, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!actualite) {
+      return res.status(404).json({ success: false, message: 'Actualité introuvable' });
+    }
+
+    return res.status(200).json({ success: true, data: actualite });
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'actualité:", error);
+    return res.status(500).json({ success: false, message: 'Erreur serveur' });
+  }
+};
+
+// @desc    Supprimer une actualité
+// @route   DELETE /api/actualites/:id
+// @access  Private (Admin)
+exports.deleteActualite = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const actualite = await Actualite.findByIdAndDelete(id);
+
+    if (!actualite) {
+      return res.status(404).json({ success: false, message: 'Actualité introuvable' });
+    }
+
+    return res.status(200).json({ success: true, message: 'Actualité supprimée avec succès' });
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'actualité:", error);
+    return res.status(500).json({ success: false, message: 'Erreur serveur' });
+  }
+};
+

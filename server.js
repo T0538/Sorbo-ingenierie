@@ -28,10 +28,12 @@ app.use(express.static(path.join(__dirname)));
 const actualiteRoutes = require('./backend/routes/actualiteRoutes');
 const formationRoutes = require('./backend/routes/formationRoutes');
 const logicielRoutes = require('./backend/routes/logicielRoutes');
+const userRoutes = require('./backend/routes/userRoutes');
 
 app.use('/api/actualites', actualiteRoutes);
 app.use('/api/formations', formationRoutes);
 app.use('/api/logiciels', logicielRoutes);
+app.use('/api/users', userRoutes);
 
 // Route racine
 app.get('/', (req, res) => {

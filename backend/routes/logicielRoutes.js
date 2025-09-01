@@ -11,7 +11,7 @@ const {
   addTestimonial,
   getDownloadLinks
 } = require('../controllers/logicielController');
-const { protect, restrict } = require('../middleware/authMiddleware');
+const { protect } = require('../middleware/authMiddleware');
 
 // Routes publiques
 router.get('/', getLogiciels);
@@ -19,13 +19,13 @@ router.get('/slug/:slug', getLogicielBySlug);
 router.get('/:id', getLogicielById);
 router.get('/:id/download', getDownloadLinks);
 
-// Routes protégées (admin uniquement)
-router.post('/', protect, restrict(['admin']), createLogiciel);
-router.put('/:id', protect, restrict(['admin']), updateLogiciel);
-router.delete('/:id', protect, restrict(['admin']), deleteLogiciel);
-router.post('/:id/versions', protect, restrict(['admin']), addVersion);
+// Routes protégées pour l'administration
+router.post('/', protect, createLogiciel);
+router.put('/:id', protect, updateLogiciel);
+router.delete('/:id', protect, deleteLogiciel);
+router.post('/:id/versions', protect, addVersion);
 
-// Route protégée (utilisateur authentifié)
+// Route protégée pour ajouter un témoignage (accessible aux utilisateurs connectés)
 router.post('/:id/testimonials', protect, addTestimonial);
 
 module.exports = router; 
