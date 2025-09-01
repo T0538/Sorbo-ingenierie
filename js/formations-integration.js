@@ -100,7 +100,7 @@ class FormationsIntegration {
     // Gérer l'inscription à une formation
     handleInscription(formation) {
         // Rediriger vers la page de contact avec les détails de la formation
-        const contactUrl = `contact.html?formation=${encodeURIComponent(formation.titre)}&prix=${formation.prix}`;
+        const contactUrl = `contact.html?formation=${encodeURIComponent(formation.titre)}&prix=${formation.prix}&subject=formation`;
         window.location.href = contactUrl;
     }
 

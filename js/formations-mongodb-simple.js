@@ -236,7 +236,7 @@ function displayRenderStarting() {
 
 // Gérer l'inscription
 function handleInscription(title, price) {
-    const contactUrl = `contact.html?formation=${encodeURIComponent(title)}&prix=${price}`;
+    const contactUrl = `contact.html?formation=${encodeURIComponent(title)}&prix=${price}&subject=formation`;
     window.location.href = contactUrl;
 }
 

@@ -216,10 +216,58 @@ class FormFix {
         // Initialiser les champs dynamiques au chargement
         this.initializeDynamicFields();
 
+        // Vérifier si on vient d'une formation (paramètre URL)
+        this.checkFormationParameter();
+
         subjectSelect.addEventListener('change', (e) => {
             const value = e.target.value;
             this.toggleDynamicFields(value);
         });
+    }
+
+    checkFormationParameter() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const subject = urlParams.get('subject');
+        
+        if (subject === 'formation') {
+            const subjectSelect = document.getElementById('subject');
+            if (subjectSelect) {
+                subjectSelect.value = 'formation';
+                this.toggleDynamicFields('formation');
+                
+                // Afficher un message informatif
+                this.showFormationMessage(urlParams);
+            }
+        }
+    }
+
+    showFormationMessage(urlParams) {
+        const formation = urlParams.get('formation');
+        const prix = urlParams.get('prix');
+        
+        if (formation) {
+            // Créer un message informatif
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                background: #e8f5e8;
+                border: 1px solid #4caf50;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 20px;
+                color: #2e7d32;
+            `;
+            messageDiv.innerHTML = `
+                <i class="fas fa-info-circle"></i>
+                <strong>Inscription à la formation :</strong> ${decodeURIComponent(formation)}
+                ${prix ? `<br><strong>Prix :</strong> ${decodeURIComponent(prix)}` : ''}
+            `;
+            
+            // Insérer le message au début du formulaire
+            const form = document.getElementById('contact-form');
+            if (form) {
+                form.insertBefore(messageDiv, form.firstChild);
+            }
+        }
     }
 
     initializeDynamicFields() {

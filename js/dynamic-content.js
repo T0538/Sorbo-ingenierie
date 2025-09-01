@@ -295,7 +295,7 @@ function voirDetailsEmploi(emploiId) {
 
 function inscrireFormation(formationId) {
     // Rediriger vers la page de contact avec les détails de la formation
-    window.location.href = `/contact.html?formation=${formationId}`;
+    window.location.href = `contact.html?formation=${formationId}&subject=formation`;
 }
 
 function voirDetailsFormation(formationId) {
