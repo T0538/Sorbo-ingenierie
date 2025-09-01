@@ -11,6 +11,11 @@ class FormFix {
         this.fixContactForm();
         this.fixInscriptionForm();
         this.fixFormationModals();
+        
+        // Vérifier les paramètres de formation après un délai
+        setTimeout(() => {
+            this.checkFormationParameter();
+        }, 500);
     }
 
     // ======================================
@@ -230,14 +235,31 @@ class FormFix {
         const subject = urlParams.get('subject');
         
         if (subject === 'formation') {
-            const subjectSelect = document.getElementById('subject');
-            if (subjectSelect) {
-                subjectSelect.value = 'formation';
-                this.toggleDynamicFields('formation');
-                
-                // Afficher un message informatif
-                this.showFormationMessage(urlParams);
-            }
+            // Fonction récursive pour attendre que l'élément soit disponible
+            this.waitForSubjectElement(urlParams);
+        }
+    }
+
+    waitForSubjectElement(urlParams, attempts = 0) {
+        const maxAttempts = 20; // 2 secondes maximum
+        const subjectSelect = document.getElementById('subject');
+        
+        if (subjectSelect) {
+            // Élément trouvé, sélectionner la formation
+            subjectSelect.value = 'formation';
+            this.toggleDynamicFields('formation');
+            
+            // Afficher un message informatif
+            this.showFormationMessage(urlParams);
+            
+            console.log('✅ Sujet "Formation" sélectionné automatiquement');
+        } else if (attempts < maxAttempts) {
+            // Élément pas encore disponible, réessayer
+            setTimeout(() => {
+                this.waitForSubjectElement(urlParams, attempts + 1);
+            }, 100);
+        } else {
+            console.log('❌ Élément subject non trouvé après', maxAttempts, 'tentatives');
         }
     }
 
