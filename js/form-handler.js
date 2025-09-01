@@ -12,6 +12,41 @@ class FormHandler {
         console.log('📧 FormHandler initialisé');
         this.setupFormListeners();
         this.setupNewsletterListeners();
+        this.setupDynamicFields(); // Ajout de l'initialisation des champs dynamiques
+    }
+
+    // Ajout de la logique pour les champs dynamiques
+    setupDynamicFields() {
+        const subjectSelect = document.getElementById('subject');
+        if (!subjectSelect) return;
+
+        const toggleFields = () => {
+            const selectedValue = subjectSelect.value;
+            console.log(`🔄 Changement de sujet détecté : ${selectedValue}`);
+
+            // Masquer tous les groupes de champs dynamiques
+            document.querySelectorAll('.dynamic-fields').forEach(field => {
+                field.style.display = 'none';
+            });
+
+            // Afficher le groupe de champs correspondant au sujet
+            if (selectedValue === 'formation' || selectedValue === 'devis') {
+                const fieldsToShow = document.getElementById(`${selectedValue}-fields`);
+                if (fieldsToShow) {
+                    fieldsToShow.style.display = 'block';
+                    console.log(`✅ Affichage des champs pour : ${selectedValue}`);
+                }
+            }
+        };
+
+        // Écouter les changements sur le menu déroulant
+        subjectSelect.addEventListener('change', toggleFields);
+
+        // Exécuter au chargement pour gérer les cas de pré-remplissage
+        document.addEventListener('DOMContentLoaded', () => {
+             // Un léger délai pour s'assurer que le pré-remplissage a eu lieu
+            setTimeout(toggleFields, 150);
+        });
     }
 
     // Configuration des écouteurs de formulaires
