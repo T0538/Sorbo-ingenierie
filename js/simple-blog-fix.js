@@ -8,56 +8,62 @@
     
     function fixReadMoreLinks() {
         // Chercher tous les liens "Lire la suite"
-        const links = document.querySelectorAll('a[href*="#"], a[onclick*="showActualiteDetails"], a[onclick*="openArticleModal"], .read-more, .lire-plus');
+        const links = document.querySelectorAll('a[href*="#"], a[onclick*="showActualiteDetails"], a[onclick*="openArticleModal"], .read-more, .lire-plus, .text-btn');
         
         links.forEach((link, index) => {
             // Éviter de traiter le même lien plusieurs fois
             if (link.hasAttribute('data-fixed')) return;
             link.setAttribute('data-fixed', 'true');
             
-            // Trouver le titre associé
-            const card = link.closest('.actualite-mini-card, .news-card, .blog-post, .actualite-card') || link.parentElement;
-            let title = `Article ${index + 1}`;
+            // Utiliser les IDs des actualités définies dans window.actualitesData
+            let articleId = 'renouvellement-habilitation-fdfp-genie-civil'; // ID par défaut
             
-            if (card) {
-                const titleEl = card.querySelector('h1, h2, h3, h4, h5, h6');
-                if (titleEl) {
-                    title = titleEl.textContent.trim();
+            // Si window.actualitesData existe, utiliser le bon ID
+            if (window.actualitesData && window.actualitesData.length > 0) {
+                if (index < window.actualitesData.length) {
+                    articleId = window.actualitesData[index].id;
                 }
             }
-            
-            // Générer un ID d'article
-            const articleId = title.toLowerCase()
-                .replace(/[àáâãäå]/g, 'a')
-                .replace(/[èéêë]/g, 'e')
-                .replace(/[ìíîï]/g, 'i')
-                .replace(/[òóôõö]/g, 'o')
-                .replace(/[ùúûü]/g, 'u')
-                .replace(/[ç]/g, 'c')
-                .replace(/[^a-z0-9\s-]/g, '')
-                .replace(/\s+/g, '-')
-                .replace(/-+/g, '-')
-                .trim('-')
-                .substring(0, 50);
             
             // Mettre à jour le lien en gardant le texte original
             link.href = `article-template.html?id=${articleId}`;
             link.removeAttribute('onclick');
-            // Ne pas changer le texte du bouton
             
-            console.log(`✅ Lien corrigé: "${title}" -> ${link.href}`);
+            console.log(`✅ Lien corrigé: Index ${index} -> ${link.href}`);
         });
+    }
+    
+    // Exécuter après que les données soient chargées
+    function initializeWhenReady() {
+        if (window.actualitesData && window.actualitesData.length > 0) {
+            fixReadMoreLinks();
+            console.log('✅ Liens corrigés avec les données actualitesData');
+        } else {
+            // Si pas de données, utiliser l'ID par défaut
+            setTimeout(fixReadMoreLinks, 500);
+            console.log('⚠️ Liens corrigés avec l\'ID par défaut');
+        }
     }
     
     // Exécuter maintenant et après chargement
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', fixReadMoreLinks);
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initializeWhenReady, 1000);
+        });
     } else {
-        fixReadMoreLinks();
+        setTimeout(initializeWhenReady, 1000);
     }
     
-    // Aussi après 2 secondes pour les chargements tardifs
-    setTimeout(fixReadMoreLinks, 2000);
+    // Vérifier périodiquement pendant les 5 premières secondes
+    let attempts = 0;
+    const checkInterval = setInterval(() => {
+        attempts++;
+        initializeWhenReady();
+        
+        if (attempts >= 5) {
+            clearInterval(checkInterval);
+        }
+    }, 1000);
     
     // Export pour utilisation manuelle
     window.fixReadMoreLinks = fixReadMoreLinks;

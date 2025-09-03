@@ -144,11 +144,7 @@
         }
         
         .article-subtitle {
-            font-size: 1.3rem;
-            color: #6c757d;
-            font-weight: 300;
-            line-height: 1.5;
-            margin-bottom: 40px;
+            display: none; /* Masquer le sous-titre */
         }
         
         .article-hero-image {
@@ -178,23 +174,30 @@
             color: #2c3e50;
         }
         
-        .main-content h2 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin: 40px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--primary-color);
-        }
-        
-        .main-content h3 {
-            font-size: 1.5rem;
+        /* CONTENU SIMPLE EN UN SEUL BLOC */
+        .main-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: #2c3e50;
-            margin: 30px 0 15px;
+            text-align: justify;
         }
         
+        /* Masquer tous les sous-titres */
+        .main-content h1,
+        .main-content h2,
+        .main-content h3,
+        .main-content h4,
+        .main-content h5,
+        .main-content h6 {
+            display: none;
+        }
+        
+        /* Style simplifié pour les paragraphes */
         .main-content p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: justify;
+            font-size: 1.2rem;
+            line-height: 1.8;
         }
         
         .main-content ul, .main-content ol {
@@ -372,79 +375,162 @@
             font-size: 2.5rem;
         }
         
-        .recommendations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .recommendations-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .recommendation-card {
+        .recommendation-link {
             background: white;
+            border: 2px solid #e9ecef;
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            padding: 25px 30px;
             text-decoration: none;
             color: inherit;
-        }
-        
-        .recommendation-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .recommendation-image {
-            height: 200px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
             overflow: hidden;
         }
         
-        .recommendation-image img {
+        .recommendation-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            background: linear-gradient(90deg, transparent, rgba(0,123,255,0.1), transparent);
+            transition: left 0.5s ease;
         }
         
-        .recommendation-card:hover .recommendation-image img {
-            transform: scale(1.1);
+        .recommendation-link:hover::before {
+            left: 100%;
         }
         
-        .recommendation-content {
-            padding: 25px;
+        .recommendation-link:hover {
+            border-color: var(--primary-color);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,123,255,0.2);
+        }
+        
+        .recommendation-info {
+            flex-grow: 1;
+            padding-right: 20px;
         }
         
         .recommendation-category {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
             padding: 4px 12px;
             border-radius: 15px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
         
         .recommendation-title {
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+        
+        .recommendation-link:hover .recommendation-title {
+            color: var(--primary-color);
         }
         
         .recommendation-excerpt {
             color: #6c757d;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 8px;
         }
         
-        .recommendation-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .recommendation-date {
             color: #6c757d;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .recommendation-date::before {
+            content: "📅";
+            margin-right: 5px;
+        }
+        
+        .recommendation-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        
+        .recommendation-link:hover .recommendation-cta {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,123,255,0.4);
+        }
+        
+        .recommendation-cta i {
+            transition: transform 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .recommendation-link:hover .recommendation-cta i {
+            transform: translateX(3px);
+        }
+        
+        /* Animation de pulsation pour attirer l'attention */
+        @keyframes pulse-cta {
+            0% { box-shadow: 0 4px 15px rgba(0,123,255,0.3); }
+            50% { box-shadow: 0 8px 25px rgba(0,123,255,0.5); }
+            100% { box-shadow: 0 4px 15px rgba(0,123,255,0.3); }
+        }
+        
+        .recommendation-cta {
+            animation: pulse-cta 3s ease-in-out infinite;
+        }
+        
+        .recommendation-link:hover .recommendation-cta {
+            animation: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .recommendation-link {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .recommendation-info {
+                padding-right: 0;
+            }
+            
+            .recommendation-cta {
+                align-self: stretch;
+                justify-content: center;
+            }
         }
         
         .author-bio {
@@ -701,8 +787,8 @@
                     
                     <!-- Barre latérale -->
                     <aside class="article-sidebar">
-                        <!-- Table des matières -->
-                        <div class="sidebar-widget">
+                        <!-- Table des matières masquée car pas de sous-titres -->
+                        <div class="sidebar-widget" style="display: none;">
                             <div class="table-of-contents" id="table-of-contents">
                                 <h4><i class="fas fa-list"></i> Table des matières</h4>
                                 <ul id="toc-list">
@@ -780,8 +866,8 @@
         <section class="recommendations">
             <div class="blog-container">
                 <h2><i class="fas fa-star"></i> Articles recommandés</h2>
-                <div class="recommendations-grid" id="recommendations-grid">
-                    <!-- Les recommandations seront injectées ici -->
+                <div class="recommendations-links" id="recommendations-links">
+                    <!-- Les liens de recommandations seront injectés ici -->
                 </div>
             </div>
         </section>
@@ -840,81 +926,159 @@
 
     <!-- Scripts -->
     <script src="js/script.js"></script>
-    <script src="js/blog-engine.js"></script>
-    <script src="js/breadcrumb-title-fix.js"></script>
     
     <script>
-        // INJECTION DE DONNÉES STATIQUES POUR FIABILISER L'AFFICHAGE
+        // DONNÉES DES ACTUALITÉS - MODIFIEZ DIRECTEMENT ICI
+        // Pour ajouter une actualité : copiez un bloc et modifiez les informations
         window.actualitesData = [
+          // ACTUALITÉ 1 - FORMATION AUTOCAD (1ère sur la page d'accueil)
           {
-            "id": "formation-autocad-2025",
-            "slug": "formation-autocad-2025",
-            "title": "Nouvelle formation AutoCAD 2025 disponible",
-            "subtitle": "Découvrez les nouvelles fonctionnalités d'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.",
-            "description": "Sorbo-Ingénierie est fier d'annoncer le lancement de sa nouvelle formation AutoCAD 2025...",
-            "category": "Formation",
-            "date": "2024-12-20T10:00:00.000Z",
-            "image": "images/actualites/formation-autocad-2025.jpg",
-            "author": { "name": "Alexis KOFFI" },
-            "tags": ["AutoCAD", "Formation", "2025", "CAO"]
+            id: "formation-autocad-2025",
+            title: "Nouvelle formation AutoCAD 2025 disponible",
+            resume: "Découvrez les nouvelles fonctionnalités d'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.",
+            content: "Sorbo-Ingénierie enrichit son catalogue de formations avec le lancement de la nouvelle formation AutoCAD 2025. Cette formation complète a été spécialement conçue pour accompagner les professionnels du secteur dans la découverte et la maîtrise des dernières fonctionnalités de ce logiciel incontournable en conception assistée par ordinateur.\n\nLa formation AutoCAD 2025 couvre l'ensemble des nouvelles fonctionnalités du logiciel, incluant les outils collaboratifs améliorés, les fonctions d'automatisation avancées et les nouvelles options de modélisation 3D. Nos formateurs certifiés proposent une approche pédagogique basée sur la pratique, avec des exercices concrets et des études de cas réels tirés de projets d'ingénierie. Les participants bénéficient d'un accompagnement personnalisé adapté à leur niveau et à leurs objectifs professionnels.\n\nDisponible en format présentiel et distanciel, cette formation s'adresse aux débutants comme aux utilisateurs expérimentés souhaitant se perfectionner. Elle inclut un support pédagogique complet, des ressources numériques et une certification reconnue. Les inscriptions sont ouvertes dès maintenant, avec des sessions programmées tout au long de l'année pour répondre aux besoins de formation continue des professionnels.",
+            imageUrl: "images/formationcova.jpg",
+            imageAlt: "Formation AutoCAD 2025 Sorbo-Ingénierie",
+            datePublication: "2024-12-20",
+            auteur: "Service Formation",
+            categorie: "Formation",
+            tags: ["Formation", "AutoCAD", "CAO", "2025"]
           },
+          // ACTUALITÉ 2 - HABILITATION FDFP (2ème sur la page d'accueil)
           {
-            "id": "sorbo-ingenierie-obtient-le-renouvellement-de-son-habilitation-fdfp",
-            "slug": "sorbo-ingenierie-obtient-le-renouvellement-de-son-habilitation-fdfp",
-            "title": "Sorbo-Ingénierie obtient le renouvellement de son habilitation FDFP",
-            "subtitle": "Une reconnaissance majeure de notre expertise et de la qualité de nos processus de formation par le Fonds de Développement de la Formation Professionnelle.",
-            "description": "C'est avec une grande fierté que Sorbo-Ingénierie annonce le renouvellement de son habilitation par le Fonds de Développement de la Formation Professionnelle (FDFP). Cette décision confirme notre statut d'organisme de formation de premier plan en Côte d'Ivoire et atteste de la conformité et de la qualité de nos programmes pédagogiques.",
-            "category": "Entreprise",
-            "date": "2025-08-31T10:00:00.000Z",
-            "image": "images/actualites/prix-excellence-2024.jpg",
-            "author": { "name": "Direction Générale" },
-            "tags": ["FDFP", "Habilitation", "Formation", "Certification", "Qualité"]
+            id: "prix-excellence-2024",
+            title: "Sorbo-Ingénierie obtient le renouvellement de son habilitation FDFP",
+            resume: "Nous sommes heureux d'annoncer que Sorbo-Ingénierie a obtenu le renouvellement de son habilitation auprès du FDFP, attestant de la qualité et de la conformité de nos programmes de formation.",
+            content: "Nous sommes fiers d'annoncer que Sorbo-Ingénierie a obtenu en mars 2025 le renouvellement officiel de son habilitation dans le domaine de la formation en Génie Civil. Cette distinction, valable jusqu'en décembre 2026, confirme notre statut d'organisme de formation de référence en Côte d'Ivoire.\n\nCette reconnaissance vient confirmer la qualité et la rigueur de nos programmes pédagogiques, l'expertise reconnue de nos formateurs et ingénieurs, ainsi que notre engagement constant à accompagner les professionnels et étudiants vers l'excellence. Nos méthodes d'enseignement, basées sur des cas concrets et des projets réels, permettent à nos apprenants d'acquérir les compétences nécessaires pour réussir dans le secteur du génie civil.\n\nCe renouvellement constitue une véritable marque de confiance des autorités compétentes et valorise notre rôle comme acteur majeur de la formation en Génie Civil. Tout au long de cette période, nous continuerons d'innover et de proposer des formations adaptées aux enjeux actuels et futurs du secteur, en intégrant les dernières technologies et les meilleures pratiques internationales.",
+            imageUrl: "images/image 01.jpg",
+            imageAlt: "Habilitation FDFP Sorbo-Ingénierie",
+            datePublication: "2025-04-03",
+            auteur: "Direction Sorbo-Ingénierie",
+            categorie: "Formation",
+            tags: ["FDFP", "Habilitation", "Génie Civil", "Formation", "Excellence"]
           },
+          // ACTUALITÉ 3 - LOGICIEL OH-ROUTE (3ème sur la page d'accueil)
           {
-            "id": "oh-route-v1-1",
-            "slug": "oh-route-v1-1",
-            "title": "Nouveau logiciel de calcul de structures OH-Route v1.1",
-            "subtitle": "Lancement de la version 1.1 de notre logiciel OH-Route avec de nouvelles fonctionnalités de calcul hydraulique avancé.",
-            "description": "Sorbo-Ingénierie présente OH-Route v1.1, la nouvelle version de notre logiciel spécialisé...",
-            "category": "Logiciels",
-            "date": "2024-12-15T09:15:00.000Z",
-            "image": "images/actualites/oh-route-v1-1.jpg",
-            "author": { "name": "Équipe Développement" },
-            "tags": ["OH-Route", "Logiciel", "Hydraulique", "v1.1"]
+            id: "oh-route-v1-1",
+            title: "Lancement officiel de notre logiciel OH-Route v1",
+            resume: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.",
+            content: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.\n\nDéveloppé par notre équipe d'ingénieurs et d'experts en Génie Civil, OH-Route v1 intègre des fonctionnalités avancées permettant de :\n\n🌧 Prédire et estimer avec fiabilité les débits de pluie,\n\n🌍 Anticiper les risques d'inondation,\n\n🛠 Dimensionner les ouvrages hydrauliques et d'assainissement routier de manière optimale,\n\n💡 Proposer des solutions adaptées avec une évaluation économique et financière pour un meilleur appui à la décision.",
+            imageUrl: "images/drainageroute.png",
+            imageAlt: "Logiciel OH-Route v1 Sorbo-Ingénierie",
+            datePublication: "2024-12-15",
+            auteur: "Équipe Développement",
+            categorie: "Logiciel",
+            tags: ["Logiciel", "OH-Route", "Hydraulique", "Infrastructure"]
           }
         ];
 
         // Initialisation de la page article (robuste et utilisant les données injectées)
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📖 Chargement simple de l\'article...');
+            
+            // Récupérer l'ID de l'article depuis l'URL
             const urlParams = new URLSearchParams(window.location.search);
             const articleId = urlParams.get('id');
-
+            
             if (!articleId) {
-                window.location.href = 'actualites.html';
+                console.log('❌ Aucun ID d\'article fourni');
+                document.getElementById('main-content').innerHTML = '<p>Aucun article spécifié.</p>';
                 return;
             }
-
-            // Attendre que BlogEngine soit prêt
-            async function ensureBlogEngine(timeout = 2000) {
-                let waited = 0;
-                while (!window.BlogEngine && waited < timeout) {
-                    await new Promise(r => setTimeout(r, 100));
-                    waited += 100;
-                }
-                return window.BlogEngine;
-            }
-
-            const engine = await ensureBlogEngine();
-            if (!engine) {
-                console.error('BlogEngine non disponible. Impossible de charger l\'article.');
-                // Optionnel: afficher un message d'erreur au lieu de rediriger
-                document.body.innerHTML = '<h1>Erreur de chargement du moteur de blog.</h1>';
+            
+            // Trouver l'article dans les données
+            const article = window.actualitesData.find(a => a.id === articleId);
+            
+            if (!article) {
+                console.log('❌ Article non trouvé:', articleId);
+                document.getElementById('main-content').innerHTML = '<p>Article non trouvé.</p>';
                 return;
             }
-
-            // Charger l'article en utilisant les données injectées
-            engine.loadArticle(articleId);
+            
+            console.log('✅ Article trouvé:', article.title);
+            
+            // Afficher l'article
+            document.getElementById('article-title').textContent = article.title;
+            document.getElementById('article-breadcrumb').textContent = article.title;
+            document.title = article.title + ' - Sorbo-Ingénierie';
+            
+            // Catégorie
+            document.getElementById('article-category').textContent = article.categorie || 'Actualités';
+            
+            // Date
+            const date = new Date(article.datePublication);
+            document.getElementById('article-date').textContent = date.toLocaleDateString('fr-FR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Auteur
+            document.getElementById('article-author').textContent = article.auteur;
+            
+            // Temps de lecture
+            const wordsPerMinute = 200;
+            const wordCount = article.content.split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / wordsPerMinute);
+            document.getElementById('reading-time').textContent = readingTime + ' min de lecture';
+            
+            // Image principale
+            const heroImage = document.getElementById('hero-image');
+            if (article.imageUrl) {
+                heroImage.src = article.imageUrl;
+                heroImage.alt = article.imageAlt || article.title;
+                heroImage.style.display = 'block';
+            }
+            
+            // Contenu principal - AVEC PARAGRAPHES PROFESSIONNELS
+            const contentWithParagraphs = article.content
+                .split('\n\n') // Séparer les paragraphes
+                .map(paragraph => '<p>' + paragraph.trim() + '</p>') // Créer les balises <p>
+                .join(''); // Joindre tous les paragraphes
+            
+            document.getElementById('main-content').innerHTML = contentWithParagraphs;
+            
+            // GÉNÉRER LES RECOMMANDATIONS D'ARTICLES
+            generateRecommendations(articleId);
+            
+            console.log('✅ Article affiché avec succès - PAS D\'ERREUR DE MOTEUR !');
         });
+        
+        // Fonction pour générer les recommandations d'articles
+        function generateRecommendations(currentArticleId) {
+            const recommendationsContainer = document.getElementById('recommendations-links');
+            
+            // Obtenir les autres articles (exclure l'article actuel)
+            const otherArticles = window.actualitesData.filter(article => article.id !== currentArticleId);
+            
+            if (otherArticles.length === 0) {
+                document.querySelector('.recommendations').style.display = 'none';
+                return;
+            }
+            
+            console.log('📋 Génération des liens de recommandations...');
+            
+            recommendationsContainer.innerHTML = otherArticles.map(article => `
+                <a href="article-template.html?id=${article.id}" class="recommendation-link">
+                    <div class="recommendation-info">
+                        <span class="recommendation-category">${article.categorie}</span>
+                        <h3 class="recommendation-title">${article.title}</h3>
+                        <p class="recommendation-excerpt">${article.resume}</p>
+                        <span class="recommendation-date">${new Date(article.datePublication).toLocaleDateString('fr-FR', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</span>
+                    </div>
+                    <div class="recommendation-cta">
+                        <span>Lire l'article</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            `).join('');
+            
+            console.log(`✅ ${otherArticles.length} liens de recommandations générés`);
+        }
     </script>
 </body>
 </html>

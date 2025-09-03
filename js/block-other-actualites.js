@@ -86,7 +86,7 @@
                 image: 'images/actualites/formation-autocad-2025.jpg'
             },
             {
-                id: 'prix-excellence-2024',
+                id: 'Sorbo-Ingénierie renouvelle son habilitation en formation Génie Civil',
                 title: 'Sorbo-Ingénierie remporte le prix d\'excellence 2024',
                 resume: 'Notre entreprise a été récompensée pour ses innovations dans le domaine de l\'ingénierie civile en Afrique de l\'Ouest.',
                 datePublication: '2024-12-18T14:30:00.000Z',

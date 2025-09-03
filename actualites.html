@@ -48,6 +48,169 @@
                 transform: translateY(0);
             }
         }
+        
+        /* CSS pour les articles de blog */
+        .blog-post {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .blog-post-image {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .blog-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-post:hover .blog-post-image img {
+            transform: scale(1.05);
+        }
+        
+        .blog-post-category {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .blog-post-content {
+            padding: 30px;
+        }
+        
+        .blog-post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .blog-post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .blog-post-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+        
+        .blog-post:hover .blog-post-title {
+            color: var(--primary-color);
+        }
+        
+        .blog-post-excerpt {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .blog-post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .blog-post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .read-more-btn {
+            background: linear-gradient(135deg, var(--primary-color), #ff6b6b);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(209,0,0,0.3);
+        }
+        
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(209,0,0,0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .read-more-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more-btn:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Responsive pour les articles */
+        @media (max-width: 768px) {
+            .blog-post-content {
+                padding: 20px;
+            }
+            
+            .blog-post-title {
+                font-size: 1.5rem;
+            }
+            
+            .blog-post-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .read-more-btn {
+                justify-content: center;
+            }
+        }
 
         @keyframes pulse {
             0% {
@@ -1538,7 +1701,7 @@
             <div id="actualites-container" class="blog-posts">
                 <div class="loading-actualites" style="text-align: center; padding: 40px;">
                     <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #3498db; margin-bottom: 20px;"></i>
-                    <p>Chargement des actualités depuis MongoDB Atlas...</p>
+                    <p>Chargement des actualités...</p>
                 </div>
             </div>
 
@@ -2675,18 +2838,54 @@
             });
         });
     </script>
+    <!-- DONNÉES DES ACTUALITÉS INTÉGRÉES -->
+    <script>
+        // DONNÉES DES ACTUALITÉS - MODIFIEZ DIRECTEMENT ICI
+        window.actualitesData = [
+          // ACTUALITÉ 1 - FORMATION AUTOCAD (1ère sur la page d'accueil)
+          {
+            id: "formation-autocad-2025",
+            title: "Nouvelle formation AutoCAD 2025 disponible",
+            resume: "Découvrez les nouvelles fonctionnalités d'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.",
+            content: "Sorbo-Ingénierie enrichit son catalogue de formations avec le lancement de la nouvelle formation AutoCAD 2025. Cette formation complète a été spécialement conçue pour accompagner les professionnels du secteur dans la découverte et la maîtrise des dernières fonctionnalités de ce logiciel incontournable en conception assistée par ordinateur.\n\nLa formation AutoCAD 2025 couvre l'ensemble des nouvelles fonctionnalités du logiciel, incluant les outils collaboratifs améliorés, les fonctions d'automatisation avancées et les nouvelles options de modélisation 3D. Nos formateurs certifiés proposent une approche pédagogique basée sur la pratique, avec des exercices concrets et des études de cas réels tirés de projets d'ingénierie. Les participants bénéficient d'un accompagnement personnalisé adapté à leur niveau et à leurs objectifs professionnels.\n\nDisponible en format présentiel et distanciel, cette formation s'adresse aux débutants comme aux utilisateurs expérimentés souhaitant se perfectionner. Elle inclut un support pédagogique complet, des ressources numériques et une certification reconnue. Les inscriptions sont ouvertes dès maintenant, avec des sessions programmées tout au long de l'année pour répondre aux besoins de formation continue des professionnels.",
+            imageUrl: "images/formationcova.jpg",
+            imageAlt: "Formation AutoCAD 2025 Sorbo-Ingénierie",
+            datePublication: "2024-12-20",
+            auteur: "Service Formation",
+            categorie: "Formation",
+            tags: ["Formation", "AutoCAD", "CAO", "2025"]
+          },
+          // ACTUALITÉ 2 - HABILITATION FDFP (2ème sur la page d'accueil)
+          {
+            id: "prix-excellence-2024",
+            title: "Sorbo-Ingénierie obtient le renouvellement de son habilitation FDFP",
+            resume: "Nous sommes heureux d'annoncer que Sorbo-Ingénierie a obtenu le renouvellement de son habilitation auprès du FDFP, attestant de la qualité et de la conformité de nos programmes de formation.",
+            content: "Nous sommes fiers d'annoncer que Sorbo-Ingénierie a obtenu en mars 2025 le renouvellement officiel de son habilitation dans le domaine de la formation en Génie Civil. Cette distinction, valable jusqu'en décembre 2026, confirme notre statut d'organisme de formation de référence en Côte d'Ivoire.\n\nCette reconnaissance vient confirmer la qualité et la rigueur de nos programmes pédagogiques, l'expertise reconnue de nos formateurs et ingénieurs, ainsi que notre engagement constant à accompagner les professionnels et étudiants vers l'excellence. Nos méthodes d'enseignement, basées sur des cas concrets et des projets réels, permettent à nos apprenants d'acquérir les compétences nécessaires pour réussir dans le secteur du génie civil.\n\nCe renouvellement constitue une véritable marque de confiance des autorités compétentes et valorise notre rôle comme acteur majeur de la formation en Génie Civil. Tout au long de cette période, nous continuerons d'innover et de proposer des formations adaptées aux enjeux actuels et futurs du secteur, en intégrant les dernières technologies et les meilleures pratiques internationales.",
+            imageUrl: "images/image 01.jpg",
+            imageAlt: "Habilitation FDFP Sorbo-Ingénierie",
+            datePublication: "2025-04-03",
+            auteur: "Direction Sorbo-Ingénierie",
+            categorie: "Formation",
+            tags: ["FDFP", "Habilitation", "Génie Civil", "Formation", "Excellence"]
+          },
+          // ACTUALITÉ 3 - LOGICIEL OH-ROUTE (3ème sur la page d'accueil)
+          {
+            id: "oh-route-v1-1",
+            title: "Lancement officiel de notre logiciel OH-Route v1",
+            resume: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.",
+            content: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.\n\nDéveloppé par notre équipe d'ingénieurs et d'experts en Génie Civil, OH-Route v1 intègre des fonctionnalités avancées permettant de :\n\n🌧 Prédire et estimer avec fiabilité les débits de pluie,\n\n🌍 Anticiper les risques d'inondation,\n\n🛠 Dimensionner les ouvrages hydrauliques et d'assainissement routier de manière optimale,\n\n💡 Proposer des solutions adaptées avec une évaluation économique et financière pour un meilleur appui à la décision.",
+            imageUrl: "images/drainageroute.png",
+            imageAlt: "Logiciel OH-Route v1 Sorbo-Ingénierie",
+            datePublication: "2024-12-15",
+            auteur: "Équipe Développement",
+            categorie: "Logiciel",
+            tags: ["Logiciel", "OH-Route", "Hydraulique", "Infrastructure"]
+          }
+        ];
+    </script>
     <script src="js/script.js"></script>
-    <script src="js/backend-integration.js"></script>
-    <script src="js/lazy-loading.js"></script>
-    <script src="js/performance-optimizer.js"></script>
-    <script src="js/actualites-statiques.js"></script>
-    <script src="js/actualites-images-manager.js"></script>
-    <script src="js/debug-actualites.js"></script>
-    <script src="js/dynamic-content.js"></script>
-    <script src="js/actualites-loader.js"></script>
-    <script src="js/cleanup-red-buttons.js"></script>
+    <script src="js/actualites-page-fix.js"></script>
     <script src="js/simple-blog-fix.js"></script>
-    <script src="js/limit-actualites.js"></script>
     <script>
         // Hero Banner Carousel et Menu déroulant
         // Ces fonctionnalités seront initialisées dans le premier event listener DOMContentLoaded

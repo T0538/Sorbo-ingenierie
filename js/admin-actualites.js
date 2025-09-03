@@ -172,5 +172,4 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 Page d\'administration chargée');
     loadActualites();
 });
-
 console.log('✅ Script d\'administration des actualités chargé');

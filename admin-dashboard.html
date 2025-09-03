@@ -43,28 +43,28 @@
                 <div class="stat-card primary">
                     <div class="stat-card-icon">
                         <i class="fas fa-newspaper"></i>
-                    </div>
+        </div>
                     <div class="stat-card-value" id="total-articles">3</div>
                     <div class="stat-card-label">Actualités publiées</div>
-        </div>
+            </div>
                 <div class="stat-card success">
                     <div class="stat-card-icon">
                         <i class="fas fa-eye"></i>
-            </div>
+        </div>
                     <div class="stat-card-value" id="total-views">1,247</div>
                     <div class="stat-card-label">Vues totales</div>
-        </div>
+            </div>
                 <div class="stat-card warning">
                     <div class="stat-card-icon">
                         <i class="fas fa-clock"></i>
             </div>
                     <div class="stat-card-value" id="draft-articles">0</div>
                     <div class="stat-card-label">Brouillons</div>
-            </div>
+        </div>
                 <div class="stat-card info">
                     <div class="stat-card-icon">
                         <i class="fas fa-calendar"></i>
-        </div>
+            </div>
                     <div class="stat-card-value" id="this-month">3</div>
                     <div class="stat-card-label">Ce mois</div>
             </div>
@@ -102,8 +102,8 @@
                     <div id="articles-list" class="articles-list">
                         <p><i class="fas fa-spinner fa-spin"></i> Chargement des actualités...</p>
                     </div>
-                </div>
             </div>
+        </div>
     </div>
 
         <!-- Add/Edit Article Section -->
@@ -121,25 +121,25 @@
                     <div class="form-group">
                                 <label for="article-title">Titre de l'actualité *</label>
                                 <input type="text" id="article-title" name="title" required maxlength="100">
-                    </div>
+                </div>
                     <div class="form-group">
                                 <label for="article-date">Date de publication *</label>
                                 <input type="date" id="article-date" name="date" required>
-                    </div>
-                        </div>
+        </div>
+    </div>
 
                         <div class="form-group">
                             <label for="article-resume">Résumé (affiché sur la page d'accueil) *</label>
                             <textarea id="article-resume" name="resume" required maxlength="200" rows="3"></textarea>
-                        </div>
+                </div>
 
-                        <div class="form-group">
+                    <div class="form-group">
                             <label for="article-content">Contenu complet</label>
                             <textarea id="article-content" name="content" rows="8"></textarea>
-                        </div>
+                    </div>
 
                         <div class="form-grid">
-                        <div class="form-group">
+                    <div class="form-group">
                                 <label for="article-author">Auteur</label>
                                 <input type="text" id="article-author" name="author" value="Équipe Sorbo-Ingénierie">
                     </div>
@@ -147,28 +147,28 @@
                                 <label for="article-category">Catégorie</label>
                                 <select id="article-category" name="category">
                                     <option value="actualite">Actualité</option>
-                                    <option value="formation">Formation</option>
+                                <option value="formation">Formation</option>
                                     <option value="logiciel">Logiciel</option>
                                     <option value="projet">Projet</option>
-                                </select>
-                    </div>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group">
+                    <div class="form-group">
                             <label for="article-tags">Tags (séparés par des virgules)</label>
                             <input type="text" id="article-tags" name="tags" placeholder="Formation, AutoCAD, Ingénierie">
                             <div id="tags-preview" class="tags-container"></div>
-                        </div>
+                    </div>
 
-                        <div class="form-group">
+                    <div class="form-group">
                             <label>Image de l'actualité</label>
                             <div class="image-upload" onclick="document.getElementById('image-input').click()">
                                 <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #d10000; margin-bottom: 1rem;"></i>
                                 <p>Cliquez pour sélectionner une image ou glissez-déposez</p>
                                 <input type="file" id="image-input" accept="image/*" style="display: none;">
                                 <img id="image-preview" class="image-preview" style="display: none;">
-                            </div>
                         </div>
+                    </div>
 
                         <div class="btn-group">
                             <button type="submit" class="btn btn-primary">
@@ -180,9 +180,9 @@
                             <button type="button" class="btn btn-secondary" onclick="resetForm()">
                                 <i class="fas fa-times"></i> Annuler
                             </button>
-                        </div>
+                    </div>
                     </form>
-                </div>
+                        </div>
                         </div>
                     </div>
 
@@ -192,15 +192,15 @@
                 <div class="admin-card-header">
                     <h2>Paramètres</h2>
                     <p>Configuration du système de gestion</p>
-                    </div>
+                        </div>
                 <div class="admin-card-body">
-                    <div class="form-group">
+                        <div class="form-group">
                         <label for="auto-save">Sauvegarde automatique</label>
                         <select id="auto-save">
                             <option value="enabled">Activée</option>
                             <option value="disabled">Désactivée</option>
-                        </select>
-                    </div>
+                            </select>
+                        </div>
 
                     <div class="btn-group">
                         <button class="btn btn-success" onclick="exportData()">
@@ -209,10 +209,10 @@
                         <button class="btn btn-warning" onclick="importData()">
                             <i class="fas fa-upload"></i> Importer des données
                         </button>
-                    </div>
                         </div>
                     </div>
                         </div>
+                    </div>
                     </div>
 
     <!-- Scripts -->
