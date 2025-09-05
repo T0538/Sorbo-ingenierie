@@ -16,13 +16,7 @@
         console.log('📰 Affichage simple des 3 actualités...');
         
         const actualites = [
-            {
-                title: 'Nouvelle formation AutoCAD 2025 disponible',
-                resume: 'Découvrez les nouvelles fonctionnalités d\'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.',
-                date: '20 décembre 2024',
-                image: 'images/formationcova.jpg',
-                id: 'formation-autocad-2025'
-            },
+           
             {
                 title: 'Sorbo-Ingénierie obtient le renouvellement de son habilitation FDFP',
                 resume: 'Nous sommes heureux d’annoncer que Sorbo-Ingénierie a obtenu le renouvellement de son habilitation auprès du FDFP, attestant de la qualité et de la conformité de nos programmes de formation.',
