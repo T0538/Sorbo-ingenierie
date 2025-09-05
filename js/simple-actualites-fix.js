@@ -16,7 +16,13 @@
         console.log('📰 Affichage simple des 3 actualités...');
         
         const actualites = [
-           
+            /*{
+                title: 'Nouvelle formation AutoCAD 2025 disponible',
+                resume: 'Découvrez les nouvelles fonctionnalités d\'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.',
+                date: '20 décembre 2024',
+                image: 'images/formationcova.jpg',
+                id: 'formation-autocad-2025'
+            },*/
             {
                 title: 'Sorbo-Ingénierie obtient le renouvellement de son habilitation FDFP',
                 resume: 'Nous sommes heureux d’annoncer que Sorbo-Ingénierie a obtenu le renouvellement de son habilitation auprès du FDFP, attestant de la qualité et de la conformité de nos programmes de formation.',
@@ -25,11 +31,11 @@
                 id: 'prix-excellence-2024'
             },
             {
-                title: 'Nouveau logiciel de calcul de structures OH-Route v1.1',
+                title: 'Nouveau logiciel de calcul de structures OH-Route v1',
                 resume: 'Lancement de la version 1.1 de notre logiciel OH-Route avec de nouvelles fonctionnalités de calcul hydraulique avancé.',
-                date: '15 décembre 2024',
+                date: '12 septembre 2025',
                 image: 'images/drainageroute.png',
-                id: 'oh-route-v1-1'
+                id: 'oh-route-v1'
             }
         ];
         
