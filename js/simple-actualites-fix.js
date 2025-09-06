@@ -32,7 +32,7 @@
             },
             {
                 title: 'Nouveau logiciel de calcul de structures OH-Route v1',
-                resume: 'Lancement de la version 1.de notre logiciel OH-Route avec de nouvelles fonctionnalités de calcul hydraulique avancé.',
+                resume: 'Lancement de la version 1 de notre logiciel OH-Route avec de nouvelles fonctionnalités de calcul hydraulique avancé.',
                 date: '12 Septembre 2025',
                 image: 'images/drainageroute.png',
                 id: 'oh-route-v1-1'
