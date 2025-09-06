@@ -15,17 +15,42 @@
             if (link.hasAttribute('data-fixed')) return;
             link.setAttribute('data-fixed', 'true');
             
-            // Utiliser les IDs des actualités définies dans window.actualitesData
-            let articleId = 'renouvellement-habilitation-fdfp-genie-civil'; // ID par défaut
+            let articleId = 'default-article-id'; // ID par défaut
             
-            // Si window.actualitesData existe, utiliser le bon ID
+            // Si window.actualitesData existe, essayer de matcher par titre ou utiliser l'index
             if (window.actualitesData && window.actualitesData.length > 0) {
-                if (index < window.actualitesData.length) {
-                    articleId = window.actualitesData[index].id;
+                // Essayer de trouver la carte parente pour matcher par titre
+                const card = link.closest('.news-card, .blog-post, .actualite-card');
+                if (card) {
+                    const titleEl = card.querySelector('h1, h2, h3, h4, h5, h6, .blog-title, .news-title');
+                    if (titleEl) {
+                        const cardTitle = titleEl.textContent.trim();
+                        const matchedArticle = window.actualitesData.find(a => a.title === cardTitle);
+                        if (matchedArticle) {
+                            articleId = matchedArticle.id;
+                            console.log(`🎯 Match par titre: "${cardTitle}" -> ${articleId}`);
+                        } else {
+                            // Fallback par index
+                            if (index < window.actualitesData.length) {
+                                articleId = window.actualitesData[index].id;
+                                console.log(`📊 Fallback par index: ${index} -> ${articleId}`);
+                            }
+                        }
+                    } else {
+                        // Fallback par index si pas de titre trouvé
+                        if (index < window.actualitesData.length) {
+                            articleId = window.actualitesData[index].id;
+                        }
+                    }
+                } else {
+                    // Fallback par index si pas de carte trouvée
+                    if (index < window.actualitesData.length) {
+                        articleId = window.actualitesData[index].id;
+                    }
                 }
             }
             
-            // Mettre à jour le lien en gardant le texte original
+            // Mettre à jour le lien
             link.href = `article-template.html?id=${articleId}`;
             link.removeAttribute('onclick');
             
