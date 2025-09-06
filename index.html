@@ -415,7 +415,7 @@
         
         .ticker-track {
             display: flex;
-            animation: tickerScroll 60s linear infinite;
+            animation: tickerScroll 30s linear infinite;
         }
         
         .ticker-item {
@@ -440,6 +440,10 @@
         @keyframes tickerScroll {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
+        }
+        
+        .ticker-track:hover {
+            animation-play-state: paused;
         }
         
         .ticker-content:hover .ticker-track {
@@ -864,6 +868,42 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+        
+        .google-maps-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+        
+        .google-maps-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4285f4;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .google-maps-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .google-maps-btn i {
+            font-size: 12px;
         }
         
         .map-overlay {
@@ -1475,11 +1515,11 @@
                         </div>
                         <div class="ticker-item">
                             <i class="fas fa-users"></i>
-                            <span>Recrutement en cours: Stagiaire en étude mécanique des plaques</span>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées.</span>
                         </div>
                         <div class="ticker-item">
                             <i class="fas fa-users"></i>
-                            <span>Recrutement en cours : stagiaire en étude statistique appliquée à l'hydrologie</span>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 (Génie Civil, Mécanique, Structures).</span>
                         </div>
                         <div class="ticker-item">
                             <i class="fas fa-cogs"></i>
@@ -1651,7 +1691,13 @@
                     <p><i class="fas fa-envelope"></i> contact@sorbo.ingenierie.ci</p>
                     <a href="contact.html" class="btn primary-btn">Nous contacter</a>
                 </div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4376615729384!2d-3.9888842!3d5.3473065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjAnNTAuMyJOIDPCsDU5JzE5LjkiVw!5e0!3m2!1sfr!2sci!4v1637324567890!5m2!1sfr!2sci" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.46686467134!2d-4.0624552!3d5.345477999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb0016feceb9%3A0x440471094000f902!2sCentre%20de%20Formation%20Sorbo-Ing%C3%A9nierie!5e0!3m2!1sfr!2stg!4v1757163216203!5m2!1sfr!2stg" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="google-maps-overlay">
+                    <a href="https://maps.app.goo.gl/4C2HgePxUWWsx8gV7?g_st=iw" target="_blank" class="google-maps-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ouvrir dans Google Maps
+                    </a>
+                </div>
             </div>
         </div>
     </section>

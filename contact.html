@@ -194,12 +194,49 @@
             height: 400px;
             border-radius: var(--border-radius);
             overflow: hidden;
+            position: relative;
         }
         
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: 0;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+        
+        .google-maps-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4285f4;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .google-maps-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .google-maps-btn i {
+            font-size: 12px;
         }
         
         /* Styles pour la section service client */
@@ -879,7 +916,13 @@
                 </div>
                 
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127356.39773170619!2d-4.047242142002386!3d5.351078653833855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ea5311959121%3A0x3fe70ddce19221a6!2sAbidjan%2C%20C%C3%B4te%20d&#39;Ivoire!5e0!3m2!1sfr!2s!4v1667842284532!5m2!1sfr!2s" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.46686467134!2d-4.0624552!3d5.345477999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb0016feceb9%3A0x440471094000f902!2sCentre%20de%20Formation%20Sorbo-Ing%C3%A9nierie!5e0!3m2!1sfr!2stg!4v1757163216203!5m2!1sfr!2stg" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="map-overlay">
+                        <a href="https://maps.app.goo.gl/4C2HgePxUWWsx8gV7?g_st=iw" target="_blank" class="google-maps-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Ouvrir dans Google Maps
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
