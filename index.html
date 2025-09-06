@@ -415,7 +415,8 @@
         
         .ticker-track {
             display: flex;
-            animation: tickerScroll 30s linear infinite;
+            animation: tickerScroll 40s linear infinite;
+            width: max-content;
         }
         
         .ticker-item {
@@ -438,8 +439,8 @@
         }
         
         @keyframes tickerScroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
         }
         
         .ticker-track:hover {
@@ -1529,10 +1530,27 @@
                             <i class="fas fa-calendar-alt"></i>
                             <span>Prochaines formations : Covadis, AutoCAD, Revit - Réservez votre place</span>
                         </div>
-                       <!-- <div class="ticker-item">
-                            <i class="fas fa-globe"></i>
-                            <span>Extension de nos services au Mali et au Burkina Faso</span>
-                        </div>-->
+                        <!-- Duplication pour défilement continu -->
+                        <div class="ticker-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Nouvelle formation AutoCAD 2025 disponible - Inscriptions ouvertes</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées.</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 (Génie Civil, Mécanique, Structures).</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-cogs"></i>
+                            <span>Nouveau logiciel de drainage OH-Route v1 disponible</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Prochaines formations : Covadis, AutoCAD, Revit - Réservez votre place</span>
+                        </div>
                     </div>
                 </div>
             </div>
