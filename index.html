@@ -680,8 +680,9 @@
         }
         
         .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
             margin-top: 50px;
         }
@@ -696,6 +697,8 @@
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            flex: 0 0 420px; /* Largeur fixe pour garder les cartes compactes */
+            max-width: 420px;
         }
         
         .news-card:hover {
@@ -1548,7 +1551,7 @@
             <h3 data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">Faites confiance à l'expertise de notre équipe pour la réussite de vos projets</h3>
             <div class="director-message">
                 <div class="director-image" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="300">
-                    <img src="images/alexis DG.jpg" alt="Alexis KOFFI, Directeur Général">
+                    <img src="images/alexis DG.jpeg" alt="Alexis KOFFI, Directeur Général">
                 </div>
                 <div class="message" data-aos="fade-left" data-aos-duration="1000" data-aos-offset="300">
                     <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="100">Cher visiteur,</p>
@@ -1646,14 +1649,9 @@
                     <p><i class="fas fa-map-marker-alt"></i> Abidjan, Yopougon Ancien Bel-Air cité SOPIM</p>
                     <p><i class="fas fa-phone"></i> (+225) 01 50 12 30 50</p>
                     <p><i class="fas fa-envelope"></i> contact@sorbo.ingenierie.ci</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="contact.html" class="btn primary-btn">Nous contacter</a>
-                        <a href="https://maps.app.goo.gl/4C2HgePxUWWsx8gV7" target="_blank" class="btn" style="background: #4285f4; color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-size: 0.9rem;">
-                            <i class="fas fa-external-link-alt"></i> Ouvrir dans Google Maps
-                        </a>
-                    </div>
+                    <a href="contact.html" class="btn primary-btn">Nous contacter</a>
                 </div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4376615729384!2d-3.9888842!3d5.3473065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjAnNTAuMyJOIDPCsDU5JzE5LjkiVw!5e0!3m2!1sfr!2sci!4v1637324567890!5m2!1sfr!2sci" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.4376615729384!2d-3.9888842!3d5.3473065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjAnNTAuMyJOIDPCsDU5JzE5LjkiVw!5e0!3m2!1sfr!2sci!4v1637324567890!5m2!1sfr!2sci" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -1776,7 +1774,7 @@
             content: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.\n\nDéveloppé par notre équipe d'ingénieurs et d'experts en Génie Civil, OH-Route v1 intègre des fonctionnalités avancées permettant de :\n\n🌧 Prédire et estimer avec fiabilité les débits de pluie,\n\n🌍 Anticiper les risques d'inondation,\n\n🛠 Dimensionner les ouvrages hydrauliques et d'assainissement routier de manière optimale,\n\n💡 Proposer des solutions adaptées avec une évaluation économique et financière pour un meilleur appui à la décision.",
             imageUrl: "images/drainageroute.png",
             imageAlt: "Logiciel OH-Route v1 Sorbo-Ingénierie",
-            datePublication: "2025-09-12",
+            datePublication: "2024-12-15",
             auteur: "Équipe Développement",
             categorie: "Logiciel",
             tags: ["Logiciel", "OH-Route", "Hydraulique", "Infrastructure"]
