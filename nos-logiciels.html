@@ -15,34 +15,40 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <style>
-        to {
+        @keyframes fadeInUp {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+        @keyframes fadeInLeft {
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
+        @keyframes fadeInRight {
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
 
+        @keyframes scaleUp {
             50% {
                 transform: scale(1.05);
             }
         }
 
+        @keyframes rotate {
             100% {
                 transform: rotate(360deg);
             }
         }
 
+        @keyframes progressBar {
             25% {
                 width: 30%;
             }
@@ -1033,8 +1039,8 @@
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/sorbo.ingenierie" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/sorbo-ing-nierie/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
@@ -1077,8 +1083,6 @@
                 }, 2500);
             });
         }
-
-        );
     </script>
     <!-- Scripts -->
     <script src="js/script.js"></script>
