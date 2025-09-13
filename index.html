@@ -1441,6 +1441,314 @@
                 font-size: 0.8rem;
             }
         }
+
+        /* Section Ils nous font confiance - Carousel automatique avec identité Sorbo */
+        .trust-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23dc3545" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .trust-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .trust-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .trust-header .underline {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #dc3545, #c82333);
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+
+        .trust-header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .trust-carousel-container {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .trust-carousel {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .trust-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            gap: 30px;
+        }
+
+        .trust-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-300px * 3));
+            }
+        }
+
+        .trust-slide {
+            flex: 0 0 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .trust-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(220, 53, 69, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(220, 53, 69, 0.1);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trust-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(220, 53, 69, 0.15);
+            border-color: #dc3545;
+        }
+
+        .trust-logo-full {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .trust-logo-main {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            transition: all 0.4s ease;
+            filter: grayscale(20%) brightness(1.1);
+        }
+
+        .trust-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 2;
+        }
+
+        .trust-item:hover .trust-overlay {
+            opacity: 1;
+        }
+
+        .trust-item:hover .trust-logo-full {
+            transform: scale(0.9);
+            opacity: 0.3;
+        }
+
+        .trust-identity {
+            text-align: center;
+            color: #ffffff;
+            padding: 20px;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .trust-item:hover .trust-identity {
+            transform: translateY(0);
+        }
+
+        .trust-logo-overlay {
+            margin-bottom: 15px;
+        }
+
+        .trust-logo-mini {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .trust-identity h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .trust-identity p {
+            font-size: 0.85rem;
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.4;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trust-section {
+                padding: 60px 0;
+            }
+
+            .trust-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .trust-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .trust-slide {
+                flex: 0 0 250px;
+            }
+
+            .trust-item {
+                max-width: 230px;
+                height: 160px;
+            }
+
+            .trust-logo-main {
+                width: 100px;
+                height: 100px;
+            }
+
+            .trust-logo-mini {
+                width: 50px;
+                height: 50px;
+                padding: 6px;
+            }
+
+            .trust-identity h4 {
+                font-size: 1.1rem;
+            }
+
+            .trust-identity p {
+                font-size: 0.75rem;
+            }
+
+            .trust-track {
+                gap: 20px;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-250px * 3));
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trust-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .trust-slide {
+                flex: 0 0 200px;
+            }
+
+            .trust-item {
+                max-width: 180px;
+                height: 140px;
+            }
+
+            .trust-logo-main {
+                width: 80px;
+                height: 80px;
+            }
+
+            .trust-logo-mini {
+                width: 40px;
+                height: 40px;
+                padding: 4px;
+            }
+
+            .trust-identity {
+                padding: 15px;
+            }
+
+            .trust-identity h4 {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+
+            .trust-identity p {
+                font-size: 0.7rem;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-200px * 3));
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -1696,6 +2004,114 @@
         </div>
     </section>
 
+    <!-- Section Ils nous font confiance - Carousel automatique -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-header" data-aos="fade-up" data-aos-duration="800">
+                <h2>Ils nous font confiance</h2>
+                <div class="underline"></div>
+                <p>Des entreprises de renom nous font confiance pour leurs projets d'ingénierie et de formation</p>
+            </div>
+            
+            <div class="trust-carousel-container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                <div class="trust-carousel">
+                    <div class="trust-track">
+                        <div class="trust-slide">
+                            <div class="trust-item">
+                                <div class="trust-logo-full">
+                                    <img src="images/logo-fdfp02.png" alt="Logo FDFP" class="trust-logo-main">
+                                </div>
+                                <div class="trust-overlay">
+                                    <div class="trust-identity">
+                                        <div class="trust-logo-overlay">
+                                            <img src="images/logo-fdfp02.png" alt="Logo FDFP" class="trust-logo-mini">
+                                        </div>
+                                        <h4>FDFP</h4>
+                                        <p>Fonds de Développement de la Formation Professionnelle</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide">
+                            <div class="trust-item">
+                                <div class="trust-logo-full">
+                                    <img src="images/logo-setec.png" alt="Logo SETEC AFRIQUE" class="trust-logo-main">
+                                </div>
+                                <div class="trust-overlay">
+                                    <div class="trust-identity">
+                                        <div class="trust-logo-overlay">
+                                            <img src="images/logo-setec.png" alt="Logo SETEC AFRIQUE" class="trust-logo-mini">
+                                        </div>
+                                        <h4>SETEC AFRIQUE</h4>
+                                        <p>Société d'Études et de Construction Technique</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide">
+                            <div class="trust-item">
+                                <div class="trust-logo-full">
+                                    <img src="images/LOGO_SICMA.svg" alt="Logo SICMA" class="trust-logo-main">
+                                </div>
+                                <div class="trust-overlay">
+                                    <div class="trust-identity">
+                                        <div class="trust-logo-overlay">
+                                            <img src="images/LOGO_SICMA.svg" alt="Logo SICMA" class="trust-logo-mini">
+                                        </div>
+                                        <h4>SICMA</h4>
+                                        <p>Société Ivoirienne de Construction et de Matériaux</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Entreprises masquées temporairement -->
+                        <div class="trust-slide" style="display: none;">
+                            <div class="trust-item">
+                                <div class="trust-logo-container">
+                                    <div class="trust-logo-placeholder">
+                                        <i class="fas fa-warehouse"></i>
+                                    </div>
+                                </div>
+                                <div class="trust-info">
+                                    <h4>SECTEC AFRIQUE</h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide" style="display: none;">
+                            <div class="trust-item">
+                                <div class="trust-logo-container">
+                                    <div class="trust-logo-placeholder">
+                                        <i class="fas fa-hard-hat"></i>
+                                    </div>
+                                </div>
+                                <div class="trust-info">
+                                    <h4></h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide" style="display: none;">
+                            <div class="trust-item">
+                                <div class="trust-logo-container">
+                                    <div class="trust-logo-placeholder">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                </div>
+                                <div class="trust-info">
+                                    <h4>Nom de l'Entreprise 6</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="map-section">
         <div class="container">
             <h2 data-aos="fade-up" data-aos-duration="800">Nous trouver</h2>
@@ -1719,8 +2135,6 @@
             </div>
         </div>
     </section>
-
-
 
     <!-- Section Newsletter
     <section class="newsletter-section">
