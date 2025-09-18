@@ -2602,7 +2602,7 @@ footer h3::after {
 
 .formation-header {
     position: relative;
-    height: 160px;
+    height: 120px;
     overflow: hidden;
 }
 
@@ -2617,6 +2617,16 @@ footer h3::after {
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
+}
+
+/* Ajustement pour les cartes de formation dans la grille */
+.formations-grid .formation-card .formation-image {
+    height: 120px;
+}
+
+.formations-grid .formation-card .formation-image img {
+    height: 120px;
+    object-fit: cover;
 }
 
 .formation-card-promo:hover .formation-image img {
