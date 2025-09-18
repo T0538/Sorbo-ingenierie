@@ -45,7 +45,20 @@ async function loadFormationsFromAPI() {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        const formations = await response.json();
+        const responseData = await response.json();
+        console.log('📊 Réponse API complète:', responseData);
+        
+        // Extraire les formations du bon format
+        let formations;
+        if (responseData.data && Array.isArray(responseData.data)) {
+            formations = responseData.data;
+        } else if (Array.isArray(responseData)) {
+            formations = responseData;
+        } else {
+            console.error('❌ Format de données inattendu:', responseData);
+            formations = [];
+        }
+        
         console.log(`✅ ${formations.length} formations récupérées depuis MongoDB Atlas`);
         
         // Réinitialiser le compteur de tentatives
@@ -178,6 +191,19 @@ function displayFormations(formations) {
                 <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #bdc3c7; margin-bottom: 20px;"></i>
                 <h3>Aucune formation disponible</h3>
                 <p>Nos formations sont en cours de mise à jour. Revenez bientôt !</p>
+                <button class="btn primary-btn" onclick="window.location.reload()">Actualiser</button>
+            </div>
+        `;
+        return;
+    }
+
+    // Vérifier que formations est bien un tableau
+    if (!Array.isArray(formations)) {
+        console.error('❌ formations n\'est pas un tableau:', formations);
+        container.innerHTML = `
+            <div class="no-formations">
+                <h3>Erreur de format de données</h3>
+                <p>Les données reçues ne sont pas dans le bon format.</p>
                 <button class="btn primary-btn" onclick="window.location.reload()">Actualiser</button>
             </div>
         `;
