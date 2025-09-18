@@ -178,10 +178,28 @@ function createFormationCard(formation) {
 
 // Fonction pour afficher les formations
 function displayFormations(formations) {
+    console.log('🎯 displayFormations appelée avec:', formations);
+    console.log('🔍 Type de formations:', typeof formations);
+    console.log('🔍 Est-ce un tableau?', Array.isArray(formations));
+    
     const container = document.getElementById('formations-grid');
     
     if (!container) {
         console.error('❌ Container formations-grid non trouvé');
+        return;
+    }
+
+    // Vérifier que formations est bien un tableau
+    if (!Array.isArray(formations)) {
+        console.error('❌ formations n\'est pas un tableau:', formations);
+        container.innerHTML = `
+            <div class="no-formations" style="text-align: center; padding: 40px;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 20px;"></i>
+                <h3>Erreur de format de données</h3>
+                <p>Les données reçues ne sont pas dans le bon format.</p>
+                <button class="btn primary-btn" onclick="window.location.reload()">Actualiser</button>
+            </div>
+        `;
         return;
     }
 
