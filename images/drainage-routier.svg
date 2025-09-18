@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <linearGradient id="roadGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34495e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="grassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#27ae60;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#229954;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fond -->
+  <rect width="400" height="200" fill="#ecf0f1"/>
+  
+  <!-- Route principale -->
+  <rect x="50" y="80" width="300" height="40" fill="url(#roadGradient)" rx="5"/>
+  
+  <!-- Lignes de route -->
+  <line x1="50" y1="100" x2="350" y2="100" stroke="white" stroke-width="3" stroke-dasharray="10,5"/>
+  <line x1="50" y1="110" x2="350" y2="110" stroke="white" stroke-width="2" stroke-dasharray="8,4"/>
+  <line x1="50" y1="90" x2="350" y2="90" stroke="white" stroke-width="2" stroke-dasharray="8,4"/>
+  
+  <!-- Caniveaux de drainage -->
+  <rect x="30" y="75" width="340" height="10" fill="url(#waterGradient)" rx="5"/>
+  <rect x="30" y="115" width="340" height="10" fill="url(#waterGradient)" rx="5"/>
+  
+  <!-- Eau dans les caniveaux -->
+  <rect x="35" y="77" width="330" height="6" fill="#5dade2" opacity="0.8"/>
+  <rect x="35" y="117" width="330" height="6" fill="#5dade2" opacity="0.8"/>
+  
+  <!-- Gouttes d'eau -->
+  <circle cx="80" cy="73" r="3" fill="#3498db" opacity="0.7"/>
+  <circle cx="120" cy="71" r="2" fill="#3498db" opacity="0.6"/>
+  <circle cx="160" cy="74" r="2.5" fill="#3498db" opacity="0.7"/>
+  <circle cx="200" cy="72" r="2" fill="#3498db" opacity="0.6"/>
+  <circle cx="240" cy="75" r="3" fill="#3498db" opacity="0.7"/>
+  <circle cx="280" cy="73" r="2.5" fill="#3498db" opacity="0.7"/>
+  <circle cx="320" cy="71" r="2" fill="#3498db" opacity="0.6"/>
+  
+  <circle cx="70" cy="127" r="2.5" fill="#3498db" opacity="0.7"/>
+  <circle cx="110" cy="129" r="2" fill="#3498db" opacity="0.6"/>
+  <circle cx="150" cy="126" r="3" fill="#3498db" opacity="0.7"/>
+  <circle cx="190" cy="128" r="2" fill="#3498db" opacity="0.6"/>
+  <circle cx="230" cy="125" r="2.5" fill="#3498db" opacity="0.7"/>
+  <circle cx="270" cy="127" r="2" fill="#3498db" opacity="0.6"/>
+  <circle cx="310" cy="129" r="2.5" fill="#3498db" opacity="0.7"/>
+  
+  <!-- Herbe sur les côtés -->
+  <rect x="0" y="0" width="50" height="200" fill="url(#grassGradient)"/>
+  <rect x="350" y="0" width="50" height="200" fill="url(#grassGradient)"/>
+  
+  <!-- Détails de drainage -->
+  <rect x="40" y="70" width="8" height="20" fill="#95a5a6" rx="2"/>
+  <rect x="352" y="70" width="8" height="20" fill="#95a5a6" rx="2"/>
+  
+  <!-- Flèches de direction d'eau -->
+  <path d="M 60 80 L 70 80 L 65 75 Z" fill="#3498db" opacity="0.8"/>
+  <path d="M 340 120 L 330 120 L 335 125 Z" fill="#3498db" opacity="0.8"/>
+  
+  <!-- Ombres -->
+  <rect x="50" y="120" width="300" height="5" fill="rgba(0,0,0,0.1)" rx="2"/>
+</svg>

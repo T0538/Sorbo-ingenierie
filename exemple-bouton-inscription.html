@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple Bouton Inscription Formation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .formation-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            background: #f9f9f9;
+        }
+        .inscription-btn {
+            background: #d10000;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(209, 0, 0, 0.2);
+        }
+        .inscription-btn:hover {
+            background: #b30000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(209, 0, 0, 0.3);
+        }
+    </style>
+
+
+    
+</head>
+<body>
+    <h1>Exemples de Boutons d'Inscription aux Formations</h1>
+    
+    <h2>Méthode 1: Bouton HTML direct</h2>
+    <div class="formation-card">
+        <h3>Formation AutoCAD Civil 3D</h3>
+        <p><strong>Durée:</strong> 5 jours</p>
+        <p><strong>Prix:</strong> 250 000 FCFA</p>
+        <button class="inscription-btn" onclick="openInscriptionForm('Formation AutoCAD Civil 3D', '5 jours', '250 000 FCFA', 'autocad-001')">
+            <i class="fas fa-graduation-cap"></i> S'inscrire à cette formation
+        </button>
+    </div>
+
+    <h2>Méthode 2: Bouton avec données personnalisées</h2>
+    <div class="formation-card">
+        <h3>Formation Revit Structure</h3>
+        <p><strong>Durée:</strong> 4 jours</p>
+        <p><strong>Prix:</strong> 200 000 FCFA</p>
+        <button class="inscription-btn" onclick="openInscriptionForm('Formation Revit Structure', '4 jours', '200 000 FCFA', 'revit-001')">
+            <i class="fas fa-graduation-cap"></i> S'inscrire à cette formation
+        </button>
+    </div>
+
+    <h2>Méthode 3: Bouton dynamique avec JavaScript</h2>
+    <div class="formation-card" id="formation-dynamique">
+        <h3>Formation Dynamique</h3>
+        <p><strong>Durée:</strong> 3 jours</p>
+        <p><strong>Prix:</strong> 150 000 FCFA</p>
+        <!-- Le bouton sera ajouté automatiquement par JavaScript -->
+    </div>
+
+    <script>
+        // Fonction pour ouvrir la page d'inscription
+        function openInscriptionForm(formationName, duration, price, id) {
+            const params = new URLSearchParams({
+                name: encodeURIComponent(formationName),
+                duration: encodeURIComponent(duration),
+                price: encodeURIComponent(price),
+                id: encodeURIComponent(id)
+            });
+            
+            // Ouvrir dans un nouvel onglet
+            window.open(`inscription-formation.html?${params.toString()}`, '_blank');
+        }
+
+        // Exemple d'ajout dynamique d'un bouton
+        document.addEventListener('DOMContentLoaded', function() {
+            const formationElement = document.getElementById('formation-dynamique');
+            if (formationElement) {
+                const button = document.createElement('button');
+                button.className = 'inscription-btn';
+                button.innerHTML = '<i class="fas fa-graduation-cap"></i> S\'inscrire (ajouté dynamiquement)';
+                button.onclick = function() {
+                    openInscriptionForm('Formation Dynamique', '3 jours', '150 000 FCFA', 'dynamique-001');
+                };
+                formationElement.appendChild(button);
+            }
+        });
+    </script>
+
+    <h2>Code HTML à copier-coller :</h2>
+    <pre><code>&lt;button class="inscription-btn" onclick="openInscriptionForm('Nom Formation', 'Durée', 'Prix', 'ID')"&gt;
+    &lt;i class="fas fa-graduation-cap"&gt;&lt;/i&gt; S'inscrire à cette formation
+&lt;/button&gt;</code></pre>
+
+    <h2>Code JavaScript à ajouter :</h2>
+    <pre><code>&lt;script&gt;
+function openInscriptionForm(formationName, duration, price, id) {
+    const params = new URLSearchParams({
+        name: encodeURIComponent(formationName),
+        duration: encodeURIComponent(duration),
+        price: encodeURIComponent(price),
+        id: encodeURIComponent(id)
+    });
+    
+    window.open(`inscription-formation.html?${params.toString()}`, '_blank');
+}
+&lt;/script&gt;</code></pre>
+
+    <h2>CSS pour le style du bouton :</h2>
+    <pre><code>.inscription-btn {
+    background: #d10000;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(209, 0, 0, 0.2);
+}
+
+.inscription-btn:hover {
+    background: #b30000;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(209, 0, 0, 0.3);
+}</code></pre>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

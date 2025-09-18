@@ -1,0 +1,132 @@
+/* Styles pour les images des logiciels Sorbo Ingénierie */
+
+/* Image d'en-tête des cartes logiciels */
+.software-header-image {
+    width: 100%;
+    height: 140px; /* Augmenté à 140px pour plus de visibilité */
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+    position: relative;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Retour à 'cover' pour remplir la carte */
+    object-position: center top; /* Priorité au haut de l'image */
+    transition: transform 0.3s ease;
+    background: #ffffff;
+}
+
+.software-card:hover .header-image {
+    transform: scale(1.02); /* Réduit de 1.05 à 1.02 pour un effet plus subtil */
+}
+
+/* Icône du logiciel */
+.software-icon-image {
+    width: 40px; /* Augmenté de 35px à 40px */
+    height: 40px; /* Augmenté de 35px à 40px */
+    border-radius: 8px; /* Augmenté de 6px à 8px */
+    object-fit: contain; /* Changé de 'cover' à 'contain' */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+    padding: 4px; /* Ajout de padding */
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+/* Responsive design pour les images */
+@media (max-width: 768px) {
+    .software-header-image {
+        height: 120px; /* Réduit sur mobile mais toujours plus grand qu'avant */
+    }
+    
+    .software-icon-image {
+        width: 35px;
+        height: 35px;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .software-header-image {
+        height: 100px;
+    }
+    
+    .software-icon-image {
+        width: 30px;
+        height: 30px;
+        padding: 2px;
+    }
+}
+
+/* Amélioration de l'accessibilité */
+.software-header-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.1) 0%, rgba(233, 236, 239, 0.1) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.header-image {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation d'apparition des images */
+.software-card[data-aos] .software-header-image {
+    animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Gestion des erreurs de chargement d'images */
+.header-image:not([src]),
+.header-image[src=""],
+.header-image[src="undefined"] {
+    display: none;
+}
+
+.software-header-image:has(.header-image:not([src]))::after,
+.software-header-image:has(.header-image[src=""])::after,
+.software-header-image:has(.header-image[src="undefined"])::after {
+    content: '🖼️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: #6c757d;
+    z-index: 3;
+}
+
+/* Support pour le mode sombre */
+@media (prefers-color-scheme: dark) {
+    .software-header-image {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    }
+    
+    .header-image {
+        background: #2d3748;
+    }
+    
+    .software-icon-image {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+}

@@ -1,0 +1,9 @@
+Ceci est une démonstration du logiciel TALREN.
+
+TALREN est un logiciel de calcul de stabilité des pentes et des ouvrages de soutènement.
+
+Ce fichier simule un package d'installation du logiciel TALREN.
+
+Merci d'avoir téléchargé notre logiciel!
+
+© 2024 Sorbo-Ingénierie

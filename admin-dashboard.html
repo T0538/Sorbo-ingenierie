@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Sorbo-Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <h1><i class="fas fa-cogs"></i> Dashboard Administrateur</h1>
+        <p>Gestion des actualités et contenu du site Sorbo-Ingénierie</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="admin-container">
+        <!-- Navigation Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="dashboard">
+                <i class="fas fa-chart-line"></i>
+                Vue d'ensemble
+            </button>
+            <button class="admin-tab" data-tab="articles">
+                <i class="fas fa-newspaper"></i>
+                Actualités
+            </button>
+            <button class="admin-tab" data-tab="add-article">
+                <i class="fas fa-plus-circle"></i>
+                Ajouter
+            </button>
+            <button class="admin-tab" data-tab="settings">
+                <i class="fas fa-cog"></i>
+                Paramètres
+            </button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="admin-section active">
+            <div class="stats-grid">
+                <div class="stat-card primary">
+                    <div class="stat-card-icon">
+                        <i class="fas fa-newspaper"></i>
+        </div>
+                    <div class="stat-card-value" id="total-articles">3</div>
+                    <div class="stat-card-label">Actualités publiées</div>
+            </div>
+                <div class="stat-card success">
+                    <div class="stat-card-icon">
+                        <i class="fas fa-eye"></i>
+        </div>
+                    <div class="stat-card-value" id="total-views">1,247</div>
+                    <div class="stat-card-label">Vues totales</div>
+            </div>
+                <div class="stat-card warning">
+                    <div class="stat-card-icon">
+                        <i class="fas fa-clock"></i>
+            </div>
+                    <div class="stat-card-value" id="draft-articles">0</div>
+                    <div class="stat-card-label">Brouillons</div>
+        </div>
+                <div class="stat-card info">
+                    <div class="stat-card-icon">
+                        <i class="fas fa-calendar"></i>
+            </div>
+                    <div class="stat-card-value" id="this-month">3</div>
+                    <div class="stat-card-label">Ce mois</div>
+            </div>
+        </div>
+
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2>Activité récente</h2>
+                    <p>Dernières actions sur le site</p>
+            </div>
+                <div class="admin-card-body">
+                    <div id="recent-activity">
+                        <p><i class="fas fa-clock text-muted"></i> Chargement des activités récentes...</p>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <!-- Articles Management Section -->
+        <div id="articles" class="admin-section">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2>Gestion des actualités</h2>
+                    <p>Modifier, supprimer ou publier vos actualités</p>
+                </div>
+                <div class="admin-card-body">
+                    <div class="btn-group" style="margin-bottom: 2rem;">
+                        <button class="btn btn-primary" onclick="refreshArticlesList()">
+                            <i class="fas fa-sync"></i> Actualiser
+                        </button>
+                        <button class="btn btn-success" onclick="switchTab('add-article')">
+                            <i class="fas fa-plus"></i> Nouvelle actualité
+                        </button>
+                    </div>
+                    <div id="articles-list" class="articles-list">
+                        <p><i class="fas fa-spinner fa-spin"></i> Chargement des actualités...</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Add/Edit Article Section -->
+        <div id="add-article" class="admin-section">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2 id="form-title">Nouvelle actualité</h2>
+                    <p>Créez ou modifiez une actualité</p>
+                </div>
+                <div class="admin-card-body">
+                    <form id="article-form">
+                        <input type="hidden" id="article-id" name="id">
+                        
+                        <div class="form-grid">
+                    <div class="form-group">
+                                <label for="article-title">Titre de l'actualité *</label>
+                                <input type="text" id="article-title" name="title" required maxlength="100">
+                </div>
+                    <div class="form-group">
+                                <label for="article-date">Date de publication *</label>
+                                <input type="date" id="article-date" name="date" required>
+        </div>
+    </div>
+
+                        <div class="form-group">
+                            <label for="article-resume">Résumé (affiché sur la page d'accueil) *</label>
+                            <textarea id="article-resume" name="resume" required maxlength="200" rows="3"></textarea>
+                </div>
+
+                    <div class="form-group">
+                            <label for="article-content">Contenu complet</label>
+                            <textarea id="article-content" name="content" rows="8"></textarea>
+                    </div>
+
+                        <div class="form-grid">
+                    <div class="form-group">
+                                <label for="article-author">Auteur</label>
+                                <input type="text" id="article-author" name="author" value="Équipe Sorbo-Ingénierie">
+                    </div>
+                    <div class="form-group">
+                                <label for="article-category">Catégorie</label>
+                                <select id="article-category" name="category">
+                                    <option value="actualite">Actualité</option>
+                                <option value="formation">Formation</option>
+                                    <option value="logiciel">Logiciel</option>
+                                    <option value="projet">Projet</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                            <label for="article-tags">Tags (séparés par des virgules)</label>
+                            <input type="text" id="article-tags" name="tags" placeholder="Formation, AutoCAD, Ingénierie">
+                            <div id="tags-preview" class="tags-container"></div>
+                    </div>
+
+                    <div class="form-group">
+                            <label>Image de l'actualité</label>
+                            <div class="image-upload" onclick="document.getElementById('image-input').click()">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #d10000; margin-bottom: 1rem;"></i>
+                                <p>Cliquez pour sélectionner une image ou glissez-déposez</p>
+                                <input type="file" id="image-input" accept="image/*" style="display: none;">
+                                <img id="image-preview" class="image-preview" style="display: none;">
+                        </div>
+                    </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Enregistrer
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="previewArticle()">
+                                <i class="fas fa-eye"></i> Prévisualiser
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                <i class="fas fa-times"></i> Annuler
+                            </button>
+                    </div>
+                    </form>
+                        </div>
+                        </div>
+                    </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="admin-section">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2>Paramètres</h2>
+                    <p>Configuration du système de gestion</p>
+                        </div>
+                <div class="admin-card-body">
+                        <div class="form-group">
+                        <label for="auto-save">Sauvegarde automatique</label>
+                        <select id="auto-save">
+                            <option value="enabled">Activée</option>
+                            <option value="disabled">Désactivée</option>
+                            </select>
+                        </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-success" onclick="exportData()">
+                            <i class="fas fa-download"></i> Exporter les données
+                        </button>
+                        <button class="btn btn-warning" onclick="importData()">
+                            <i class="fas fa-upload"></i> Importer des données
+                        </button>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    </div>
+
+    <!-- Scripts -->
+        <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/admin-dashboard-core.js"></script>
+</body>
+</html> 

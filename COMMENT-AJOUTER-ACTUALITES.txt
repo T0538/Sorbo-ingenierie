@@ -1,0 +1,90 @@
+===============================================
+COMMENT AJOUTER DES ACTUALITÉS - MÉTHODE SIMPLE
+===============================================
+
+🎯 VOTRE ACTUALITÉ FDFP EST MAINTENANT INTÉGRÉE !
+
+📍 ELLE SE TROUVE DANS :
+- Page d'accueil : ligne 1736 de index.html
+- Page articles : ligne 850 de article-template.html
+
+===============================================
+POUR AJOUTER UNE NOUVELLE ACTUALITÉ :
+===============================================
+
+1️⃣ OUVRIR LE FICHIER index.html
+2️⃣ ALLER À LA LIGNE 1748 (après le })
+3️⃣ AJOUTER UNE VIRGULE après le }
+4️⃣ COPIER-COLLER CE MODÈLE :
+
+          ,
+          // ACTUALITÉ 2 - VOTRE TITRE
+          {
+            id: "votre-id-unique",
+            title: "Titre de votre actualité",
+            resume: "Description courte pour les cartes",
+            content: "Tout votre contenu en un seul bloc, sans retour à la ligne, juste le texte complet de l'actualité sans sous-titres.",
+            imageUrl: "images/votre-image.jpg",
+            imageAlt: "Description de l'image",
+            datePublication: "2025-01-10",
+            auteur: "Nom de l'auteur",
+            categorie: "Catégorie",
+            tags: ["Tag1", "Tag2", "Tag3"]
+          }
+
+5️⃣ REMPLACER :
+- id : identifiant unique (ex: formation-autocad-2025)
+- title : titre complet
+- resume : description courte
+- content : TOUT le texte en un bloc
+- imageUrl : chemin de l'image (ex: images/image1.jpg)
+- datePublication : format AAAA-MM-JJ
+- auteur : qui a écrit l'actualité
+- categorie : Formation, Actualités, etc.
+- tags : mots-clés entre guillemets
+
+6️⃣ RÉPÉTER POUR LA 3ème ACTUALITÉ
+
+7️⃣ SAUVEGARDER LE FICHIER
+
+===============================================
+EXEMPLE COMPLET D'AJOUT :
+===============================================
+
+À la ligne 1748, remplacer :
+          }
+          // POUR AJOUTER UNE ACTUALITÉ...
+
+Par :
+          },
+          // ACTUALITÉ 2 - FORMATION AUTOCAD
+          {
+            id: "formation-autocad-2025",
+            title: "Nouvelle formation AutoCAD 2025",
+            resume: "Découvrez les nouvelles fonctionnalités d'AutoCAD 2025",
+            content: "Sorbo-Ingénierie lance sa nouvelle formation AutoCAD 2025, conçue pour vous faire maîtriser les dernières innovations. Cette formation vous permettra de découvrir les nouvelles fonctionnalités et d'optimiser votre flux de travail.",
+            imageUrl: "images/image1.jpg",
+            imageAlt: "Formation AutoCAD 2025",
+            datePublication: "2025-01-10",
+            auteur: "Service Formation",
+            categorie: "Formation",
+            tags: ["AutoCAD", "Formation", "CAO", "2025"]
+          }
+          // POUR AJOUTER UNE ACTUALITÉ...
+
+===============================================
+⚠️ IMPORTANT :
+===============================================
+- L'ID doit être UNIQUE pour chaque actualité
+- Le contenu va dans "content" en UN SEUL BLOC
+- Respecter les guillemets et virgules
+- Utiliser des images existantes (images/image1.jpg, etc.)
+- Date au format AAAA-MM-JJ
+
+===============================================
+🔄 APRÈS MODIFICATION :
+===============================================
+1. Sauvegarder index.html
+2. Actualiser la page (F5)
+3. Vos actualités apparaissent automatiquement !
+

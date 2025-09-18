@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Images Logiciels | Sorbo-Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo-fixes.css">
+    <link rel="stylesheet" href="css/software-images.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-title {
+            color: #d10000;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .test-subtitle {
+            color: #6b7280;
+            font-size: 1.2rem;
+        }
+        
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .comparison-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-title {
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .before-title {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .after-title {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+        
+        .software-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .software-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+        
+        .software-header-image {
+            width: 100%;
+            height: 90px; /* Version AVANT */
+            overflow: hidden;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .software-header-image.after {
+            height: 140px; /* Version APRÈS */
+            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Version AVANT */
+            transition: transform 0.3s ease;
+        }
+        
+        .header-image.after {
+            object-fit: cover; /* Version APRÈS - remplit la carte */
+            object-position: center top;
+            background: #ffffff;
+        }
+        
+        .software-card:hover .header-image {
+            transform: scale(1.05); /* Version AVANT */
+        }
+        
+        .software-card:hover .header-image.after {
+            transform: scale(1.02); /* Version APRÈS */
+        }
+        
+        .software-header {
+            padding: 0.75rem 0.75rem 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 0.5rem;
+        }
+        
+        .software-icon-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            gap: 0.75rem;
+        }
+        
+        .software-icon-image {
+            width: 35px; /* Version AVANT */
+            height: 35px; /* Version AVANT */
+            border-radius: 6px; /* Version AVANT */
+            object-fit: cover; /* Version AVANT */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+        
+        .software-icon-image.after {
+            width: 40px; /* Version APRÈS */
+            height: 40px; /* Version APRÈS */
+            border-radius: 8px; /* Version APRÈS */
+            object-fit: contain; /* Version APRÈS */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            padding: 4px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        
+        .software-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .software-content {
+            padding: 0 0.75rem 0.75rem;
+        }
+        
+        .software-category {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .software-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .software-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .primary-btn {
+            background: #d10000;
+            color: white;
+        }
+        
+        .primary-btn:hover {
+            background: #b30000;
+            transform: translateY(-2px);
+        }
+        
+        .secondary-btn {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .secondary-btn:hover {
+            background: #e5e7eb;
+            transform: translateY(-2px);
+        }
+        
+        .test-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .test-info h3 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .test-info ul {
+            color: #6b7280;
+            line-height: 1.8;
+        }
+        
+        .test-info li {
+            margin-bottom: 10px;
+        }
+        
+        .responsive-test {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .responsive-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .responsive-btn {
+            padding: 10px 20px;
+            border: 2px solid #d10000;
+            background: white;
+            color: #d10000;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .responsive-btn:hover,
+        .responsive-btn.active {
+            background: #d10000;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .test-title {
+                font-size: 2rem;
+            }
+            
+            .responsive-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1 class="test-title">🧪 Test Images Logiciels</h1>
+            <p class="test-subtitle">Comparaison AVANT/APRÈS les améliorations d'affichage</p>
+        </div>
+        
+        <div class="test-info">
+            <h3>📋 Objectif du Test</h3>
+            <p>Ce fichier permet de visualiser et comparer les améliorations apportées aux images des logiciels :</p>
+                         <ul>
+                 <li><strong>AVANT :</strong> Images avec hauteur limitée (90px) qui coupent le contenu</li>
+                 <li><strong>APRÈS :</strong> Images avec hauteur augmentée (140px) qui remplissent mieux la carte</li>
+                 <li><strong>Visibilité :</strong> Plus d'espace pour voir les détails des images</li>
+                 <li><strong>Responsive :</strong> Adaptation automatique sur tous les écrans</li>
+             </ul>
+        </div>
+        
+        <div class="comparison-section">
+            <!-- Version AVANT -->
+            <div class="comparison-card">
+                <h2 class="comparison-title before-title">❌ AVANT - Images coupées</h2>
+                
+                <div class="software-card">
+                    <div class="software-header-image">
+                        <img src="images/drainageroute.png" alt="OH-Route V1" class="header-image">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône OH-Route" class="software-icon-image">
+                            <h4 class="software-name">OH-Route V1</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">EAU ET ASSAINISSEMENT • V2024</div>
+                        <p>Logiciel pour la conception et le dimensionnement des ouvrages d'assainissement et de drainage routier.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="software-card">
+                    <div class="software-header-image">
+                        <img src="images/drainageroute.png" alt="Drainage Pro" class="header-image">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône Drainage Pro" class="software-icon-image">
+                            <h4 class="software-name">Drainage Pro</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">HYDRAULIQUE • VV3.2</div>
+                        <p>Logiciel professionnel pour la conception et l'analyse des systèmes de drainage routier et urbain.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Version APRÈS -->
+            <div class="comparison-card">
+                <h2 class="comparison-title after-title">✅ APRÈS - Images complètes</h2>
+                
+                <div class="software-card">
+                    <div class="software-header-image after">
+                        <img src="images/drainageroute.png" alt="OH-Route V1" class="header-image after">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône OH-Route" class="software-icon-image after">
+                            <h4 class="software-name">OH-Route V1</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">EAU ET ASSAINISSEMENT • V2024</div>
+                        <p>Logiciel pour la conception et le dimensionnement des ouvrages d'assainissement et de drainage routier.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="software-card">
+                    <div class="software-header-image after">
+                        <img src="images/drainageroute.png" alt="Drainage Pro" class="header-image after">
+                    </div>
+                    <div class="software-header">
+                        <div class="software-icon-section">
+                            <img src="images/image1.png" alt="Icône Drainage Pro" class="software-icon-image after">
+                            <h4 class="software-name">Drainage Pro</h4>
+                        </div>
+                    </div>
+                    <div class="software-content">
+                        <div class="software-category">HYDRAULIQUE • VV3.2</div>
+                        <p>Logiciel professionnel pour la conception et l'analyse des systèmes de drainage routier et urbain.</p>
+                        <div class="software-buttons">
+                            <a href="#" class="software-btn primary-btn">📥 Télécharger</a>
+                            <a href="#" class="software-btn secondary-btn">
+                                <i class="fas fa-info-circle"></i> Consulter les informations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="responsive-test">
+            <h3>📱 Test Responsive</h3>
+            <p>Utilisez ces boutons pour simuler différentes tailles d'écran et voir comment les images s'adaptent :</p>
+            
+            <div class="responsive-buttons">
+                <button class="responsive-btn active" onclick="setViewport('desktop')">🖥️ Desktop (1200px)</button>
+                <button class="responsive-btn" onclick="setViewport('tablet')">📱 Tablette (768px)</button>
+                <button class="responsive-btn" onclick="setViewport('mobile')">📱 Mobile (480px)</button>
+                <button class="responsive-btn" onclick="setViewport('reset')">🔄 Reset</button>
+            </div>
+            
+            <div id="viewport-info">
+                <strong>Taille actuelle :</strong> <span id="current-size">Desktop (1200px)</span>
+            </div>
+        </div>
+        
+        <div class="test-info">
+            <h3>🚀 Prochaines Étapes</h3>
+            <ol>
+                <li><strong>Testez localement :</strong> Ouvrez ce fichier dans votre navigateur</li>
+                <li><strong>Vérifiez les améliorations :</strong> Comparez les versions AVANT/APRÈS</li>
+                <li><strong>Testez le responsive :</strong> Utilisez les boutons de simulation</li>
+                <li><strong>Validation :</strong> Si satisfait, intégrez <code>css/software-images.css</code> dans <code>nos-logiciels.html</code></li>
+                <li><strong>Déploiement :</strong> Une fois validé, déployez sur votre site</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function setViewport(type) {
+            const container = document.querySelector('.test-container');
+            const buttons = document.querySelectorAll('.responsive-btn');
+            const sizeInfo = document.getElementById('current-size');
+            
+            // Retirer la classe active de tous les boutons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Ajouter la classe active au bouton cliqué
+            event.target.classList.add('active');
+            
+            // Appliquer la taille correspondante
+            switch(type) {
+                case 'desktop':
+                    container.style.maxWidth = '1200px';
+                    sizeInfo.textContent = 'Desktop (1200px)';
+                    break;
+                case 'tablet':
+                    container.style.maxWidth = '768px';
+                    sizeInfo.textContent = 'Tablette (768px)';
+                    break;
+                case 'mobile':
+                    container.style.maxWidth = '480px';
+                    sizeInfo.textContent = 'Mobile (480px)';
+                    break;
+                case 'reset':
+                    container.style.maxWidth = '1200px';
+                    sizeInfo.textContent = 'Desktop (1200px)';
+                    document.querySelector('.responsive-btn:first-child').classList.add('active');
+                    break;
+            }
+        }
+        
+        // Animation d'apparition des cartes
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.software-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
+
+

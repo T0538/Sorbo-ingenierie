@@ -1,0 +1,103 @@
+=====================================
+MODÈLE POUR AJOUTER UNE ACTUALITÉ
+=====================================
+
+1. ALLEZ À LA LIGNE 1748 dans index.html
+2. AJOUTEZ UNE VIRGULE après le }
+3. COPIEZ-COLLEZ CE MODÈLE :
+
+          ,
+          // ACTUALITÉ 2 - VOTRE TITRE
+          {
+            id: "votre-id-unique-ici",
+            title: "Titre complet de votre actualité",
+            resume: "Description courte de 2-3 lignes qui apparaît sur les cartes d'actualités de la page d'accueil.",
+            content: "Premier paragraphe de votre actualité avec les informations principales et le contexte général. Ce paragraphe donne le ton et présente le sujet de manière professionnelle. Il peut contenir plusieurs phrases pour bien expliquer le contexte.\n\nDeuxième paragraphe qui développe le sujet avec plus de détails. Vous pouvez expliquer les enjeux, les bénéfices ou les implications de cette actualité. Cette structure permet une lecture plus agréable et professionnelle.\n\nTroisième paragraphe pour conclure ou donner des perspectives d'avenir. Vous pouvez mentionner les prochaines étapes, les objectifs ou l'impact attendu de cette actualité sur votre entreprise ou vos clients.",
+            imageUrl: "images/votre-image.jpg",
+            imageAlt: "Description de votre image",
+            datePublication: "2025-01-15",
+            auteur: "Nom de l'auteur",
+            categorie: "Formation",
+            tags: ["Tag1", "Tag2", "Tag3"]
+          }
+
+=====================================
+EXPLICATION DES CHAMPS :
+=====================================
+
+📌 id: 
+   - Identifiant UNIQUE (pas d'espaces, utilisez des tirets)
+   - Exemple: "nouvelle-formation-autocad-2025"
+
+📌 title: 
+   - Titre complet qui apparaît partout
+   - Exemple: "Nouvelle formation AutoCAD 2025 disponible"
+
+📌 resume: 
+   - Description courte pour les cartes
+   - 2-3 lignes maximum
+   - Exemple: "Découvrez notre nouvelle formation AutoCAD 2025 avec ses fonctionnalités révolutionnaires."
+
+📌 content: 
+   - Contenu COMPLET avec paragraphes
+   - Utilisez \n\n pour séparer les paragraphes
+   - Structure professionnelle: Introduction → Développement → Conclusion
+
+📌 imageUrl: 
+   - Chemin vers une image existante
+   - Exemples disponibles: "images/image1.jpg", "images/image3.jpg", "images/formationcova.jpg"
+
+📌 datePublication: 
+   - Format OBLIGATOIRE: AAAA-MM-JJ
+   - Exemple: "2025-01-15" pour le 15 janvier 2025
+
+📌 auteur: 
+   - Qui a écrit l'actualité
+   - Exemples: "Direction Sorbo-Ingénierie", "Service Formation", "Équipe Technique"
+
+📌 categorie: 
+   - Catégorie principale
+   - Exemples: "Formation", "Actualités", "Innovation", "Partenariat"
+
+📌 tags: 
+   - Mots-clés entre guillemets, séparés par des virgules
+   - Exemple: ["Formation", "AutoCAD", "CAO", "2025"]
+
+=====================================
+EXEMPLE COMPLET D'UNE ACTUALITÉ :
+=====================================
+
+          ,
+          // ACTUALITÉ 2 - FORMATION AUTOCAD
+          {
+            id: "formation-autocad-2025-innovations",
+            title: "Nouvelle formation AutoCAD 2025 : Maîtrisez les dernières innovations",
+            resume: "Sorbo-Ingénierie lance sa formation AutoCAD 2025, conçue pour maîtriser les nouvelles fonctionnalités et optimiser votre flux de travail.",
+            content: "Sorbo-Ingénierie est fier d'annoncer le lancement de sa nouvelle formation AutoCAD 2025, spécialement conçue pour accompagner les professionnels dans la maîtrise des dernières innovations de ce logiciel de référence en conception assistée par ordinateur. Cette formation représente une opportunité unique de se tenir à jour avec les évolutions technologiques du secteur.\n\nCette formation complète vous permettra de découvrir les nouvelles fonctionnalités d'AutoCAD 2025, d'optimiser votre flux de travail avec les outils collaboratifs intégrés, de maîtriser la modélisation 3D avancée et d'utiliser efficacement les nouvelles fonctions d'automatisation. Nos formateurs certifiés vous accompagnent avec des exercices pratiques basés sur des cas réels d'entreprise, garantissant une approche pédagogique adaptée aux besoins du terrain.\n\nLa formation s'adresse aussi bien aux débutants qu'aux utilisateurs expérimentés souhaitant se perfectionner. Disponible en présentiel et à distance, elle inclut un support pédagogique complet et une certification reconnue à la clé. Cette initiative s'inscrit dans notre engagement constant à proposer des formations de qualité, adaptées aux enjeux actuels et futurs du secteur de l'ingénierie.",
+            imageUrl: "images/image1.jpg",
+            imageAlt: "Formation AutoCAD 2025 Sorbo-Ingénierie",
+            datePublication: "2025-01-10",
+            auteur: "Service Formation",
+            categorie: "Formation",
+            tags: ["Formation", "AutoCAD", "CAO", "2025", "Innovation"]
+          }
+
+=====================================
+POUR COPIER DANS index.html :
+=====================================
+
+1. Ouvrez index.html
+2. Cherchez la ligne 1748 qui contient: 
+   }
+   // POUR AJOUTER UNE ACTUALITÉ...
+
+3. Remplacez par:
+   },
+   [VOTRE NOUVELLE ACTUALITÉ ICI]
+   // POUR AJOUTER UNE ACTUALITÉ...
+
+4. Sauvegardez le fichier
+5. Actualisez votre site (F5)
+
+=====================================
+

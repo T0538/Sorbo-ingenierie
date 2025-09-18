@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/server-mongodb.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/server-mongodb.js"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "mongodb+srv://kevinyameogo01:wBLR2n5hAPNZM93Y@sorbo-ingenierie.ol32tmy.mongodb.net/?retryWrites=true&w=majority&appName=Sorbo-ingenierie",
+    "NODE_ENV": "production",
+    "JWT_SECRET": "c670766d50129c7b7e59455fc7608991666bdeb5f5984ef6915b8a358a90c9c4",
+    "JWT_EXPIRES_IN": "30d"
+  }
+} 

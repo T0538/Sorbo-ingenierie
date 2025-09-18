@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Formation - Sorbo-Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo-fixes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .inscription-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .inscription-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .inscription-header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .inscription-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .formation-info {
+            background: var(--light-bg);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .formation-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .formation-info p {
+            margin: 8px 0;
+            color: var(--dark-text);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #b30000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #b30000;
+        }
+
+        .back-btn i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .inscription-container {
+                margin: 20px;
+                padding: 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .inscription-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="inscription-container">
+        <a href="nos-formations.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Retour aux formations
+        </a>
+
+        <div class="inscription-header">
+            <h1>Inscription à la Formation</h1>
+            <p>Remplissez le formulaire ci-dessous pour vous inscrire</p>
+        </div>
+
+        <div class="formation-info" id="formation-info">
+            <h3>Formation sélectionnée</h3>
+            <p><strong>Nom :</strong> <span id="formation-name">Chargement...</span></p>
+            <p><strong>Durée :</strong> <span id="formation-duration">Chargement...</span></p>
+            <p><strong>Prix :</strong> <span id="formation-price">Chargement...</span></p>
+        </div>
+
+        <form id="inscription-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom">Nom complet *</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom *</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">Téléphone *</label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="entreprise">Entreprise / Organisation</label>
+                    <input type="text" id="entreprise" name="entreprise">
+                </div>
+                <div class="form-group">
+                    <label for="fonction">Fonction / Poste</label>
+                    <input type="text" id="fonction" name="fonction">
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="adresse">Adresse complète</label>
+                <textarea id="adresse" name="adresse" rows="3" placeholder="Votre adresse complète"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="ville">Ville *</label>
+                    <input type="text" id="ville" name="ville" required>
+                </div>
+                <div class="form-group">
+                    <label for="pays">Pays *</label>
+                    <select id="pays" name="pays" required>
+                        <option value="">Sélectionnez un pays</option>
+                        <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                        <option value="Sénégal">Sénégal</option>
+                        <option value="Mali">Mali</option>
+                        <option value="Burkina Faso">Burkina Faso</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Bénin">Bénin</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Guinée">Guinée</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="motivation">Motivation pour cette formation *</label>
+                <textarea id="motivation" name="motivation" rows="4" required placeholder="Expliquez pourquoi vous souhaitez suivre cette formation et vos objectifs professionnels"></textarea>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="experience">Expérience professionnelle</label>
+                <textarea id="experience" name="experience" rows="3" placeholder="Décrivez brièvement votre expérience dans le domaine"></textarea>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="questions">Questions ou demandes particulières</label>
+                <textarea id="questions" name="questions" rows="3" placeholder="Avez-vous des questions spécifiques ou des besoins particuliers ?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                Envoyer ma demande d'inscription
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner"></i>
+            <p>Envoi en cours...</p>
+        </div>
+
+        <div class="success-message" id="success-message">
+            <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <h3>Demande envoyée avec succès !</h3>
+            <p>Nous avons bien reçu votre demande d'inscription. Notre équipe vous contactera dans les plus brefs délais pour confirmer votre inscription et vous donner plus de détails.</p>
+        </div>
+
+        <div class="error-message" id="error-message">
+            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <h3>Erreur lors de l'envoi</h3>
+            <p id="error-text">Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer ou nous contacter directement.</p>
+        </div>
+    </div>
+
+        <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/formations-loader-fixed.js"></script>
+    <script src="js/inscription-formation.js"></script>
+    <script src="js/form-fix.js"></script>
+</body>
+</html>
+

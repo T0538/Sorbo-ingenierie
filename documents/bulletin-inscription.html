@@ -1,0 +1,666 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin d'inscription - Sorbo-Ingénierie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+            font-size: 11px;
+        }
+        
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            padding: 15px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d10000;
+            padding-bottom: 10px;
+            gap: 20px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            max-width: 80px;
+        }
+        
+        .company-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .company-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d10000;
+        }
+        
+        .company-subtitle {
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .company-details {
+            font-size: 8px;
+            color: #666;
+        }
+        
+        .header-right {
+            text-align: right;
+            font-size: 8px;
+            color: #666;
+        }
+        
+        .form-title {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            color: #d10000;
+            margin: 10px 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid #d10000;
+            padding-bottom: 3px;
+        }
+        
+        .contact-info {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 3px solid #d10000;
+            font-size: 9px;
+        }
+        
+        .contact-info h4 {
+            color: #d10000;
+            margin-bottom: 8px;
+            font-size: 10px;
+        }
+        
+        .contact-info p {
+            margin: 3px 0;
+        }
+        
+        .section {
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #d10000;
+            border-bottom: 1px solid #d10000;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .formations-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-size: 9px;
+        }
+        
+        .formations-table th {
+            background: #d10000;
+            color: white;
+            padding: 6px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #8b0000;
+            font-size: 9px;
+        }
+        
+        .formations-table td {
+            padding: 6px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        
+        .formations-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .module-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 2px;
+            font-size: 9px;
+        }
+        
+        .module-description {
+            font-size: 8px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .date-select {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            font-size: 8px;
+        }
+        
+        .price-input {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            font-size: 8px;
+            text-align: right;
+        }
+        
+        .checkbox-module {
+            width: 15px;
+            height: 15px;
+            accent-color: #d10000;
+        }
+        
+        .summary-section {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            font-size: 9px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 3px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 10px;
+            color: #d10000;
+        }
+        
+        .summary-label {
+            font-weight: bold;
+        }
+        
+        .summary-value {
+            font-weight: bold;
+            color: #d10000;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #555;
+            font-size: 9px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 9px;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #d10000;
+        }
+        
+        .textarea-field {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 9px;
+            min-height: 40px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .signature-section {
+            margin-top: 15px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #333;
+            height: 25px;
+            margin-bottom: 3px;
+        }
+        
+        .footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 8px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            background: #f8f9fa;
+            padding: 10px;
+        }
+        
+        .print-button {
+            background: #d10000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 10px;
+        }
+        
+        .print-button:hover {
+            background: #8b0000;
+        }
+        
+        .required-field::after {
+            content: ' *';
+            color: #d10000;
+            font-weight: bold;
+        }
+        
+        .payment-terms {
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 3px solid #d10000;
+            margin: 10px 0;
+            font-size: 9px;
+        }
+        
+        .payment-terms h4 {
+            color: #d10000;
+            margin-bottom: 5px;
+            font-size: 10px;
+        }
+        
+        .payment-terms p {
+            margin: 3px 0;
+        }
+        
+        @media print {
+            body {
+                font-size: 10px;
+            }
+            
+            .print-button {
+                display: none;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="window.print()">
+        🖨️ Imprimer / Sauvegarder en PDF
+    </button>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <img src="../images/logo.mr.png" alt="Logo Sorbo-Ingénierie" class="logo">
+                <div class="company-info">
+                    <div class="company-name">SORBO-INGÉNIERIE</div>
+                    <div class="company-subtitle">Excellence et Innovation en Génie Civil</div>
+                    <div class="company-details">
+                        N° Compte contribuable : 2242797T | RC : CI-ABJ-03-2022-B12-03946
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <div>Date : __/__/____</div>
+                <div>Réf. : __/__/____</div>
+            </div>
+        </div>
+        
+        <div class="form-title">Bulletin d'inscription aux formations</div>
+        
+        <div class="contact-info">
+            <h4>📞 Contact et informations</h4>
+            <p><strong>Adresse :</strong> Abidjan, Côte d'Ivoire</p>
+            <p><strong>Téléphone :</strong> (+225) 01 50 12 30 50 / (+225) 21 21 80 21 26</p>
+            <p><strong>Email :</strong> contact@sorbo-ingenierie.ci / infos@sorbo-ingenierie.ci</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">1. Sélection des formations</div>
+            
+            <table class="formations-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">Sélection</th>
+                        <th style="width: 45%;">Intitulé de la formation</th>
+                        <th style="width: 25%;">Dates</th>
+                        <th style="width: 20%;">Tarif / stagiaire</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="checkbox-module" id="module1" data-price="120000">
+                        </td>
+                        <td>
+                            <div class="module-title">Module M1: Dimensionnement des structures de chaussées routières</div>
+                            <div class="module-description">Conception et calcul des structures de chaussées neuves</div>
+                        </td>
+                        <td>
+                            <select class="date-select" id="date1">
+                                <option value="">Choisir une date</option>
+                                <option value="2024-09-15">15-16 Sept 2024</option>
+                                <option value="2024-10-20">20-21 Oct 2024</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="price-input" value="120 000 FCFA" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="checkbox-module" id="module2" data-price="140000">
+                        </td>
+                        <td>
+                            <div class="module-title">Module M2: dégel des structures de chaussée</div>
+                            <div class="module-description">Analyse des performances en conditions climatiques extrêmes</div>
+                        </td>
+                        <td>
+                            <select class="date-select" id="date2">
+                                <option value="">Choisir une date</option>
+                                <option value="2024-09-22">22-23 Sept 2024</option>
+                                <option value="2024-10-27">27-28 Oct 2024</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="price-input" value="140 000 FCFA" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="checkbox-module" id="module3" data-price="160000">
+                        </td>
+                        <td>
+                            <div class="module-title">Module M3: Diagnostic et renforcement des chaussées routières</div>
+                            <div class="module-description">Méthodes CEREMA-IDRRIM pour l'évaluation et le renforcement</div>
+                        </td>
+                        <td>
+                            <select class="date-select" id="date3">
+                                <option value="">Choisir une date</option>
+                                <option value="2024-10-06">6-7 Oct 2024</option>
+                                <option value="2024-11-10">10-11 Nov 2024</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="price-input" value="160 000 FCFA" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <input type="checkbox" class="checkbox-module" id="module4" data-price="130000">
+                        </td>
+                        <td>
+                            <div class="module-title">Module M4: Dimensionnement des chaussées sous charges spéciales</div>
+                            <div class="module-description">Conception pour véhicules lourds et charges exceptionnelles</div>
+                        </td>
+                        <td>
+                            <select class="date-select" id="date4">
+                                <option value="">Choisir une date</option>
+                                <option value="2024-10-13">13-14 Oct 2024</option>
+                                <option value="2024-11-17">17-18 Nov 2024</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="price-input" value="130 000 FCFA" readonly>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="summary-section">
+                <div class="summary-row">
+                    <span class="summary-label">Montant par stagiaire :</span>
+                    <span class="summary-value" id="amount-per-trainee">0,00 FCFA</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Nombre de stagiaires :</span>
+                    <span>
+                        <input type="number" id="trainee-count" value="1" min="1" max="10" style="width: 60px; padding: 3px; border: 1px solid #ddd; border-radius: 2px; font-size: 9px;">
+                    </span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Montant total H.T. :</span>
+                    <span class="summary-value" id="total-amount">0,00 FCFA</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">2. Informations de l'entreprise</div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="entreprise" class="required-field">Société</label>
+                    <input type="text" id="entreprise" class="input-field" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-suivi" class="required-field">Nom & e-mail (suivi du dossier)</label>
+                    <input type="text" id="contact-suivi" class="input-field" required placeholder="Nom + email">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="adresse-entreprise" class="required-field">Adresse, code postal, ville & pays</label>
+                <textarea id="adresse-entreprise" class="textarea-field" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="signature-entreprise" class="required-field">Date, signature et cachet de l'entreprise</label>
+                <textarea id="signature-entreprise" class="textarea-field" required placeholder="Date: __/__/____&#10;Signature:&#10;Cachet:"></textarea>
+            </div>
+        </div>
+        
+       <!-- <div class="section">
+            <div class="section-title">3. Informations des participants</div>
+            
+            <div class="form-group">
+                <label for="participants" class="required-field">Participants: Nom, prénom & e-mail</label>
+                <textarea id="participants" class="textarea-field" required placeholder="1. Nom Prénom - email@entreprise.com&#10;2. Nom Prénom - email@entreprise.com"></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">4. Modalités de règlement</div>
+            
+            <div class="payment-terms">
+                <p><strong>•</strong> L'intégralité de la facture doit être réglée avant le début de la formation.</p>
+                <p><strong>•</strong> La subrogation de paiement n'est pas acceptée.</p>
+                <p><strong>•</strong> Paiement accepté : Virement bancaire, Chèque, Espèces.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">5. Conditions d'annulation</div>
+            
+            <div class="payment-terms">
+                <p><strong>Par Sorbo-Ingénierie :</strong> Nous nous réservons le droit d'annuler ou de reporter une session de formation en cas de participation insuffisante ou d'événements indépendants de notre volonté.</p>
+                <p><strong>Par un participant :</strong> Une retenue de 30% sera appliquée en cas d'annulation moins de 15 jours avant le début de la formation. Il est toujours possible de remplacer une personne inscrite.</p>
+            </div>
+        </div>-->
+        
+        <div class="signature-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date de signature</label>
+                    <div class="signature-line"></div>
+                </div>
+                <div class="form-group">
+                    <label>Signature du responsable</label>
+                    <div class="signature-line"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>⚠️ Important :</strong> Ce bulletin doit être rempli complètement et signé avant d'être renvoyé.</p>
+            <p>Les champs marqués d'un * sont obligatoires.</p>
+            <p>Pour toute question, contactez-nous au (+225) 01 50 12 30 50 ou par email à contact@sorbo-ingenierie.ci</p>
+        </div>
+    </div>
+    
+    <script>
+        // Calcul automatique des montants
+        function calculateAmounts() {
+            let totalPerTrainee = 0;
+            let selectedModules = [];
+            
+            // Calculer le montant par module sélectionné
+            document.querySelectorAll('.checkbox-module:checked').forEach(checkbox => {
+                const price = parseInt(checkbox.dataset.price);
+                totalPerTrainee += price;
+                selectedModules.push(checkbox.id);
+            });
+            
+            // Mettre à jour l'affichage
+            document.getElementById('amount-per-trainee').textContent = totalPerTrainee.toLocaleString() + ' FCFA';
+            
+            const traineeCount = parseInt(document.getElementById('trainee-count').value);
+            const totalAmount = totalPerTrainee * traineeCount;
+            document.getElementById('total-amount').textContent = totalAmount.toLocaleString() + ' FCFA';
+            
+            // Vérifier que les dates sont sélectionnées pour les modules cochés
+            selectedModules.forEach(moduleId => {
+                const dateSelect = document.getElementById('date' + moduleId.replace('module', ''));
+                if (dateSelect && !dateSelect.value) {
+                    dateSelect.style.borderColor = '#d10000';
+                    dateSelect.style.backgroundColor = '#fff5f5';
+                }
+            });
+        }
+        
+        // Écouter les changements sur les checkboxes et le nombre de stagiaires
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.checkbox-module').forEach(checkbox => {
+                checkbox.addEventListener('change', calculateAmounts);
+            });
+            
+            document.getElementById('trainee-count').addEventListener('change', calculateAmounts);
+            
+            // Validation des dates pour les modules sélectionnés
+            document.querySelectorAll('.date-select').forEach(select => {
+                select.addEventListener('change', function() {
+                    if (this.value) {
+                        this.style.borderColor = '#27ae60';
+                        this.style.backgroundColor = '#f8fff9';
+                    } else {
+                        this.style.borderColor = '#ddd';
+                        this.style.backgroundColor = 'white';
+                    }
+                });
+            });
+        });
+        
+        // Validation du formulaire avant impression
+        function validateForm() {
+            const selectedModules = document.querySelectorAll('.checkbox-module:checked');
+            let isValid = true;
+            let errorMessage = '';
+            
+            if (selectedModules.length === 0) {
+                errorMessage += 'Veuillez sélectionner au moins un module de formation.\n';
+                isValid = false;
+            }
+            
+            // Vérifier que les dates sont sélectionnées pour les modules cochés
+            selectedModules.forEach(checkbox => {
+                const moduleId = checkbox.id.replace('module', '');
+                const dateSelect = document.getElementById('date' + moduleId);
+                if (!dateSelect.value) {
+                    errorMessage += 'Veuillez sélectionner une date pour le module ' + moduleId + '.\n';
+                    isValid = false;
+                }
+            });
+            
+            // Vérifier les champs obligatoires
+            const requiredFields = document.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#d10000';
+                    field.style.backgroundColor = '#fff5f5';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#ddd';
+                    field.style.backgroundColor = 'white';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Veuillez corriger les erreurs suivantes :\n' + errorMessage);
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // Remplacer la fonction d'impression par défaut
+        const originalPrint = window.print;
+        window.print = function() {
+            if (validateForm()) {
+                originalPrint.call(this);
+            }
+        };
+    </script>
+</body>
+</html>
+

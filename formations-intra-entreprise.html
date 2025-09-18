@@ -1,0 +1,468 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formations Intra‑entreprise | Sorbo‑Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    
+
+    <style>
+        /* Hero moderne réutilisé (comme Notre entreprise) */
+        .hero-banner {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 3;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,.5);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: .95;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero-nav {
+            position: absolute;
+            bottom: 26px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 4;
+        }
+        
+        .hero-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .hero-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.55);
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        
+        .hero-dot.active {
+            background: #fff;
+            transform: scale(1.15);
+        }
+        
+        /* Styles repris de l'onglet Intra-Entreprises (copie conforme) */
+        .formation-split { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.1); transition:all .3s ease; }
+        .formation-split:hover { box-shadow:0 25px 60px rgba(0,0,0,0.15); transform:translateY(-5px); }
+        .formation-header { position:relative; height:300px; background:linear-gradient(135deg,#d10000 0%,#b30000 100%); display:flex; align-items:center; overflow:hidden; }
+        .formation-header::before { content:''; position:absolute; inset:0; background-image:url('images/formationi3.JPG'); background-size:cover; background-position:center; opacity:.15; transition:opacity .3s ease; }
+        .formation-split:hover .formation-header::before { opacity:.25; }
+        .formation-header-content { position:relative; z-index:2; color:#fff; padding:0 50px; width:100%; }
+        .formation-badge { display:inline-block; background:rgba(255,255,255,.2); color:#fff; padding:8px 16px; border-radius:20px; font-size:.9rem; font-weight:600; margin-bottom:20px; backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.3); }
+        .formation-header h3 { font-size:2.5rem; margin-bottom:10px; font-weight:700; text-shadow:0 2px 4px rgba(0,0,0,.3); }
+        .formation-subtitle { font-size:1.2rem; margin-bottom:0; opacity:.9; font-weight:400; }
+        .formation-body { padding:50px; }
+        .formation-description { color:#666; line-height:1.7; margin-bottom:40px; font-size:1.1rem; text-align:justify; padding:25px; background:#f8f9fa; border-radius:15px; border-left:4px solid #d10000; }
+        .formation-features { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:40px; }
+        .feature-column { background:#fff; padding:30px; border-radius:15px; box-shadow:0 8px 25px rgba(0,0,0,.08); border:1px solid #f0f0f0; transition:all .3s ease; }
+        .feature-column:hover { transform:translateY(-3px); box-shadow:0 15px 35px rgba(0,0,0,.12); border-color:#e0e0e0; }
+        .feature-column h4 { color:#333; margin-bottom:20px; font-size:1.2rem; display:flex; align-items:center; gap:10px; font-weight:600; padding-bottom:15px; border-bottom:2px solid #f0f0f0; }
+        .feature-column h4 i { color:#d10000; font-size:1.3rem; width:25px; text-align:center; }
+        .feature-column ul{ list-style:none; padding:0; margin:0; }
+        .feature-column li{ display:flex; align-items:center; gap:12px; margin-bottom:12px; color:#555; font-size:1rem; padding:8px 0; }
+        .feature-column li i{ color:#28a745; font-size:.9rem; width:16px; text-align:center; }
+        .modality-items{ display:flex; flex-direction:column; gap:12px; }
+        .modality-item{ display:flex; align-items:center; gap:12px; color:#555; font-size:1rem; padding:8px 0; }
+        .modality-item i{ color:#d10000; font-size:1rem; width:20px; text-align:center; }
+        .formation-contact{ background:linear-gradient(135deg,#d10000 0%,#b30000 100%); padding:30px; border-radius:15px; text-align:center; color:#fff; position:relative; overflow:hidden; }
+        .formation-contact::before{ content:''; position:absolute; inset:0; background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.1) 50%,transparent 70%); transform:translateX(-100%); transition:transform .6s ease; }
+        .formation-contact:hover::before{ transform:translateX(100%); }
+        .formation-contact h4{ color:#fff; margin-bottom:15px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:1.3rem; position:relative; z-index:2; }
+        .formation-contact p{ color:rgba(255,255,255,.9); margin-bottom:20px; font-size:1rem; position:relative; z-index:2; }
+        .formation-contact .btn{ background:#fff; color:#d10000; border:2px solid #fff; font-weight:600; padding:12px 30px; position:relative; z-index:2; }
+        .formation-contact .btn:hover{ background:transparent; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,255,255,.2); }
+        @media (max-width: 992px){ .formation-header{height:250px;} .formation-header-content{padding:0 30px;} .formation-header h3{font-size:2rem;} .formation-body{padding:30px;} .formation-features{grid-template-columns:1fr; gap:25px;} .feature-column{padding:25px;} }
+        
+        /* Styles pour la section formations passées */
+        .formations-passees { padding: 80px 0; background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: #333; margin-bottom: 20px; font-weight: 700; }
+        .section-header p { font-size: 1.1rem; color: #666; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        
+        .formations-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transition: all 0.4s ease; }
+        .gallery-item:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(0,0,0,0.2); }
+        
+        .gallery-image { position: relative; height: 280px; overflow: hidden; }
+        .gallery-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover .gallery-image img { transform: scale(1.1); }
+        
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(209,0,0,0.9) 0%, rgba(179,0,0,0.8) 100%); display: flex; align-items: flex-end; opacity: 0; transition: all 0.4s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        
+        .gallery-info { padding: 25px; color: white; width: 100%; }
+        .gallery-info h4 { font-size: 1.3rem; margin-bottom: 8px; font-weight: 600; }
+        .gallery-info p { font-size: 0.95rem; margin-bottom: 12px; opacity: 0.9; }
+        .formation-date { display: inline-block; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+        
+        .gallery-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
+        .stat-item { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.3s ease; }
+        .stat-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        
+        .stat-number { font-size: 3rem; font-weight: 700; color: #d10000; margin-bottom: 10px; }
+        .stat-label { font-size: 1rem; color: #666; font-weight: 500; }
+        
+        @media (max-width: 768px) {
+            .formations-gallery { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-stats { grid-template-columns: 1fr; gap: 20px; }
+            .section-header h2 { font-size: 2rem; }
+            .formations-passees { padding: 60px 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogies & Méthodologies</a></li>
+                            <li><a href="formations-intra-entreprise.html" class="active">Formations intra-entreprises</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprises</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="contact-btn">Contactez-nous</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image\ 38.jpg');">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Formations intra‑entreprises</h2>
+                <p>Des programmes 100% personnalisés construits sur vos cas réels, en présentiel ou en visio.</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image\ 36.jpg');">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Formation sur-mesure</h2>
+                <p>Adaptée aux besoins spécifiques de votre organisation</p>
+                <a href="#formation-conditions" class="hero-btn">SUR-MESURE</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)), url('images/image\ 01.jpg'  );">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h2>Flexibilité totale</h2>
+                <p>Dates et lieux adaptés à vos contraintes</p>
+            </div>
+        </div>
+        
+        <!-- Flèches de navigation -->
+        <div class="hero-arrows">
+            <div class="hero-arrow prev-slide">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="hero-arrow next-slide">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active" data-index="0"></div>
+                <div class="hero-dot" data-index="1"></div>
+                <div class="hero-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="formation-conditions">
+        <div class="container">
+            <div class="formation-split">
+                <div class="formation-header">
+                    <div class="formation-header-content">
+                        <div class="formation-badge">Sur-mesure</div>
+                        <h3>Nos Formations Intra-Entreprises</h3>
+                        <p class="formation-subtitle">Une approche personnalisée pour votre entreprise</p>
+                    </div>
+                </div>
+                <div class="formation-body">
+                    <div class="formation-description">
+                        <p>
+
+                            Nos formations intra-entreprises offrent la possibilité de concevoir des programmes sur mesure, adaptés aux besoins spécifiques de chaque structure. Elles permettent d’aborder des problématiques plus larges, plus ciblées et directement liées aux réalités de l’entreprise, au-delà du cadre de nos formations inter-entreprises.
+
+                            Sauf cas particulier, ces sessions se déroulent au sein de l’entreprise mandataire, à la date convenue selon la disponibilité des collaborateurs et de nos experts formateurs. Elles sont également accessibles aux personnes à mobilité réduite, sous réserve que l’entreprise mette à disposition une salle de formation équipée en conséquence.
+                            
+                            </p>
+                            <p>📩 Pour organiser une session intra-entreprise, contactez-nous à  <a href="mailto:contact@sorbo-ingenierie.ci"> contact@sorbo-ingenierie.ci</a> en précisant : Les modalités de la formation
+                            </p>
+                    </div>
+                    <div class="formation-features">
+                        <div class="feature-column">
+                            <h4><i class="fas fa-star"></i> Avantages clés</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Programme adapté à vos besoins spécifiques</li>
+                                <li><i class="fas fa-check"></i> Formation dans vos locaux</li>
+                                <li><i class="fas fa-check"></i> Dates flexibles selon vos disponibilités</li>
+                                <li><i class="fas fa-check"></i> Cohésion d'équipe renforcée</li>
+                                <li><i class="fas fa-check"></i> Suivi personnalisé post-formation</li>
+                            </ul>
+                        </div>
+                        <div class="feature-column">
+                            <h4><i class="fas fa-cogs"></i> Modalités pratiques à préciser</h4>
+                            <div class="modality-items">
+                                <span class="modality-item"><i class="fas fa-map-marker-alt"></i>  Le lieu de la formation et la période envisagée</span>
+                                <span class="modality-item"><i class="fas fa-universal-access"></i>Le module ou le thème de formation souhaité</span>
+                                <span class="modality-item"><i class="fas fa-users"></i> Le nombre de participants prévus</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formation-contact">
+                        <h4><i class="fas fa-rocket"></i> Lancez votre projet de formation</h4>
+                        <p>Contactez notre équipe pour discuter de vos besoins et obtenir un devis personnalisé</p>
+                        <a href="contact.html" class="btn">Demander un devis gratuit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="formations-passees">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quelques Formations Intra-Entreprises Réalisées</h2>
+                <p>Découvrez un aperçu de nos sessions de formation passées et de l'engagement de nos participants</p>
+            </div>
+            
+            <div class="formations-gallery">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-image">
+                        <img src="images/formationcova.jpg" alt="Formation BIM en cours" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Covadis réseaux divers</h4>
+                                <p>Infrastructures & Transport</p>
+                                <span class="formation-date">Décembre 2024</span>
+                                <span class="formation-date">SICMA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-image">
+                        <img src="images/formationirri2.jpg" alt="Formation Topographie" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation et étude pour alimentation agricole </h4>
+                                <p>Aménagement Hydro-agricole</p>
+                                <span class="formation-date">Novembre 2024</span>
+                                <span class="formation-date">SETEC AFRIQUE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-image">
+                        <img src="images/image 38.jpg" alt="Formation Ingénierie routière" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation AuTopiste Perfectionnement</h4>
+                                <p>Infrastructure & Transport</p>
+                                <span class="formation-date">Octobre 2024</span>
+                                <span class="formation-date">SICMA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--<div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="gallery-image">
+                        <img src="images/image 32.jpg" alt="Formation Architecture" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Architecture</h4>
+                                <p>Design & Construction</p>
+                                <span class="formation-date">Septembre 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>--> 
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="gallery-image">
+                        <img src="images/image12.jpg" alt="Formation Ingénierie de l'eau" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Covadis Perfectionnement</h4>
+                                <p>Hydraulique & Environnement</p>
+                                <span class="formation-date">Août 2024</span>
+                                <span class="formation-date">SICMA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="gallery-image">
+                        <img src="images/image 34.jpg" alt="Formation Génie civil" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h4>Formation Covadis Initiation</h4>
+                                <p>Assainissement & drainage routier</p>
+                                <span class="formation-date">Juillet 2024</span>
+                                <span class="formation-date">SETEC AFRIQUE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.mr.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p class="footer-description">Excellence et Innovation en Génie civil</p>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Informations légales</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sorbo.ingenierie" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/sorbo-ing-nierie/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mini carrousel pour le hero (slides + dots)
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.hero-banner .hero-slide');
+            const dots = document.querySelectorAll('.hero-banner .hero-dot');
+            let index = 0;
+            function show(i){
+                slides.forEach(s=>s.classList.remove('active'));
+                dots.forEach(d=>d.classList.remove('active'));
+                slides[i].classList.add('active');
+                if (dots[i]) dots[i].classList.add('active');
+            }
+            dots.forEach(d=>d.addEventListener('click',()=>{ index = Number(d.dataset.index); show(index);}));
+            setInterval(()=>{ index = (index+1)%slides.length; show(index); }, 6000);
+        });
+        // Note: Menu mobile géré par js/script.js
+        console.log('📱 Menu mobile géré par js/script.js');
+    </script>
+        <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/formations-loader-fixed.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/hero-banner-navigation.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Logiciels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .software-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .software-media {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        .software-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .software-logo-section {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+        .software-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .software-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        .software-content {
+            padding: 20px;
+        }
+        .software-title {
+            font-size: 1.5rem;
+            color: #d10000;
+            margin-bottom: 10px;
+        }
+        .software-category {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .software-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: #d10000;
+            color: white;
+        }
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+
+
+    
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test des Cartes de Logiciels</h1>
+        
+        <div class="software-card">
+            <div class="software-media">
+                <img src="images/drainage-routier.svg" alt="Drainage routier" />
+                <div class="software-logo-section">
+                    <img src="images/Image1.png" alt="Logo OH-Route" class="software-logo" />
+                    <h4 class="software-name">OH-Route</h4>
+                </div>
+            </div>
+            <div class="software-content">
+                <h3 class="software-title">OH-Route</h3>
+                <div class="software-category">AUTRE • V2024</div>
+                <p>Construire rapidement des modèles HEC-RAS 1D/2D pour l'analyse hydraulique et la gestion des inondations.</p>
+                <div class="software-buttons">
+                    <a href="#" class="btn btn-primary">📥 Télécharger</a>
+                    <a href="#" class="btn btn-secondary">ℹ️ Consulter les informations</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="software-card">
+            <div class="software-media">
+                <img src="images/drainage-routier.svg" alt="Drainage routier" />
+                <div class="software-logo-section">
+                    <img src="images/default-software-logo.svg" alt="Logo par défaut" class="software-logo" />
+                    <h4 class="software-name">Autre Logiciel</h4>
+                </div>
+            </div>
+            <div class="software-content">
+                <h3 class="software-title">Autre Logiciel</h3>
+                <div class="software-category">GÉNIE CIVIL • V2024</div>
+                <p>Description d'un autre logiciel de génie civil pour la conception et l'analyse.</p>
+                <div class="software-buttons">
+                    <a href="#" class="btn btn-primary">📥 Télécharger</a>
+                    <a href="#" class="btn btn-secondary">ℹ️ Consulter les informations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,114 @@
+<svg width="3840" height="2160" viewBox="0 0 3840 2160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients pour un effet moderne -->
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#4682B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="buildingGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#708090;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.3" />
+      <stop offset="50%" style="stop-color:#4682B4;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:0.1" />
+    </linearGradient>
+    
+    <!-- Filtres pour les effets -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="10" dy="10" stdDeviation="5" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Ciel avec gradient -->
+  <rect width="3840" height="2160" fill="url(#skyGradient)"/>
+  
+  <!-- Nuages stylisés -->
+  <ellipse cx="800" cy="400" rx="200" ry="80" fill="#FFFFFF" opacity="0.7"/>
+  <ellipse cx="850" cy="380" rx="150" ry="60" fill="#FFFFFF" opacity="0.6"/>
+  <ellipse cx="2800" cy="300" rx="250" ry="100" fill="#FFFFFF" opacity="0.5"/>
+  <ellipse cx="3200" cy="500" rx="180" ry="70" fill="#FFFFFF" opacity="0.6"/>
+  
+  <!-- Bâtiments modernes en arrière-plan -->
+  <!-- Gratte-ciel 1 -->
+  <rect x="200" y="800" width="300" height="1360" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  <rect x="220" y="820" width="260" height="1320" fill="url(#glassGradient)"/>
+  
+  <!-- Fenêtres du gratte-ciel 1 -->
+  <g opacity="0.8">
+    <rect x="240" y="850" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+    <rect x="300" y="850" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+    <rect x="360" y="850" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+    <rect x="420" y="850" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+    
+    <rect x="240" y="950" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+    <rect x="300" y="950" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+    <rect x="360" y="950" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+    <rect x="420" y="950" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+    
+    <!-- Répétition du motif de fenêtres -->
+    <g transform="translate(0,200)">
+      <rect x="240" y="850" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+      <rect x="300" y="850" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+      <rect x="360" y="850" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+      <rect x="420" y="850" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+    </g>
+    
+    <g transform="translate(0,400)">
+      <rect x="240" y="850" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+      <rect x="300" y="850" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+      <rect x="360" y="850" width="40" height="60" fill="#87CEEB" opacity="0.5"/>
+      <rect x="420" y="850" width="40" height="60" fill="#4682B4" opacity="0.7"/>
+    </g>
+  </g>
+  
+  <!-- Gratte-ciel 2 -->
+  <rect x="600" y="600" width="250" height="1560" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  <rect x="615" y="615" width="220" height="1530" fill="url(#glassGradient)"/>
+  
+  <!-- Gratte-ciel 3 -->
+  <rect x="3200" y="700" width="400" height="1460" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  <rect x="3220" y="720" width="360" height="1420" fill="url(#glassGradient)"/>
+  
+  <!-- Gratte-ciel 4 -->
+  <rect x="3700" y="900" width="140" height="1260" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  <rect x="3710" y="910" width="120" height="1240" fill="url(#glassGradient)"/>
+  
+  <!-- Bâtiments moyens -->
+  <rect x="1000" y="1200" width="200" height="960" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  <rect x="1300" y="1100" width="180" height="1060" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  <rect x="1600" y="1300" width="220" height="860" fill="url(#buildingGradient)" filter="url(#shadow)"/>
+  
+  <!-- Éléments de construction modernes -->
+  <!-- Grue de construction -->
+  <g transform="translate(2800,400)" filter="url(#shadow)">
+    <rect x="0" y="0" width="20" height="800" fill="#FF6B35"/>
+    <rect x="-200" y="100" width="400" height="15" fill="#FF6B35"/>
+    <rect x="180" y="115" width="15" height="200" fill="#FF6B35"/>
+    <polygon points="0,0 -30,50 30,50" fill="#FF6B35"/>
+  </g>
+  
+  <!-- Éléments décoratifs géométriques -->
+  <circle cx="1920" cy="1080" r="300" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.1"/>
+  <circle cx="1920" cy="1080" r="200" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.15"/>
+  <circle cx="1920" cy="1080" r="100" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.2"/>
+  
+  <!-- Lignes de perspective -->
+  <line x1="0" y1="2160" x2="1920" y2="1080" stroke="#FFFFFF" stroke-width="1" opacity="0.1"/>
+  <line x1="3840" y1="2160" x2="1920" y2="1080" stroke="#FFFFFF" stroke-width="1" opacity="0.1"/>
+  
+  <!-- Overlay gradient pour l'effet de profondeur -->
+  <rect width="3840" height="2160" fill="url(#skyGradient)" opacity="0.3"/>
+</svg>

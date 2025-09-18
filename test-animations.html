@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test des Animations - Formations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #d32f2f;
+            margin-bottom: 40px;
+        }
+        
+        /* Styles pour les statistiques */
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-item .percentage {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d32f2f;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item .description {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        /* Animations pour les statistiques */
+        .stat-item.animate {
+            animation: statPulse 0.6s ease-out;
+        }
+        
+        .stat-item .percentage.counting {
+            color: #28a745;
+            text-shadow: 0 0 10px rgba(40, 167, 69, 0.3);
+        }
+        
+        @keyframes statPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .test-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: #b71c1c;
+        }
+    </style>
+
+
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Test des Animations - Formations Sorbo Ingénierie</h1>
+        
+        <button class="test-button" onclick="testAnimations()">Tester les Animations</button>
+        
+        <div class="statistics">
+            <div class="stat-item">
+                <span class="percentage" data-target="85">0</span>
+                <span class="description">Architecture</span>
+            </div>
+            <div class="stat-item">
+                <span class="percentage" data-target="72">0</span>
+                <span class="description">Ingénierie Routière</span>
+            </div>
+            <div class="stat-item">
+                <span class="percentage" data-target="68">0</span>
+                <span class="description">Topographie</span>
+            </div>
+            <div class="stat-item">
+                <span class="percentage" data-target="91">0</span>
+                <span class="description">Ingénierie de l'Eau</span>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 40px; color: #666;">
+            Cliquez sur le bouton pour voir les animations des statistiques en action !
+        </p>
+    </div>
+
+    <script>
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            element.classList.add('counting');
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    element.classList.remove('counting');
+                }
+                element.textContent = Math.floor(current) + '%';
+            }, 16);
+        }
+        
+        function testAnimations() {
+            const statItems = document.querySelectorAll('.stat-item');
+            const percentages = document.querySelectorAll('.percentage');
+            
+            // Reset les valeurs
+            percentages.forEach(p => {
+                p.textContent = '0%';
+                p.classList.remove('counting');
+            });
+            
+            // Ajouter l'animation pulse aux cartes
+            statItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animate');
+                    const percentage = item.querySelector('.percentage');
+                    const target = parseInt(percentage.dataset.target);
+                    animateCounter(percentage, target);
+                    
+                    setTimeout(() => {
+                        item.classList.remove('animate');
+                    }, 600);
+                }, index * 200);
+            });
+        }
+        
+        // Animation automatique au chargement
+        window.addEventListener('load', () => {
+            setTimeout(testAnimations, 1000);
+        });
+    </script>
+</body>
+</html>

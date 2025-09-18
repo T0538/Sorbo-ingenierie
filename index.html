@@ -1,0 +1,2715 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorbo-Ingénierie | Excellence et Innovation en Génie civil</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="shortcut icon" type="image/png" href="images/logo.mr.png">
+    <link rel="apple-touch-icon" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo-fixes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS désactivé globalement -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+    <style>
+
+         /* Loader Styles */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .loader-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d10000;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: slideInFromLeft 1s ease-out 0.3s both;
+        }
+
+        .loader-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: slideInFromRight 1s ease-out 0.6s both;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #d10000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .loader-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #d10000, #b30000);
+            border-radius: 2px;
+            animation: loadProgress 3s ease-out forwards;
+        }
+        
+        /* Animations pour le loader */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Styles pour les modals de newsletter */
+        .newsletter-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .newsletter-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .newsletter-modal h2 {
+            color: #2c3e50;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .newsletter-modal p {
+            color: #6c757d;
+            margin: 0 0 25px 0;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+            transform: translateY(-2px);
+        }
+
+        .modal-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .modal-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .modal-info a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes loadProgress {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 60%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+      
+        /* Styles spécifiques à la page d'accueil modernisée */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-bg-4k.svg');
+            position: relative;
+            overflow: hidden;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Style pour les services dans le hero */
+        .hero-services {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px 25px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .service-item i {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .service-item span {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .hero-btn {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(209, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.4);
+        }
+        
+        /* Barre d'information défilante */
+        .info-ticker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, rgba(221, 8, 8, 0.95),  rgba(139, 7, 7, 0.95));
+            z-index: 10;
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ticker-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .ticker-label {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-right: 20px;
+            white-space: nowrap;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .ticker-label i {
+            margin-right: 8px;
+            color: #ffd700;
+        }
+        
+        .ticker-content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ticker-track {
+            display: flex;
+            animation: tickerScroll 40s linear infinite;
+            width: max-content;
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            padding: 0 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .ticker-item i {
+            margin-right: 10px;
+            color: #ffd700;
+            font-size: 1rem;
+        }
+        
+        .ticker-item span {
+            color: white;
+        }
+        
+        @keyframes tickerScroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .ticker-content:hover .ticker-track {
+            animation-play-state: paused;
+        }
+        
+        /* Icônes flottantes à droite - uniquement dans la section hero */
+        .floating-icons {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* Conteneur pour limiter les icônes à la section hero */
+        .hero {
+            position: relative;
+        }
+        
+        .floating-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            /* Animation d'apparition des icônes */
+            animation: slideInRight 0.6s ease forwards;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .floating-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .floating-icon:hover::before {
+            left: 100%;
+        }
+        
+        .floating-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(209, 0, 0, 0.4);
+        }
+        
+        .floating-icon .tooltip {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .floating-icon .tooltip::after {
+            content: '';
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .floating-icon:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px;
+        }
+        
+        .floating-icon:nth-child(1) { animation-delay: 0.2s; }
+        .floating-icon:nth-child(2) { animation-delay: 0.4s; }
+        .floating-icon:nth-child(3) { animation-delay: 0.6s; }
+        .floating-icon:nth-child(4) { animation-delay: 0.8s; }
+        .floating-icon:nth-child(5) { animation-delay: 1.0s; }
+        
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+
+        
+        /* Responsive pour les icônes flottantes */
+        @media (max-width: 768px) {
+            .floating-icons {
+                right: 15px;
+                gap: 15px;
+            }
+            
+            .floating-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .floating-icon .tooltip {
+                display: none;
+            }
+        }
+        
+        /* Mot du directeur */
+        .about-director {
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .about-director::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.03;
+            clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+        }
+        
+        .about-director h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .about-director h2::after {
+            display: none;
+        }
+        
+        .about-director h3 {
+            text-align: center;
+            font-weight: 400;
+            color: var(--light-text);
+            margin-bottom: 50px;
+        }
+        
+        .director-message {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .director-image {
+            position: relative;
+        }
+        
+        .director-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .director-image::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 15px;
+            left: 15px;
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            z-index: -1;
+        }
+        
+        .message {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .signature {
+            margin-top: 20px;
+            font-style: italic;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .signature::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        /* News section */
+        .news {
+            background-color: white;
+        }
+        
+        .news h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .news h2::after {
+            display: none;
+        }
+        
+        .news-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .news-card[data-title*="AutoCAD"] {
+            display: none;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            flex: 0 0 420px; /* Largeur fixe pour garder les cartes compactes */
+            max-width: 420px;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-image {
+            height: 240px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.1);
+        }
+        
+        .news-content {
+            padding: 25px;
+        }
+        
+        .date {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .news-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .news-content p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        /* Styles pour les actualités dynamiques */
+        .actualites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .actualite-mini-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .actualite-mini-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .actualite-mini-card .actualite-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .actualite-mini-card .actualite-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .actualite-mini-card:hover .actualite-image img {
+            transform: scale(1.1);
+        }
+
+        .actualite-mini-card .actualite-content {
+            padding: 25px;
+        }
+
+        .actualite-mini-card .actualite-content h4 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .actualite-mini-card .actualite-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .actualite-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .actualite-meta .date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .actualite-meta .lire-plus {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .actualite-meta .lire-plus:hover {
+            color: #b30000;
+        }
+
+        .loading-actualites {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-style: italic;
+        }
+        
+        /* Google Maps section */
+        .map-section {
+            background-color: #f9f9f9;
+            position: relative;
+            padding: 80px 0;
+        }
+        
+        .map-section h2 {
+            text-align: center;
+            padding-bottom: 0;
+            margin-bottom: 40px;
+        }
+        
+        .map-section h2::after {
+            display: none;
+        }
+        
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 450px;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .google-maps-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+        
+        .google-maps-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4285f4;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .google-maps-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .google-maps-btn i {
+            font-size: 12px;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            z-index: 1;
+        }
+        
+        .map-overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .map-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--light-text);
+        }
+        
+        .map-overlay .btn {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+        }
+        
+        /* Newsletter section */
+        .newsletter {
+            background-color: #f9f9f9;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 40%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.03;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .newsletter h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .newsletter h2::after {
+            display: none;
+        }
+        
+        .newsletter p {
+            text-align: center;
+            max-width: 700px;
+            margin: 20px auto 30px;
+            color: var(--light-text);
+        }
+        
+        .newsletter-form {
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            padding: 20px 25px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 35px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            
+            .hero-services {
+                gap: 20px;
+            }
+            
+            .service-item {
+                padding: 15px 20px;
+            }
+            
+            .service-item i {
+                font-size: 2.2rem;
+            }
+            
+            .service-item span {
+                font-size: 1rem;
+            }
+            
+            .director-message {
+                grid-template-columns: 1fr;
+            }
+            
+            .director-image {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            
+            .map-overlay {
+                position: relative;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .info-ticker {
+                padding: 10px 0;
+            }
+            
+            .ticker-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 15px;
+            }
+            
+            .ticker-label {
+                margin-right: 0;
+                margin-bottom: 5px;
+                font-size: 0.8rem;
+            }
+            
+            .ticker-item {
+                padding: 0 20px;
+                font-size: 0.85rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .hero-services {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .service-item {
+                padding: 12px 15px;
+                min-width: 100px;
+            }
+            
+            .service-item i {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+            
+            .service-item span {
+                font-size: 0.9rem;
+            }
+            
+            .hero-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .newsletter-form input {
+                width: 100%;
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .newsletter-form button {
+                width: 100%;
+                padding: 15px;
+                border-radius: 0 0 10px 10px;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        /* Animations et transitions pour le scrolling */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .slide-up {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .slide-up.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Amélioration de l'effet de lazy loading */
+        img {
+            transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+        
+        img[loading="lazy"] {
+            opacity: 0;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+        
+        /* Styles pour le carousel de projets */
+        .projects-carousel {
+            background-color: var(--light-bg);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .projects-carousel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            opacity: 0.03;
+            clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%);
+        }
+        
+        .projects-carousel h2 {
+            text-align: center;
+            padding-bottom: 0;
+        }
+        
+        .projects-carousel h2::after {
+            display: none;
+        }
+        
+        .projects-carousel > .container > p {
+            text-align: center;
+            max-width: 700px;
+            margin: 20px auto 50px;
+            color: var(--light-text);
+        }
+        
+        /* conteneur du slider */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Track - piste de défilement */
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s ease;
+        }
+        
+        /* éléments du carousel */ 
+        .carousel-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0;
+            position: relative;
+            opacity: 0.6;
+            transform: scale(0.85);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        /* état actif */
+        .carousel-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* carte projet */
+        .project-card {
+            position: relative;
+            height: 500px; /* à adapter selon maquette */
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        
+        /* zoom effet sur image active */
+        .carousel-item.active .project-image img {
+            transform: scale(1.05);
+        }
+        
+        /* overlay texte */
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 30px 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+        
+        /* titre projet */
+        .project-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease 0.1s, opacity 0.5s ease 0.1s;
+        }
+        
+        /* Texte projet */
+        .project-overlay p {
+            margin-bottom: 15px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
+        }
+        
+        /* Tags style */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s ease 0.3s, opacity 0.5s ease 0.3s;
+        }
+        
+        .project-tags span {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Animation éléments de l'overlay */
+        .carousel-item.active .project-overlay h3,
+        .carousel-item.active .project-overlay p,
+        .carousel-item.active .project-tags {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Navigation */
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        /* Boutons slider */
+        .carousel-prev,
+        .carousel-next {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 15px;
+        }
+        
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Indicateurs */
+        .carousel-dots {
+            display: flex;
+            gap: 8px; 
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* point actif */
+        .carousel-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        
+        /* utilitaires */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-40 {
+            margin-top: 40px;
+        }
+        
+        /* Media queries... */
+        @media (max-width: 992px) {
+            .project-card {
+                height: 450px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .project-card {
+                height: 400px;
+            }
+            
+            .project-overlay {
+                padding: 30px 20px 20px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 1.3rem;
+            }
+            
+            .carousel-prev,
+            .carousel-next {
+                width: 35px;
+                height: 35px;
+                margin: 0 10px;
+            }
+        }
+        
+        /* petit mobile */
+        @media (max-width: 576px) {
+            .info-ticker {
+                padding: 8px 0;
+            }
+            
+            .ticker-container {
+                padding: 0 10px;
+            }
+            
+            .ticker-label {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            
+            .ticker-item {
+                padding: 0 15px;
+                font-size: 0.8rem;
+            }
+            
+            .ticker-item i {
+                font-size: 0.9rem;
+            }
+            
+            .project-card {
+                height: 350px;
+            }
+            
+            .project-tags span {
+                padding: 4px 10px; 
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Section Ils nous font confiance - Carousel automatique avec identité Sorbo */
+        .trust-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trust-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23dc3545" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .trust-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .trust-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .trust-header .underline {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #dc3545, #c82333);
+            margin: 0 auto 30px;
+            border-radius: 2px;
+        }
+
+        .trust-header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .trust-carousel-container {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .trust-carousel {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .trust-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            gap: 30px;
+        }
+
+        .trust-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-300px * 3));
+            }
+        }
+
+        .trust-slide {
+            flex: 0 0 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .trust-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(220, 53, 69, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(220, 53, 69, 0.1);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trust-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(220, 53, 69, 0.15);
+            border-color: #dc3545;
+        }
+
+        .trust-logo-full {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+
+        .trust-logo-main {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            transition: all 0.4s ease;
+            filter: grayscale(20%) brightness(1.1);
+        }
+
+        .trust-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 2;
+        }
+
+        .trust-item:hover .trust-overlay {
+            opacity: 1;
+        }
+
+        .trust-item:hover .trust-logo-full {
+            transform: scale(0.9);
+            opacity: 0.3;
+        }
+
+        .trust-identity {
+            text-align: center;
+            color: #ffffff;
+            padding: 20px;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .trust-item:hover .trust-identity {
+            transform: translateY(0);
+        }
+
+        .trust-logo-overlay {
+            margin-bottom: 15px;
+        }
+
+        .trust-logo-mini {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .trust-identity h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .trust-identity p {
+            font-size: 0.85rem;
+            margin: 0;
+            opacity: 0.9;
+            line-height: 1.4;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .trust-section {
+                padding: 60px 0;
+            }
+
+            .trust-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .trust-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .trust-slide {
+                flex: 0 0 250px;
+            }
+
+            .trust-item {
+                max-width: 230px;
+                height: 160px;
+            }
+
+            .trust-logo-main {
+                width: 100px;
+                height: 100px;
+            }
+
+            .trust-logo-mini {
+                width: 50px;
+                height: 50px;
+                padding: 6px;
+            }
+
+            .trust-identity h4 {
+                font-size: 1.1rem;
+            }
+
+            .trust-identity p {
+                font-size: 0.75rem;
+            }
+
+            .trust-track {
+                gap: 20px;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-250px * 3));
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trust-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .trust-slide {
+                flex: 0 0 200px;
+            }
+
+            .trust-item {
+                max-width: 180px;
+                height: 140px;
+            }
+
+            .trust-logo-main {
+                width: 80px;
+                height: 80px;
+            }
+
+            .trust-logo-mini {
+                width: 40px;
+                height: 40px;
+                padding: 4px;
+            }
+
+            .trust-identity {
+                padding: 15px;
+            }
+
+            .trust-identity h4 {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+
+            .trust-identity p {
+                font-size: 0.7rem;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-200px * 3));
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+ <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie" class="loader-logo">
+            <h1 class="loader-title">Sorbo-Ingénierie</h1>
+            <p class="loader-subtitle">Solutions d'ingénierie innovantes</p>
+            <div class="loader-spinner"></div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogies & Méthodologies</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprises</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprises</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="contact-btn">Contactez-nous</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <!-- Barre d'information défilante -->
+        <div class="info-ticker">
+            <div class="ticker-container">
+                <div class="ticker-label">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Actualités</span>
+                </div>
+                <div class="ticker-content">
+                    <div class="ticker-track">
+                        <div class="ticker-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Nouvelle formation AutoCAD 2025 disponible - Inscriptions ouvertes</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées.</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 (Génie Civil, Mécanique, Structures).</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-cogs"></i>
+                            <span>Nouveau logiciel de drainage OH-Route v1 disponible</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Prochaines formations : Covadis, AutoCAD, Revit - Réservez votre place</span>
+                        </div>
+                        <!-- Duplication pour défilement continu -->
+                        <div class="ticker-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Nouvelle formation AutoCAD 2025 disponible - Inscriptions ouvertes</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées.</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-users"></i>
+                            <span>Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 (Génie Civil, Mécanique, Structures).</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-cogs"></i>
+                            <span>Nouveau logiciel de drainage OH-Route v1 disponible</span>
+                        </div>
+                        <div class="ticker-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Prochaines formations : Covadis, AutoCAD, Revit - Réservez votre place</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h1 data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">Sorbo-Ingénierie</h1>
+                <h2 data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">Excellence et Innovation en Génie civil</h2>
+                <div class="hero-services" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800" aria-label="Nos services">
+                    <a href="ingenierie.html" class="service-item" aria-label="Service d'ingénierie" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="500">
+                        <i class="fas fa-cogs" aria-hidden="true"></i>
+                        <span>Ingénierie</span>
+                    </a>
+                    <a href="nos-formations.html" class="service-item" aria-label="Service de formation" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="500">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        <span>Formation</span>
+                    </a>
+                    <a href="nos-logiciels.html" class="service-item" aria-label="Nos logiciels" data-aos="zoom-in" data-aos-delay="800" data-aos-duration="500">
+                        <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                        <span>Logiciels</span>
+                    </a>
+                </div>
+                <a href="notre-entreprise.html" class="btn primary-btn hero-btn" data-aos="fade-up" data-aos-delay="900" data-aos-duration="800">Découvrir notre entreprise</a>
+            </div>
+        </div>
+        
+        <!-- Icônes flottantes à droite - uniquement dans la section hero -->
+        <div class="floating-icons" style="display: flex !important; opacity: 1 !important; visibility: visible !important;">
+            <a href="tel:+2252121802126" class="floating-icon" aria-label="Nous contacter">
+                <i class="fas fa-phone"></i>
+                <span class="tooltip">Nous contacter</span>
+            </a>
+            <a href="mailto:contact@sorbo.ingenierie.ci" class="floating-icon" aria-label="Envoyer un email">
+                <i class="fas fa-envelope"></i>
+                <span class="tooltip">Envoyer un email</span>
+            </a>
+            <a href="nos-formations.html" class="floating-icon" aria-label="Nos formations">
+                <i class="fas fa-graduation-cap"></i>
+                <span class="tooltip">Nos formations</span>
+            </a>
+            <a href="ingenierie.html" class="floating-icon" aria-label="Services d'ingénierie">
+                <i class="fas fa-cogs"></i>
+                <span class="tooltip">Ingénierie</span>
+            </a>
+            <a href="nos-logiciels.html" class="floating-icon" aria-label="Nos logiciels">
+                <i class="fas fa-laptop-code"></i>
+                <span class="tooltip">Nos logiciels</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="director" class="about-director">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Mot du Directeur Général</h2>
+            <h3 data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">Faites confiance à l'expertise de notre équipe pour la réussite de vos projets</h3>
+            <div class="director-message">
+                <div class="director-image" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="300">
+                    <img src="images/alexis DG.jpeg" alt="Alexis KOFFI, Directeur Général">
+                </div>
+                <div class="message" data-aos="fade-left" data-aos-duration="1000" data-aos-offset="300">
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="100">Cher visiteur,</p>
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="200">C'est avec un immense plaisir que nous vous accueillons sur le site de Sorbo-Ingénierie. Depuis notre création, nous nous engageons à offrir des solutions techniques performantes et adaptées aux défis de l'ingénierie moderne. Nous plaçons l'innovation, la rigueur et la qualité au cœur de nos interventions, qu'il s'agisse d'études, de suivi de travaux, de formation ou de développement de logiciels spécialisés.</p>
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="300">Grâce à une équipe d'experts passionnés et à une approche méthodique, nous avons su nous imposer comme un partenaire de confiance sur des projets d'envergure en Afrique. Notre ambition est de continuer à accompagner nos clients avec professionnalisme et excellence, en apportant des solutions toujours plus efficaces et adaptées aux besoins spécifiques de chaque projet.</p>
+                    <p data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="400">Nous vous invitons à parcourir notre site pour découvrir l'étendue de nos services et réalisations. Que vous soyez un maître d'ouvrage, un bureau d'études, une entreprise ou un professionnel du secteur, nous sommes à votre disposition pour collaborer et construire ensemble les infrastructures de demain.</p>
+                    <p class="signature" data-aos="fade-up" data-aos-anchor=".message" data-aos-delay="500"><strong>Alexis KOFFI</strong><br>Directeur Général</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Notre actualité</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            
+            <div id="latest-actualites" class="news-grid">
+                <div class="loading-actualites" style="text-align: center; padding: 40px; width: 100%">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #3498db; margin-bottom: 20px;"></i>
+                    <p>Chargement des dernières actualités...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-carousel">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Nos réalisations</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">Découvrez nos projets d'ingénierie innovants et nos réalisations marquantes.</p>
+            
+            <div class="carousel-container" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+                <div class="carousel-track">
+                    <div class="carousel-item active">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="images/image1.jpg" alt="Immeuble moderne à Abidjan" loading="lazy" fetchpriority="high" decoding="async">
+                            </div>
+                            <div class="project-overlay">
+                                <h3>Projet de lotissement d'un site de 610 Ha à vitré en République de Côte d'Ivoire</h3>
+                                <p>Réalisation des levés topographiques</p>
+                                <div class="project-tags">
+                                    <span>Topographie et SIG</span>
+                                   <!-- <span>SIG</span>--> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="images/image3.jpg" alt="Réseau hydraulique" loading="lazy">
+                            </div>
+                            <div class="project-overlay">
+                                <h3>Projet d'aménagement et de bitumage de la route Dabakala - Satama-Sokoro</h3>
+                                <p>Suivi et contrôle topographique des travaux</p>
+                                <div class="project-tags">
+                                    <span>Infrastructures et transport</span>
+                                   <!--<span>Transport</span>--> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-nav">
+                    <button class="carousel-prev" aria-label="Projet précédent">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-dots">
+                        <span class="carousel-dot active" data-index="0"></span>
+                        <span class="carousel-dot" data-index="1"></span>
+                    </div>
+                    <button class="carousel-next" aria-label="Projet suivant">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-40" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+                <a href="nos-projets.html" class="btn outline-btn">Voir toutes nos réalisations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Ils nous font confiance - Carousel automatique -->
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-header" data-aos="fade-up" data-aos-duration="800">
+                <h2>Ils nous font confiance</h2>
+                <div class="underline"></div>
+                <p>Des entreprises de renom nous font confiance pour leurs projets d'ingénierie et de formation</p>
+            </div>
+            
+            <div class="trust-carousel-container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                <div class="trust-carousel">
+                    <div class="trust-track">
+                        <div class="trust-slide">
+                            <div class="trust-item">
+                                <div class="trust-logo-full">
+                                    <img src="images/logo-fdfp02.png" alt="Logo FDFP" class="trust-logo-main">
+                                </div>
+                                <div class="trust-overlay">
+                                    <div class="trust-identity">
+                                        <div class="trust-logo-overlay">
+                                            <img src="images/logo-fdfp02.png" alt="Logo FDFP" class="trust-logo-mini">
+                                        </div>
+                                        <h4>FDFP</h4>
+                                        <p>Fonds de Développement de la Formation Professionnelle</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide">
+                            <div class="trust-item">
+                                <div class="trust-logo-full">
+                                    <img src="images/logo-setec.png" alt="Logo SETEC AFRIQUE" class="trust-logo-main">
+                                </div>
+                                <div class="trust-overlay">
+                                    <div class="trust-identity">
+                                        <div class="trust-logo-overlay">
+                                            <img src="images/logo-setec.png" alt="Logo SETEC AFRIQUE" class="trust-logo-mini">
+                                        </div>
+                                        <h4>SETEC AFRIQUE</h4>
+                                        <p>Société d'Études et de Construction Technique</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide">
+                            <div class="trust-item">
+                                <div class="trust-logo-full">
+                                    <img src="images/LOGO_SICMA.svg" alt="Logo SICMA" class="trust-logo-main">
+                                </div>
+                                <div class="trust-overlay">
+                                    <div class="trust-identity">
+                                        <div class="trust-logo-overlay">
+                                            <img src="images/LOGO_SICMA.svg" alt="Logo SICMA" class="trust-logo-mini">
+                                        </div>
+                                        <h4>SICMA</h4>
+                                        <p>Société Ivoirienne de Construction et de Matériaux</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Entreprises masquées temporairement -->
+                        <div class="trust-slide" style="display: none;">
+                            <div class="trust-item">
+                                <div class="trust-logo-container">
+                                    <div class="trust-logo-placeholder">
+                                        <i class="fas fa-warehouse"></i>
+                                    </div>
+                                </div>
+                                <div class="trust-info">
+                                    <h4>SECTEC AFRIQUE</h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide" style="display: none;">
+                            <div class="trust-item">
+                                <div class="trust-logo-container">
+                                    <div class="trust-logo-placeholder">
+                                        <i class="fas fa-hard-hat"></i>
+                                    </div>
+                                </div>
+                                <div class="trust-info">
+                                    <h4></h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-slide" style="display: none;">
+                            <div class="trust-item">
+                                <div class="trust-logo-container">
+                                    <div class="trust-logo-placeholder">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                </div>
+                                <div class="trust-info">
+                                    <h4>Nom de l'Entreprise 6</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="800">Nous trouver</h2>
+            <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
+            
+            <div class="map-container" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <div class="map-overlay fade-in" data-aos="fade-right" data-aos-delay="400" data-aos-duration="800">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Abidjan, Yopougon Ancien Bel-Air cité SOPIM</p>
+                    <p><i class="fas fa-phone"></i> (+225) 01 50 12 30 50</p>
+                    <p><i class="fas fa-envelope"></i> contact@sorbo.ingenierie.ci</p>
+                    <a href="contact.html" class="btn primary-btn">Nous contacter</a>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.46686467134!2d-4.0624552!3d5.345477999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb0016feceb9%3A0x440471094000f902!2sCentre%20de%20Formation%20Sorbo-Ing%C3%A9nierie!5e0!3m2!1sfr!2stg!4v1757163216203!5m2!1sfr!2stg" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="google-maps-overlay">
+                    <a href="https://maps.app.goo.gl/4C2HgePxUWWsx8gV7?g_st=iw" target="_blank" class="google-maps-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ouvrir dans Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Newsletter
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up" data-aos-duration="800">
+                <div class="newsletter-text">
+                    <h2>Restez informé de nos actualités</h2>
+                    <p>Recevez nos dernières nouvelles, formations et offres spéciales directement dans votre boîte mail</p>
+                </div>
+                <div class="newsletter-form-container">
+                    <form class="newsletter-form-main">
+                        <div class="input-group">
+                            <input type="email" placeholder="Votre adresse email" required>
+                            <button type="submit" class="newsletter-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>S'abonner</span>
+                            </button>
+                        </div>
+                        <div class="newsletter-benefits">
+                            <span><i class="fas fa-check"></i> Gratuit et sans engagement</span>
+                            <span><i class="fas fa-check"></i> Désabonnement en 1 clic</span>
+                            <span><i class="fas fa-check"></i> Contenu exclusif</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.mr.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p class="footer-description">Excellence et Innovation en Génie civil</p>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Informations légales</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form" onsubmit="return false;">
+                        <input type="email" name="email" placeholder="Votre email" required>
+                        <button type="button" onclick="handleNewsletterSubmit(this)"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sorbo.ingenierie" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/sorbo-ing-nierie/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DONNÉES DES ACTUALITÉS - MODIFIEZ DIRECTEMENT ICI
+        window.actualitesData = [
+          // ACTUALITÉ 1 - FORMATION AUTOCAD (1ère sur la page d'accueil)
+          {
+            id: "formation-autocad-2025",
+            title: "Nouvelle formation AutoCAD 2025 disponible",
+            resume: "Découvrez les nouvelles fonctionnalités d'AutoCAD 2025 dans notre formation mise à jour. Inscription ouverte.",
+            content: "Sorbo-Ingénierie enrichit son catalogue de formations avec le lancement de la nouvelle formation AutoCAD 2025. Cette formation complète a été spécialement conçue pour accompagner les professionnels du secteur dans la découverte et la maîtrise des dernières fonctionnalités de ce logiciel incontournable en conception assistée par ordinateur.\n\nLa formation AutoCAD 2025 couvre l'ensemble des nouvelles fonctionnalités du logiciel, incluant les outils collaboratifs améliorés, les fonctions d'automatisation avancées et les nouvelles options de modélisation 3D. Nos formateurs certifiés proposent une approche pédagogique basée sur la pratique, avec des exercices concrets et des études de cas réels tirés de projets d'ingénierie. Les participants bénéficient d'un accompagnement personnalisé adapté à leur niveau et à leurs objectifs professionnels.\n\nDisponible en format présentiel et distanciel, cette formation s'adresse aux débutants comme aux utilisateurs expérimentés souhaitant se perfectionner. Elle inclut un support pédagogique complet, des ressources numériques et une certification reconnue. Les inscriptions sont ouvertes dès maintenant, avec des sessions programmées tout au long de l'année pour répondre aux besoins de formation continue des professionnels.",
+            imageUrl: "images/formationcova.jpg",
+            imageAlt: "Formation AutoCAD 2025 Sorbo-Ingénierie",
+            datePublication: "2024-12-20",
+            auteur: "Service Formation",
+            categorie: "Formation",
+            tags: ["Formation", "AutoCAD", "CAO", "2025"]
+          },
+          // ACTUALITÉ 2 - HABILITATION FDFP (2ème sur la page d'accueil)
+          {
+            id: "prix-excellence-2024",
+            title: "Sorbo-Ingénierie obtient le renouvellement de son habilitation FDFP",
+            resume: "Nous sommes heureux d'annoncer que Sorbo-Ingénierie a obtenu le renouvellement de son habilitation auprès du FDFP, attestant de la qualité et de la conformité de nos programmes de formation.",
+            content: "Nous sommes fiers d'annoncer que Sorbo-Ingénierie a obtenu en mars 2025 le renouvellement officiel de son habilitation dans le domaine de la formation en Génie Civil. Cette distinction, valable jusqu'en décembre 2026, confirme notre statut d'organisme de formation de référence en Côte d'Ivoire.\n\nCette reconnaissance vient confirmer la qualité et la rigueur de nos programmes pédagogiques, l'expertise reconnue de nos formateurs et ingénieurs, ainsi que notre engagement constant à accompagner les professionnels et étudiants vers l'excellence. Nos méthodes d'enseignement, basées sur des cas concrets et des projets réels, permettent à nos apprenants d'acquérir les compétences nécessaires pour réussir dans le secteur du génie civil.\n\nCe renouvellement constitue une véritable marque de confiance des autorités compétentes et valorise notre rôle comme acteur majeur de la formation en Génie Civil. Tout au long de cette période, nous continuerons d'innover et de proposer des formations adaptées aux enjeux actuels et futurs du secteur, en intégrant les dernières technologies et les meilleures pratiques internationales.",
+            imageUrl: "images/image 01.jpg",
+            imageAlt: "Habilitation FDFP Sorbo-Ingénierie",
+            datePublication: "2025-04-03",
+            auteur: "Direction Sorbo-Ingénierie",
+            categorie: "Formation",
+            tags: ["FDFP", "Habilitation", "Génie Civil", "Formation", "Excellence"]
+          },
+          // ACTUALITÉ 3 - LOGICIEL OH-ROUTE (3ème sur la page d'accueil)
+          {
+            id: "oh-route-v1-1",
+            title: "Lancement officiel de notre logiciel OH-Route v1",
+            resume: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.",
+            content: "Nous avons le plaisir d'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d'assainissement routier.\n\nDéveloppé par notre équipe d'ingénieurs et d'experts en Génie Civil, OH-Route v1 intègre des fonctionnalités avancées permettant de :\n\n🌧 Prédire et estimer avec fiabilité les débits de pluie,\n\n🌍 Anticiper les risques d'inondation,\n\n🛠 Dimensionner les ouvrages hydrauliques et d'assainissement routier de manière optimale,\n\n💡 Proposer des solutions adaptées avec une évaluation économique et financière pour un meilleur appui à la décision.",
+            imageUrl: "images/drainageroute.png",
+            imageAlt: "Logiciel OH-Route v1 Sorbo-Ingénierie",
+            datePublication: "2024-12-15",
+            auteur: "Équipe Développement",
+            categorie: "Logiciel",
+            tags: ["Logiciel", "OH-Route", "Hydraulique", "Infrastructure"]
+          }
+          // POUR AJOUTER UNE ACTUALITÉ : copiez le bloc ci-dessus, 
+          // ajoutez une virgule après le }, et modifiez les informations
+        ];
+    </script>
+    <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/zoho-email-integration.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/simple-actualites-fix.js"></script>
+    <script src="js/simple-blog-fix.js"></script>
+    
+    <!-- Système Newsletter Avancé -->
+    <script src="js/newsletter-validator.js"></script>
+    <script src="js/newsletter-categories.js"></script>
+    <script src="js/newsletter-database.js"></script>
+    <script src="js/newsletter-double-optin.js"></script>
+    <script src="js/newsletter-emailjs-config.js"></script>
+    <script src="js/newsletter-dashboard.js"></script>
+    <script src="js/newsletter-main.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+
+
+        // Page Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            const progressBar = document.querySelector('.loader-progress-bar');
+            
+            // Animation de la barre de progression
+            if (progressBar) {
+                progressBar.style.width = '0%';
+                setTimeout(() => {
+                    progressBar.style.width = '100%';
+                }, 100);
+            }
+            
+            // Attendre un minimum de 2 secondes pour l'effet visuel
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                
+                // Supprimer complètement le loader après la transition
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Initialiser AOS après le chargement
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                AOS.init({
+                    offset: 120,
+                    duration: 800,
+                    easing: 'ease-out',
+                    once: true
+                });
+            }, 2500);
+        });
+
+        // Afficher le loader immédiatement si la page se recharge
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('pageLoader');
+            loader.style.display = 'flex';
+        });
+    
+
+        // Initialisation de AOS avec des paramètres améliorés
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: false,
+            mirror: true,
+            anchorPlacement: 'top-bottom',
+            disable: 'mobile'
+        });
+        
+        // Fonction pour gérer la soumission de la newsletter
+        function handleNewsletterSubmit(button) {
+            const form = button.closest('.footer-newsletter-form');
+            const emailInput = form.querySelector('input[name="email"]');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                alert('Veuillez saisir une adresse email valide');
+                return;
+            }
+            
+            // Vérifier si le nouveau système newsletter est disponible
+            if (window.newsletterManager && window.newsletterManager.isInitialized) {
+                console.log('📧 Utilisation du nouveau système newsletter...');
+                // Simuler une soumission de formulaire
+                const formData = new FormData();
+                formData.append('email', email);
+                
+                // Créer un événement de soumission
+                const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+                form.dispatchEvent(submitEvent);
+            } else {
+                console.log('📧 Utilisation du système de fallback...');
+                showNewsletterMessage('Inscription en cours...', 'info');
+                
+                // Traitement réel avec la base de données
+                handleRealNewsletterSubmission(email, emailInput);
+            }
+        }
+        
+        // Fonction pour traitement réel de l'inscription newsletter
+        async function handleRealNewsletterSubmission(email, emailInput) {
+            try {
+                // 1. Sauvegarder en base de données locale
+                const subscriberData = {
+                    email: email,
+                    subscribedAt: new Date().toISOString(),
+                    status: 'pending',
+                    categories: ['actualites'], // Catégorie par défaut
+                    confirmed: false
+                };
+                
+                // Utiliser la base de données si disponible
+                if (window.newsletterDB || window.NewsletterDatabase) {
+                    const db = window.newsletterDB || new window.NewsletterDatabase();
+                    await db.addSubscriber(subscriberData);
+                    console.log('✅ Abonné sauvegardé en base locale');
+                } else {
+                    // Sauvegarde dans localStorage comme fallback
+                    const subscribers = JSON.parse(localStorage.getItem('newsletter_subscribers') || '[]');
+                    subscribers.push(subscriberData);
+                    localStorage.setItem('newsletter_subscribers', JSON.stringify(subscribers));
+                    console.log('✅ Abonné sauvegardé dans localStorage');
+                }
+                
+                // 2. Essayer d'envoyer l'email de confirmation
+                let emailSent = false;
+                if (window.newsletterEmailJS && window.newsletterEmailJS.isConfigured) {
+                    try {
+                        const emailResult = await window.newsletterEmailJS.sendEmail({
+                            title: 'Confirmez votre abonnement - Sorbo Ingénierie',
+                            name: email.split('@')[0],
+                            email: email,
+                            date: new Date().toLocaleDateString('fr-FR'),
+                            confirmation_link: `${window.location.origin}/?confirm=${btoa(email)}`
+                        });
+                        
+                        if (emailResult.success) {
+                            emailSent = true;
+                            console.log('✅ Email de confirmation envoyé');
+                        }
+                    } catch (error) {
+                        console.warn('⚠️ Erreur envoi email:', error);
+                    }
+                }
+                
+                // 3. Afficher le message approprié
+                if (emailSent) {
+                    showNewsletterMessage('✅ Inscription réussie ! Vérifiez votre email pour confirmer.', 'success');
+                } else {
+                    showNewsletterMessage('✅ Inscription enregistrée ! (Email de confirmation non envoyé - vérifiez la configuration EmailJS)', 'info');
+                }
+                
+                // 4. Vider le champ
+                emailInput.value = '';
+                
+                // 5. Mettre à jour le dashboard
+                if (window.newsletterDashboard && window.newsletterDashboard.isVisible) {
+                    window.newsletterDashboard.refresh();
+                    console.log('🔄 Dashboard mis à jour');
+                }
+                
+                // 6. Notification de mise à jour du dashboard
+                if (window.newsletterDashboard) {
+                    showDashboardUpdateNotification();
+                }
+                
+            } catch (error) {
+                console.error('❌ Erreur lors de l\'inscription:', error);
+                showNewsletterMessage('❌ Erreur lors de l\'inscription. Veuillez réessayer.', 'error');
+            }
+        }
+        
+        // Fonction pour afficher une notification de mise à jour du dashboard
+        function showDashboardUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 12px 18px;
+                border-radius: 8px;
+                z-index: 10001;
+                animation: slideInRight 0.3s ease;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            `;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Dashboard mis à jour !</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+        
+        // Fonction pour afficher les messages de newsletter
+        function showNewsletterMessage(message, type) {
+            // Supprimer les anciens messages
+            const existingMessages = document.querySelectorAll('.newsletter-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `newsletter-message newsletter-message-${type}`;
+            messageDiv.style.cssText = `
+                margin-top: 15px;
+                padding: 12px 15px;
+                border-radius: 6px;
+                font-size: 14px;
+                animation: slideDown 0.3s ease;
+                ${type === 'success' ? 'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : ''}
+                ${type === 'info' ? 'background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;' : ''}
+                ${type === 'error' ? 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;' : ''}
+            `;
+            messageDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'info' ? 'info-circle' : 'exclamation-triangle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            const form = document.querySelector('.footer-newsletter-form');
+            form.parentNode.insertBefore(messageDiv, form.nextSibling);
+            
+            // Auto-suppression après 5 secondes
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // Gestion du lazy loading des images
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.onload = function() {
+                                img.classList.add('loaded');
+                            };
+                            
+                            // Si l'image est déjà chargée du cache
+                            if (img.complete) {
+                                img.classList.add('loaded');
+                            }
+                            
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(img) {
+                    imageObserver.observe(img);
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas IntersectionObserver
+                lazyImages.forEach(function(img) {
+                    img.classList.add('loaded');
+                });
+            }
+        });
+        
+        // Effets de défilement personnalisés
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const slideElements = document.querySelectorAll('.slide-up');
+            
+            const scrollObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else if (typeof AOS !== 'undefined' && AOS?.options && !AOS.options.once) {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(function(el) {
+                scrollObserver.observe(el);
+            });
+            
+            slideElements.forEach(function(el) {
+                scrollObserver.observe(el);
+            });
+        });
+        
+        // Gestion du scroll pour le header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Note: Gestion du menu mobile déplacée vers js/script.js pour éviter les conflits
+        console.log('🏠 Menu mobile géré par js/script.js');
+        
+        // Smooth scroll pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Gestion du carousel de projets
+        document.addEventListener('DOMContentLoaded', function() {
+            // On récupère les éléments du DOM
+            var track = document.querySelector('.carousel-track');
+            var items = document.querySelectorAll('.carousel-item');
+            var prevBtn = document.querySelector('.carousel-prev');
+            var nextBtn = document.querySelector('.carousel-next');
+            var dots = document.querySelectorAll('.carousel-dot');
+            
+            var currentIndex = 0;
+            var autoplayInterval;
+            var itemCount = items.length;
+            
+            // TODO: Implémenter preload des images suivantes
+            
+            // Change de slide
+            function updateCarousel() {
+                // Animation de translation
+                track.style.transform = 'translateX(-' + currentIndex * 100 + '%)';
+                
+                // On retire la classe active de tous les items
+                for(var i = 0; i < items.length; i++) {
+                    items[i].classList.remove('active');
+                }
+                // On l'ajoute à l'item actif
+                items[currentIndex].classList.add('active');
+                
+                // Même chose pour les points
+                for(var j = 0; j < dots.length; j++) {
+                    dots[j].classList.remove('active');
+                }
+                dots[currentIndex].classList.add('active');
+            }
+            
+            // Passe à la slide suivante
+            function nextSlide() {
+                currentIndex++;
+                // On revient au début si on dépasse
+                if(currentIndex >= itemCount) {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }
+            
+            // Passe à la slide précédente
+            function prevSlide() {
+                currentIndex--;
+                // On va à la fin si on est au début
+                if(currentIndex < 0) {
+                    currentIndex = itemCount - 1;
+                }
+                updateCarousel();
+            }
+            
+            // Gestion des boutons
+            nextBtn.onclick = function() {
+                nextSlide();
+                // On reset l'autoplay
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            };
+            
+            prevBtn.onclick = function() {
+                prevSlide();
+                // On reset l'autoplay
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            };
+            
+            // Gestion des points
+            for(var k = 0; k < dots.length; k++) {
+                // On utilise une IIFE pour capturer la valeur de k
+                (function(index) {
+                    dots[index].onclick = function() {
+                        currentIndex = index;
+                        updateCarousel();
+                        // On reset l'autoplay
+                        clearInterval(autoplayInterval);
+                        startAutoplay();
+                    };
+                })(k);
+            }
+            
+            // Défilement auto toutes les 5 secondes
+            function startAutoplay() {
+                autoplayInterval = setInterval(function() {
+                    nextSlide();
+                }, 5000);
+            }
+            
+            // Support tactile (swipe)
+            var touchStartX = 0;
+            var touchEndX = 0;
+            
+            var carousel = document.querySelector('.carousel-container');
+            
+            carousel.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            carousel.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                
+                // Si différence suffisante = swipe
+                var diff = touchStartX - touchEndX;
+                if(Math.abs(diff) > 50) { // seuil de détection
+                    if(diff > 0) {
+                        // swipe gauche
+                        nextSlide();
+                    } else {
+                        // swipe droite
+                        prevSlide();
+                    }
+                    // reset autoplay
+                    clearInterval(autoplayInterval);
+                    startAutoplay();
+                }
+            }, { passive: true });
+            
+            // Lancement initial
+            updateCarousel();
+            startAutoplay();
+            
+            // Fix bug IE11
+            if (/Trident\/|MSIE/.test(window.navigator.userAgent)) {
+                console.log('Détection IE, ajustements appliqués');
+                // Code pas encore implémenté
+            }
+        });
+    </script>
+</body>
+</html>
+</html>
+

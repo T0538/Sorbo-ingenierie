@@ -1,0 +1,1272 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous | Sorbo-Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="shortcut icon" type="image/png" href="images/logo.mr.png">
+    <link rel="apple-touch-icon" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo-fixes.css">
+    <!-- AOS désactivé globalement -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Animations pour le loader */
+        
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+            50% {
+                width: 60%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Styles spécifiques à la page de contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .contact-info {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .contact-info ul {
+            margin-bottom: 30px;
+        }
+        
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            color: var(--accent-color);
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .contact-form h3 {
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        /* Styles pour l'alerte de formation */
+        .formation-info-alert {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196f3;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.15);
+        }
+        
+        .formation-info-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .formation-info-content i {
+            font-size: 2rem;
+            color: #2196f3;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+        }
+        
+        .formation-details h4 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+            font-size: 1.1rem;
+        }
+        
+        .formation-price {
+            margin: 0;
+            color: #1565c0;
+            font-size: 1rem;
+        }
+        
+        .formation-price strong {
+            color: #d10000;
+        }
+        
+        .map-container {
+            grid-column: 1 / -1;
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+        
+        .google-maps-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4285f4;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .google-maps-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .google-maps-btn i {
+            font-size: 12px;
+        }
+        
+        /* Styles pour la section service client */
+        .customer-service {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .customer-service h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .customer-service p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .customer-service-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.2);
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .service-features li {
+            margin-bottom: 12px;
+            color: #495057;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+        }
+        
+        .service-features i {
+            color: var(--primary-color);
+            margin-right: 12px;
+            font-size: 1.1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+        
+        /* Responsive pour la section service client */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .customer-service {
+                padding: 30px 20px;
+            }
+            
+            .customer-service-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .customer-service h3 {
+                font-size: 1.3rem;
+            }
+            
+            .service-features li {
+                font-size: 0.9rem;
+            }
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+        
+        .form-hint {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .dynamic-fields {
+            margin-top: 15px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--primary-color);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        /* Organisation des champs formation en grille */
+        #formation-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            align-items: start;
+        }
+        
+        #formation-fields .form-group {
+            margin-bottom: 0;
+        }
+        
+        /* Champs spécifiques qui prennent toute la largeur */
+        #formation-fields .form-group:has(#formation-adresse),
+        #formation-fields .form-group:has(#formation-email) {
+            grid-column: 1 / -1;
+        }
+        
+        /* Style pour les champs obligatoires */
+        #formation-fields label {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Styles pour les menus déroulants */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            margin: 0;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            padding: 0;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(209, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        /* Mobile responsif pour dropdown */
+        @media (max-width: 992px) {
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+                margin-top: 10px;
+            }
+            
+            .dropdown-menu.show {
+                max-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="contact-btn">Contactez-nous</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Parlons de Votre Projet</h1>
+                <p>Des experts disponibles 24/7 pour transformer vos idées en réalité</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Service Client Premium</h1>
+                <p>Une équipe dédiée pour un accompagnement personnalisé</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Consultations Gratuites</h1>
+                <p>Obtenez des conseils d'experts sans engagement</p>
+            </div>
+        </div>
+        <!-- Flèches de navigation -->
+        <div class="hero-arrows">
+            <div class="hero-arrow prev-slide">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="hero-arrow next-slide">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active" data-index="0"></div>
+                <div class="hero-dot" data-index="1"></div>
+                <div class="hero-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Nos coordonnées</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p><strong>Siège social</strong></p>
+                                <p>Abidjan, Yopougon Bel Air cité SOPIM</p>
+                                <p>Côte d'Ivoire</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p><a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></p>
+                                <p><a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p><a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></p>
+                                <p><a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <h3>Heures d'ouverture</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <p><strong>Lundi - Vendredi :</strong> 8h00 - 18h00</p>
+                                <p><strong>Samedi :</strong> Fermé</p>
+                                <p><strong>Dimanche :</strong> Fermé</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Envoyez-nous un message</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="rendezvous">Demande de rendez-vous</option>
+                                <option value="ingenierie">Projet d'ingénierie</option>
+                                <option value="formation">Formation</option>
+                                <option value="logiciel">Logiciels</option>
+                                <option value="carriere">Carrières</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Champs dynamiques pour Projet d'ingénierie -->
+                        <div id="ingenierie-fields" class="dynamic-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="project-type">Type de projet</label>
+                                <select id="project-type" name="project-type">
+                                    <option value="">Sélectionnez un type</option>
+                                    <option value="etude">Étude de faisabilité</option>
+                                    <option value="conception">Conception technique</option>
+                                    <option value="suivi">Suivi de chantier</option>
+                                    <option value="expertise">Expertise technique</option>
+                                    <option value="autre-ing">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-description">Description du projet</label>
+                                <textarea id="project-description" name="project-description" placeholder="Décrivez brièvement votre projet, ses objectifs et contraintes principales..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-location">Localisation du projet</label>
+                                <input type="text" id="project-location" name="project-location" placeholder="Ville, pays">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-budget">Budget estimatif (FCFA)</label>
+                                <select id="project-budget" name="project-budget">
+                                    <option value="">Sélectionnez une fourchette</option>
+                                    <option value="moins-5m">Moins de 5 millions</option>
+                                    <option value="5m-20m">5 à 20 millions</option>
+                                    <option value="20m-50m">20 à 50 millions</option>
+                                    <option value="50m-100m">50 à 100 millions</option>
+                                    <option value="plus-100m">Plus de 100 millions</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-deadline">Délai souhaité</label>
+                                <input type="date" id="project-deadline" name="project-deadline">
+                            </div>
+                        </div>
+                        
+                        <!-- Champs dynamiques pour Formation -->
+                        <div id="formation-fields" class="dynamic-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="formation-nom">Nom *</label>
+                                <input type="text" id="formation-nom" name="formation-nom" required placeholder="Votre nom de famille">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-prenom">Prénom *</label>
+                                <input type="text" id="formation-prenom" name="formation-prenom" required placeholder="Votre prénom">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-nationalite">Nationalité *</label>
+                                <select id="formation-nationalite" name="formation-nationalite" required>
+                                    <option value="">Sélectionnez votre nationalité</option>
+                                    <option value="Ivoirienne">Ivoirienne</option>
+                                    <option value="Sénégalaise">Sénégalaise</option>
+                                    <option value="Malienne">Malienne</option>
+                                    <option value="Burkinabé">Burkinabé</option>
+                                    <option value="Nigérienne">Nigérienne</option>
+                                    <option value="Togolaise">Togolaise</option>
+                                    <option value="Béninoise">Béninoise</option>
+                                    <option value="Ghanéenne">Ghanéenne</option>
+                                    <option value="Guinéenne">Guinéenne</option>
+                                    <option value="Camerounaise">Camerounaise</option>
+                                    <option value="Gabonaise">Gabonaise</option>
+                                    <option value="Congolaise (RDC)">Congolaise (RDC)</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-cni">Numéro CNI *</label>
+                                <input type="text" id="formation-cni" name="formation-cni" required placeholder="Numéro de votre carte nationale d'identité">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-email">E-mail *</label>
+                                <input type="email" id="formation-email" name="formation-email" required placeholder="votre.email@exemple.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-adresse">Adresse postale *</label>
+                                <textarea id="formation-adresse" name="formation-adresse" required rows="3" placeholder="Votre adresse complète (rue, quartier, ville, pays)"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-fonction">Fonction *</label>
+                                <input type="text" id="formation-fonction" name="formation-fonction" required placeholder="Votre fonction/poste actuel">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-secteur">Secteur d'activité *</label>
+                                <select id="formation-secteur" name="formation-secteur" required>
+                                    <option value="">Sélectionnez votre secteur</option>
+                                    <option value="Génie civil">Génie civil</option>
+                                    <option value="BTP">BTP</option>
+                                    <option value="Architecture">Architecture</option>
+                                    <option value="Topographie">Topographie</option>
+                                    <option value="Hydraulique">Hydraulique</option>
+                                    <option value="Géotechnique">Géotechnique</option>
+                                    <option value="Environnement">Environnement</option>
+                                    <option value="Urbanisme">Urbanisme</option>
+                                    <option value="Informatique">Informatique</option>
+                                    <option value="Enseignement">Enseignement</option>
+                                    <option value="Administration publique">Administration publique</option>
+                                    <option value="Secteur privé">Secteur privé</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-niveau">Niveau *</label>
+                                <select id="formation-niveau" name="formation-niveau" required>
+                                    <option value="">Sélectionnez votre niveau</option>
+                                    <option value="Débutant">Débutant</option>
+                                    <option value="Moyen">Moyen</option>
+                                    <option value="Intermédiaire">Intermédiaire</option>
+                                    <option value="Avancé">Avancé</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-prise-charge">Prise en charge *</label>
+                                <select id="formation-prise-charge" name="formation-prise-charge" required>
+                                    <option value="">Qui prend en charge la formation ?</option>
+                                    <option value="Entreprise">Entreprise</option>
+                                    <option value="Apprenant">Apprenant (financement personnel)</option>
+                                    <option value="Organisation">Organisation/Institution</option>
+                                    <option value="Bourse">Bourse/Subvention</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="formation-paiement">Mode de paiement *</label>
+                                <select id="formation-paiement" name="formation-paiement" required>
+                                    <option value="">Sélectionnez le mode de paiement</option>
+                                    <option value="Virement bancaire">Virement bancaire</option>
+                                    <option value="Mobile Money">Mobile Money (Orange Money, MTN Money, etc.)</option>
+                                    <option value="Espèces">Espèces</option>
+                                    <option value="Chèque">Chèque</option>
+                                    <option value="Carte bancaire">Carte bancaire</option>
+                                    <option value="Paiement échelonné">Paiement échelonné</option>
+                                    <option value="À définir">À définir lors de l'entretien</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Champs dynamiques pour Logiciels -->
+                        <div id="logiciel-fields" class="dynamic-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="software-name">Logiciel concerné</label>
+                                <select id="software-name" name="software-name">
+                                    <option value="">Sélectionnez un logiciel</option>
+                                    <option value="sorbo-struct">Sorbo-Struct</option>
+                                    <option value="sorbo-hydro">Sorbo-Hydro</option>
+                                    <option value="sorbo-geotech">Sorbo-Geotech</option>
+                                    <option value="autre-soft">Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="software-license">Type de licence</label>
+                                <select id="software-license" name="software-license">
+                                    <option value="">Sélectionnez un type</option>
+                                    <option value="individuelle">Individuelle</option>
+                                    <option value="entreprise">Entreprise</option>
+                                    <option value="educative">Éducative</option>
+                                    <option value="essai">Version d'essai</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="software-users">Nombre d'utilisateurs</label>
+                                <input type="number" id="software-users" name="software-users" min="1">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Services additionnels requis</label>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" name="software-services[]" value="installation"> Installation</label>
+                                    <label><input type="checkbox" name="software-services[]" value="formation"> Formation</label>
+                                    <label><input type="checkbox" name="software-services[]" value="support"> Support technique</label>
+                                    <label><input type="checkbox" name="software-services[]" value="personnalisation"> Personnalisation</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="software-os">Système d'exploitation</label>
+                                <select id="software-os" name="software-os">
+                                    <option value="">Sélectionnez un OS</option>
+                                    <option value="windows">Windows</option>
+                                    <option value="mac">macOS</option>
+                                    <option value="linux">Linux</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Champs dynamiques pour Rendez-vous -->
+                        <div id="rendezvous-fields" class="dynamic-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="rdv-motif">Motif du rendez-vous</label>
+                                <select id="rdv-motif" name="rdv-motif">
+                                    <option value="">Sélectionnez un motif</option>
+                                    <option value="ingenierie">Projet d'ingénierie</option>
+                                    <option value="formation">Besoin de formation</option>
+                                    <option value="logiciel">Démonstration de logiciel</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="rdv-date">Date souhaitée</label>
+                                <input type="date" id="rdv-date" name="rdv-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="rdv-time">Heure souhaitée</label>
+                                <input type="time" id="rdv-time" name="rdv-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="rdv-mode">Mode</label>
+                                <select id="rdv-mode" name="rdv-mode">
+                                    <option value="">Sélectionnez le mode</option>
+                                    <option value="presentiel">Présentiel</option>
+                                    <option value="visio">Visio (Google Meet)</option>
+                                    <option value="telephone">Téléphone</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Champs dynamiques pour Carrières -->
+                        <div id="carriere-fields" class="dynamic-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="career-position">Poste recherché</label>
+                                <input type="text" id="career-position" name="career-position" placeholder="Ex: Ingénieur structure, Technicien BTP...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="career-experience">Années d'expérience</label>
+                                <select id="career-experience" name="career-experience">
+                                    <option value="">Sélectionnez votre expérience</option>
+                                    <option value="debutant">Débutant (0-2 ans)</option>
+                                    <option value="junior">Junior (2-5 ans)</option>
+                                    <option value="confirme">Confirmé (5-10 ans)</option>
+                                    <option value="senior">Senior (10+ ans)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="career-cv">Joindre votre CV</label>
+                                <input type="file" id="career-cv" name="career-cv" accept=".pdf,.doc,.docx">
+                                <p class="form-hint">Formats acceptés: PDF, DOC, DOCX. Max 5MB</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="career-availability">Disponibilité</label>
+                                <input type="date" id="career-availability" name="career-availability">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn primary-btn">Envoyer le message</button>
+                    </form>
+                </div>
+                
+                <div class="customer-service">
+                    <img src="images/berenice.jpg" alt="Service client Sorbo-Ingénierie" class="customer-service-image" loading="lazy">
+                    <h3>Service Client de Qualité</h3>
+                    <p>Notre équipe dédiée est là pour vous accompagner à chaque étape de votre projet. Nous garantissons une réponse rapide et un suivi personnalisé.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-clock"></i> Réponse sous 24 h</li>
+                        <li><i class="fas fa-users"></i> Équipe expérimentée</li>
+                        <li><i class="fas fa-shield-alt"></i> Confidentialité garantie</li>
+                        <li><i class="fas fa-handshake"></i> Accompagnement personnalisé</li>
+                    </ul>
+                </div>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.46686467134!2d-4.0624552!3d5.345477999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1eb0016feceb9%3A0x440471094000f902!2sCentre%20de%20Formation%20Sorbo-Ing%C3%A9nierie!5e0!3m2!1sfr!2stg!4v1757163216203!5m2!1sfr!2stg" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="map-overlay">
+                        <a href="https://maps.app.goo.gl/4C2HgePxUWWsx8gV7?g_st=iw" target="_blank" class="google-maps-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Ouvrir dans Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.mr.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
+                    <h3>Sorbo - Ingénierie</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Nous suivre</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sorbo.ingenierie" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/sorbo-ing-nierie/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS script conservé mais non utilisé si DISABLE_ANIMATIONS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+        <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/zoho-email-integration.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/lazy-loading.js"></script>
+    <script src="js/performance-optimizer.js"></script>
+    <script src="js/backend-integration.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/newsletter-handler.js"></script>
+    <script src="js/email-config.js"></script>
+    <script src="js/form-handler.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const subjectParam = params.get('subject');
+        const formationParam = params.get('formation');
+        const subjectSelect = document.getElementById('subject');
+
+        // Vérifie si on vient d'une page de formation
+        if (subjectSelect && (subjectParam === 'formation' || formationParam)) {
+            console.log('✅ Paramètre de formation détecté. Sélection automatique du sujet.');
+
+            // Attendre un court instant pour s'assurer que tous les autres scripts sont initialisés
+            setTimeout(() => {
+                // 1. Définir la valeur sur 'formation'
+                subjectSelect.value = 'formation';
+
+                // 2. Déclencher manuellement l'événement 'change'
+                // C'est l'étape cruciale pour forcer la mise à jour de l'UI
+                const event = new Event('change', { bubbles: true });
+                subjectSelect.dispatchEvent(event);
+
+                console.log('🚀 Sujet défini sur "Formation" et événement "change" déclenché.');
+            }, 100); // Un petit délai de 100ms pour plus de robustesse
+        }
+    });
+    </script>
+    <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+            // Animation de la barre de progression
+            if (typeof progressBar !== 'undefined' && progressBar) {
+                setTimeout(() => {
+                    // Animation de la barre
+                }, 100);
+            }
+            
+            // Attendre un minimum de 2 secondes pour l'effet visuel
+            setTimeout(function() {
+                // Supprimer complètement le loader après la transition
+                setTimeout(function() {
+                    // Transition terminée
+                }, 500);
+            }, 2000);
+        });
+
+        // JavaScript pour le formulaire de contact dynamique
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM chargé, initialisation du formulaire...');
+            
+            const subjectSelect = document.getElementById('subject');
+            const dynamicFields = document.querySelectorAll('.dynamic-fields');
+            
+            if (!subjectSelect) {
+                console.error('❌ Élément subject non trouvé');
+                return;
+            }
+            
+            // Fonction pour afficher les champs en fonction du sujet sélectionné
+            function toggleFields() {
+                const selectedValue = subjectSelect.value;
+                console.log('🔄 Changement de sujet:', selectedValue);
+                
+                // Gérer la visibilité des champs principaux pour les formations
+                const nameField = document.getElementById('name')?.closest('.form-group');
+                const emailField = document.getElementById('email')?.closest('.form-group');
+                
+                if (selectedValue === 'formation') {
+                    // Masquer les champs nom et email pour éviter la duplication
+                    if (nameField) nameField.style.display = 'none';
+                    if (emailField) emailField.style.display = 'none';
+                } else {
+                    // Afficher les champs nom et email pour les autres sujets
+                    if (nameField) nameField.style.display = 'block';
+                    if (emailField) emailField.style.display = 'block';
+                }
+                
+                // Cacher tous les champs dynamiques d'abord
+                dynamicFields.forEach(fields => {
+                    fields.style.display = 'none';
+                });
+                
+                // Afficher les champs correspondant au sujet sélectionné
+                if (selectedValue) {
+                    const fieldsToShow = document.getElementById(selectedValue + '-fields');
+                    if (fieldsToShow) {
+                        fieldsToShow.style.display = 'block';
+                        console.log('✅ Champs affichés pour:', selectedValue);
+                    }
+                }
+            }
+            
+            // Fonction pour formater le prix au format souhaité
+            function formatPrice(price) {
+                if (!price) return price;
+                
+                // Supprimer tous les espaces et caractères non numériques pour obtenir le nombre
+                const numericPrice = price.replace(/[^\d]/g, '');
+                
+                if (!numericPrice) return price;
+                
+                // Ajouter des espaces tous les 3 chiffres en partant de la droite
+                const formattedNumber = numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+                
+                return `${formattedNumber} F CFA`;
+            }
+
+            // Fonction pour traiter les paramètres de formation
+            function processFormationParams() {
+                // Pré-remplissage via paramètres d'URL
+                const params = new URLSearchParams(window.location.search);
+                const subjectParam = (params.get('subject') || '').toLowerCase();
+                const fromParam = (params.get('from') || '').toLowerCase();
+                const formationParam = params.get('formation');
+                const prixParam = params.get('prix');
+
+                // Debug: Afficher les paramètres dans la console
+                console.log('🔍 Paramètres URL détectés:', {
+                    formation: formationParam,
+                    prix: prixParam,
+                    subject: subjectParam,
+                    from: fromParam
+                });
+
+                // Gestion des paramètres de formation
+                if (formationParam && prixParam) {
+                    console.log('✅ Paramètres de formation détectés, traitement en cours...');
+                    
+                    // Pré-remplir le sujet avec "Formation"
+                    subjectSelect.value = 'formation';
+                    toggleFields();
+                    
+                    // Pré-remplir les champs de formation avec les données principales du formulaire
+                    setTimeout(() => {
+                        const mainEmail = document.getElementById('email');
+                        const formationEmail = document.getElementById('formation-email');
+                        if (mainEmail && formationEmail && mainEmail.value) {
+                            formationEmail.value = mainEmail.value;
+                        }
+                    }, 100);
+
+                    // Créer et afficher l'info de formation
+                    console.log('🎨 Création de l\'alerte de formation...');
+                    const formattedPrice = formatPrice(prixParam);
+                    const formationInfo = document.createElement('div');
+                    formationInfo.className = 'formation-info-alert';
+                    formationInfo.innerHTML = `
+                        <div class="formation-info-content">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div class="formation-details">
+                                <h4>Formation sélectionnée : ${formationParam}</h4>
+                                <p class="formation-price"><strong>Coût : ${formattedPrice}</strong></p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Insérer avant le formulaire
+                    const contactForm = document.querySelector('.contact-form');
+                    if (contactForm) {
+                        console.log('✅ Conteneur de formulaire trouvé, insertion de l\'alerte...');
+                        const formTitle = contactForm.querySelector('h3');
+                        if (formTitle) {
+                            contactForm.insertBefore(formationInfo, formTitle);
+                            console.log('✅ Alerte de formation insérée avec succès !');
+                        } else {
+                            console.error('❌ Titre du formulaire non trouvé');
+                        }
+                    } else {
+                        console.error('❌ Conteneur de formulaire non trouvé !');
+                    }
+
+                    // Le nom de la formation est maintenant affiché dans l'alerte au-dessus du formulaire
+                    console.log('✅ Nom de formation affiché dans l\'alerte:', formationParam);
+
+                    // Pré-remplir le message avec le contexte de formation
+                    const message = document.getElementById('message');
+                    if (message && !message.value) {
+                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (coût : ${formattedPrice}).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                        console.log('✅ Message pré-rempli avec le contexte de formation');
+                    }
+                    
+                    // Scroll vers le formulaire
+                    setTimeout(() => {
+                        const formEl = document.getElementById('contact-form');
+                        if (formEl) {
+                            formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            console.log('✅ Scroll vers le formulaire effectué');
+                        }
+                    }, 500);
+                    
+                } else if (subjectParam === 'rendezvous' || subjectParam === 'rdv') {
+                    // Gestion des paramètres de rendez-vous
+                    console.log('📅 Paramètres de rendez-vous détectés');
+                    subjectSelect.value = 'rendezvous';
+                    toggleFields();
+
+                    // Préremplir le motif en fonction de la page d'origine
+                    const rdvMotif = document.getElementById('rdv-motif');
+                    if (rdvMotif) {
+                        if (fromParam === 'ingenierie') rdvMotif.value = 'ingenierie';
+                        else if (fromParam === 'formation') rdvMotif.value = 'formation';
+                        else if (fromParam === 'logiciel') rdvMotif.value = 'logiciel';
+                    }
+
+                    // Optionnel: proposer une date par défaut (demain)
+                    const rdvDate = document.getElementById('rdv-date');
+                    if (rdvDate && !rdvDate.value) {
+                        const d = new Date();
+                        d.setDate(d.getDate() + 1);
+                        const yyyy = d.getFullYear();
+                        const mm = String(d.getMonth() + 1).padStart(2, '0');
+                        const dd = String(d.getDate()).padStart(2, '0');
+                        rdvDate.value = `${yyyy}-${mm}-${dd}`;
+                    }
+
+                    // Pré-remplir le message pour contextualiser
+                    const message = document.getElementById('message');
+                    if (message && !message.value) {
+                        const origin = fromParam ? ` via la page ${fromParam}` : '';
+                        message.value = `Demande de rendez-vous${origin}. Merci de confirmer la date et l'heure proposées, ou de nous suggérer une alternative.`;
+                    }
+
+                    // Focus sur le formulaire
+                    const formEl = document.getElementById('contact-form');
+                    if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+            
+            // Traiter les paramètres immédiatement
+            processFormationParams();
+            
+            // Écouter les changements sur le select du sujet
+            subjectSelect.addEventListener('change', toggleFields);
+            
+            // Synchroniser l'email principal avec celui de formation
+            const mainEmail = document.getElementById('email');
+            if (mainEmail) {
+                mainEmail.addEventListener('input', function() {
+                    const formationEmail = document.getElementById('formation-email');
+                    if (formationEmail && subjectSelect.value === 'formation') {
+                        formationEmail.value = this.value;
+                    }
+                });
+            }
+            
+            // Note: La gestion du menu mobile est gérée par js/script.js
+            console.log('📱 Menu mobile géré par js/script.js');
+
+            // Hero Banner Carousel
+            if (document.querySelector('.hero-banner')) {
+                const slides = document.querySelectorAll('.hero-slide');
+                const dots = document.querySelectorAll('.hero-dot');
+                let currentSlide = 0;
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                        showSlide(currentSlide);
+                    });
+                });
+
+                // Auto rotation toutes les 6 secondes
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }, 6000);
+            }
+            
+            console.log('✅ Initialisation du formulaire terminée');
+        });
+    </script>
+    <script src="js/hero-banner-navigation.js"></script>
+    <script src="js/form-validation-fix.js"></script>
+    <script src="js/formation-auto-select.js"></script>
+    <script src="js/form-fix.js"></script>
+</body>
+</html> 
+

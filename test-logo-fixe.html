@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Logo Fixé</title>
+    <style>
+        :root {
+            --primary-color: #d10000;
+            --accent-color: #1a1a1a;
+            --light-text: #6b7280;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .software-card.modern-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .software-card.modern-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .software-header-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .software-card:hover .header-image {
+            transform: scale(1.05);
+        }
+
+        .software-header {
+            padding: 2rem 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+        }
+
+        .software-icon-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .software-icon-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .software-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .software-content {
+            padding: 0 2rem 2rem;
+        }
+
+        .software-category {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .software-content p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .features-list {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .feature-item i {
+            color: #10b981;
+            margin-right: 0.8rem;
+            font-size: 0.9rem;
+            width: 16px;
+        }
+
+        .software-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-direction: column;
+        }
+
+        .software-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .primary-btn {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+        }
+
+        .primary-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(44, 90, 160, 0.4);
+        }
+
+        .secondary-btn {
+            background: rgba(44, 90, 160, 0.1);
+            color: var(--light-text);
+            border: 1px solid rgba(44, 90, 160, 0.2);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(44, 90, 160, 0.15);
+            transform: translateY(-2px);
+            border-color: rgba(44, 90, 160, 0.3);
+        }
+
+        .test-info {
+            background: #e8f4fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .test-info h3 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+
+        .fix-info {
+            background: #f0f8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+
+        .fix-info h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+    </style>
+
+
+    
+</head>
+<body>
+    <h1 style="text-align: center; color: #d10000; margin-bottom: 30px;">Test Logo Fixé</h1>
+    
+    <div class="test-info">
+        <h3>🔧 Problème identifié et résolu !</h3>
+        <p><strong>Cause :</strong> Des styles CSS en conflit créaient des icônes colorées qui écrasaient votre image de logo.</p>
+        <p><strong>Solution :</strong> Suppression des styles <code>.software-icon</code> en conflit dans <code>nos-logiciels.html</code></p>
+    </div>
+
+    <div class="fix-info">
+        <h3>✅ Styles supprimés :</h3>
+        <ul>
+            <li><code>.software-icon</code> - Icônes avec gradients colorés</li>
+            <li><code>.software-icon.blue</code> - Variante bleue</li>
+            <li><code>.software-icon.green</code> - Variante verte</li>
+            <li><code>.software-icon i</code> - Icônes FontAwesome</li>
+        </ul>
+    </div>
+
+    <!-- Carte de test avec logo maintenant visible -->
+    <div class="software-card modern-card" data-logiciel-id="test">
+        <!-- Image d'en-tête -->
+        <div class="software-header-image">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+                 alt="Image d'en-tête OH - Route" class="header-image" loading="lazy" />
+        </div>
+        
+        <!-- En-tête avec logo image1.png maintenant visible -->
+        <div class="software-header">
+            <div class="software-icon-section">
+                <!-- Logo image1.png (maintenant visible sans conflit CSS) -->
+                <img src="images/image1.png" alt="Logo OH - Route" class="software-icon-image" loading="lazy" />
+                <h4 class="software-name">OH - Route</h4>
+            </div>
+        </div>
+
+        <!-- Contenu de la carte -->
+        <div class="software-content">
+            <div class="software-category">AUTRE • V2024</div>
+            <p>Construire rapidement des modèles HEC-RAS 1D/2D pour l'analyse hydraulique et la cartographie des inondations.</p>
+            <div class="features-list">
+                <div class="feature-item"><i class="fas fa-check"></i><span>Modèles 1D/2D</span></div>
+                <div class="feature-item"><i class="fas fa-check"></i><span>Cartes inondations</span></div>
+            </div>
+            <div class="software-buttons">
+                <a href="#" class="software-btn primary-btn download-btn">📥 Télécharger</a>
+                <a href="#" class="software-btn secondary-btn info-btn">
+                    <i class="fas fa-info-circle"></i> Consulter les informations
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; color: #666;">
+        <h3>🎯 Maintenant votre logo devrait s'afficher !</h3>
+        <p>Le logo <strong>images/image1.png</strong> devrait maintenant être visible à côté du nom "OH - Route"</p>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 8px; border-left: 4px solid #ffc107;">
+            <h4 style="margin: 0 0 10px 0; color: #856404;">Prochaines étapes :</h4>
+            <p>1. <strong>Vérifiez</strong> que le logo s'affiche correctement</p>
+            <p>2. <strong>Remplacez</strong> <code>images/image1.png</code> par votre logo personnalisé</p>
+            <p>3. <strong>Testez</strong> la page <code>nos-logiciels.html</code></p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>
+

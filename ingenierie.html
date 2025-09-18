@@ -1,0 +1,1412 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingénierie | Sorbo-Ingénierie</title>
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="shortcut icon" type="image/png" href="images/logo.mr.png">
+    <link rel="apple-touch-icon" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo-fixes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS désactivé globalement -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+ -->
+    <style>
+        /* Animations pour le loader */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes progressBar {
+            from {
+                width: 0%;
+            }
+            50% {
+                width: 60%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        .ingenierie-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ingenierie-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            z-index: 1;
+        }
+        
+        .ingenierie-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .ingenierie-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .intro-section {
+            padding: 100px 0;
+            position: relative;
+            background-color: var(--primary-color);
+        }
+        
+        .intro-section p {
+            max-width: 900px;
+            margin: 20px auto;
+            line-height: 1.8;
+            text-align: center;
+            font-size: 1.1rem;
+            color: white;
+        }
+        
+        .intro-section::before {
+            content: '"';
+            font-size: 400px;
+            position: absolute;
+            opacity: 0.05;
+            top: 0;
+            left: 10%;
+            font-family: Georgia, serif;
+            color: var(--primary-color);
+        }
+        
+        .sectors-section {
+            background-color: var(--light-bg);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sectors-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 90% 10%, rgba(209, 0, 0, 0.1) 0%, transparent 60%);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: #777;
+            line-height: 1.6;
+        }
+        
+        .sectors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .sector-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+            cursor: pointer;
+        }
+        
+        .sector-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .sector-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .sector-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .sector-card:hover .sector-image img {
+            transform: scale(1.1);
+        }
+        
+        .sector-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.4s ease;
+        }
+        
+        .sector-card:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+        }
+        
+        .sector-overlay i {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .sector-overlay h3 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Couleurs spécifiques pour chaque secteur */
+        .sector-card[data-sector="batiments"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.85) 0%, rgba(179, 0, 0, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="infrastructures"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.85) 0%, rgba(0, 86, 179, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="geotechnique"]:hover .sector-overlay {
+           
+            background: linear-gradient(135deg, rgba(228, 123, 4, 0.85) 0%, rgba(179, 135, 5, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="eau"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.85) 0%, rgba(0, 105, 179, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="hydroagricole"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.85) 0%, rgba(28, 117, 48, 0.75) 100%);
+        }
+        
+        .sector-card[data-sector="topographie"]:hover .sector-overlay {
+            background: linear-gradient(135deg, rgba(108, 117, 125, 0.85) 0%, rgba(76, 85, 93, 0.75) 100%);
+        }
+        
+        .sector-card:hover .sector-overlay i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .sector-card:hover .sector-overlay h3 {
+            transform: translateY(-5px);
+        }
+        
+        .service-pillars {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .service-pillars::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.02);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .pillars-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .pillar-card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pillar-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .pillar-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .pillar-card:hover .pillar-image img {
+            transform: scale(1.1);
+        }
+        
+        .pillar-content {
+            padding: 30px;
+        }
+        
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background-color: var(--primary-color);
+            opacity: 0.05;
+            transition: height 0.3s ease;
+            z-index: -1;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pillar-card:hover::before {
+            height: 100%;
+        }
+        
+        .pillar-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .pillar-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .pillar-card p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .pillar-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.1;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .approach {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .service-item {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(209, 0, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover .service-icon {
+            background-color: var(--primary-color);
+        }
+        
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .service-item:hover .service-icon i {
+            color: white;
+        }
+        
+        .service-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .service-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .testimonials-section {
+            padding: 100px 0;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 90%, rgba(209, 0, 0, 0.1) 0%, transparent 60%);
+        }
+        
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            font-size: 120px;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            font-family: Georgia, serif;
+            color: var(--primary-color);
+            opacity: 0.1;
+        }
+        
+        .testimonial-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+        }
+        
+        .testimonial-title {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            padding: 0;
+            font-style: italic;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(209, 0, 0, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .cta::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(209, 0, 0, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .primary-btn:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+        
+        .outline-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .outline-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        @media (max-width: 992px) {
+            .ingenierie-hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .pillars-container,
+            .sectors-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ingenierie-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .ingenierie-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .pillars-container,
+            .sectors-container,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Styles pour la section des ressources techniques */
+        .resources-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .resources-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 40%, rgba(209, 0, 0, 0.05) 0%, transparent 70%);
+        }
+        
+        .resources-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            display: flex;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d4d 100%);
+            color: white;
+        }
+        
+        .resource-icon i {
+            font-size: 2.5rem;
+        }
+        
+        .resource-content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .resource-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-card:hover .resource-content h3 {
+            color: var(--primary-color);
+        }
+        
+        .resource-content p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .resource-format {
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .resource-format i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: rgba(209, 0, 0, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn i {
+            margin-left: 8px;
+        }
+        
+        .download-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .resources-note {
+            margin-top: 40px;
+            padding: 15px 20px;
+            background-color: rgba(209, 0, 0, 0.05);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        .resources-note p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .resources-note i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 992px) {
+            .resources-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-card {
+                flex-direction: column;
+            }
+            
+            .resource-icon {
+                width: 100%;
+                height: 100px;
+            }
+            
+            .sectors-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .sector-card {
+                height: 240px;
+            }
+            
+            .sector-overlay h3 {
+                font-size: 1.1rem;
+            }
+            
+            .sector-overlay i {
+                font-size: 2.5rem;
+            }
+            
+            .pillars-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .pillar-image {
+                height: 180px;
+            }
+            
+            .pillar-content {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sector-card {
+                height: 220px;
+            }
+            
+            .sector-overlay h3 {
+                font-size: 1rem;
+            }
+            
+            .sector-overlay i {
+                font-size: 2rem;
+            }
+            
+            .pillar-image {
+                height: 160px;
+            }
+            
+            .pillar-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie" id="logo">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="ingenierie.html" class="active">Ingénierie</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogie & Méthodologie</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprise</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprise</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="contact-btn">Contactez-nous</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Conception et maîtrise d’œuvre</h1>
+                <p>
+                    Nous accompagnons chaque projet depuis l’idée jusqu’à sa réalisation, avec rigueur et précision</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Expertise pluridisciplinaire</h1>
+                <p>
+                    Nos domaines d’intervention couvrent le bâtiment, les infrastructures, l’hydraulique, la géotechnique et bien plus.</p>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+            <div class="hero-content">
+                <h1>Des solutions sur mesure</h1>
+                <p>
+                    Chaque projet est unique. Nous proposons des approches adaptées aux spécificités techniques et financières.
+                    </p>
+            </div>
+        </div>
+        <!-- Flèches de navigation -->
+        <div class="hero-arrows">
+            <div class="hero-arrow prev-slide">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="hero-arrow next-slide">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+        
+        <div class="hero-nav">
+            <div class="hero-dots">
+                <div class="hero-dot active" data-index="0"></div>
+                <div class="hero-dot" data-index="1"></div>
+                <div class="hero-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="intro-section">
+        <div class="container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+            <p>Chez Sorbo-Ingénierie, nous mettons à votre disposition une expertise pointue et un savoir-faire éprouvé dans la conception, l'analyse et la gestion technique des projets d'ingénierie. Notre approche repose sur l'innovation, la rigueur et le strict respect des normes en vigueur, afin de proposer des solutions adaptées aux contraintes spécifiques de chaque projet : faisabilité, optimisation des coûts, exigences environnementales et sociales, ainsi que les conditions de réalisation des travaux.</p>
+        </div>
+    </section>
+
+    <section id="services" class="sectors-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Secteurs d'intervention</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Nous intervenons dans des secteurs stratégiques, garantissant des solutions fiables et durables</p>
+            
+            <div class="sectors-container">
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="150" data-sector="batiments">
+                    <div class="sector-image">
+                        <img src="images/construction-de-batiments-modernes.jpg" alt="Bâtiments civils" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-city"></i>
+                            <h3>Bâtiments civils et aménagement urbain</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="200" data-sector="infrastructures">
+                    <div class="sector-image">
+                        <img src="images/route.jpg" alt="Infrastructures et transport" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-road"></i>
+                            <h3>Infrastructures et transport</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="250" data-sector="geotechnique">
+                    <div class="sector-image">
+                        <img src="images/geotechnique.jpg" alt="Ouvrages géotechniques" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-mountain"></i>
+                            <h3>Ouvrages géotechniques</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="300" data-sector="eau">
+                    <div class="sector-image">
+                        <img src="images/eau.jpg" alt="Eau et assainissement" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-water"></i>
+                            <h3>Eau et assainissement</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="350" data-sector="hydroagricole">
+                    <div class="sector-image">
+                        <img src="images/salade.jpg" alt="Aménagement hydroagricole" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-seedling"></i>
+                            <h3>Aménagement hydroagricole</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sector-card" data-aos="fade-up" data-aos-delay="400" data-sector="topographie">
+                    <div class="sector-image">
+                        <img src="images/topographie.jpeg" alt="Topographie et SIG" loading="lazy">
+                        <div class="sector-overlay">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h3>Topographie et SIG</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Ressources techniques</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Téléchargez nos fiches techniques et études de cas pour en savoir plus sur nos méthodologies et réalisations</p>
+            
+            <div class="resources-container">
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="resource-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Bâtiments civils et aménagement urbain</h3>
+                        <p>Découvrez notre méthodologie de conception et nos approches innovantes pour les bâtiments et l'aménagement urbain.</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 2.4 Mo</span>
+                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="resource-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Infrastructures et transport</h3>
+                        <p>Analyse détaillée de notre méthodologie pour les projets d'infrastructures routières et ouvrages d'art.</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 3.1 Mo</span>
+                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="resource-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Ouvrages géotechniques</h3>
+                        <p>Fiche technique sur nos approches en matière d'études géotechniques et de stabilisation des sols.</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 1.8 Mo</span>
+                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="resource-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Eau et assainissement</h3>
+                        <p>Documentation technique sur nos méthodes de conception et dimensionnement des réseaux hydrauliques.</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 2.7 Mo</span>
+                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="resource-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Aménagement hydroagricole</h3>
+                        <p>Étude de cas et solutions techniques pour l'optimisation des aménagements hydroagricoles.</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 3.4 Mo</span>
+                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="resource-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Topographie et SIG</h3>
+                        <p>Présentation de nos méthodologies et outils pour les levés topographiques et l'analyse SIG.</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 2.2 Mo</span>
+                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resources-note" data-aos="fade-up" data-aos-delay="450">
+                <p><i class="fas fa-info-circle"></i> Ces ressources techniques sont régulièrement mises à jour pour refléter les derniers développements dans notre domaine. Pour accéder à d'autres documents techniques ou pour une documentation spécifique à votre projet, n'hésitez pas à nous contacter.</p>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="service-pillars">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Notre accompagnement</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Nous accompagnons nos clients sur l'ensemble du cycle de vie de leurs projets, à travers trois axes majeurs</p>
+            
+            <div class="pillars-container">
+                <div class="pillar-card" data-aos="fade-right" data-aos-delay="150">
+                    <div class="pillar-image">
+                        <img src="images/image4.jpg" alt="Études techniques" loading="lazy">
+                    </div>
+                    <div class="pillar-content">
+                        <i class="fas fa-drafting-compass pillar-icon"></i>
+                        <h3>Les études techniques</h3>
+                        <p>Conception, dimensionnement et optimisation des ouvrages en s'appuyant sur des méthodologies éprouvées et des outils de pointe.</p>
+                    </div>
+                </div>
+                
+                <div class="pillar-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pillar-image">
+                        <img src="images/image2.jpg" alt="Suivi et contrôle de travaux" loading="lazy">
+                    </div>
+                    <div class="pillar-content">
+                        <i class="fas fa-tasks pillar-icon"></i>
+                        <h3>Le suivi et contrôle de travaux</h3>
+                        <p>Supervision, gestion de la qualité, respect des délais et conformité des ouvrages avec les prescriptions techniques.</p>
+                    </div>
+                </div>
+                
+                <div class="pillar-card" data-aos="fade-left" data-aos-delay="250">
+                    <div class="pillar-image">
+                        <img src="images/assistance.jpg" alt="Assistance technique" loading="lazy">
+                    </div>
+                    <div class="pillar-content">
+                        <i class="fas fa-hands-helping pillar-icon"></i>
+                        <h3>L'assistance technique</h3>
+                        <p>Accompagnement des maîtres d'ouvrage et des entreprises pour garantir la réussite des projets à chaque étape.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 50px;" data-aos="fade-up" data-aos-delay="300">Grâce à une équipe multidisciplinaire et à des moyens techniques avancés, Sorbo-Ingénierie s'engage à fournir des solutions innovantes et adaptées aux défis techniques et environnementaux. Nous mettons notre expertise au service de vos projets, en garantissant qualité, performance et pérennité des ouvrages. Confiez-nous vos projets et bénéficiez d'un accompagnement sur mesure pour assurer leur réussite !</p>
+        </div>
+    </section>
+
+    <section class="approach">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Pourquoi nous faire appel ?</h2>
+            
+            <div class="services-grid">
+                <div class="service-item" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Accompagnement de proximité</h3>
+                    <p>Nous sommes à votre écoute et disponibles pour vous accompagner à chaque étape de votre projet.</p>
+                </div>
+
+                <div class="service-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Approche intégrée et sur mesure</h3>
+                    <p>Nous développons des solutions personnalisées adaptées à vos besoins spécifiques.</p>
+                </div>
+
+                <div class="service-item" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Expertise technique innovation</h3>
+                    <p>Notre équipe d'experts utilise les dernières technologies et méthodes innovantes.</p>
+                </div>
+
+                <div class="service-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Engagement qualité et conformité</h3>
+                    <p>Nous garantissons des prestations de qualité conformes aux normes en vigueur.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Ce que nos collaborateurs disent de nous</h2>
+            
+            <div class="testimonials-container">
+                <div class="testimonial-card" data-aos="fade-right" data-aos-delay="150">
+                    <h3>Jean</h3>
+                    <div class="testimonial-title">Directeur de Projets</div>
+                    <div class="testimonial-content">L'expertise de Sorbo-Ingénierie nous a permis de concrétiser des projets complexes en génie civil. Leur approche technique innovante et leur capacité à proposer des solutions sur mesure ont transformé notre manière de concevoir et d'exécuter nos travaux.</div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-left" data-aos-delay="200">
+                    <h3>Aissata</h3>
+                    <div class="testimonial-title">Ingénieure en Structure</div>
+                    <div class="testimonial-content">Sorbo-Ingénierie a su relever pour nous des défis techniques majeurs grâce à une ingénierie de pointe. Leur intervention pragmatique et leur savoir-faire éprouvé ont significativement amélioré la performance de nos infrastructures.</div>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+    <section class="cta">
+        <div class="container" data-aos="fade-up">
+            <h2>Prêt à lancer votre projet avec nous ?</h2>
+            <p>Notre équipe d'experts est disponible pour vous accompagner dans toutes les étapes de votre projet d'ingénierie.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn primary-btn">Contactez-nous</a>
+                <a href="contact.html?subject=rendezvous&from=ingenierie" class="btn outline-btn">Prendre rendez-vous</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.mr.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p class="footer-description">Excellence et Innovation en Génie civil</p>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Informations légales</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sorbo.ingenierie" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/sorbo-ing-nierie/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS script conservé mais non utilisé si DISABLE_ANIMATIONS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script>
+        // Page Loader
+        window.addEventListener('load', function() {
+
+            // Animation de la barre de progression
+            if (progressBar) {
+                
+                setTimeout(() => {
+                    
+                }, 100);
+            }
+            
+            // Attendre un minimum de 2 secondes pour l'effet visuel
+            setTimeout(function() {
+
+                // Supprimer complètement le loader après la transition
+                setTimeout(function() {
+                    
+                }, 500);
+            }, 2000);
+        });
+
+        // Initialiser AOS après le chargement (désactivé si animations désactivées)
+        if (!window.DISABLE_ANIMATIONS) {
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({
+                            offset: 120,
+                            duration: 800,
+                            easing: 'ease-out',
+                            once: true
+                        });
+                    }
+                }, 2500);
+            });
+        }
+
+        // AOS explicit init supprimé (désactivé)
+        
+        // Gestion des téléchargements de fiches techniques
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Dans un environnement de production, vous voudriez ici pointer vers de vrais fichiers PDF
+                    // Pour le moment, pour des raisons de démonstration, nous empêchons le téléchargement effectif
+                    e.preventDefault();
+                    
+                    // Récupération du titre de la ressource
+                    const resourceTitle = this.closest('.resource-content').querySelector('h3').textContent;
+                    
+                    // Simulation d'un suivi analytique du téléchargement
+                    console.log('Téléchargement: ' + resourceTitle);
+                    
+                    // En production, vous pourriez ajouter ici un code pour suivre les téléchargements
+                    // comme un appel à Google Analytics
+                    // ga('send', 'event', 'Downloads', 'Technical Resource', resourceTitle);
+                    
+                    // Message de confirmation
+                    const confirmation = confirm('Le téléchargement de "' + resourceTitle + '" va commencer. Souhaitez-vous recevoir d\'autres ressources techniques par email ?');
+                    
+                    if (confirmation) {
+                        // Redirection vers la page de contact avec pré-remplissage du sujet
+                        window.location.href = 'contact.html?subject=Demande de ressources techniques - ' + encodeURIComponent(resourceTitle);
+                    } else {
+                        // Simulation du téléchargement (pour une démo)
+                        alert('Votre téléchargement de "' + resourceTitle + '" est en cours. Merci de l\'intérêt que vous portez à nos services!');
+                        
+                        // Dans un environnement de production, vous laisseriez le téléchargement s'effectuer normalement
+                        // sans prévenir l'événement par défaut
+                    }
+                });
+            });
+        });
+    </script>
+        <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/backend-integration.js"></script>
+    <script src="js/lazy-loading.js"></script>
+    <script src="js/performance-optimizer.js"></script>
+    <script src="js/newsletter-handler.js"></script>
+    <script src="js/hero-banner-navigation.js"></script>
+</body>
+</html>
+
