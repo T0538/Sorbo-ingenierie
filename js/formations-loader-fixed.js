@@ -93,7 +93,14 @@ function createFormationCard(formation) {
     const categorie = formation.category; // Champ category en anglais
     const localisation = formation.location; // Champ location en anglais
     const dates = formation.dates;
-    const image = formation.image || `images/formation-${formation.type || 'default'}.jpg`;
+        // Mapping des images selon le type de formation
+        const imageMapping = {
+            'autocad': 'images/formationirri1.jpg',
+            'genie-civil': 'images/formationi2.JPG', 
+            'robot': 'images/formationrobot1.jpg',
+            'revit': 'images/formationarchi1.jpg'
+        };
+        const image = formation.image || imageMapping[formation.type] || 'images/formationi1.JPG';
     const objectifs = formation.objectives || [];
     const prerequisites = formation.prerequisites || [];
     const status = formation.active ? 'active' : 'inactive';
@@ -158,19 +165,12 @@ function createFormationCard(formation) {
                         <span class="price-amount">${prix ? `${parseInt(prix).toLocaleString()} FCFA` : 'Prix sur demande'}</span>
                     </div>
                     <div class="formation-actions">
-                        <button class="btn outline-btn" onclick="showFormationDetails('${_id}')">
-                            <i class="fas fa-info-circle"></i> En savoir plus
-                        </button>
-                        <button class="btn primary-btn inscription-btn" onclick="openInscriptionModal('${_id}')">
-                            <i class="fas fa-user-plus"></i> S'inscrire
+                        <button class="btn primary-btn inscription-btn" onclick="openInscriptionForm('${titre}', '${duree}', '${prix}', '${_id}')">
+                            <i class="fas fa-user-plus"></i> S'INSCRIRE
                         </button>
                     </div>
                 </div>
 
-                <div class="formation-tags">
-                    ${categorie ? `<span class="tag category-tag">${categorie}</span>` : ''}
-                    ${niveau ? `<span class="tag level-tag">${niveau}</span>` : ''}
-                </div>
             </div>
         </div>
     `;
@@ -508,11 +508,24 @@ if (document.readyState === 'loading') {
     initFormationsLoader();
 }
 
+// Fonction pour ouvrir le formulaire d'inscription
+function openInscriptionForm(formationName, duration, price, id) {
+    const params = new URLSearchParams({
+        formation: encodeURIComponent(formationName),
+        prix: encodeURIComponent(price),
+        duree: encodeURIComponent(duration),
+        subject: 'formation'
+    });
+    
+    window.location.href = `contact.html?${params.toString()}`;
+}
+
 // Export pour utilisation dans d'autres modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         loadFormationsFromAPI,
         displayFormations,
-        initFormationsLoader
+        initFormationsLoader,
+        openInscriptionForm
     };
 }
