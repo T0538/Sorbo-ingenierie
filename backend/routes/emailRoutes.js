@@ -3,7 +3,7 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 
 // Configuration Email (Zoho ou Gmail)
-const createEmailTransporter = () => {
+const createEmailTransporter = async () => {
     // Essayer d'abord Zoho, puis Gmail en fallback
     const zohoConfig = {
         host: 'smtp.zoho.eu', // Serveur européen
@@ -30,8 +30,17 @@ const createEmailTransporter = () => {
         }
     };
     
-    // Utiliser Zoho avec paramètres optimisés
-    return nodemailer.createTransport(zohoConfig);
+    // Essayer Zoho d'abord, puis Gmail en fallback
+    try {
+        const transporter = nodemailer.createTransport(zohoConfig);
+        // Test de connexion
+        await transporter.verify();
+        console.log('✅ Zoho Mail configuré avec succès');
+        return transporter;
+    } catch (error) {
+        console.log('❌ Zoho Mail échoué, utilisation de Gmail:', error.message);
+        return nodemailer.createTransport(gmailConfig);
+    }
 };
 
 // @route   POST /api/email/contact
@@ -59,7 +68,7 @@ router.post('/contact', async (req, res) => {
         }
 
         // Créer le transporteur Email
-        const transporter = createEmailTransporter();
+        const transporter = await createEmailTransporter();
         
         // Vérifier la connexion
         await transporter.verify();
@@ -134,7 +143,7 @@ router.post('/test', async (req, res) => {
     try {
         console.log('🧪 Test de la configuration Zoho Mail...');
         
-        const transporter = createEmailTransporter();
+        const transporter = await createEmailTransporter();
         
         // Vérifier la connexion
         await transporter.verify();
