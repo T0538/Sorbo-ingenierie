@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-// Configuration Zoho Mail
-const createZohoTransporter = () => {
-    return nodemailer.createTransport({
+// Configuration Email (Zoho ou Gmail)
+const createEmailTransporter = () => {
+    // Essayer d'abord Zoho, puis Gmail en fallback
+    const zohoConfig = {
         host: 'smtp.zoho.com',
         port: 465,
-        secure: true, // true pour 465, false pour autres ports
+        secure: true,
         auth: {
             user: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
             pass: process.env.ZOHO_PASSWORD || 'votre-mot-de-passe-zoho'
@@ -15,10 +16,22 @@ const createZohoTransporter = () => {
         tls: {
             rejectUnauthorized: false
         },
-        connectionTimeout: 60000, // 60 secondes
-        greetingTimeout: 30000,   // 30 secondes
-        socketTimeout: 60000      // 60 secondes
-    });
+        connectionTimeout: 30000,
+        greetingTimeout: 15000,
+        socketTimeout: 30000
+    };
+    
+    // Configuration Gmail en fallback
+    const gmailConfig = {
+        service: 'gmail',
+        auth: {
+            user: process.env.GMAIL_EMAIL || 'contact@sorbo-ingenierie.ci',
+            pass: process.env.GMAIL_PASSWORD || process.env.ZOHO_PASSWORD
+        }
+    };
+    
+    // Utiliser Zoho par défaut
+    return nodemailer.createTransport(zohoConfig);
 };
 
 // @route   POST /api/email/contact
@@ -45,8 +58,8 @@ router.post('/contact', async (req, res) => {
             });
         }
 
-        // Créer le transporteur Zoho
-        const transporter = createZohoTransporter();
+        // Créer le transporteur Email
+        const transporter = createEmailTransporter();
         
         // Vérifier la connexion
         await transporter.verify();
@@ -121,7 +134,7 @@ router.post('/test', async (req, res) => {
     try {
         console.log('🧪 Test de la configuration Zoho Mail...');
         
-        const transporter = createZohoTransporter();
+        const transporter = createEmailTransporter();
         
         // Vérifier la connexion
         await transporter.verify();
@@ -186,7 +199,7 @@ async function saveEmailLog(logData) {
 router.get('/config', (req, res) => {
     const config = {
         host: 'smtp.zoho.com',
-        port: 587,
+        port: 465,
         email: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
         configured: !!(process.env.ZOHO_EMAIL && process.env.ZOHO_PASSWORD),
         timestamp: new Date().toISOString()
