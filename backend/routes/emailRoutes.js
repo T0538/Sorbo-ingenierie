@@ -202,7 +202,7 @@ async function saveEmailLog(logData) {
 router.get('/config', (req, res) => {
     const config = {
         host: 'smtp.zoho.com',
-        port: 465,
+        port: 587,
         email: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
         configured: !!(process.env.ZOHO_EMAIL && process.env.ZOHO_PASSWORD),
         timestamp: new Date().toISOString()
