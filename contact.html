@@ -1133,7 +1133,7 @@
                         <div class="formation-info-content">
                             <i class="fas fa-graduation-cap"></i>
                             <div class="formation-details">
-                                <h4>Formation sélectionnée : ${formationParam}</h4>
+                                <h4>Formation sélectionnée : ${decodeURIComponent(formationParam)}</h4>
                                 <p class="formation-price"><strong>Coût : ${formattedPrice}</strong></p>
                             </div>
                         </div>
@@ -1160,7 +1160,7 @@
                     // Pré-remplir le message avec le contexte de formation
                     const message = document.getElementById('message');
                     if (message && !message.value) {
-                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${formationParam}" (coût : ${formattedPrice}).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
+                        message.value = `Bonjour,\n\nJe souhaite m'inscrire à la formation "${decodeURIComponent(formationParam)}" (coût : ${formattedPrice}).\n\nPouvez-vous me donner plus d'informations sur cette formation et les modalités d'inscription ?\n\nMerci.`;
                         console.log('✅ Message pré-rempli avec le contexte de formation');
                     }
                     
