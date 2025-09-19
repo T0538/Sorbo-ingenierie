@@ -6,19 +6,23 @@ const nodemailer = require('nodemailer');
 const createEmailTransporter = async () => {
     // Essayer d'abord Zoho, puis Gmail en fallback
     const zohoConfig = {
-        host: 'smtp.zoho.eu', // Serveur européen
-        port: 465,
-        secure: true, // SSL
+        host: 'smtp.zoho.com',
+        port: 587,
+        secure: false, // STARTTLS
         auth: {
             user: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
             pass: process.env.ZOHO_PASSWORD || 'votre-mot-de-passe-zoho'
         },
         tls: {
-            rejectUnauthorized: false
+            rejectUnauthorized: false,
+            ciphers: 'SSLv3'
         },
-        connectionTimeout: 30000,
-        greetingTimeout: 15000,
-        socketTimeout: 30000
+        connectionTimeout: 60000,
+        greetingTimeout: 30000,
+        socketTimeout: 60000,
+        pool: true,
+        maxConnections: 1,
+        maxMessages: 1
     };
     
     // Configuration Gmail en fallback
@@ -30,17 +34,9 @@ const createEmailTransporter = async () => {
         }
     };
     
-    // Essayer Zoho d'abord, puis Gmail en fallback
-    try {
-        const transporter = nodemailer.createTransport(zohoConfig);
-        // Test de connexion
-        await transporter.verify();
-        console.log('✅ Zoho Mail configuré avec succès');
-        return transporter;
-    } catch (error) {
-        console.log('❌ Zoho Mail échoué, utilisation de Gmail:', error.message);
-        return nodemailer.createTransport(gmailConfig);
-    }
+    // Configuration Zoho Mail optimisée pour Railway
+    console.log('📧 Configuration Zoho Mail pour Railway');
+    return nodemailer.createTransport(zohoConfig);
 };
 
 // @route   POST /api/email/contact
@@ -207,8 +203,8 @@ async function saveEmailLog(logData) {
 // @access  Public
 router.get('/config', (req, res) => {
     const config = {
-        host: 'smtp.zoho.eu',
-        port: 465,
+        host: 'smtp.zoho.com',
+        port: 587,
         email: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
         configured: !!(process.env.ZOHO_EMAIL && process.env.ZOHO_PASSWORD),
         timestamp: new Date().toISOString()
