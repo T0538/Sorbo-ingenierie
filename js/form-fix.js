@@ -264,32 +264,8 @@ class FormFix {
     }
 
     showFormationMessage(urlParams) {
-        const formation = urlParams.get('formation');
-        const prix = urlParams.get('prix');
-        
-        if (formation) {
-            // Créer un message informatif
-            const messageDiv = document.createElement('div');
-            messageDiv.style.cssText = `
-                background: #e8f5e8;
-                border: 1px solid #4caf50;
-                border-radius: 8px;
-                padding: 15px;
-                margin-bottom: 20px;
-                color: #2e7d32;
-            `;
-            messageDiv.innerHTML = `
-                <i class="fas fa-info-circle"></i>
-                <strong>Inscription à la formation :</strong> ${decodeURIComponent(formation)}
-                ${prix ? `<br><strong>Prix :</strong> ${decodeURIComponent(prix)}` : ''}
-            `;
-            
-            // Insérer le message au début du formulaire
-            const form = document.getElementById('contact-form');
-            if (form) {
-                form.insertBefore(messageDiv, form.firstChild);
-            }
-        }
+        // Fonction supprimée - plus de cartes vertes "Inscription à la formation"
+        console.log('✅ Cartes vertes d\'inscription supprimées selon demande utilisateur');
     }
 
     initializeDynamicFields() {

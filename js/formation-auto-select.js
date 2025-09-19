@@ -57,40 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (formation) {
             // Vérifier si le message n'existe pas déjà
-            if (!document.querySelector('.formation-info-banner')) {
-                // Créer le message informatif
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'formation-info-banner';
-                messageDiv.style.cssText = `
-                    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-                    border: 2px solid #2196f3;
-                    border-radius: 12px;
-                    padding: 20px;
-                    margin-bottom: 25px;
-                    color: #1565c0;
-                    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
-                `;
-                messageDiv.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <div style="background: #2196f3; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div>
-                            <h3 style="margin: 0 0 8px 0; color: #1565c0; font-size: 18px;">
-                                Formation sélectionnée : ${decodeURIComponent(formation)}
-                            </h3>
-                            ${prix ? `<p style="margin: 0; color: #d10000; font-weight: bold; font-size: 16px;">Coût : ${decodeURIComponent(prix)}</p>` : ''}
-                        </div>
-                    </div>
-                `;
-                
-                // Insérer le message au début du formulaire
-                const form = document.getElementById('contact-form');
-                if (form) {
-                    form.insertBefore(messageDiv, form.firstChild);
-                    console.log('✅ Message informatif de formation affiché');
-                }
-            }
+            // Carte bleue dupliquée supprimée - seule la carte du haut est conservée
+            console.log('✅ Carte bleue dupliquée supprimée selon demande utilisateur');
         }
     }
     
