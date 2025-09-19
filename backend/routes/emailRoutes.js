@@ -6,15 +6,18 @@ const nodemailer = require('nodemailer');
 const createZohoTransporter = () => {
     return nodemailer.createTransport({
         host: 'smtp.zoho.com',
-        port: 587,
-        secure: false, // true pour 465, false pour autres ports
+        port: 465,
+        secure: true, // true pour 465, false pour autres ports
         auth: {
             user: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
             pass: process.env.ZOHO_PASSWORD || 'votre-mot-de-passe-zoho'
         },
         tls: {
             rejectUnauthorized: false
-        }
+        },
+        connectionTimeout: 60000, // 60 secondes
+        greetingTimeout: 30000,   // 30 secondes
+        socketTimeout: 60000      // 60 secondes
     });
 };
 
