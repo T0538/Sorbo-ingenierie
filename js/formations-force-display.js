@@ -197,36 +197,22 @@ async function tryLoadRealFormations() {
     return false;
 }
 
-// Fonction pour gérer les modales d'inscription
+// Fonction pour rediriger vers le formulaire de contact
 function openInscriptionModal(formationId, formationTitle, prix) {
-    console.log(`📝 Ouverture modal inscription: ${formationTitle}`);
+    console.log(`📝 Redirection vers contact pour: ${formationTitle}`);
     
-    // Essayer de trouver le modal existant
-    let modal = document.getElementById('inscriptionModal');
+    // Rediriger vers contact.html avec les paramètres
+    const params = new URLSearchParams({
+        formation: encodeURIComponent(formationTitle),
+        prix: encodeURIComponent(prix),
+        subject: 'formation'
+    });
     
-    if (!modal) {
-        // Créer le modal si il n'existe pas
-        modal = createInscriptionModal();
-        document.body.appendChild(modal);
-    }
-    
-    // Remplir les informations
-    const titleElement = modal.querySelector('#formationTitle, .formation-title');
-    if (titleElement) {
-        titleElement.textContent = formationTitle;
-    }
-    
-    const priceElement = modal.querySelector('.formation-price');
-    if (priceElement) {
-        priceElement.textContent = `${parseInt(prix).toLocaleString()} FCFA`;
-    }
-    
-    // Afficher le modal
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    window.location.href = `contact.html?${params.toString()}`;
 }
 
-function createInscriptionModal() {
+// Fonction createInscriptionModal supprimée - redirection vers contact.html
+function createInscriptionModal_DEPRECATED() {
     const modal = document.createElement('div');
     modal.id = 'inscriptionModal';
     modal.className = 'modal';
