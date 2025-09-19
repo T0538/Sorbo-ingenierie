@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 
 // Configuration Zoho Mail
 const createZohoTransporter = () => {
-    return nodemailer.createTransporter({
+    return nodemailer.createTransport({
         host: 'smtp.zoho.com',
         port: 587,
         secure: false, // true pour 465, false pour autres ports
