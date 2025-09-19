@@ -6,22 +6,19 @@ const nodemailer = require('nodemailer');
 const createEmailTransporter = () => {
     // Essayer d'abord Zoho, puis Gmail en fallback
     const zohoConfig = {
-        host: 'smtp.zoho.com',
-        port: 587,
-        secure: false, // STARTTLS
+        host: 'smtp.zoho.eu', // Serveur européen
+        port: 465,
+        secure: true, // SSL
         auth: {
             user: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
             pass: process.env.ZOHO_PASSWORD || 'votre-mot-de-passe-zoho'
         },
         tls: {
-            rejectUnauthorized: false,
-            ciphers: 'SSLv3'
+            rejectUnauthorized: false
         },
-        connectionTimeout: 60000,
-        greetingTimeout: 30000,
-        socketTimeout: 60000,
-        debug: true,
-        logger: true
+        connectionTimeout: 30000,
+        greetingTimeout: 15000,
+        socketTimeout: 30000
     };
     
     // Configuration Gmail en fallback
@@ -201,8 +198,8 @@ async function saveEmailLog(logData) {
 // @access  Public
 router.get('/config', (req, res) => {
     const config = {
-        host: 'smtp.zoho.com',
-        port: 587,
+        host: 'smtp.zoho.eu',
+        port: 465,
         email: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
         configured: !!(process.env.ZOHO_EMAIL && process.env.ZOHO_PASSWORD),
         timestamp: new Date().toISOString()
