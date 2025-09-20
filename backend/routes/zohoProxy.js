@@ -1,45 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
-// Service proxy pour Zoho Mail via SendGrid (gratuit jusqu'à 100 emails/jour)
+// Service proxy pour Zoho Mail via Resend (gratuit jusqu'à 3,000 emails/mois)
 const sendEmailViaZohoProxy = async (emailData) => {
     try {
-        const sendgridApiKey = process.env.SENDGRID_API_KEY;
+        const resendApiKey = process.env.RESEND_API_KEY;
         
-        if (!sendgridApiKey) {
-            throw new Error('SENDGRID_API_KEY non configurée');
+        if (!resendApiKey) {
+            throw new Error('RESEND_API_KEY non configurée');
         }
 
-        // Configuration pour envoyer depuis Zoho vers Zoho
-        const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+        // Configuration pour envoyer depuis Zoho vers Zoho via Resend
+        const response = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${sendgridApiKey}`,
+                'Authorization': `Bearer ${resendApiKey}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                personalizations: [{
-                    to: [{ email: emailData.to }],
-                    subject: emailData.subject
-                }],
-                from: {
-                    email: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
-                    name: 'Sorbo-Ingénierie'
-                },
-                reply_to: {
-                    email: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
-                    name: 'Sorbo-Ingénierie'
-                },
-                content: [
-                    {
-                        type: 'text/html',
-                        value: emailData.html
-                    },
-                    {
-                        type: 'text/plain',
-                        value: emailData.text
-                    }
-                ],
+                from: `Sorbo-Ingénierie <${process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci'}>`,
+                to: [emailData.to],
+                subject: emailData.subject,
+                html: emailData.html,
+                text: emailData.text,
+                reply_to: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
                 // Headers personnalisés pour identifier l'origine
                 headers: {
                     'X-Zoho-Proxy': 'true',
@@ -50,7 +34,7 @@ const sendEmailViaZohoProxy = async (emailData) => {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(`SendGrid API Error: ${errorData.message || response.statusText}`);
+            throw new Error(`Resend API Error: ${errorData.message || response.statusText}`);
         }
 
         const result = await response.json();
@@ -120,7 +104,7 @@ router.post('/send', async (req, res) => {
             type,
             formData,
             timestamp: new Date().toISOString(),
-            proxy: 'SendGrid -> Zoho'
+            proxy: 'Resend -> Zoho'
         });
         
         res.json({
@@ -155,7 +139,7 @@ router.post('/test', async (req, res) => {
                 <h2>🎉 Test Proxy Zoho Réussi !</h2>
                 <p>Le service proxy Zoho fonctionne correctement.</p>
                 <p><strong>Heure du test :</strong> ${new Date().toLocaleString('fr-FR')}</p>
-                <p><strong>Service :</strong> SendGrid → Zoho Mail</p>
+                <p><strong>Service :</strong> Resend → Zoho Mail</p>
                 <p><strong>Email de destination :</strong> ${process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci'}</p>
                 <hr>
                 <p><em>Message automatique - Sorbo-Ingénierie Proxy</em></p>
@@ -190,9 +174,9 @@ router.post('/test', async (req, res) => {
 // @access  Public
 router.get('/status', (req, res) => {
     const status = {
-        proxy: 'SendGrid → Zoho Mail',
+        proxy: 'Resend → Zoho Mail',
         zohoEmail: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
-        sendgridConfigured: !!process.env.SENDGRID_API_KEY,
+        resendConfigured: !!process.env.RESEND_API_KEY,
         timestamp: new Date().toISOString(),
         version: '1.0'
     };
