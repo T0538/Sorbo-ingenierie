@@ -28,7 +28,7 @@ const createSMTPProxy = () => {
         rateLimit: 5
     };
 
-    return nodemailer.createTransporter(proxyConfig);
+    return nodemailer.createTransport(proxyConfig);
 };
 
 // @route   POST /api/smtp-proxy/send
