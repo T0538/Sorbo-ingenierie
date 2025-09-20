@@ -6,19 +6,20 @@ const nodemailer = require('nodemailer');
 const createEmailTransporter = async () => {
     // Essayer d'abord Zoho, puis Gmail en fallback
     const zohoConfig = {
-        host: 'smtp.zoho.eu', // Serveur européen
+        host: 'smtp.zoho.com',
         port: 465,
-        secure: true, // SSL
+        secure: true,
         auth: {
             user: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
             pass: process.env.ZOHO_PASSWORD || 'votre-mot-de-passe-zoho'
         },
         tls: {
-            rejectUnauthorized: false
+            rejectUnauthorized: false,
+            ciphers: 'SSLv3'
         },
-        connectionTimeout: 30000,
-        greetingTimeout: 15000,
-        socketTimeout: 30000
+        connectionTimeout: 10000,
+        greetingTimeout: 5000,
+        socketTimeout: 10000
     };
     
     // Configuration Gmail en fallback
@@ -30,9 +31,10 @@ const createEmailTransporter = async () => {
         }
     };
     
-    // Utiliser Gmail directement (plus fiable sur Railway)
-    console.log('📧 Utilisation de Gmail pour l\'envoi d\'emails');
-    return nodemailer.createTransport(gmailConfig);
+    // Utiliser Zoho Mail uniquement
+    console.log('📧 Configuration Zoho Mail...');
+    const transporter = nodemailer.createTransport(zohoConfig);
+    return transporter;
 };
 
 // @route   POST /api/email/contact

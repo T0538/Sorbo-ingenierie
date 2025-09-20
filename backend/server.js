@@ -8,6 +8,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const emailRoutes = require('./routes/emailRoutes');
+const smtpProxyRoutes = require('./routes/smtpProxy');
 // Utiliser le nouveau fichier de routes simplifié
 const formationRoutes = require('./routes/formation');
 const emploiRoutes = require('./routes/emploiRoutes');
@@ -86,6 +87,7 @@ const connectDB = async () => {
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/email', emailRoutes);
+app.use('/api/smtp-proxy', smtpProxyRoutes);
 app.use('/api/formations', formationRoutes);
 app.use('/api/emplois', emploiRoutes);
 app.use('/api/projets', projetRoutes);

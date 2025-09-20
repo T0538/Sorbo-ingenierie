@@ -4,9 +4,9 @@
 class ZohoEmailIntegration {
     constructor() {
         this.emailAddress = 'contact@sorbo-ingenierie.ci';
-        this.apiEndpoint = 'https://sorbo-api-production.up.railway.app/api/contact';
+        this.apiEndpoint = 'https://sorbo-api-production.up.railway.app/api/smtp-proxy/send';
         
-        console.log('📧 Initialisation intégration Zoho Mail...');
+        console.log('📧 Initialisation intégration Zoho Mail via Proxy SMTP...');
         this.init();
     }
     
