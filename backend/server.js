@@ -9,6 +9,8 @@ const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const emailRoutes = require('./routes/emailRoutes');
 const smtpProxyRoutes = require('./routes/smtpProxy');
+const zohoProxyRoutes = require('./routes/zohoProxy');
+const emailServiceRoutes = require('./routes/emailService');
 // Utiliser le nouveau fichier de routes simplifié
 const formationRoutes = require('./routes/formation');
 const emploiRoutes = require('./routes/emploiRoutes');
@@ -88,6 +90,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/email', emailRoutes);
 app.use('/api/smtp-proxy', smtpProxyRoutes);
+app.use('/api/zoho-proxy', zohoProxyRoutes);
 app.use('/api/formations', formationRoutes);
 app.use('/api/emplois', emploiRoutes);
 app.use('/api/projets', projetRoutes);
