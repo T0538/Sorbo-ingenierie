@@ -81,10 +81,10 @@ router.post('/send', async (req, res) => {
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h2 style="color: #2c3e50; margin-bottom: 20px;">📧 Nouveau message de contact</h2>
                     <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #e74c3c;">
-                        <p style="margin: 10px 0;"><strong>Nom:</strong> ${formData.nom || 'Non renseigné'}</p>
+                        <p style="margin: 10px 0;"><strong>Nom:</strong> ${formData.name || formData.nom || 'Non renseigné'}</p>
                         <p style="margin: 10px 0;"><strong>Email:</strong> ${formData.email || 'Non renseigné'}</p>
-                        <p style="margin: 10px 0;"><strong>Téléphone:</strong> ${formData.telephone || 'Non renseigné'}</p>
-                        <p style="margin: 10px 0;"><strong>Sujet:</strong> ${formData.sujet || 'Non renseigné'}</p>
+                        <p style="margin: 10px 0;"><strong>Téléphone:</strong> ${formData.phone || formData.telephone || 'Non renseigné'}</p>
+                        <p style="margin: 10px 0;"><strong>Sujet:</strong> ${formData.subject || formData.sujet || 'Non renseigné'}</p>
                         <div style="margin: 15px 0;">
                             <strong>Message:</strong>
                             <div style="background: #f8f9fa; padding: 10px; margin-top: 5px; border-radius: 3px; white-space: pre-wrap;">${formData.message || 'Aucun message'}</div>
