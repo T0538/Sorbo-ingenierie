@@ -18,7 +18,7 @@ const sendEmailViaZohoProxy = async (emailData) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                from: `Sorbo-Ingénierie <${process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci'}>`,
+                from: 'Sorbo-Ingénierie <onboarding@resend.dev>',
                 to: [emailData.to],
                 subject: emailData.subject,
                 html: emailData.html,
