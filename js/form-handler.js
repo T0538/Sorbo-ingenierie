@@ -100,8 +100,8 @@ class FormHandler {
             const formData = new FormData(form);
             const data = this.prepareContactData(formData);
 
-            // Envoyer via Formspree
-            const response = await this.sendToFormspree(EMAIL_CONFIG.contact, data);
+            // Envoyer via proxy Zoho
+            const response = await this.sendToZohoProxy('contact', data);
 
             if (response.ok) {
                 this.showSuccess('contact', form);
@@ -200,7 +200,7 @@ class FormHandler {
                 date: new Date().toISOString()
             };
 
-            const response = await this.sendToFormspree(EMAIL_CONFIG.newsletter, data);
+            const response = await this.sendToZohoProxy('newsletter', data);
 
             if (response.ok) {
                 this.showSuccess('newsletter', form);
@@ -215,15 +215,92 @@ class FormHandler {
         }
     }
 
-    // Envoi vers Formspree
-    async sendToFormspree(endpoint, data) {
-        return fetch(endpoint, {
+    // Envoi vers proxy Zoho
+    async sendToZohoProxy(type, data) {
+        const emailData = this.prepareEmailData(type, data);
+        
+        return fetch('/api/zoho-proxy/send', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(emailData)
         });
+    }
+
+    // Préparation des données email pour le proxy Zoho
+    prepareEmailData(type, data) {
+        const baseEmail = {
+            to: 'contact@sorbo-ingenierie.ci',
+            subject: '',
+            html: '',
+            text: '',
+            formData: data,
+            type: type
+        };
+
+        if (type === 'contact') {
+            baseEmail.subject = `Nouveau message de contact - ${data.nom || 'Anonyme'}`;
+            baseEmail.html = this.generateContactEmailHTML(data);
+            baseEmail.text = this.generateContactEmailText(data);
+        } else if (type === 'newsletter') {
+            baseEmail.subject = 'Nouvelle inscription newsletter';
+            baseEmail.html = this.generateNewsletterEmailHTML(data);
+            baseEmail.text = this.generateNewsletterEmailText(data);
+        }
+
+        return baseEmail;
+    }
+
+    // Génération HTML pour email de contact
+    generateContactEmailHTML(data) {
+        return `
+            <h2>📧 Nouveau message de contact</h2>
+            <p><strong>Nom:</strong> ${data.nom || 'Non renseigné'}</p>
+            <p><strong>Email:</strong> ${data.email || 'Non renseigné'}</p>
+            <p><strong>Téléphone:</strong> ${data.telephone || 'Non renseigné'}</p>
+            <p><strong>Sujet:</strong> ${data.sujet || 'Non renseigné'}</p>
+            <p><strong>Message:</strong></p>
+            <p>${data.message || 'Aucun message'}</p>
+            <hr>
+            <p><small>Envoyé depuis: ${data.page || 'Page inconnue'}</small></p>
+        `;
+    }
+
+    // Génération texte pour email de contact
+    generateContactEmailText(data) {
+        return `
+Nouveau message de contact:
+Nom: ${data.nom || 'Non renseigné'}
+Email: ${data.email || 'Non renseigné'}
+Téléphone: ${data.telephone || 'Non renseigné'}
+Sujet: ${data.sujet || 'Non renseigné'}
+Message: ${data.message || 'Aucun message'}
+
+Envoyé depuis: ${data.page || 'Page inconnue'}
+        `;
+    }
+
+    // Génération HTML pour email newsletter
+    generateNewsletterEmailHTML(data) {
+        return `
+            <h2>📬 Nouvelle inscription newsletter</h2>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Date d'inscription:</strong> ${new Date(data.date).toLocaleString('fr-FR')}</p>
+            <hr>
+            <p><small>Envoyé depuis: ${data.page || 'Page inconnue'}</small></p>
+        `;
+    }
+
+    // Génération texte pour email newsletter
+    generateNewsletterEmailText(data) {
+        return `
+Nouvelle inscription newsletter:
+Email: ${data.email}
+Date d'inscription: ${new Date(data.date).toLocaleString('fr-FR')}
+
+Envoyé depuis: ${data.page || 'Page inconnue'}
+        `;
     }
 
     // Préparation des données de contact
