@@ -72,14 +72,23 @@ router.post('/send', async (req, res) => {
 
         // Enrichir le contenu HTML avec les informations Zoho
         const enrichedHtml = `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                ${html}
-                <hr style="margin: 20px 0; border: none; border-top: 1px solid #eee;">
-                <div style="font-size: 12px; color: #666; text-align: center;">
-                    <p>📧 Email envoyé via Sorbo-Ingénierie</p>
-                    <p>🏢 <strong>Sorbo-Ingénierie</strong> - Ingénierie & Formation</p>
-                    <p>📞 +225 XX XX XX XX | 🌐 www.sorbo-ingenierie.ci</p>
-                    <p>📧 <a href="mailto:contact@sorbo-ingenierie.ci">contact@sorbo-ingenierie.ci</a></p>
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                    <h1 style="margin: 0; font-size: 24px;">🏢 Sorbo-Ingénierie</h1>
+                    <p style="margin: 5px 0 0 0; opacity: 0.9;">Excellence et Innovation en Génie civil</p>
+                </div>
+                <div style="padding: 20px;">
+                    ${html}
+                </div>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 0 0 8px 8px; border-top: 1px solid #eee;">
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <p style="margin: 0; font-size: 14px; color: #666;">📧 Email envoyé via Sorbo-Ingénierie</p>
+                    </div>
+                    <div style="text-align: center; font-size: 12px; color: #666;">
+                        <p style="margin: 5px 0;">🏢 <strong>Sorbo-Ingénierie</strong> - Ingénierie & Formation</p>
+                        <p style="margin: 5px 0;">📞 +225 XX XX XX XX | 🌐 <a href="https://sorbo-ingenierie.ci" style="color: #667eea;">www.sorbo-ingenierie.ci</a></p>
+                        <p style="margin: 5px 0;">📧 <a href="mailto:contact@sorbo-ingenierie.ci" style="color: #667eea;">contact@sorbo-ingenierie.ci</a></p>
+                    </div>
                 </div>
             </div>
         `;

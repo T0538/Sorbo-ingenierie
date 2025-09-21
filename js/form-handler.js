@@ -255,15 +255,22 @@ class FormHandler {
     // Génération HTML pour email de contact
     generateContactEmailHTML(data) {
         return `
-            <h2>📧 Nouveau message de contact</h2>
-            <p><strong>Nom:</strong> ${data.nom || 'Non renseigné'}</p>
-            <p><strong>Email:</strong> ${data.email || 'Non renseigné'}</p>
-            <p><strong>Téléphone:</strong> ${data.telephone || 'Non renseigné'}</p>
-            <p><strong>Sujet:</strong> ${data.sujet || 'Non renseigné'}</p>
-            <p><strong>Message:</strong></p>
-            <p>${data.message || 'Aucun message'}</p>
-            <hr>
-            <p><small>Envoyé depuis: ${data.page || 'Page inconnue'}</small></p>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">📧 Nouveau message de contact</h2>
+                <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #3498db;">
+                    <p style="margin: 10px 0;"><strong>Nom:</strong> ${data.nom || 'Non renseigné'}</p>
+                    <p style="margin: 10px 0;"><strong>Email:</strong> ${data.email || 'Non renseigné'}</p>
+                    <p style="margin: 10px 0;"><strong>Téléphone:</strong> ${data.telephone || 'Non renseigné'}</p>
+                    <p style="margin: 10px 0;"><strong>Sujet:</strong> ${data.sujet || 'Non renseigné'}</p>
+                    <div style="margin: 15px 0;">
+                        <strong>Message:</strong>
+                        <div style="background: #f8f9fa; padding: 10px; margin-top: 5px; border-radius: 3px; white-space: pre-wrap;">${data.message || 'Aucun message'}</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 15px;">
+                    <small>Envoyé depuis: ${data.page || 'Page inconnue'}</small>
+                </p>
+            </div>
         `;
     }
 
