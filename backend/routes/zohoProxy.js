@@ -133,7 +133,7 @@ router.post('/test', async (req, res) => {
         console.log('🧪 Test du proxy Zoho...');
         
         const testEmail = {
-            to: process.env.ZOHO_EMAIL || 'contact@sorbo-ingenierie.ci',
+            to: 'kevinyameogo01@gmail.com',
             subject: 'Test Proxy Zoho - Sorbo-Ingénierie',
             html: `
                 <h2>🎉 Test Proxy Zoho Réussi !</h2>
