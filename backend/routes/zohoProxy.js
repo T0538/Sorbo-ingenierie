@@ -62,6 +62,9 @@ router.post('/send', async (req, res) => {
             formData = {}
         } = req.body;
 
+        console.log('📧 Type:', type);
+        console.log('📧 FormData:', formData);
+
         // Validation
         if (!to || !subject || (!html && !text)) {
             return res.status(400).json({

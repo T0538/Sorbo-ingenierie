@@ -232,22 +232,12 @@ class FormHandler {
     prepareEmailData(type, data) {
         const baseEmail = {
             to: 'contact@sorbo-ingenierie.ci',
-            subject: '',
-            html: '',
-            text: '',
+            subject: type === 'contact' ? `Nouveau message de contact - ${data.nom || 'Anonyme'}` : 'Nouvelle inscription newsletter',
+            html: '<p>Données du formulaire</p>', // Le backend génère le HTML
+            text: 'Données du formulaire', // Le backend génère le texte
             formData: data,
             type: type
         };
-
-        if (type === 'contact') {
-            baseEmail.subject = `Nouveau message de contact - ${data.nom || 'Anonyme'}`;
-            baseEmail.html = this.generateContactEmailHTML(data);
-            baseEmail.text = this.generateContactEmailText(data);
-        } else if (type === 'newsletter') {
-            baseEmail.subject = 'Nouvelle inscription newsletter';
-            baseEmail.html = this.generateNewsletterEmailHTML(data);
-            baseEmail.text = this.generateNewsletterEmailText(data);
-        }
 
         return baseEmail;
     }
