@@ -70,15 +70,55 @@ router.post('/send', async (req, res) => {
             });
         }
 
+        // Générer le contenu HTML basé sur le type
+        let contentHtml = '';
+        
+        if (type === 'contact' && formData) {
+            contentHtml = `
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h2 style="color: #2c3e50; margin-bottom: 20px;">📧 Nouveau message de contact</h2>
+                    <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #e74c3c;">
+                        <p style="margin: 10px 0;"><strong>Nom:</strong> ${formData.nom || 'Non renseigné'}</p>
+                        <p style="margin: 10px 0;"><strong>Email:</strong> ${formData.email || 'Non renseigné'}</p>
+                        <p style="margin: 10px 0;"><strong>Téléphone:</strong> ${formData.telephone || 'Non renseigné'}</p>
+                        <p style="margin: 10px 0;"><strong>Sujet:</strong> ${formData.sujet || 'Non renseigné'}</p>
+                        <div style="margin: 15px 0;">
+                            <strong>Message:</strong>
+                            <div style="background: #f8f9fa; padding: 10px; margin-top: 5px; border-radius: 3px; white-space: pre-wrap;">${formData.message || 'Aucun message'}</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12px; color: #666; margin-top: 15px;">
+                        <small>Envoyé depuis: ${formData.page || 'Page inconnue'}</small>
+                    </p>
+                </div>
+            `;
+        } else if (type === 'newsletter' && formData) {
+            contentHtml = `
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h2 style="color: #2c3e50; margin-bottom: 20px;">📬 Nouvelle inscription newsletter</h2>
+                    <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #e74c3c;">
+                        <p style="margin: 10px 0;"><strong>Email:</strong> ${formData.email}</p>
+                        <p style="margin: 10px 0;"><strong>Date d'inscription:</strong> ${new Date(formData.date || new Date()).toLocaleString('fr-FR')}</p>
+                    </div>
+                    <p style="font-size: 12px; color: #666; margin-top: 15px;">
+                        <small>Envoyé depuis: ${formData.page || 'Page inconnue'}</small>
+                    </p>
+                </div>
+            `;
+        } else {
+            // Fallback pour les autres types
+            contentHtml = html || `<p>${text}</p>`;
+        }
+
         // Enrichir le contenu HTML avec les informations Zoho
         const enrichedHtml = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
                     <h1 style="margin: 0; font-size: 24px;">🏢 Sorbo-Ingénierie</h1>
                     <p style="margin: 5px 0 0 0; opacity: 0.9;">Excellence et Innovation en Génie civil</p>
                 </div>
                 <div style="padding: 20px;">
-                    ${html}
+                    ${contentHtml}
                 </div>
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 0 0 8px 8px; border-top: 1px solid #eee;">
                     <div style="text-align: center; margin-bottom: 15px;">
@@ -86,8 +126,8 @@ router.post('/send', async (req, res) => {
                     </div>
                     <div style="text-align: center; font-size: 12px; color: #666;">
                         <p style="margin: 5px 0;">🏢 <strong>Sorbo-Ingénierie</strong> - Ingénierie & Formation</p>
-                        <p style="margin: 5px 0;">📞 +225 XX XX XX XX | 🌐 <a href="https://sorbo-ingenierie.ci" style="color: #667eea;">www.sorbo-ingenierie.ci</a></p>
-                        <p style="margin: 5px 0;">📧 <a href="mailto:contact@sorbo-ingenierie.ci" style="color: #667eea;">contact@sorbo-ingenierie.ci</a></p>
+                        <p style="margin: 5px 0;">📞 +225 XX XX XX XX | 🌐 <a href="https://sorbo-ingenierie.ci" style="color: #e74c3c;">www.sorbo-ingenierie.ci</a></p>
+                        <p style="margin: 5px 0;">📧 <a href="mailto:contact@sorbo-ingenierie.ci" style="color: #e74c3c;">contact@sorbo-ingenierie.ci</a></p>
                     </div>
                 </div>
             </div>
