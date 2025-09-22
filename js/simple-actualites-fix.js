@@ -31,9 +31,9 @@
                 id: 'prix-excellence-2024'
             },
             {
-                title: 'Nouveau logiciel de calcul de structures OH-Route v1',
-                resume: 'Lancement de la version 1 de notre logiciel OH-Route avec de nouvelles fonctionnalités de calcul hydraulique avancé.',
-                date: '12 Septembre 2025',
+                title: 'Lancement officiel de notre logiciel OH-Route v1',
+                resume: 'Nous avons le plaisir d\'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d\'assainissement routier.',
+                date: '15 Décembre 2024',
                 image: 'images/drainageroute.png',
                 id: 'oh-route-v1-1'
             }
