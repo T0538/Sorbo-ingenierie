@@ -22,15 +22,18 @@ class ZohoEmailIntegration {
     setupFormHandlers() {
         console.log('🔧 Configuration des gestionnaires de formulaires...');
         
-        // Types de formulaires à gérer
+        // Désactiver le gestionnaire pour le formulaire de contact principal
+        // car il est déjà géré par form-fix.js
+        const contactForm = document.querySelector('#contact-form');
+        if (contactForm) {
+            console.log('⚠️ Formulaire de contact détecté - géré par form-fix.js');
+            // Ne pas attacher de gestionnaire ici pour éviter les conflits
+        }
+        
+        // Types de formulaires à gérer (sauf contact principal)
         const formTypes = [
             {
-                selector: '#contact-form, .contact-form',
-                type: 'contact',
-                title: 'Nouveau message de contact'
-            },
-            {
-                selector: '#inscription-form, .inscription-form, .inscription-formation-form',
+                selector: '.inscription-form, .inscription-formation-form',
                 type: 'inscription',
                 title: 'Nouvelle inscription à une formation'
             },
@@ -58,9 +61,6 @@ class ZohoEmailIntegration {
                 this.attachFormHandler(form, formType);
             });
         });
-        
-        // Gestionnaire global pour les formulaires non spécifiques
-        this.setupGlobalFormHandler();
     }
     
     attachFormHandler(form, formType) {

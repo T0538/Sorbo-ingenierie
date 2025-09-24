@@ -26,13 +26,20 @@ class FormFix {
         const contactForm = document.getElementById('contact-form');
         if (!contactForm) return;
 
+        // S'assurer que le formulaire n'a pas d'action mailto
+        contactForm.removeAttribute('action');
+        contactForm.setAttribute('action', 'javascript:void(0);');
+        contactForm.setAttribute('method', 'post');
+
         // Supprimer les anciens event listeners
         const newForm = contactForm.cloneNode(true);
         contactForm.parentNode.replaceChild(newForm, contactForm);
 
-        // Ajouter le nouvel event listener
+        // Ajouter le nouvel event listener avec preventDefault strict
         newForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
             await this.handleContactSubmit(e);
         });
 
@@ -124,19 +131,109 @@ class FormFix {
     }
 
     async simulateContactSend(data) {
-        // Simuler un délai d'envoi
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log('📤 Envoi du message de contact via Zoho Mail...', data);
         
-        // Sauvegarder dans localStorage pour le dashboard
-        const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-        contacts.push({
-            id: Date.now(),
-            ...data,
-            status: 'nouveau'
-        });
-        localStorage.setItem('contacts', JSON.stringify(contacts));
-        
-        console.log('Contact sauvegardé:', data);
+        // Utiliser l'intégration Zoho Mail si disponible
+        if (window.zohoEmailIntegration) {
+            try {
+                // Déterminer le type de formulaire basé sur le sujet
+                let formType = { type: 'contact', title: 'Nouveau message de contact' };
+                
+                if (data.subject === 'formation') {
+                    formType = { type: 'inscription', title: 'Nouvelle inscription à une formation' };
+                } else if (data.subject === 'rendezvous') {
+                    formType = { type: 'rendez-vous', title: 'Nouvelle demande de rendez-vous' };
+                } else if (data.subject === 'ingenierie') {
+                    formType = { type: 'devis', title: 'Nouvelle demande de projet d\'ingénierie' };
+                }
+                
+                // Préparer les données pour Zoho Mail
+                const emailData = {
+                    name: data.name || 'Non renseigné',
+                    nom: data['formation-nom'] || data.name || 'Non renseigné',
+                    prenom: data['formation-prenom'] || 'Non renseigné',
+                    email: data.email || data['formation-email'] || 'Non renseigné',
+                    telephone: data.phone || 'Non renseigné',
+                    subject: data.subject || 'Non renseigné',
+                    message: data.message || 'Aucun message',
+                    
+                    // Données spécifiques aux formations
+                    nationalite: data['formation-nationalite'] || '',
+                    cni: data['formation-cni'] || '',
+                    adresse: data['formation-adresse'] || '',
+                    fonction: data['formation-fonction'] || '',
+                    secteur_activite: data['formation-secteur'] || '',
+                    niveau: data['formation-niveau'] || '',
+                    prise_en_charge: data['formation-prise-charge'] || '',
+                    mode_paiement: data['formation-paiement'] || '',
+                    
+                    // Données spécifiques aux projets d'ingénierie
+                    'project-type': data['project-type'] || '',
+                    'project-description': data['project-description'] || '',
+                    'project-location': data['project-location'] || '',
+                    'project-budget': data['project-budget'] || '',
+                    'project-deadline': data['project-deadline'] || '',
+                    
+                    // Données spécifiques aux logiciels
+                    'software-name': data['software-name'] || '',
+                    'software-license': data['software-license'] || ''
+                };
+                
+                // Envoyer via Zoho Mail
+                const success = await window.zohoEmailIntegration.sendEmail(emailData, formType);
+                
+                if (success) {
+                    console.log('✅ Message envoyé avec succès via Zoho Mail');
+                } else {
+                    console.log('⚠️ Erreur lors de l\'envoi via Zoho Mail, sauvegarde locale');
+                }
+                
+                // Sauvegarder aussi localement pour backup
+                const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+                contacts.push({
+                    id: Date.now(),
+                    ...data,
+                    status: success ? 'envoyé' : 'en_attente',
+                    timestamp: new Date().toISOString(),
+                    zoho_sent: success
+                });
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                return success;
+                
+            } catch (error) {
+                console.error('❌ Erreur lors de l\'envoi via Zoho Mail:', error);
+                
+                // Fallback: sauvegarder localement
+                const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+                contacts.push({
+                    id: Date.now(),
+                    ...data,
+                    status: 'erreur',
+                    timestamp: new Date().toISOString(),
+                    error: error.message
+                });
+                localStorage.setItem('contacts', JSON.stringify(contacts));
+                
+                return false;
+            }
+        } else {
+            console.log('⚠️ Intégration Zoho Mail non disponible, sauvegarde locale uniquement');
+            
+            // Fallback: simulation simple
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            contacts.push({
+                id: Date.now(),
+                ...data,
+                status: 'local_only',
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            
+            return true;
+        }
     }
 
     showContactSuccess(form, data) {
