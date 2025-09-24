@@ -33,7 +33,7 @@
             {
                 title: 'Lancement officiel de notre logiciel OH-Route v1',
                 resume: 'Nous avons le plaisir d\'annoncer la sortie de la version 1 de notre logiciel OH-Route, une solution innovante dédiée aux études hydrologiques et aux ouvrages d\'assainissement routier.',
-                date: '24 septembre 2025'
+                date: '24 septembre 2025',
                 image: 'images/drainageroute.png',
                 id: 'oh-route-v1-1'
             }
