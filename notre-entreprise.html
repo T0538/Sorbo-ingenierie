@@ -1199,8 +1199,42 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center center;
             border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        /* Ajustements spécifiques pour certaines photos si nécessaire */
+        .org-icon img[src*="alexis"] {
+            object-position: center 30%;
+        }
+        
+        .org-icon img[src*="Franck"] {
+            object-position: center 25%;
+        }
+        
+        .org-icon img[src*="florent"] {
+            object-position: center 35%;
+        }
+        
+        .org-icon img[src*="Bere"] {
+            object-position: center 20%;
+        }
+        
+        .org-icon img[src*="alex"] {
+            object-position: center 25%;
+        }
+        
+        .org-icon img[src*="YVES"] {
+            object-position: center 30%;
+        }
+        
+        .org-icon img[src*="estelle"] {
+            object-position: center 25%;
+        }
+        
+        .org-icon img[src*="moya"] {
+            object-position: center 20%;
         }
         
         .org-card.org-ceo .org-icon {
