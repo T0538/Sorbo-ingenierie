@@ -1,119 +1,50 @@
-// ======================================
-// CORRECTION DES ERREURS DE VALIDATION - SORBO-INGÉNIERIE
-// ======================================
+// Script pour corriger les problèmes de validation HTML5
+// Désactive complètement la validation et force l'envoi du formulaire
 
-// Script pour corriger les erreurs de validation HTML5 sur les champs cachés
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔧 Initialisation de la correction des erreurs de validation...');
+    console.log('🔧 Correction validation HTML5...');
     
-    // Fonction pour désactiver la validation des champs cachés
-    function disableHiddenFieldValidation() {
-        const allDynamicFields = document.querySelectorAll('.dynamic-fields');
-        
-        allDynamicFields.forEach(field => {
-            if (field.style.display === 'none' || field.offsetParent === null) {
-                const inputs = field.querySelectorAll('input, select, textarea');
-                inputs.forEach(input => {
-                    // Sauvegarder l'état required original
-                    if (input.hasAttribute('required')) {
-                        input.setAttribute('data-was-required', 'true');
-                        input.removeAttribute('required');
-                    }
-                    // Désactiver le champ
-                    input.disabled = true;
-                });
-            }
-        });
-    }
-
-    // Fonction pour réactiver la validation des champs visibles
-    function enableVisibleFieldValidation() {
-        const visibleDynamicFields = document.querySelectorAll('.dynamic-fields[style*="block"]');
-        
-        visibleDynamicFields.forEach(field => {
-            const inputs = field.querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                // Réactiver le champ
-                input.disabled = false;
-                // Restaurer l'attribut required si nécessaire
-                if (input.hasAttribute('data-was-required')) {
-                    input.setAttribute('required', '');
-                }
+    // Désactiver la validation HTML5 sur tous les formulaires
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.noValidate = true;
+        console.log('✅ Validation HTML5 désactivée pour:', form.id || 'formulaire sans ID');
+    });
+    
+    // Intercepter TOUTES les soumissions de formulaire
+    document.addEventListener('submit', function(e) {
+        const form = e.target;
+        if (form.tagName === 'FORM') {
+            // Forcer la désactivation de la validation
+            form.noValidate = true;
+            
+            // Supprimer tous les attributs required temporairement
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                field.removeAttribute('required');
             });
-        });
-    }
-
-    // Observer les changements de visibilité des champs dynamiques
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-                const target = mutation.target;
-                if (target.classList.contains('dynamic-fields')) {
-                    if (target.style.display === 'none') {
-                        // Champs cachés - désactiver la validation
-                        const inputs = target.querySelectorAll('input, select, textarea');
-                        inputs.forEach(input => {
-                            if (input.hasAttribute('required')) {
-                                input.setAttribute('data-was-required', 'true');
-                                input.removeAttribute('required');
-                            }
-                            input.disabled = true;
-                        });
-                    } else if (target.style.display === 'block') {
-                        // Champs visibles - réactiver la validation
-                        const inputs = target.querySelectorAll('input, select, textarea');
-                        inputs.forEach(input => {
-                            input.disabled = false;
-                            if (input.hasAttribute('data-was-required')) {
-                                input.setAttribute('required', '');
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    });
-
-    // Observer tous les champs dynamiques
-    const dynamicFields = document.querySelectorAll('.dynamic-fields');
-    dynamicFields.forEach(field => {
-        observer.observe(field, { attributes: true, attributeFilter: ['style'] });
-    });
-
-    // Initialisation
-    disableHiddenFieldValidation();
+            
+            console.log('🔧 Validation forcément désactivée pour la soumission');
+            
+            // Laisser le formulaire se soumettre normalement
+            return true;
+        }
+    }, true); // Utiliser capture pour intercepter avant les autres handlers
     
-    // Réactiver la validation des champs visibles après un court délai
+    // Supprimer tous les attributs required des champs cachés
     setTimeout(() => {
-        enableVisibleFieldValidation();
-    }, 100);
-
-    console.log('✅ Correction des erreurs de validation initialisée');
-});
-
-// Fonction globale pour forcer la correction des erreurs
-window.fixFormValidation = function() {
-    const allDynamicFields = document.querySelectorAll('.dynamic-fields');
-    
-    allDynamicFields.forEach(field => {
-        const inputs = field.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            // Si le champ est caché, désactiver la validation
-            if (field.style.display === 'none' || field.offsetParent === null) {
-                if (input.hasAttribute('required')) {
-                    input.setAttribute('data-was-required', 'true');
-                    input.removeAttribute('required');
-                }
-                input.disabled = true;
-            } else {
-                // Si le champ est visible, réactiver la validation
-                input.disabled = false;
-                if (input.hasAttribute('data-was-required')) {
-                    input.setAttribute('required', '');
-                }
+        const allRequiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+        allRequiredFields.forEach(field => {
+            const isHidden = field.offsetParent === null || 
+                           window.getComputedStyle(field).display === 'none' ||
+                           window.getComputedStyle(field).visibility === 'hidden';
+            
+            if (isHidden) {
+                field.removeAttribute('required');
+                console.log('🔧 Attribut required supprimé du champ caché:', field.name || field.id);
             }
         });
-    });
+    }, 500);
     
-    console.log('🔧 Validation des formulaires corrigée manuellement');
-};
+    console.log('✅ Correction validation HTML5 terminée');
+});

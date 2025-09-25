@@ -133,107 +133,62 @@ class FormFix {
     async simulateContactSend(data) {
         console.log('📤 Envoi du message de contact via Zoho Mail...', data);
         
-        // Utiliser l'intégration Zoho Mail si disponible
-        if (window.zohoEmailIntegration) {
+        // Utiliser la nouvelle fonction sendToZohoMail du FormHandler
+        if (window.formHandler && window.formHandler.sendToZohoMail) {
             try {
-                // Déterminer le type de formulaire basé sur le sujet
-                let formType = { type: 'contact', title: 'Nouveau message de contact' };
-                
-                if (data.subject === 'formation') {
-                    formType = { type: 'inscription', title: 'Nouvelle inscription à une formation' };
-                } else if (data.subject === 'rendezvous') {
-                    formType = { type: 'rendez-vous', title: 'Nouvelle demande de rendez-vous' };
-                } else if (data.subject === 'ingenierie') {
-                    formType = { type: 'devis', title: 'Nouvelle demande de projet d\'ingénierie' };
-                }
-                
-                // Préparer les données pour Zoho Mail
-                const emailData = {
-                    name: data.name || 'Non renseigné',
-                    nom: data['formation-nom'] || data.name || 'Non renseigné',
-                    prenom: data['formation-prenom'] || 'Non renseigné',
-                    email: data.email || data['formation-email'] || 'Non renseigné',
-                    telephone: data.phone || 'Non renseigné',
-                    subject: data.subject || 'Non renseigné',
-                    message: data.message || 'Aucun message',
-                    
-                    // Données spécifiques aux formations
-                    nationalite: data['formation-nationalite'] || '',
-                    cni: data['formation-cni'] || '',
-                    adresse: data['formation-adresse'] || '',
-                    fonction: data['formation-fonction'] || '',
-                    secteur_activite: data['formation-secteur'] || '',
-                    niveau: data['formation-niveau'] || '',
-                    prise_en_charge: data['formation-prise-charge'] || '',
-                    mode_paiement: data['formation-paiement'] || '',
-                    
-                    // Données spécifiques aux projets d'ingénierie
-                    'project-type': data['project-type'] || '',
-                    'project-description': data['project-description'] || '',
-                    'project-location': data['project-location'] || '',
-                    'project-budget': data['project-budget'] || '',
-                    'project-deadline': data['project-deadline'] || '',
-                    
-                    // Données spécifiques aux logiciels
-                    'software-name': data['software-name'] || '',
-                    'software-license': data['software-license'] || ''
-                };
-                
-                // Envoyer via Zoho Mail
-                const success = await window.zohoEmailIntegration.sendEmail(emailData, formType);
-                
-                if (success) {
-                    console.log('✅ Message envoyé avec succès via Zoho Mail');
-                } else {
-                    console.log('⚠️ Erreur lors de l\'envoi via Zoho Mail, sauvegarde locale');
-                }
-                
-                // Sauvegarder aussi localement pour backup
-                const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-                contacts.push({
-                    id: Date.now(),
-                    ...data,
-                    status: success ? 'envoyé' : 'en_attente',
-                    timestamp: new Date().toISOString(),
-                    zoho_sent: success
-                });
-                localStorage.setItem('contacts', JSON.stringify(contacts));
-                
-                return success;
-                
+                const success = await window.formHandler.sendToZohoMail(data);
+                return success.ok;
             } catch (error) {
-                console.error('❌ Erreur lors de l\'envoi via Zoho Mail:', error);
-                
-                // Fallback: sauvegarder localement
-                const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-                contacts.push({
-                    id: Date.now(),
-                    ...data,
-                    status: 'erreur',
-                    timestamp: new Date().toISOString(),
-                    error: error.message
-                });
-                localStorage.setItem('contacts', JSON.stringify(contacts));
-                
+                console.error('❌ Erreur lors de l\'envoi via FormHandler:', error);
                 return false;
             }
-        } else {
-            console.log('⚠️ Intégration Zoho Mail non disponible, sauvegarde locale uniquement');
+        }
+        
+        // Fallback: utiliser mailto directement
+        try {
+            const subject = `Nouveau message de ${data.name || data.nom || 'contact'}`;
+            const body = this.formatContactEmailBody(data);
             
-            // Fallback: simulation simple
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-            contacts.push({
-                id: Date.now(),
-                ...data,
-                status: 'local_only',
-                timestamp: new Date().toISOString()
-            });
-            localStorage.setItem('contacts', JSON.stringify(contacts));
+            const mailtoLink = `mailto:contact@sorbo-ingenierie.ci?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
             
             return true;
+        } catch (error) {
+            console.error('❌ Erreur lors de l\'envoi via mailto:', error);
+            return false;
         }
+    }
+
+    // Formatage du corps de l'email pour form-fix
+    formatContactEmailBody(data) {
+        let body = `Nouveau message de contact:\n\n`;
+        body += `Nom: ${data.name || data.nom || 'Non renseigné'}\n`;
+        body += `Email: ${data.email || 'Non renseigné'}\n`;
+        body += `Téléphone: ${data.phone || data.telephone || 'Non renseigné'}\n`;
+        body += `Sujet: ${this.getSubjectText(data.subject || data.sujet) || 'Non renseigné'}\n\n`;
+        body += `Message:\n${data.message || 'Aucun message'}\n\n`;
+        
+        // Ajouter les informations spécifiques aux formations
+        if (data.subject === 'formation' || data.sujet === 'formation') {
+            body += `--- Informations Formation ---\n`;
+            body += `Nom complet: ${data['formation-nom'] || ''} ${data['formation-prenom'] || ''}\n`;
+            body += `Email formation: ${data['formation-email'] || ''}\n`;
+            body += `Téléphone formation: ${data['formation-telephone'] || ''}\n`;
+            body += `Nationalité: ${data['formation-nationalite'] || ''}\n`;
+            body += `CNI: ${data['formation-cni'] || ''}\n`;
+            body += `Adresse: ${data['formation-adresse'] || ''}\n`;
+            body += `Fonction: ${data['formation-fonction'] || ''}\n`;
+            body += `Secteur d'activité: ${data['formation-secteur'] || ''}\n`;
+            body += `Niveau: ${data['formation-niveau'] || ''}\n`;
+            body += `Prise en charge: ${data['formation-prise-charge'] || ''}\n`;
+            body += `Mode de paiement: ${data['formation-paiement'] || ''}\n`;
+        }
+        
+        body += `\n--- Informations techniques ---\n`;
+        body += `Page: ${data.page || window.location.pathname}\n`;
+        body += `Date: ${new Date().toLocaleString('fr-FR')}\n`;
+        
+        return body;
     }
 
     showContactSuccess(form, data) {
