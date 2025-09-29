@@ -202,13 +202,17 @@ class FormHandler {
         const email = emailInput.value;
 
         try {
+            // Stocker l'email localement en attendant l'envoi manuel
+            this.storeNewsletterEmail(email);
+            
             const data = {
                 email: email,
                 type: 'newsletter',
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
+                page: window.location.pathname
             };
 
-            const response = await this.sendToZohoMail(data);
+            const response = await this.sendNewsletterToZoho(data);
 
             if (response.ok) {
                 this.showSuccess('newsletter', form);
@@ -223,10 +227,101 @@ class FormHandler {
         }
     }
 
+    // Stocker les emails de newsletter localement
+    storeNewsletterEmail(email) {
+        try {
+            let newsletterEmails = JSON.parse(localStorage.getItem('newsletterEmails') || '[]');
+            
+            // Éviter les doublons
+            if (!newsletterEmails.includes(email)) {
+                newsletterEmails.push({
+                    email: email,
+                    date: new Date().toISOString(),
+                    page: window.location.pathname,
+                    sent: false
+                });
+                localStorage.setItem('newsletterEmails', JSON.stringify(newsletterEmails));
+                console.log('Email newsletter stocké:', email);
+            }
+        } catch (error) {
+            console.error('Erreur stockage newsletter:', error);
+        }
+    }
+
+    // Envoi spécifique pour les newsletters vers Zoho
+    async sendNewsletterToZoho(data) {
+        try {
+            // Essayer d'abord l'envoi direct avec EmailJS
+            if (window.emailService && window.emailService.initialized) {
+                console.log('📧 Tentative d'envoi newsletter direct avec EmailJS...');
+                const result = await window.emailService.sendNewsletterEmail(data);
+                
+                if (result.success) {
+                    console.log('✅ Newsletter envoyée directement via EmailJS');
+                    return { ok: true };
+                } else {
+                    console.warn('⚠️ Échec EmailJS newsletter, fallback vers mailto');
+                }
+            }
+            
+            // Fallback vers mailto si EmailJS n'est pas disponible ou échoue
+            console.log('📧 Utilisation du fallback mailto pour newsletter...');
+            const subject = `📧 Nouvelle inscription newsletter`;
+            const body = this.formatNewsletterEmailBody(data);
+            
+            // Créer un lien mailto spécifique pour les newsletters
+            const mailtoLink = `mailto:contact@sorbo-ingenierie.ci?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Ouvrir le client email par défaut
+            window.location.href = mailtoLink;
+            
+            // Simuler une réponse réussie
+            return { ok: true };
+            
+        } catch (error) {
+            console.error('Erreur envoi newsletter Zoho:', error);
+            throw error;
+        }
+    }
+
+    // Formatage spécifique pour les emails de newsletter
+    formatNewsletterEmailBody(data) {
+        let body = `📧 NOUVELLE INSCRIPTION NEWSLETTER\n\n`;
+        body += `Email: ${data.email}\n`;
+        body += `Page d'inscription: ${data.page}\n`;
+        body += `Date d'inscription: ${new Date(data.date).toLocaleString('fr-FR')}\n\n`;
+        
+        body += `--- Instructions ---\n`;
+        body += `Cet email a été automatiquement stocké dans le système.\n`;
+        body += `Pour consulter tous les emails stockés, utilisez la console développeur:\n`;
+        body += `localStorage.getItem('newsletterEmails')\n\n`;
+        
+        body += `--- Informations techniques ---\n`;
+        body += `Type: Newsletter\n`;
+        body += `Statut: En attente d'envoi manuel\n`;
+        body += `Timestamp: ${data.date}\n`;
+        
+        return body;
+    }
+
     // Envoi vers Zoho Mail avec fallback mailto
     async sendToZohoMail(data) {
         try {
-            // Pour l'instant, utilisation de mailto comme solution simple et fiable
+            // Essayer d'abord l'envoi direct avec EmailJS
+            if (window.emailService && window.emailService.initialized) {
+                console.log('📧 Tentative d'envoi direct avec EmailJS...');
+                const result = await window.emailService.sendContactEmail(data);
+                
+                if (result.success) {
+                    console.log('✅ Email envoyé directement via EmailJS');
+                    return { ok: true };
+                } else {
+                    console.warn('⚠️ Échec EmailJS, fallback vers mailto');
+                }
+            }
+            
+            // Fallback vers mailto si EmailJS n'est pas disponible ou échoue
+            console.log('📧 Utilisation du fallback mailto...');
             const subject = `Nouveau message de ${data.name || data.nom || 'contact'}`;
             const body = this.formatEmailBody(data);
             
