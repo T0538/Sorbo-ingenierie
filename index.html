@@ -3,7 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorbo-Ingénierie | Excellence et Innovation en Génie civil</title>
+    <title>Sorbo-Ingénierie | Bureau d'études en génie civil Abidjan Côte d'Ivoire</title>
+    
+    <!-- Balises SEO essentielles -->
+    <meta name="description" content="Sorbo-Ingénierie, bureau d'études spécialisé en génie civil à Abidjan. Expertise en ingénierie, formations professionnelles et logiciels techniques. Solutions innovantes pour vos projets de construction.">
+    <meta name="keywords" content="Sorbo-Ingénierie, bureau d'études, génie civil, ingénierie, Abidjan, Côte d'Ivoire, formation professionnelle, logiciels techniques, construction, BTP">
+    <meta name="author" content="Sorbo-Ingénierie">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr">
+    <meta name="geo.region" content="CI">
+    <meta name="geo.placename" content="Abidjan">
+    <meta name="geo.position" content="5.345478;-4.062455">
+    <meta name="ICBM" content="5.345478, -4.062455">
+    
+    <!-- Open Graph pour les réseaux sociaux -->
+    <meta property="og:title" content="Sorbo-Ingénierie | Bureau d'études en génie civil Abidjan">
+    <meta property="og:description" content="Bureau d'études spécialisé en génie civil à Abidjan. Expertise en ingénierie, formations professionnelles et logiciels techniques.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sorbo-ingenierie.ci">
+    <meta property="og:image" content="https://sorbo-ingenierie.ci/images/logo.mr.png">
+    <meta property="og:site_name" content="Sorbo-Ingénierie">
+    <meta property="og:locale" content="fr_CI">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sorbo-Ingénierie | Bureau d'études en génie civil Abidjan">
+    <meta name="twitter:description" content="Bureau d'études spécialisé en génie civil à Abidjan. Expertise en ingénierie, formations professionnelles et logiciels techniques.">
+    <meta name="twitter:image" content="https://sorbo-ingenierie.ci/images/logo.mr.png">
+    
+    <!-- Informations de contact structurées -->
+    <meta name="contact" content="contact@sorbo.ingenierie.ci">
+    <meta name="phone" content="+225 01 50 12 30 50">
+    <meta name="address" content="Yopougon Ancien Bel-Air cité SOPIM, Abidjan, Côte d'Ivoire">
+    
+    <link rel="canonical" href="https://sorbo-ingenierie.ci/">
     <link rel="icon" type="image/png" href="images/logo.mr.png">
     <link rel="shortcut icon" type="image/png" href="images/logo.mr.png">
     <link rel="apple-touch-icon" href="images/logo.mr.png">
@@ -1508,7 +1541,8 @@
 
         .trust-track {
             display: flex;
-            animation: scroll 20s linear infinite;
+            animation: scroll 25s linear infinite;
+            animation-delay: 5s;
             gap: 30px;
         }
 
@@ -1517,7 +1551,7 @@
         }
 
         @keyframes scroll {
-            0% {
+            0%, 20% {
                 transform: translateX(0);
             }
             100% {
@@ -1583,13 +1617,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #dc3545, #c82333);
+            background: rgba(220, 53, 69, 0.15);
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             z-index: 2;
+        }
+
+        /* Couleurs spécifiques pour chaque logo avec transparence */
+        .trust-slide:nth-child(1) .trust-overlay {
+            background: rgba(220, 53, 69, 0.15); /* Rouge FDFP avec transparence */
+        }
+
+        .trust-slide:nth-child(2) .trust-overlay {
+            background: rgba(76, 175, 80, 0.15); /* Vert SETEC avec transparence */
+        }
+
+        .trust-slide:nth-child(3) .trust-overlay {
+            background: rgba(255, 152, 0, 0.15); /* Orange SICMA avec transparence */
         }
 
         .trust-item:hover .trust-overlay {
@@ -1621,11 +1669,12 @@
             width: 60px;
             height: 60px;
             object-fit: contain;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.25);
             border-radius: 12px;
             padding: 8px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .trust-identity h4 {
@@ -1693,7 +1742,7 @@
             }
 
             @keyframes scroll {
-                0% {
+                0%, 20% {
                     transform: translateX(0);
                 }
                 100% {
@@ -1741,7 +1790,7 @@
             }
 
             @keyframes scroll {
-                0% {
+                0%, 20% {
                     transform: translateX(0);
                 }
                 100% {
@@ -1750,6 +1799,111 @@
             }
         }
     </style>
+    
+    <!-- Données structurées Schema.org pour le référencement -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Sorbo-Ingénierie",
+        "alternateName": "Sorbo Ingénierie",
+        "url": "https://sorbo-ingenierie.ci",
+        "logo": "https://sorbo-ingenierie.ci/images/logo.mr.png",
+        "description": "Bureau d'études spécialisé en génie civil à Abidjan, Côte d'Ivoire. Expertise en ingénierie, formations professionnelles et logiciels techniques.",
+        "foundingDate": "2022",
+        "legalName": "Sorbo-Ingénierie SARL",
+        "taxID": "2242797T",
+        "vatID": "CI-ABJ-03-2022-B12-03946",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Yopougon Ancien Bel-Air cité SOPIM",
+            "addressLocality": "Abidjan",
+            "addressRegion": "Abidjan",
+            "addressCountry": "CI"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "5.345478",
+            "longitude": "-4.062455"
+        },
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "telephone": "+225-01-50-12-30-50",
+                "contactType": "customer service",
+                "availableLanguage": "French"
+            },
+            {
+                "@type": "ContactPoint",
+                "telephone": "+225-21-21-80-21-26",
+                "contactType": "technical support",
+                "availableLanguage": "French"
+            }
+        ],
+        "email": "contact@sorbo.ingenierie.ci",
+        "sameAs": [
+            "https://www.facebook.com/sorbo.ingenierie",
+            "https://www.linkedin.com/company/sorbo-ingenierie"
+        ],
+        "areaServed": {
+            "@type": "Country",
+            "name": "Côte d'Ivoire"
+        },
+        "serviceType": [
+            "Génie civil",
+            "Ingénierie",
+            "Formation professionnelle",
+            "Logiciels techniques",
+            "Bureau d'études"
+        ],
+        "knowsAbout": [
+            "Génie civil",
+            "Construction",
+            "BTP",
+            "Ingénierie structurelle",
+            "Formation technique",
+            "Logiciels de calcul"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Sorbo-Ingénierie",
+        "image": "https://sorbo-ingenierie.ci/images/logo.mr.png",
+        "telephone": "+225-01-50-12-30-50",
+        "email": "contact@sorbo.ingenierie.ci",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Yopougon Ancien Bel-Air cité SOPIM",
+            "addressLocality": "Abidjan",
+            "addressRegion": "Abidjan",
+            "postalCode": "",
+            "addressCountry": "CI"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 5.345478,
+            "longitude": -4.062455
+        },
+        "url": "https://sorbo-ingenierie.ci",
+        "priceRange": "$$",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday", 
+                "Wednesday",
+                "Thursday",
+                "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+        }
+    }
+    </script>
 </head>
 <body>
 
@@ -1867,7 +2021,7 @@
         <div class="container">
             <div class="hero-content" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                 <h1 data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">Sorbo-Ingénierie</h1>
-                <h2 data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">Excellence et Innovation en Génie civil</h2>
+                <h2 data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">Bureau d'études en génie civil à Abidjan - Solutions d'ingénierie innovantes</h2>
                 <div class="hero-services" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800" aria-label="Nos services">
                     <a href="ingenierie.html" class="service-item" aria-label="Service d'ingénierie" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="500">
                         <i class="fas fa-cogs" aria-hidden="true"></i>
@@ -1946,9 +2100,9 @@
 
     <section class="projects-carousel">
         <div class="container">
-            <h2 data-aos="fade-up" data-aos-duration="800">Nos réalisations</h2>
+            <h2 data-aos="fade-up" data-aos-duration="800">Nos réalisations en génie civil et ingénierie</h2>
             <div class="underline" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800"></div>
-            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">Découvrez nos projets d'ingénierie innovants et nos réalisations marquantes.</p>
+            <p data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">Découvrez nos projets d'ingénierie innovants et nos réalisations marquantes en Côte d'Ivoire.</p>
             
             <div class="carousel-container" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
                 <div class="carousel-track">

@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sorbo-ingenierie.ci/sitemap.xml
+
+# Disallow certain directories if needed
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow important pages
+Allow: /index.html
+Allow: /notre-entreprise.html
+Allow: /ingenierie.html
+Allow: /nos-formations.html
+Allow: /formations-intra-entreprise.html
+Allow: /formations-inter-entreprise.html
+Allow: /nos-logiciels.html
+Allow: /nous-rejoindre.html
+Allow: /actualites.html
+Allow: /nos-projets.html
+Allow: /contact.html
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Crawl-delay (optional)
+Crawl-delay: 1
