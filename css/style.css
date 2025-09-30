@@ -983,6 +983,7 @@ footer h3::after {
     max-width: 800px;
     margin: 0 auto 30px;
     font-size: 1.1rem;
+   bacgroun-color = var 'red color '
 }
 
 .cta-buttons {
