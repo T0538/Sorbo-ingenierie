@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -40,6 +40,7 @@
     <link rel="icon" type="image/png" href="images/logo.mr.png">
     <link rel="shortcut icon" type="image/png" href="images/logo.mr.png">
     <link rel="apple-touch-icon" href="images/logo.mr.png">
+    <link rel="preload" as="image" href="images/logo.mr.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/logo-fixes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -320,7 +321,7 @@
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-            min-height: 100vh;
+            min-height: 100svh;
         }
         
         .hero::before {
@@ -593,17 +594,6 @@
         /* Responsive pour les icônes flottantes */
         @media (max-width: 768px) {
             .floating-icons {
-                right: 15px;
-                gap: 15px;
-            }
-            
-            .floating-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            
-            .floating-icon .tooltip {
                 display: none;
             }
         }
@@ -1911,7 +1901,7 @@
 
  <div class="page-loader" id="pageLoader">
         <div class="loader-content">
-            <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie - Bureau d'études génie civil Abidjan" class="loader-logo">
+            <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie - Bureau d'études génie civil Abidjan" class="loader-logo" width="120" height="120" loading="eager" decoding="async">
             <h1 class="loader-title">Sorbo-Ingénierie</h1>
             <p class="loader-subtitle">Bureau d'études en génie civil - Solutions d'ingénierie innovantes</p>
             <div class="loader-spinner"></div>
@@ -1927,7 +1917,7 @@
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie - Bureau d'études génie civil Abidjan" id="logo">
+                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie - Bureau d'études génie civil Abidjan" id="logo" width="160" height="60" loading="eager" decoding="async">
                 </a>
             </div>
             <nav aria-label="Navigation principale">
@@ -2041,7 +2031,7 @@
         </div>
         
         <!-- Icônes flottantes à droite - uniquement dans la section hero -->
-        <div class="floating-icons" style="display: flex !important; opacity: 1 !important; visibility: visible !important;">
+        <div class="floating-icons">
             <a href="tel:+2252121802126" class="floating-icon" aria-label="Nous contacter">
                 <i class="fas fa-phone"></i>
                 <span class="tooltip">Nous contacter</span>
@@ -2434,58 +2424,62 @@
     <script>
 
 
-        // Page Loader
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('pageLoader');
-            const progressBar = document.querySelector('.loader-progress-bar');
-            
-            // Animation de la barre de progression
-            if (progressBar) {
-                progressBar.style.width = '0%';
-                setTimeout(() => {
-                    progressBar.style.width = '100%';
-                }, 100);
-            }
-            
-            // Attendre un minimum de 2 secondes pour l'effet visuel
-            setTimeout(function() {
-                loader.classList.add('hidden');
-                
-                // Supprimer complètement le loader après la transition
-                setTimeout(function() {
-                    loader.style.display = 'none';
-                }, 500);
-            }, 2000);
-        });
+        const loader = document.getElementById('pageLoader');
+        const progressBar = document.querySelector('.loader-progress-bar');
+        const loaderLogo = document.querySelector('.loader-logo');
 
-        // Initialiser AOS après le chargement
+        let loaderStartTime = performance.now();
+
+        const hideLoader = () => {
+            if (!loader) return;
+
+            const minDurationMs = 600;
+            const elapsed = performance.now() - loaderStartTime;
+            const remaining = Math.max(0, minDurationMs - elapsed);
+
+            window.setTimeout(() => {
+                loader.classList.add('hidden');
+                window.setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 350);
+            }, remaining);
+        };
+
+        if (progressBar) {
+            progressBar.style.width = '0%';
+            window.setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 80);
+        }
+
+        if (loader) {
+            loader.style.display = 'flex';
+        }
+
+        if (loaderLogo) {
+            if (loaderLogo.complete) {
+                hideLoader();
+            } else {
+                loaderLogo.addEventListener('load', hideLoader, { once: true });
+                loaderLogo.addEventListener('error', hideLoader, { once: true });
+            }
+        } else {
+            window.addEventListener('load', hideLoader, { once: true });
+        }
+
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                AOS.init({
-                    offset: 120,
+            window.setTimeout(function() {
+                if (!window.AOS) return;
+                window.AOS.init({
                     duration: 800,
                     easing: 'ease-out',
-                    once: true
+                    once: true,
+                    mirror: false,
+                    anchorPlacement: 'top-bottom',
+                    disable: 'mobile'
                 });
-            }, 2500);
-        });
-
-        // Afficher le loader immédiatement si la page se recharge
-        document.addEventListener('DOMContentLoaded', function() {
-            const loader = document.getElementById('pageLoader');
-            loader.style.display = 'flex';
-        });
-    
-
-        // Initialisation de AOS avec des paramètres améliorés
-        AOS.init({
-            duration: 800,
-            easing: 'ease-out',
-            once: false,
-            mirror: true,
-            anchorPlacement: 'top-bottom',
-            disable: 'mobile'
-        });
+            }, 300);
+        }, { once: true });
         
         // Fonction pour gérer la soumission de la newsletter
         function handleNewsletterSubmit(button) {

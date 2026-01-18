@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -1576,71 +1576,7 @@
             }
         }
         
-        /* Styles pour les menus déroulants */
-        .dropdown {
-            position: relative;
-        }
         
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            min-width: 200px;
-            background-color: white;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-            margin: 0;
-            list-style: none;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-        
-        .dropdown:hover .dropdown-menu,
-        .dropdown-menu.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .dropdown-menu li {
-            padding: 0;
-        }
-        
-        .dropdown-menu a {
-            display: block;
-            padding: 8px 15px;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-        
-        .dropdown-menu a:hover {
-            background-color: rgba(209, 0, 0, 0.05);
-            color: var(--primary-color);
-        }
-
-        /* Mobile responsif pour dropdown */
-        @media (max-width: 992px) {
-            .dropdown-menu {
-                position: static;
-                box-shadow: none;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                padding: 0;
-                margin-top: 10px;
-            }
-            
-            .dropdown-menu.show {
-                max-height: 200px;
-            }
-        }
     </style>
 </head>
 <body>
