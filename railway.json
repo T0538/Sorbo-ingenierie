@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "node server-railway-cors-fixed.js",
+    "startCommand": "node server-production.js || node backend/server-production.js",
     "healthcheckPath": "/api/health",
     "healthcheckTimeout": 300,
     "numReplicas": 1,

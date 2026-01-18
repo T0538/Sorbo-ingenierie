@@ -79,9 +79,11 @@ const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/sorbo-ingenierie');
     console.log(`MongoDB connecté: ${conn.connection.host}`);
+
+    return true;
   } catch (error) {
     console.error(`Erreur de connexion à MongoDB: ${error.message}`);
-    process.exit(1);
+    return false;
   }
 };
 
@@ -118,8 +120,8 @@ app.use((err, req, res, next) => {
 // Port et démarrage du serveur
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Serveur démarré sur le port ${PORT}`);
-  });
-}); 
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+});
+
+connectDB();
