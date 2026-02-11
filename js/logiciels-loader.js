@@ -108,12 +108,20 @@ function createLogicielCard(logiciel, index, total) {
      const prix = logiciel.prix || 'Gratuit';
      
      // Utilisation des images de la base de données ou fallback sur les défauts
-     const image = logiciel.logo || logiciel.image || 'images/image1.png';
-     const headerImage = logiciel.headerImage || 'images/drainageroute.png';
+     let image = logiciel.logo || logiciel.image || 'images/image1.png';
+     let headerImage = logiciel.headerImage || 'images/drainageroute.png';
      
+     // Correction forcée côté client pour Str-Chaussée (au cas où la DB n'est pas à jour)
+     if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
+         image = 'images/geopavetotal.jpg.jpeg';
+         headerImage = 'images/Image autoroute.png';
+         // On force aussi la catégorie si besoin
+         // categorie = 'Infrastructures et Transports'; 
+     }
+
      // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
-    const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
-    const categorieFormatee = categorie.split(' ').map((word, index) => {
+     const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
+     let categorieFormatee = categorie.split(' ').map((word, index) => {
         const motMinuscule = word.toLowerCase();
         // Garder les mots de liaison en minuscules, sauf s'ils sont en première position
         if (index > 0 && motsLiaison.includes(motMinuscule)) {
@@ -121,6 +129,11 @@ function createLogicielCard(logiciel, index, total) {
         }
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
+    
+    // Correction forcée catégorie pour Str-Chaussée
+    if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
+        categorieFormatee = 'Infrastructures et Transports';
+    }
      
      // Déterminer si le logiciel est disponible au téléchargement
      // TALREN et OH-Route sont disponibles
@@ -156,7 +169,7 @@ function createLogicielCard(logiciel, index, total) {
             <div class="software-title" style="font-size: 1.25rem; font-weight: 700; color: #1f2937;"><strong>${nom}</strong></div>
           </header>
 
-          <div class="software-category" style="color:#6b7280; font-size:0.85rem; margin-bottom:12px; font-weight:500;">Eau et Assainissement</div>
+          <div class="software-category" style="color:#6b7280; font-size:0.85rem; margin-bottom:12px; font-weight:500;">${categorieFormatee}</div>
 
           <p class="software-description" style="color:#374155; line-height:1.5; font-size:0.95rem; margin-bottom:16px;">
             ${description}
