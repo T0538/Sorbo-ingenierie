@@ -180,11 +180,81 @@ function createLogicielCard(logiciel, index, total) {
               ? '<a href="#" class="btn btn-primary download-btn" data-logiciel-id="' + logiciel.id + '" style="padding:8px 14px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; cursor:pointer; background:#d10000; color:white; box-shadow: 0 3px 10px rgba(209,0,0,0.15); font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-download"></i> Télécharger</a>'
               : '<button class="btn btn-primary" disabled style="padding:8px 14px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; opacity: 0.6; cursor: not-allowed; background:#d10000; color:white; font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-clock"></i> En cours de développement</button>'
             }
-            <a href="logiciel-details.html" class="btn btn-secondary" style="padding:8px 14px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; cursor:pointer; background:white; color:#374155; border:1px solid #d1d5db; font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-info-circle"></i> Infos</a>
+            <a href="logiciel-details.html" class="btn btn-secondary info-btn" data-nom="${nom}" data-is-disponible="${isDisponible}" style="padding:8px 14px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-weight:600; cursor:pointer; background:white; color:#374155; border:1px solid #d1d5db; font-size:0.9rem; pointer-events:auto; text-align:center;"><i class="fas fa-info-circle"></i> Infos</a>
           </div>
         </div>
       </article>
     `;
+}
+
+function showComingSoonModal(softwareName) {
+    // Créer l'overlay
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.zIndex = '9999';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.backdropFilter = 'blur(5px)';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.3s ease';
+
+    // Créer la modale
+    const modal = document.createElement('div');
+    modal.style.backgroundColor = 'white';
+    modal.style.borderRadius = '16px';
+    modal.style.padding = '30px';
+    modal.style.maxWidth = '400px';
+    modal.style.width = '90%';
+    modal.style.textAlign = 'center';
+    modal.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+    modal.style.transform = 'scale(0.9)';
+    modal.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+    modal.innerHTML = `
+        <div style="margin-bottom: 20px;">
+            <div style="width: 60px; height: 60px; background-color: rgba(209, 0, 0, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                <i class="fas fa-rocket" style="font-size: 24px; color: #D10000;"></i>
+            </div>
+        </div>
+        <h3 style="color: #1f2937; font-size: 1.5rem; font-weight: 700; margin-bottom: 10px;">Bientôt disponible !</h3>
+        <p style="color: #4b5563; font-size: 1rem; line-height: 1.5; margin-bottom: 25px;">
+            Les informations détaillées sur <strong>${softwareName}</strong> seront bientôt mises en ligne. Notre équipe finalise actuellement la documentation.
+        </p>
+        <button id="closeModalBtn" style="background-color: #D10000; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;">
+            Compris
+        </button>
+    `;
+
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    // Animation d'entrée
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+        modal.style.transform = 'scale(1)';
+    });
+
+    // Gestion de la fermeture
+    const closeBtn = modal.querySelector('#closeModalBtn');
+    
+    const closeModal = () => {
+        overlay.style.opacity = '0';
+        modal.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+        }, 300);
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+    });
 }
 
 function addDownloadListeners() {
@@ -211,8 +281,23 @@ function addDownloadListeners() {
              await handleDownload(logicielId, 'download');
          });
      });
+
+     // NOUVEAU : Gestion des boutons "Infos"
+     document.querySelectorAll('.info-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const isDisponible = btn.getAttribute('data-is-disponible') === 'true';
+            const nomLogiciel = btn.getAttribute('data-nom');
+
+            // Si le logiciel n'est PAS disponible (en cours de dév), on affiche la modale
+            if (!isDisponible) {
+                e.preventDefault(); // Empêcher la navigation vers la page infos
+                showComingSoonModal(nomLogiciel);
+            }
+            // Sinon, on laisse le lien fonctionner normalement vers la page infos
+        });
+     });
      
-     console.log('ℹ️ Boutons de téléchargement configurés pour les logiciels disponibles');
+     console.log('ℹ️ Boutons de téléchargement et infos configurés');
 }
 
 async function handleDownload(logicielId, type) {
