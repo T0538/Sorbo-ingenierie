@@ -113,8 +113,8 @@ function createLogicielCard(logiciel, index, total) {
      
      // Correction forcée côté client pour Str-Chaussée (au cas où la DB n'est pas à jour)
      if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-         image = 'images/geopavetotal.jpg.jpeg';
-         headerImage = 'images/ Image PDG Str-Chaussée.png';
+         image = 'images/Image PDG Str-Chaussée.png'; // Nom corrigé
+         headerImage = 'images/Image autoroute.png';
          // On force aussi la catégorie si besoin
          // categorie = 'Infrastructures et Transports'; 
      }
