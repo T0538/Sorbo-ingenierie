@@ -22,6 +22,15 @@ async function connectDB() {
         
         await mongoose.connect(process.env.MONGODB_URI);
         console.log('✅ Connexion MongoDB Atlas réussie !');
+        
+        // Exécuter les mises à jour automatiques
+        try {
+            const { runUpdates } = require('./scripts/apply-updates');
+            await runUpdates();
+        } catch (updateError) {
+            console.error('⚠️ Erreur lors de la mise à jour automatique:', updateError);
+        }
+
     } catch (error) {
         console.error('❌ Erreur de connexion MongoDB:', error.message);
         console.log('💡 Vérifiez votre URI MongoDB et votre connexion internet');
