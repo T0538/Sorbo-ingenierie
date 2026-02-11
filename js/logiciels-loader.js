@@ -113,8 +113,8 @@ function createLogicielCard(logiciel, index, total) {
      
      // Correction forcée côté client pour Str-Chaussée (au cas où la DB n'est pas à jour)
      if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-         image = 'images/Image PDG Str-Chaussée.png'; // Nom corrigé
-         headerImage = 'images/Image autoroute.png';
+         image = 'images/geopavetotal.jpg.jpeg';
+         headerImage = 'images/Image PDG Str-Chaussée.png';
          // On force aussi la catégorie si besoin
          // categorie = 'Infrastructures et Transports'; 
      }
@@ -194,25 +194,58 @@ function addDownloadListeners() {
              e.preventDefault();
              const logicielId = btn.getAttribute('data-logiciel-id');
              
-             // Détecter OH-Route par son nom affiché sur la carte
+             // Détecter OH-Route ou Str-Chaussée par son nom affiché sur la carte
              const softwareCard = btn.closest('.software-card');
              const softwareName = softwareCard.querySelector('.software-title');
-             if (softwareName && softwareName.textContent.toLowerCase().includes('oh-route')) {
-                 // C'est OH-Route, télécharger directement
-                 const downloadLink = document.createElement('a');
-                 downloadLink.href = 'downloads/OH-Route v1.1.rar';
-                 downloadLink.download = 'OH-Route v1.1.rar';
-                 document.body.appendChild(downloadLink);
-                 downloadLink.click();
-                 document.body.removeChild(downloadLink);
-                 return;
+             
+             if (softwareName) {
+                const nameText = softwareName.textContent.toLowerCase();
+                
+                if (nameText.includes('oh-route')) {
+                    // C'est OH-Route, télécharger directement
+                    downloadLocalFile('downloads/OH-Route v1.1.rar');
+                    return;
+                }
+                
+                if (nameText.includes('str-chaussée') || nameText.includes('str chaussée')) {
+                    // C'est Str-Chaussée, télécharger directement
+                    // NOTE: Assurez-vous que le fichier "downloads/Str-Chaussée v1.rar" existe
+                    downloadLocalFile('downloads/Str-Chaussée v1.rar');
+                    return;
+                }
              }
              
              await handleDownload(logicielId, 'download');
          });
      });
+
+     // NOUVEAU : Gestion des boutons "Infos"
+     document.querySelectorAll('.info-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const isDisponible = btn.getAttribute('data-is-disponible') === 'true';
+            const nomLogiciel = btn.getAttribute('data-nom');
+
+            // Si le logiciel n'est PAS disponible (en cours de dév), on affiche la modale
+            if (!isDisponible) {
+                e.preventDefault(); // Empêcher la navigation vers la page infos
+                showComingSoonModal(nomLogiciel);
+            }
+            // Sinon, on laisse le lien fonctionner normalement vers la page infos
+        });
+     });
      
-     console.log('ℹ️ Boutons de téléchargement configurés pour les logiciels disponibles');
+     console.log('ℹ️ Boutons de téléchargement et infos configurés');
+}
+
+function downloadLocalFile(filePath) {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = filePath;
+    // Extraire le nom du fichier de l'URL
+    const fileName = filePath.split('/').pop();
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
 
 async function handleDownload(logicielId, type) {
