@@ -111,14 +111,6 @@ function createLogicielCard(logiciel, index, total) {
      let image = logiciel.logo || logiciel.image || 'images/image1.png';
      let headerImage = logiciel.headerImage || 'images/drainageroute.png';
      
-     // Correction forcée côté client pour Str-Chaussée (au cas où la DB n'est pas à jour)
-     if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-         image = 'images/geopavetotal.jpg.jpeg';
-         headerImage = 'images/Image autoroute.png';
-         // On force aussi la catégorie si besoin
-         // categorie = 'Infrastructures et Transports'; 
-     }
-
      // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
      const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
      let categorieFormatee = categorie.split(' ').map((word, index) => {
@@ -129,15 +121,17 @@ function createLogicielCard(logiciel, index, total) {
         }
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
-    
-    // Correction forcée catégorie pour Str-Chaussée
-    if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-        categorieFormatee = 'Infrastructures et Transports';
-    }
      
-     // Déterminer si le logiciel est disponible au téléchargement
-     // TALREN et OH-Route sont disponibles
-     const isDisponible = nom.toLowerCase().includes('talren') || nom.toLowerCase().includes('oh-route');
+     // Déterminer si le logiciel est disponible au téléchargement en utilisant le champ 'disponible' de la DB
+     // Fallback sur le nom si le champ n'est pas défini (pour compatibilité)
+     let isDisponible = false;
+     
+     if (typeof logiciel.disponible !== 'undefined') {
+         isDisponible = logiciel.disponible === true;
+     } else {
+         // Fallback legacy
+         isDisponible = nom.toLowerCase().includes('talren') || nom.toLowerCase().includes('oh-route');
+     }
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
