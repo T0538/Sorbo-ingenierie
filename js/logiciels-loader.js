@@ -106,11 +106,12 @@ function createLogicielCard(logiciel, index, total) {
      const categorie = logiciel.categorie || '';
      const version = logiciel.version ? `v${logiciel.version}` : '';
      const prix = logiciel.prix || 'Gratuit';
-     // Le logo est toujours chargé depuis le dossier local images/
-     const image = 'images/image1.png';
+     
+     // Utilisation des images de la base de données ou fallback sur les défauts
+     const image = logiciel.logo || logiciel.image || 'images/image1.png';
      const headerImage = logiciel.headerImage || 'images/drainageroute.png';
      
-         // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
+     // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
     const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
     const categorieFormatee = categorie.split(' ').map((word, index) => {
         const motMinuscule = word.toLowerCase();

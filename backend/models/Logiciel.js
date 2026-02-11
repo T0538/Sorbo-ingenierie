@@ -36,7 +36,7 @@ const logicielSchema = new mongoose.Schema({
   },
   categorie: {
     type: String,
-    enum: ['autocad', 'covadis', 'robot', 'revit', 'civil3d', 'sketchup', 'autre'],
+    // enum: ['autocad', 'covadis', 'robot', 'revit', 'civil3d', 'sketchup', 'autre'], // Validation assouplie
     required: [true, 'La catégorie est requise']
   },
   prix: {
@@ -50,6 +50,14 @@ const logicielSchema = new mongoose.Schema({
   image: {
     type: String,
     default: '/images/logiciels/default.jpg'
+  },
+  logo: {
+    type: String,
+    default: 'images/image1.png'
+  },
+  headerImage: {
+    type: String,
+    default: 'images/drainageroute.png'
   },
   lienTelechargement: {
     type: String,
