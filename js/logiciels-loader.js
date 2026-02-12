@@ -112,17 +112,17 @@ function createLogicielCard(logiciel, index, total) {
      let headerImage = logiciel.headerImage || 'images/drainageroute.png';
      
      // Correction forcée côté client pour Str-Chaussée (au cas où la DB n'est pas à jour)
-     if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-         image =  'images/geopavetotal.jpg.jpeg'; // Nom corrigé
-         headerImage =  'images/Image PDG Str-Chaussée.png';
-         // On force aussi la catégorie si besoin
-         // categorie = 'Infrastructures et Transports'; 
-     }
-     
-     // Correction forcée pour OH-Route
-     if (nom.toLowerCase().includes('oh-route')) {
-         image = 'images/image1.png';
-     }
+    if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
+        image =  'images/geopavetotal.jpg.jpeg'; // Nom corrigé
+        headerImage =  'images/Image PDG Str-Chaussée.png';
+        // On force aussi la catégorie si besoin
+        // categorie = 'Infrastructures et Transports'; 
+    }
+    
+    // Correction forcée pour OH-Route
+    if (nom.toLowerCase().includes('oh-route')) {
+        image = 'images/Image1.png';
+    }
 
      // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
      const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
