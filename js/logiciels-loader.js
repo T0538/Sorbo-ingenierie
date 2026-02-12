@@ -113,10 +113,15 @@ function createLogicielCard(logiciel, index, total) {
      
      // Correction forcée côté client pour Str-Chaussée (au cas où la DB n'est pas à jour)
      if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-         image = 'images/geopavetotal.jpg.jpeg';
-         headerImage = 'images/Image PDG Str-Chaussée.png';
+         image =  'images/geopavetotal.jpg.jpeg'; // Nom corrigé
+         headerImage =  'images/ Image PDG Str-Chaussée.png';
          // On force aussi la catégorie si besoin
          // categorie = 'Infrastructures et Transports'; 
+     }
+     
+     // Correction forcée pour OH-Route
+     if (nom.toLowerCase().includes('oh-route')) {
+         image = 'images/image1.png';
      }
 
      // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
@@ -136,8 +141,19 @@ function createLogicielCard(logiciel, index, total) {
     }
      
      // Déterminer si le logiciel est disponible au téléchargement
-     // TALREN et OH-Route sont disponibles
-     const isDisponible = nom.toLowerCase().includes('talren') || nom.toLowerCase().includes('oh-route');
+     // Utiliser le champ 'disponible' de la DB, ou fallback sur les règles legacy
+     let isDisponible = false;
+     
+     if (typeof logiciel.disponible !== 'undefined') {
+         isDisponible = logiciel.disponible === true;
+     } else {
+         isDisponible = nom.toLowerCase().includes('talren') || nom.toLowerCase().includes('oh-route');
+     }
+     
+     // Correction forcée : Str-Chaussée est TOUJOURS disponible
+     if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
+         isDisponible = true;
+     }
 
     const features = Array.isArray(logiciel.fonctionnalites)
       ? logiciel.fonctionnalites.slice(0, 4)
