@@ -102,7 +102,8 @@ function displayLogiciels(logiciels) {
 
 function createLogicielCard(logiciel, index, total) {
      const nom = logiciel.nom || 'Logiciel';
-     const description = logiciel.description || '';
+     let description = (logiciel.description || '').trim();
+     if (description && !description.endsWith('.')) description += '.';
      const categorie = logiciel.categorie || '';
      const version = logiciel.version ? `v${logiciel.version}` : '';
      const prix = logiciel.prix || 'Gratuit';
@@ -124,21 +125,12 @@ function createLogicielCard(logiciel, index, total) {
         image = 'images/Image1.png';
     }
 
-     // Formater la catégorie (première lettre de chaque mot en majuscule, sauf les mots de liaison)
-     const motsLiaison = ['et', 'de', 'du', 'des', 'le', 'la', 'les', 'en', 'à', 'au', 'aux'];
-     let categorieFormatee = categorie.split(' ').map((word, index) => {
-        const motMinuscule = word.toLowerCase();
-        // Garder les mots de liaison en minuscules, sauf s'ils sont en première position
-        if (index > 0 && motsLiaison.includes(motMinuscule)) {
-            return motMinuscule;
-        }
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join(' ');
-    
-    // Correction forcée catégorie pour Str-Chaussée
-    if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
-        categorieFormatee = 'Infrastructures et Transports';
-    }
+     // Formater la catégorie : seule la première lettre du premier mot en majuscule (ex. "Eau et assainissement", "Infrastructure et transport")
+     const catNorm = (categorie || '').trim().toLowerCase();
+     let categorieFormatee = categorie.trim() ? (categorie.trim().charAt(0).toUpperCase() + categorie.trim().slice(1).toLowerCase()) : '';
+     // Libellés d'affichage pour les catégories connues
+     if (catNorm === 'infrastructures et transports') categorieFormatee = 'Infrastructure et transport';
+     if (catNorm === 'eau et assainissement') categorieFormatee = 'Eau et assainissement';
      
      // Déterminer si le logiciel est disponible au téléchargement
      // Utiliser le champ 'disponible' de la DB, ou fallback sur les règles legacy
