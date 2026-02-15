@@ -66,7 +66,7 @@ function createBasicFooter() {
                             </li>
                             <li style="margin-bottom: 8px;">
                                 <i class="fas fa-envelope" style="color: #d10000; margin-right: 8px;"></i>
-                                <a href="mailto:infos@sorbo-ingenierie.ci" style="color: #bdc3c7; text-decoration: none;">infos@sorbo-ingenierie.ci</a>
+                                <a href="mailto:logiciels@sorbo-ingenierie.ci" style="color: #bdc3c7; text-decoration: none;">logiciels@sorbo-ingenierie.ci</a>
                             </li>
                             <li style="margin-bottom: 8px;">
                                 <i class="fas fa-phone" style="color: #d10000; margin-right: 8px;"></i>

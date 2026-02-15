@@ -26,7 +26,7 @@ $footerStandard = @"
                     <h3>Nos contacts</h3>
                     <ul class="contact-info">
                         <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:infos@sorbo-ingenierie.ci">infos@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:logiciels@sorbo-ingenierie.ci">logiciels@sorbo-ingenierie.ci</a></li>
                         <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
                         <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
                     </ul>
