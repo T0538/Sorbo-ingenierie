@@ -1466,10 +1466,10 @@
             }
         }
 
-        /* Section Ils nous font confiance - Carousel automatique avec identité Sorbo */
+        /* Section Ils nous font confiance - Grille moderne et professionnelle */
         .trust-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 100px 0;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
             position: relative;
             overflow: hidden;
         }
@@ -1487,165 +1487,168 @@
 
         .trust-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
             position: relative;
             z-index: 2;
         }
 
         .trust-header h2 {
             font-size: 2.8rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            position: relative;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
         .trust-header .underline {
-            width: 80px;
+            width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, #dc3545, #c82333);
-            margin: 0 auto 30px;
+            background: #d10000;
+            margin: 0 auto 25px;
             border-radius: 2px;
         }
 
         .trust-header p {
-            font-size: 1.1rem;
-            color: #6c757d;
-            max-width: 600px;
+            font-size: 1.15rem;
+            color: #4a5568;
+            max-width: 700px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
         .trust-carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             position: relative;
             z-index: 2;
-            overflow: hidden;
-            margin: 0 auto;
-            max-width: 1200px;
         }
 
-        .trust-carousel {
-            width: 100%;
-            overflow: hidden;
-        }
-
+        /* Flexbox pour une grille centrée statique */
         .trust-track {
             display: flex;
-            animation: scroll 25s linear infinite;
-            animation-delay: 5s;
-            gap: 30px;
-        }
-
-        .trust-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes scroll {
-            0%, 20% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-300px * 3));
-            }
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
         }
 
         .trust-slide {
-            flex: 0 0 300px;
-            display: flex;
-            justify-content: center;
+            flex: 0 1 320px;
+            max-width: 350px;
+            perspective: 1000px;
         }
 
         .trust-item {
             background: #ffffff;
-            border-radius: 20px;
-            padding: 0;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(220, 53, 69, 0.08);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            border: 1px solid rgba(220, 53, 69, 0.1);
+            border-radius: 24px;
+            height: 220px;
             position: relative;
             overflow: hidden;
-            width: 100%;
-            max-width: 300px;
-            height: 200px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 0, 0, 0.03);
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .trust-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(220, 53, 69, 0.15);
-            border-color: #dc3545;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
         }
 
         .trust-logo-full {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #ffffff;
-            transition: all 0.4s ease;
-            z-index: 1;
+            transition: all 0.5s ease;
+            padding: 40px;
         }
 
         .trust-logo-main {
-            width: 120px;
-            height: 120px;
+            max-width: 160px;
+            max-height: 80px;
             object-fit: contain;
-            transition: all 0.4s ease;
-            filter: grayscale(20%) brightness(1.1);
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.5s ease;
         }
 
+        .trust-item:hover .trust-logo-main {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Overlay Styles */
         .trust-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(220, 53, 69, 0.15);
-            backdrop-filter: blur(8px);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            z-index: 2;
-        }
-
-        /* Couleurs spécifiques pour chaque logo avec transparence */
-        .trust-slide:nth-child(1) .trust-overlay {
-            background: rgba(220, 53, 69, 0.15); /* Rouge FDFP avec transparence */
-        }
-
-        .trust-slide:nth-child(2) .trust-overlay {
-            background: rgba(76, 175, 80, 0.15); /* Vert SETEC avec transparence */
-        }
-
-        .trust-slide:nth-child(3) .trust-overlay {
-            background: rgba(255, 152, 0, 0.15); /* Orange SICMA avec transparence */
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            text-align: center;
         }
 
         .trust-item:hover .trust-overlay {
             opacity: 1;
         }
+        
+        /* FDFP - Style */
+        .trust-slide:nth-child(1) .trust-item:hover {
+            border-color: #f39c12;
+        }
+        .trust-slide:nth-child(1) .trust-overlay {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .trust-slide:nth-child(1) .trust-identity h4 {
+            color: #e67e22;
+        }
 
-        .trust-item:hover .trust-logo-full {
-            transform: scale(0.9);
-            opacity: 0.3;
+        /* SETEC - Style Vert */
+        .trust-slide:nth-child(2) .trust-item:hover {
+            border-color: #27ae60;
+        }
+        .trust-slide:nth-child(2) .trust-overlay {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.98), rgba(46, 204, 113, 0.98));
+        }
+        .trust-slide:nth-child(2) .trust-identity h4,
+        .trust-slide:nth-child(2) .trust-identity p {
+            color: #ffffff;
+        }
+        .trust-slide:nth-child(2) .trust-logo-overlay img {
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* SICMA - Style */
+        .trust-slide:nth-child(3) .trust-item:hover {
+            border-color: #d35400;
+        }
+        .trust-slide:nth-child(3) .trust-overlay {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .trust-slide:nth-child(3) .trust-identity h4 {
+            color: #d35400;
         }
 
         .trust-identity {
-            text-align: center;
-            color: #ffffff;
-            padding: 20px;
             transform: translateY(20px);
-            transition: all 0.4s ease 0.1s;
+            transition: transform 0.4s ease 0.1s;
         }
 
         .trust-item:hover .trust-identity {
@@ -1655,34 +1658,30 @@
         .trust-logo-overlay {
             margin-bottom: 15px;
         }
+        
+        /* Cacher le mini logo sur les cartes blanches pour éviter la redondance, sauf pour SETEC qui a un fond coloré */
+        .trust-slide:nth-child(1) .trust-logo-overlay,
+        .trust-slide:nth-child(3) .trust-logo-overlay {
+            display: none;
+        }
 
         .trust-logo-mini {
             width: 60px;
             height: 60px;
             object-fit: contain;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 12px;
-            padding: 8px;
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .trust-identity h4 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin: 0 0 8px 0;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 8px;
         }
 
         .trust-identity p {
-            font-size: 0.85rem;
-            margin: 0;
-            opacity: 0.9;
-            line-height: 1.4;
-            font-weight: 400;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #555;
+            font-weight: 500;
         }
 
         /* Responsive Design */
@@ -1695,50 +1694,22 @@
                 font-size: 2.2rem;
             }
 
-            .trust-header p {
-                font-size: 1rem;
-                padding: 0 20px;
-            }
-
-            .trust-slide {
-                flex: 0 0 250px;
-            }
-
-            .trust-item {
-                max-width: 230px;
-                height: 160px;
-            }
-
-            .trust-logo-main {
-                width: 100px;
-                height: 100px;
-            }
-
-            .trust-logo-mini {
-                width: 50px;
-                height: 50px;
-                padding: 6px;
-            }
-
-            .trust-identity h4 {
-                font-size: 1.1rem;
-            }
-
-            .trust-identity p {
-                font-size: 0.75rem;
-            }
-
             .trust-track {
                 gap: 20px;
             }
-
-            @keyframes scroll {
-                0%, 20% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(calc(-250px * 3));
-                }
+            
+            .trust-slide {
+                flex: 0 1 100%;
+                max-width: 320px;
+            }
+            
+            .trust-item {
+                height: 200px;
+            }
+            
+            .trust-logo-main {
+                max-width: 120px;
+                max-height: 70px;
             }
         }
 
@@ -1746,25 +1717,9 @@
             .trust-header h2 {
                 font-size: 1.8rem;
             }
-
-            .trust-slide {
-                flex: 0 0 200px;
-            }
-
+            
             .trust-item {
-                max-width: 180px;
-                height: 140px;
-            }
-
-            .trust-logo-main {
-                width: 80px;
-                height: 80px;
-            }
-
-            .trust-logo-mini {
-                width: 40px;
-                height: 40px;
-                padding: 4px;
+                height: 180px;
             }
 
             .trust-identity {
@@ -2159,7 +2114,7 @@
                                             <img src="images/logo-setec.png" alt="Logo SETEC AFRIQUE" class="trust-logo-mini">
                                         </div>
                                         <h4>SETEC AFRIQUE</h4>
-                                        <p>Société d'Études et de Construction Technique</p>
+                                        <p>Filiale du groupe setec</p>
                                     </div>
                                 </div>
                             </div>

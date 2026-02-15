@@ -337,7 +337,7 @@ class BlogEngine {
             <p>Pour plus d'informations sur nos services ou pour discuter de votre projet, n'hésitez pas à nous contacter :</p>
             <ul>
                 <li><strong>Téléphone :</strong> (+225) 01 50 12 30 50</li>
-                <li><strong>Email :</strong> contact@sorbo-ingenierie.ci</li>
+                <li><strong>Email :</strong> contact@sorbo.ingenierie.ci</li>
                 <li><strong>Adresse :</strong> Abidjan, Yopougon Ancien Bel-Air cité SOPIM</li>
             </ul>
         `;
