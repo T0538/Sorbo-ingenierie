@@ -1113,6 +1113,18 @@
             position: relative;
         }
         
+        /* Niveau 4 : forcer les 4 cartes (dont Moya Danho) sur une seule ligne */
+        .org-level-4 {
+            flex-wrap: nowrap;
+            max-width: 100%;
+            justify-content: center;
+        }
+        .org-level-4 .org-card {
+            flex: 1 1 0;
+            min-width: 200px;
+            max-width: 280px;
+        }
+        
         .org-card {
             width: 300px;
             background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
@@ -1558,6 +1570,11 @@
                 gap: 25px;
             }
             
+            .org-level-4 .org-card {
+                min-width: 180px;
+                max-width: 240px;
+            }
+            
             .org-card {
                 width: 240px;
                 padding: 22px 18px;
@@ -1608,6 +1625,16 @@
             
             .org-level {
                 gap: 20px;
+            }
+            
+            .org-level-4 {
+                flex-wrap: wrap;
+            }
+            .org-level-4 .org-card {
+                flex: none;
+                min-width: 0;
+                max-width: none;
+                width: 220px;
             }
             
             .org-card {
@@ -2276,8 +2303,8 @@
                 <!-- Ligne de connexion -->
                 <div class="org-connector"></div>
 
-                <!-- Niveau 4 : Chargés de Projet (3 cartes) -->
-                <div class="org-level">
+                <!-- Niveau 4 : 4 cartes alignées sur une seule ligne -->
+                <div class="org-level org-level-4">
                     <div class="org-card" data-member="8" data-aos="fade-up" data-aos-delay="1200" data-aos-duration="600">
                         <div class="org-icon">
                             <img src="images/YVES.num.jpg" alt="Beniwa Allali - Chargé de Communication">
@@ -2299,6 +2326,9 @@
                            <!-- <div class="org-department">Service logiciel</div>-->
                         </div>
                     </div>
+
+                   
+
                     <div class="org-card" data-member="10" data-aos="fade-up" data-aos-delay="1400" data-aos-duration="600">
                         <div class="org-icon">
                             <img src="images/moya.num.jpg" alt="Moya Danho - Chargée de Projets">
@@ -2309,6 +2339,19 @@
                             <!--<div class="org-department">Service logiciel</div>-->
                         </div>
                     </div>
+
+                    <div class="org-card" data-member="10" data-aos="fade-up" data-aos-delay="1400" data-aos-duration="600">
+                        <div class="org-icon">
+                            <img src="images/photo ass.jpeg" alt="Moya Danho - Chargée de Projets">
+                        </div>
+                        <div class="org-info">
+                            <h4>Corinne Niangne</h4>
+                            <p>Assistante Technico-commerciale</p>
+                            <!--<div class="org-department">Service logiciel</div>-->
+                        </div>
+                    </div>
+                  
+
                 </div>
             </div>
             
