@@ -57,7 +57,11 @@
         "content": "<p>Str-Chaussée est conçu pour fonctionner sur un ordinateur Windows, avec une interface graphique intuitive. Il facilite la saisie interactive des données, la gestion des projets, et la production automatique de documents de synthèse, présentant clairement les hypothèses, résultats et conclusions de l’étude.</p><p>Cette sortie est immédiatement utilisable dans les dossiers techniques et facilite la communication avec les maîtres d’ouvrage ou services compétents.</p>"
       }
     ],
-    "images": [],
+     "images": [
+      { "src": "images/str1.png", "alt": "Interface OH-Route" },
+      { "src": "images/str2.png", "alt": "Module hydrologie" },
+      { "src": "images/str3.png", "alt": "Module hydraulique" }
+    ],
     "downloadFile": "Str-Chaussee v1.rar",
     "downloadLabel": "Télécharger Str-Chaussée v1",
     "ctaTitle": "Prêt à utiliser Str-Chaussée v1 ?",
