@@ -13,22 +13,22 @@
         {
           "title": "Introduction",
           "icon": "fa-info-circle",
-          "content": "<p>OH-Route v1 est un outil specialise pour les etudes hydrologiques et hydrauliques en genie routier. Developpe pour repondre aux defis des infrastructures routieres africaines.</p><p>OH-Route v1 s'appuie sur une architecture modulaire : un module hydrologie et un module hydraulique.</p>"
+          "content": "<p>OH-Route v1 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. Développé pour répondre aux défis des infrastructures routières africaines, il s’adresse aux bureaux d’études, ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p><p>OH-Route v1 s’appuie sur une architecture modulaire avec deux parties complémentaires :</p><ul><li>Un module hydrologie pour l’analyse des apports en eau</li><li>Un module hydraulique pour le dimensionnement des ouvrages d’évacuation</li></ul><p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>"
         },
         {
-          "title": "Module hydrologie",
+          "title": "Module hydrologie pour l’estimation des débits projets",
           "icon": "fa-water",
-          "content": "<p>Ce module permet d'estimer les debits projets a partir de plusieurs bassins versants (Rationnelle, Caquot, ORSTOM, etc.).</p>"
+          "content": "<p>Ce module permet d’estimer les débits projets à partir de plusieurs bassins versants en utilisant des méthodes éprouvées et adaptées localement (Rationnelle, Caquot, ORSTOM, etc.). Il propose une saisie optimisée des données et un traitement des caractéristiques des bassins, permettant à l’utilisateur de se concentrer sur l’analyse technique et la prise de décision.</p><p>Le logiciel permet également de combiner ou regrouper plusieurs bassins/sous-bassins selon des principes hydrologiques clairs et fiables, permettant une modélisation rigoureuse de configurations complexes tout en réduisant significativement le temps d’étude.</p>"
         },
         {
-          "title": "Module hydraulique",
+          "title": "Module hydraulique pour le dimensionnement optimal des ouvrages",
           "icon": "fa-cogs",
-          "content": "<p>Dimensionnement hydraulique des ouvrages de drainage : ponceaux, dalots, canaux, fosses.</p>"
+          "content": "<p>Ce module prend en charge le dimensionnement hydraulique des ouvrages de drainage (ponceaux, dalots, canaux à ciel ouvert, fossés, etc.) une fois les débits déterminés. Il dispose d’un mode de calcul automatisé pour identifier rapidement les sections optimales en fonction des contraintes hydrauliques et des conditions d’exploitation attendues.</p><p>Cette capacité à générer rapidement des solutions adaptées constitue un atout majeur, notamment dans les phases d’avant-projet ou d’analyse de variantes techniques.</p>"
         },
         {
-          "title": "Notes de calculs",
+          "title": "Notes de calculs détaillées",
           "icon": "fa-file-alt",
-          "content": "<p>OH-Route produit une note de calcul synthetique utilisable dans les dossiers techniques.</p>"
+          "content": "<p>OH-Route produit également une note de calcul synthétique et structurée, présentant clairement les hypothèses, résultats et conclusions de l’étude. Cette sortie est immédiatement utilisable dans les dossiers techniques et facilite la communication avec les maîtres d’ouvrage ou services compétents.</p>"
         }
       ],
       "images": [
@@ -42,23 +42,33 @@
       "ctaText": "Telechargez ce logiciel professionnel pour l'assainissement et le drainage routier"
     },
     "str-chaussee-v1": {
-      "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussees",
+      "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
       "sections": [
         {
           "title": "Introduction",
           "icon": "fa-info-circle",
-          "content": "<p>Str-Chaussee v1 est un logiciel dedie a la conception et au dimensionnement des structures de chaussees. Il s'adresse aux bureaux d'etudes et ingenieurs en genie civil.</p>"
+          "content": "<p>Le logiciel Str-Chaussée v1 est un outil innovant dédié au dimensionnement des structures de chaussées routières neuves et aux solutions de renforcement, en s’appuyant sur la méthode rationnelle française ainsi que sur plusieurs guides techniques en vigueur. Il permet de calculer de manière précise les épaisseurs optimales des différentes couches de chaussée, en tenant compte des caractéristiques des matériaux, du trafic prévu, des conditions climatiques et des propriétés du sol support.</p><p>Conçu pour les ingénieurs, techniciens et bureaux d’études en génie civil, Str-Chaussée offre un environnement interactif et convivial, permettant de réaliser des études fiables et rapides, tout en générant automatiquement des notes de calculs détaillées ou synthétiques.</p>"
         },
         {
-          "title": "Fonctionnalites principales",
-          "icon": "fa-cogs",
-          "content": "<p>Dimensionnement des chaussees en fonction du trafic, des materiaux et des contraintes techniques.</p>"
+          "title": "Principales fonctionnalités",
+          "icon": "fa-list-ul",
+          "content": "<p>Str-Chaussée offre un large éventail de fonctionnalités :</p><ul><li>Gestion des données de trafic et de sol support ;</li><li>Sélection et caractérisation des matériaux (non traités, traités aux liants hydrauliques ou hydrocarbonés) ;</li><li>Calcul des contraintes et déformations dans les différentes couches de chaussée ;</li><li>Prédimensionnement des structures à l’aide de catalogues et guides techniques (Côte d’Ivoire, Sénégal, CEBTP, etc.) ;</li><li>Calcul et vérification automatique des structures ;</li><li>Génération automatique de notes de calcul détaillées et synthétiques.</li></ul>"
+        },
+        {
+          "title": "Modes de calcul disponibles",
+          "icon": "fa-calculator",
+          "content": "<p>Str-Chaussée propose deux modes de calcul adaptés à tous les besoins :</p><ul><li><strong>Dimensionnement standard :</strong> ce mode permet de réaliser un dimensionnement classique, en laissant à l’utilisateur le soin de choisir la structure à vérifier et de définir les couches à analyser.</li><li><strong>Dimensionnement automatique :</strong> ce mode effectue, à partir des matériaux sélectionnés et des plages d’épaisseurs définies, des itérations automatiques afin de proposer des structures conformes, en intégrant l’ensemble des vérifications nécessaires.</li></ul>"
+        },
+        {
+          "title": "Environnement de travail",
+          "icon": "fa-desktop",
+          "content": "<p>Str-Chaussée est conçu pour fonctionner sur un ordinateur Windows, avec une interface graphique intuitive. Il facilite la saisie interactive des données, la gestion des projets, et la production automatique de documents de synthèse, présentant clairement les hypothèses, résultats et conclusions de l’étude.</p><p>Cette sortie est immédiatement utilisable dans les dossiers techniques et facilite la communication avec les maîtres d’ouvrage ou services compétents.</p>"
         }
       ],
       "images": [],
       "downloadFile": "Str-Chaussee v1.rar",
       "downloadLabel": "Telecharger Str-Chaussee v1",
-      "ctaTitle": "Pret a utiliser Str-Chaussee v1 ?",
+      "ctaTitle": "Pret a utiliser Str-Chaussée v1 ?",
       "ctaText": "Telechargez ce logiciel pour la conception des structures de chaussees"
     }
   };
