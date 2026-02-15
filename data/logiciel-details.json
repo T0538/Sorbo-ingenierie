@@ -58,9 +58,9 @@
       }
     ],
      "images": [
-      { "src": "images/str1.png", "alt": "Interface OH-Route" },
-      { "src": "images/str2.png", "alt": "Module hydrologie" },
-      { "src": "images/str3.png", "alt": "Module hydraulique" }
+      { "src": "images/str1.png", "alt": "Interface Str-chaussée" },
+      { "src": "images/str2.png", "alt": "Chaussée routière" },
+      { "src": "images/str3.png", "alt": "Hypothèse de calculs" }
     ],
     "downloadFile": "Str-Chaussee v1.rar",
     "downloadLabel": "Télécharger Str-Chaussée v1",
