@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -648,137 +648,10 @@
     <!-- Contenu principal -->
     <section class="logiciel-content">
         <div class="container">
-            <!-- Détails statiques du logiciel -->
+            <!-- Détails du logiciel (rempli par js/logiciel-details-loader.js selon ?id=) -->
             <div class="logiciel-details-card">
-                <div class="logiciel-header" style="background: white; border: 1px solid #e0e0e0;">
-                    <div class="logiciel-header-content">
-                        <div class="logiciel-logo">
-                            <img src="images/Image1.png" alt="Logo OH-Route" />
-                        </div>
-                        <div class="logiciel-title-section">
-                            <h2 style="color: #0a173d;">OH-Route v1</h2>
-                            <p class="logiciel-subtitle" style="color: #666;">Logiciel pour l'assainissement et le drainage routier</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="logiciel-body">
-                                         <!-- Section Introduction -->
-                     <div class="logiciel-section">
-                         <h3 class="section-title">
-                             <i class="fas fa-info-circle"></i>
-                             Introduction
-                         </h3>
-                         <div class="logiciel-description">
-                             <p>OH-Route v1 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. 
-                             Développé pour répondre aux défis des infrastructures routières africaines, il s'adresse aux bureaux d'études, 
-                             ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p>
-                             
-                             <p>OH-Route v1 s'appuie sur une architecture modulaire avec deux parties complémentaires :</p>
-                             <ul style="margin: 20px 0; padding-left: 20px; color: #666; line-height: 1.6; list-style: disc; list-style-position: outside;">
-                                 <li style="margin-bottom: 10px;">Un module hydrologie pour l'analyse des apports en eau</li>
-                                 <li style="margin-bottom: 10px;">Un module hydraulique pour le dimensionnement des ouvrages d'évacuation</li>
-                                
-                             </ul>
-                             <p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>
-                         </div>
-                     </div>
-                    
-                    <!-- Section Module hydrologie -->
-                    <div class="logiciel-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-water"></i>
-                            Module hydrologie pour l'estimation des débits projets
-                        </h3>
-                        <div class="logiciel-description">
-                            <p>Ce module permet d'estimer les débits projets à partir de plusieurs bassins versants en utilisant des méthodes 
-                            éprouvées et adaptées localement (Rationnelle, Caquot, ORSTOM, etc.). Il propose une saisie optimisée des données 
-                            et un traitement des caractéristiques des bassins, permettant à l'utilisateur de se concentrer sur l'analyse 
-                            technique et la prise de décision.</p>
-                            
-                            <p>Le logiciel permet également de combiner ou regrouper plusieurs bassins/sous-bassins selon des principes 
-                            hydrologiques clairs et fiables, permettant une modélisation rigoureuse de configurations complexes tout en 
-                            réduisant significativement le temps d'étude.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Section Module hydraulique -->
-                    <div class="logiciel-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-cogs"></i>
-                            Module hydraulique pour le dimensionnement optimal des ouvrages
-                        </h3>
-                        <div class="logiciel-description">
-                            <p>Ce module prend en charge le dimensionnement hydraulique des ouvrages de drainage (ponceaux, dalots, 
-                            canaux à ciel ouvert, fossés, etc.) une fois les débits déterminés. Il dispose d'un mode de calcul 
-                            automatisé pour identifier rapidement les sections optimales en fonction des contraintes hydrauliques 
-                            et des conditions d'exploitation attendues.</p>
-                            
-                            <p>Cette capacité à générer rapidement des solutions adaptées constitue un atout majeur, notamment dans 
-                            les phases d'avant-projet ou d'analyse de variantes techniques.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Section Au-delà des calculs -->
-                    <div class="logiciel-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-file-alt"></i>
-                            Notes de calculs detaillées
-                        </h3>
-                        <div class="logiciel-description">
-                            <p>OH-Route produit également une note de calcul synthétique et structurée, présentant clairement les 
-                            hypothèses, résultats et conclusions de l'étude. Cette sortie est immédiatement utilisable dans les 
-                            dossiers techniques et facilite la communication avec les maîtres d'ouvrage ou services compétents.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Section Images du logiciel -->
-                    <div class="logiciel-section">
-                        <h3 class="section-title">
-                            <i class="fas fa-images"></i>
-                            Images du logiciel
-                        </h3>
-                        <div class="logiciel-images">
-                            <div class="image-grid">
-                                <div class="image-item" tabindex="0" role="button" aria-label="Cliquer pour agrandir l'image de l'interface principale d'OH-Route">
-                                    <img src="images/Capture 1.png" alt="Interface principale d'OH-Route" loading="lazy">
-                                    <div class="image-overlay">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>
-                                <div class="image-item" tabindex="0" role="button" aria-label="Cliquer pour agrandir l'image du module hydrologie">
-                                    <img src="images/Capture 2.png" alt="Module hydrologie - Analyse des bassins versants" loading="lazy">
-                                    <div class="image-overlay">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>
-                                <div class="image-item" tabindex="0" role="button" aria-label="Cliquer pour agrandir l'image du module hydraulique">
-                                    <img src="images/Capture 3.png" alt="Module hydraulique - Dimensionnement des ouvrages" loading="lazy">
-                                    <div class="image-overlay">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>
-                                <!--<div class="image-item" tabindex="0" role="button" aria-label="Cliquer pour agrandir l'image de visualisation 3D">
-                                    <img src="images/IMG-20241019-WA0084.jpg" alt="Visualisation 3D des projets routiers" loading="lazy">
-                                    <div class="image-overlay">
-                                        <i class="fas fa-search-plus"></i>
-                                    </div>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Section Actions -->
-                    <div class="logiciel-actions">
-                        <h3>Prêt à utiliser OH-Route v1 ?</h3>
-                        <p>Téléchargez ce logiciel professionnel spécialisé dans les études d'assainissement et de drainage routier</p>
-                                                 <div class="action-buttons">
-                                                           <a href="#" class="btn-action" onclick="handleDownload()">
-                                  <i class="fas fa-download"></i>
-                                  Télécharger OH-Route v1.1.rar (27 MB)
-                              </a>
-                         </div>
-                    </div>
+                <div id="logiciel-details-root">
+                    <p style="padding: 40px; text-align: center; color: #666;">Chargement des informations...</p>
                 </div>
             </div>
             
@@ -854,8 +727,9 @@
     </footer>
 
     <!-- Scripts -->
-        <script src="js/global-domain-handler.js"></script>
+    <script src="js/global-domain-handler.js"></script>
     <script src="js/environment-config.js"></script>
+    <script src="js/logiciel-details-loader.js"></script>
     <script src="js/script.js"></script>
     <script>
         // Note: Menu mobile géré par js/script.js
@@ -910,31 +784,7 @@
             }
         });
         
-                           // Fonction de téléchargement fonctionnelle
-          function handleDownload() {
-              const logicielName = 'OH-Route v1.1';
-              const fileName = 'OH-Route v1.1.rar';
-              
-              if (confirm(`Voulez-vous télécharger ${logicielName} ?\n\nFichier : ${fileName}\nTaille : 52 MB\nFormat : Archive RAR compressée`)) {
-                  // Créer un lien de téléchargement temporaire
-                  const downloadLink = document.createElement('a');
-                  downloadLink.href = 'downloads/' + fileName;
-                  downloadLink.download = fileName;
-                  downloadLink.style.display = 'none';
-                  
-                  // Ajouter au DOM et déclencher le téléchargement
-                  document.body.appendChild(downloadLink);
-                  downloadLink.click();
-                  
-                  // Nettoyer le DOM
-                  document.body.removeChild(downloadLink);
-                  
-                  // Message de confirmation
-                  setTimeout(() => {
-                      alert(`Téléchargement de ${logicielName} démarré !\n\nLe fichier sera sauvegardé dans votre dossier de téléchargements.\n\nNote : Ce fichier est au format RAR. Vous aurez besoin d'un logiciel comme WinRAR, 7-Zip ou WinZip pour l'extraire.`);
-                  }, 1000);
-              }
-          }
+            // Le téléchargement est géré par logiciel-details-loader.js (bouton .btn-download-detail)
     </script>
 </body>
 </html>

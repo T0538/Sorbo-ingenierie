@@ -1,0 +1,56 @@
+{
+  "oh-route-v1": {
+    "sousTitre": "Logiciel pour l'assainissement et le drainage routier",
+    "sections": [
+      {
+        "title": "Introduction",
+        "icon": "fa-info-circle",
+        "content": "<p>OH-Route v1 est un outil specialise pour les etudes hydrologiques et hydrauliques en genie routier. Developpe pour repondre aux defis des infrastructures routieres africaines.</p><p>OH-Route v1 s'appuie sur une architecture modulaire : un module hydrologie et un module hydraulique.</p>"
+      },
+      {
+        "title": "Module hydrologie",
+        "icon": "fa-water",
+        "content": "<p>Ce module permet d'estimer les debits projets a partir de plusieurs bassins versants (Rationnelle, Caquot, ORSTOM, etc.).</p>"
+      },
+      {
+        "title": "Module hydraulique",
+        "icon": "fa-cogs",
+        "content": "<p>Dimensionnement hydraulique des ouvrages de drainage : ponceaux, dalots, canaux, fosses.</p>"
+      },
+      {
+        "title": "Notes de calculs",
+        "icon": "fa-file-alt",
+        "content": "<p>OH-Route produit une note de calcul synthetique utilisable dans les dossiers techniques.</p>"
+      }
+    ],
+    "images": [
+      { "src": "images/Capture 1.png", "alt": "Interface OH-Route" },
+      { "src": "images/Capture 2.png", "alt": "Module hydrologie" },
+      { "src": "images/Capture 3.png", "alt": "Module hydraulique" }
+    ],
+    "downloadFile": "OH-Route v1.1.rar",
+    "downloadLabel": "Telecharger OH-Route v1.1.rar (27 MB)",
+    "ctaTitle": "Pret a utiliser OH-Route v1 ?",
+    "ctaText": "Telechargez ce logiciel professionnel pour l'assainissement et le drainage routier"
+  },
+  "str-chaussee-v1": {
+    "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussees",
+    "sections": [
+      {
+        "title": "Introduction",
+        "icon": "fa-info-circle",
+        "content": "<p>Str-Chaussee v1 est un logiciel dedie a la conception et au dimensionnement des structures de chaussees. Il s'adresse aux bureaux d'etudes et ingenieurs en genie civil.</p><p>Modifiez ce texte dans le fichier <strong>data/logiciel-details.json</strong> pour adapter la description.</p>"
+      },
+      {
+        "title": "Fonctionnalites principales",
+        "icon": "fa-cogs",
+        "content": "<p>Dimensionnement des chaussees en fonction du trafic, des materiaux et des contraintes techniques.</p>"
+      }
+    ],
+    "images": [],
+    "downloadFile": "Str-Chaussee v1.rar",
+    "downloadLabel": "Telecharger Str-Chaussee v1",
+    "ctaTitle": "Pret a utiliser Str-Chaussee v1 ?",
+    "ctaText": "Telechargez ce logiciel pour la conception des structures de chaussees"
+  }
+}
