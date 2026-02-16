@@ -13,7 +13,7 @@
         {
           "title": "Introduction",
           "icon": "fa-info-circle",
-          "content": "<p>OH-Route v1 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. Développé pour répondre aux défis des infrastructures routières africaines, il s’adresse aux bureaux d’études, ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p><p>OH-Route v1 s’appuie sur une architecture modulaire avec deux parties complémentaires :</p><ul><li>Un module hydrologie pour l’analyse des apports en eau</li><li>Un module hydraulique pour le dimensionnement des ouvrages d’évacuation</li></ul><p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>"
+          "content": "<p>OH-Route v1.1 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. Développé pour répondre aux défis des infrastructures routières africaines, il s’adresse aux bureaux d’études, ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p><p>OH-Route v1 s’appuie sur une architecture modulaire avec deux parties complémentaires :</p><ul><li>Un module hydrologie pour l’analyse des apports en eau</li><li>Un module hydraulique pour le dimensionnement des ouvrages d’évacuation</li></ul><p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>"
         },
         {
           "title": "Module hydrologie pour l’estimation des débits projets",
@@ -38,7 +38,7 @@
       ],
       "downloadFile": "OH-Route v1.1.rar",
       "downloadLabel": "Telecharger OH-Route v1.1.rar (27 MB)",
-      "ctaTitle": "Pret a utiliser OH-Route v1 ?",
+      "ctaTitle": "Pret a utiliser OH-Route v1.1 ?",
       "ctaText": "Telechargez ce logiciel professionnel pour l'assainissement et le drainage routier"
     },
     "str-chaussee-v1": {

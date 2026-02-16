@@ -379,229 +379,319 @@
             font-weight: 600;
         }
         
-        /* ======= SECTION EMPLOIS COMPLÈTEMENT REFAITE ======= */
+        /* ======= SECTION EMPLOIS MODERNISÉE & PROFESSIONNELLE ======= */
         .emplois-nouvelle-section {
             padding: 100px 0;
             background-color: #f8f9fa;
-            width: 100%;
+            position: relative;
         }
-        
+
         .emplois-conteneur-principal {
-            max-width: 1100px;
-            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            box-sizing: border-box;
         }
-        
+
         .emplois-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 70px;
+            position: relative;
         }
-        
+
         .emplois-titre {
-            font-size: 2rem;
+            font-size: 2.8rem;
+            color: #1a1a1a;
             margin-bottom: 20px;
-            color: #333;
+            font-weight: 800;
+            letter-spacing: -1px;
+            position: relative;
+            display: inline-block;
         }
         
+        .emplois-titre::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
         .emplois-sous-titre {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: #666;
-            margin-bottom: 0;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
-        
+
+        /* Formulaire de recherche - Style "Flottant" */
+        .emplois-recherche-conteneur {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            margin-bottom: 80px;
+            border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
+            z-index: 2;
+        }
+
         .emplois-filtres-grille {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
             margin-bottom: 30px;
         }
-        
-        .emplois-groupe-filtre {
-            display: flex;
-            flex-direction: column;
-        }
-        
+
         .emplois-groupe-filtre label {
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #888;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
+
         .emplois-groupe-filtre input,
         .emplois-groupe-filtre select {
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid transparent;
+            border-radius: 12px;
             font-size: 1rem;
+            color: #1f2937;
+            background-color: #f3f4f6;
             transition: all 0.3s ease;
-            background-color: white;
+            font-weight: 500;
         }
-        
+
         .emplois-groupe-filtre input:focus,
         .emplois-groupe-filtre select:focus {
             outline: none;
-            border-color: #d10000;
-            box-shadow: 0 0 0 3px rgba(209, 0, 0, 0.1);
+            background-color: white;
+            border-color: rgba(209, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
-        
+
         .emplois-bouton-rechercher {
-            background: linear-gradient(135deg, #d10000, #b30000);
+            width: 100%;
+            background: linear-gradient(135deg, #d10000 0%, #a00000 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.05rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 20px rgba(209, 0, 0, 0.2);
         }
-        
+
         .emplois-bouton-rechercher:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(209, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(209, 0, 0, 0.3);
         }
-        
-        .emplois-resultats-conteneur {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
+
+        /* Résultats */
         .emplois-resultats-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #f3f4f6;
+            border-bottom: 2px solid #eee;
         }
-        
+
         .emplois-resultats-header h3 {
-            color: #374151;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #111;
             margin: 0;
         }
-        
+
         .emplois-compteur {
-            background: #f3f4f6;
-            color: #6b7280;
-            padding: 8px 16px;
-            border-radius: 20px;
+            background: #111;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
         }
-        
+
         .emplois-grille {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
         }
-        
+
+        /* Carte Emploi Pro */
         .emplois-carte {
             background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid #f0f0f0;
+            height: 100%;
         }
-        
+
         .emplois-carte:hover {
-            border-color: #d10000;
-            box-shadow: 0 8px 25px rgba(209, 0, 0, 0.15);
-            transform: translateY(-3px);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
         }
-        
+
+        .emplois-carte::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #d10000, #ff4d4d);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .emplois-carte:hover::after {
+            opacity: 1;
+        }
+
+        .emplois-carte-padding {
+            padding: 35px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .emplois-carte-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
-        
+
         .emplois-badge-type {
-            background: #d10000;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 50px;
+            background: #f0f2f5;
+            color: #555;
+            padding: 8px 16px;
+            border-radius: 8px;
             font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .emplois-carte:hover .emplois-badge-type {
+            background: #fff0f0;
+            color: #d10000;
+        }
+
+        .emplois-departement {
+            font-size: 0.85rem;
+            color: #999;
             font-weight: 600;
             text-transform: uppercase;
         }
-        
-        .emplois-badge-type.stage {
-            background: #10b981;
-        }
-        
-        .emplois-departement {
-            color: #6b7280;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
+
         .emplois-titre-poste {
-            font-size: 1.1rem;
-            color: #d10000;
-            margin-bottom: 8px;
-            font-weight: 700;
+            font-size: 1.5rem;
+            color: #111;
+            margin-bottom: 20px;
+            font-weight: 800;
             line-height: 1.3;
         }
-        
-        .emplois-localisation {
-            color: #d10000;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            font-weight: 500;
+
+        .emplois-infos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 12px;
         }
-        
-        .emplois-date-limite {
+
+        .emplois-info-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #6b7280;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            padding: 8px 12px;
-            background: #f9fafb;
-            border-radius: 6px;
-            border-left: 3px solid #d10000;
-        }
-        
-        .emplois-date-limite i {
-            color: #d10000;
-            font-size: 0.9rem;
-        }
-        
-        .emplois-description p {
-            color: #6b7280;
-            line-height: 1.5;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-        }
-        
-        .emplois-carte-footer {
-            margin-top: 15px;
-        }
-        
-        .emplois-voir-offre {
-            color: #d10000;
-            text-decoration: underline;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: #444;
             font-weight: 500;
-            font-size: 0.9rem;
+        }
+
+        .emplois-info-item i {
+            color: #d10000;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .emplois-description {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .emplois-carte-footer {
+            margin-top: auto;
+            padding-top: 25px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .emplois-btn-voir {
+            width: 100%;
+            background: white;
+            color: #d10000;
+            border: 2px solid #d10000;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             transition: all 0.3s ease;
         }
-        
-        .emplois-voir-offre:hover {
-            color: #b30000;
-            text-decoration: none;
+
+        .emplois-btn-voir:hover {
+            background: #d10000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(209, 0, 0, 0.15);
         }
+
+        .emplois-btn-voir:hover {
+            gap: 12px;
+            text-decoration: none;
+            color: #b30000;
+        }
+
+        @media (max-width: 768px) {
+            .emplois-grille {
+                grid-template-columns: 1fr;
+            }
+        }
+
         
         /* Formulaire de recherche */
         .emplois-recherche-conteneur {
@@ -1779,14 +1869,13 @@
         </div>
     </section>
 
-    <!-- SECTION EMPLOIS COMPLÈTEMENT REFAITE -->
+    <!-- SECTION EMPLOIS COMPLÈTEMENT REFAITE ET MODERNISÉE -->
     <section class="emplois-nouvelle-section">
         <div class="emplois-conteneur-principal">
             <div class="emplois-header">
-                <h2 class="emplois-titre" data-aos="fade-up">Rechercher une offre</h2>
+                <h2 class="emplois-titre" data-aos="fade-up">Nos Opportunités</h2>
                 <p class="emplois-sous-titre" data-aos="fade-up" data-aos-delay="50">
-                    <i class="fas fa-info-circle"></i>
-                    Nos offres d'emplois. Utilisez les filtres ci-dessous pour explorer les opportunités disponibles.
+                    Découvrez nos offres et rejoignez une équipe passionnée par l'innovation et l'excellence technique.
                 </p>
             </div>
             
@@ -1794,14 +1883,14 @@
             <div class="emplois-recherche-conteneur" data-aos="fade-up" data-aos-delay="100">
                 <div class="emplois-filtres-grille">
                     <div class="emplois-groupe-filtre">
-                        <label for="keyword-search">Recherche par mots clés</label>
-                        <input type="text" id="keyword-search" placeholder="Ex: ingénieur, technicien, génie civil...">
+                        <label for="keyword-search">Mots clés</label>
+                        <input type="text" id="keyword-search" placeholder="Ex: ingénieur, technicien...">
                     </div>
                     
                     <div class="emplois-groupe-filtre">
-                        <label for="department-filter">Familles de Métiers</label>
+                        <label for="department-filter">Métier</label>
                         <select id="department-filter">
-                            <option value="">Tous les services</option>
+                            <option value="">Tous les métiers</option>
                             <option value="ingenierie">Ingénierie</option>
                             <option value="bureau-etudes">Bureau d'études</option>
                             <option value="chantier">Chantier / Affaires</option>
@@ -1817,7 +1906,7 @@
                     </div>
                     
                     <div class="emplois-groupe-filtre">
-                        <label for="contract-filter">Types de contrat</label>
+                        <label for="contract-filter">Contrat</label>
                         <select id="contract-filter">
                             <option value="">Tous les contrats</option>
                             <option value="CDI">CDI</option>
@@ -1846,72 +1935,80 @@
                 
                 <button class="emplois-bouton-rechercher" id="search-jobs">
                     <i class="fas fa-search"></i>
-                    Rechercher
+                    Trouver une offre
                 </button>
             </div>
 
             <!-- Résultats -->
             <div class="emplois-resultats-conteneur" data-aos="fade-up" data-aos-delay="150">
                 <div class="emplois-resultats-header">
-                    <h3>Résultats de recherche</h3>
-                    <span class="emplois-compteur" id="jobs-count">2 offres trouvées</span>
+                    <h3>Offres disponibles</h3>
+                    <span class="emplois-compteur" id="jobs-count">2 offres</span>
                 </div>
                 <div id="emplois-container" class="emplois-grille">
                     <!-- Offre 1 -->
                     <div class="emplois-carte" data-department="ingenierie" data-contract="STAGE" data-location="cote-ivoire">
-                        <div class="emplois-carte-header">
-                            <div class="emplois-badge-type stage">Stage</div>
-                            <div class="emplois-departement">Ingénierie</div>
-                        </div>
-                        <div class="emplois-carte-contenu">
+                        <div class="emplois-carte-padding">
+                            <div class="emplois-carte-header">
+                                <div class="emplois-badge-type stage">Stage</div>
+                                <div class="emplois-departement">Ingénierie</div>
+                            </div>
+                            
                             <h3 class="emplois-titre-poste">Étude statistique appliquée à l'hydrologie</h3>
-                            <div class="emplois-localisation">
-                                <i class="fas fa-map-marker-alt"></i>
-                                Cité SOPIM, Yopougon Millionnaire - Abidjan, Côte d'Ivoire
+                            
+                            <div class="emplois-infos-grid">
+                                <div class="emplois-info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Abidjan, Côte d'Ivoire</span>
+                                </div>
+                                <div class="emplois-info-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Limite : 16 Juillet 2025</span>
+                                </div>
                             </div>
-                            <div class="emplois-date-limite">
-                                <i class="fas fa-calendar-alt"></i>
-                                <strong>Date limite :</strong> 16 Juillet 2025
-                            </div>
+                            
                             <div class="emplois-description">
-                                <p><strong>Contexte :</strong> Dans le cadre de ses activités de recherche appliquée en génie civil, Sorbo-Ingénierie recherche un stagiaire motivé et rigoureux pour une étude statistique appliquée à l'hydrologie.</p>
-                                <p><strong>Objectifs :</strong> Appliquer diverses méthodes d'analyse fréquentielle aux séries hydrologiques, étudier les lois de probabilité courantes en hydrologie, traiter et interpréter des bases de données hydrologiques.</p>
-                                <p><strong>Profil recherché :</strong> Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées. Maîtrise des outils numériques (Excel avancé, Python, R).</p>
+                                <strong>Contexte :</strong> Dans le cadre de ses activités de recherche appliquée en génie civil, Sorbo-Ingénierie recherche un stagiaire motivé et rigoureux pour une étude statistique appliquée à l'hydrologie.
                             </div>
-                        </div>
-                        <div class="emplois-carte-footer">
-                            <a href="stage-hydrologie.html" class="emplois-voir-offre" data-job="Étude statistique appliquée à l'hydrologie" data-type="STAGE">
-                                En savoir plus sur l'offre
-                            </a>
+                            
+                            <div class="emplois-carte-footer">
+                                <a href="stage-hydrologie.html" class="emplois-btn-voir" data-job="Étude statistique appliquée à l'hydrologie" data-type="STAGE">
+                                    Voir l'offre <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Offre 2 -->
                     <div class="emplois-carte" data-department="ingenierie" data-contract="STAGE" data-location="cote-ivoire">
-                        <div class="emplois-carte-header">
-                            <div class="emplois-badge-type stage">Stage</div>
-                            <div class="emplois-departement">Ingénierie</div>
-                        </div>
-                        <div class="emplois-carte-contenu">
+                        <div class="emplois-carte-padding">
+                            <div class="emplois-carte-header">
+                                <div class="emplois-badge-type stage">Stage</div>
+                                <div class="emplois-departement">Ingénierie</div>
+                            </div>
+                            
                             <h3 class="emplois-titre-poste">Étude mécanique des plaques</h3>
-                            <div class="emplois-localisation">
-                                <i class="fas fa-map-marker-alt"></i>
-                                Cité SOPIM, Yopougon Millionnaire - Abidjan, Côte d'Ivoire
+                            
+                            <div class="emplois-infos-grid">
+                                <div class="emplois-info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Abidjan, Côte d'Ivoire</span>
+                                </div>
+                                <div class="emplois-info-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Limite : 16 Juillet 2025</span>
+                                </div>
                             </div>
-                            <div class="emplois-date-limite">
-                                <i class="fas fa-calendar-alt"></i>
-                                <strong>Date limite :</strong> 16 Juillet 2025
-                            </div>
+                            
                             <div class="emplois-description">
-                                <p><strong>Contexte :</strong> Sorbo-Ingénierie recherche un stagiaire motivé et rigoureux dans le domaine de la modélisation numérique pour étudier le comportement mécanique des plaques.</p>
-                                <p><strong>Objectifs :</strong> Modéliser des plaques en flexion pour diverses conditions de chargement, implémenter des approches numériques (éléments finis, différences finies), comparer les résultats avec les solutions analytiques classiques.</p>
-                                <p><strong>Profil recherché :</strong> Étudiant en dernière année d'école d'ingénieur ou Master 2 (Génie Civil, Mécanique, Structures). Solides connaissances en mécanique des structures et maîtrise des méthodes numériques.</p>
+                                <strong>Contexte :</strong> Sorbo-Ingénierie recherche un stagiaire motivé et rigoureux dans le domaine de la modélisation numérique pour étudier le comportement mécanique des plaques.
                             </div>
-                        </div>
-                        <div class="emplois-carte-footer">
-                            <a href="stage-mecanique.html" class="emplois-voir-offre" data-job="Étude mécanique des plaques" data-type="STAGE">
-                                En savoir plus sur l'offre
-                            </a>
+                            
+                            <div class="emplois-carte-footer">
+                                <a href="stage-mecanique.html" class="emplois-btn-voir" data-job="Étude mécanique des plaques" data-type="STAGE">
+                                    Voir l'offre <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
