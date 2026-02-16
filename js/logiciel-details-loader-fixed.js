@@ -67,7 +67,7 @@
       ],
       "images": [],
       "downloadFile": "Str-Chaussee v1.rar",
-      "downloadLabel": "Telecharger Str-Chaussee v1",
+      "downloadLabel": "Telecharger Str-Chaussee v1.1.rar (33 MB)",
       "ctaTitle": "Pret a utiliser Str-Chaussée v1 ?",
       "ctaText": "Telechargez ce logiciel pour la conception des structures de chaussees"
     }

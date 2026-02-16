@@ -2487,25 +2487,29 @@
             });
             
             // Fonctionnalité de recherche et filtrage des offres d'emploi
-            const searchJobsBtn = document.getElementById('search-jobs');
-            const keywordSearch = document.getElementById('keyword-search');
-            const departmentFilter = document.getElementById('department-filter');
-            const contractFilter = document.getElementById('contract-filter');
-            const locationFilter = document.getElementById('location-filter');
-            const jobCards = document.querySelectorAll('.job-card');
-            const resultsCount = document.querySelector('.results-count');
+            const searchJobsBtn = document.querySelector('.emplois-bouton-rechercher');
+            const keywordSearch = document.getElementById('recherche-mots-cles');
+            const departmentFilter = document.getElementById('filtre-departement');
+            const contractFilter = document.getElementById('filtre-contrat');
+            const locationFilter = document.getElementById('filtre-lieu');
+            const jobCards = document.querySelectorAll('.emplois-carte');
+            const resultsCount = document.querySelector('.emplois-resultats-compteur');
             
             function filterJobs() {
-                const keyword = keywordSearch.value.toLowerCase();
-                const department = departmentFilter.value;
-                const contract = contractFilter.value;
-                const location = locationFilter.value;
+                const keyword = keywordSearch ? keywordSearch.value.toLowerCase() : '';
+                const department = departmentFilter ? departmentFilter.value : '';
+                const contract = contractFilter ? contractFilter.value : '';
+                const location = locationFilter ? locationFilter.value : '';
                 
                 let visibleCount = 0;
                 
                 jobCards.forEach(card => {
-                    const title = card.querySelector('.job-title').textContent.toLowerCase();
-                    const description = card.querySelector('.job-description p').textContent.toLowerCase();
+                    const titleElement = card.querySelector('.emplois-titre-poste');
+                    const descriptionElement = card.querySelector('.emplois-description');
+                    
+                    const title = titleElement ? titleElement.textContent.toLowerCase() : '';
+                    const description = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
+                    
                     const cardDepartment = card.getAttribute('data-department');
                     const cardContract = card.getAttribute('data-contract');
                     const cardLocation = card.getAttribute('data-location');
@@ -2524,7 +2528,9 @@
                 });
                 
                 // Mettre à jour le compteur de résultats
-                resultsCount.textContent = `${visibleCount} offre${visibleCount > 1 ? 's' : ''} trouvée${visibleCount > 1 ? 's' : ''}`;
+                if (resultsCount) {
+                    resultsCount.textContent = `${visibleCount} offre${visibleCount > 1 ? 's' : ''} trouvée${visibleCount > 1 ? 's' : ''}`;
+                }
             }
             
             // Événements pour la recherche
