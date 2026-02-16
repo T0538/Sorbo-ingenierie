@@ -6,13 +6,13 @@
     "logo": "images/image1.png",
     "headerImage": "images/drainageroute.png",
     "disponible": true,
-    "version": "1.0",
+    "version": "v1.0",
     "prix": 0
   },
   {
     "nom": "Str-Chaussée v1",
     "description": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
-    "categorie": "Infrastructures et Transports",
+    "categorie": "Infrastructures et transport",
     "logo": "images/geopavetotal.jpg.jpeg",
     "headerImage": "images/Image PDG Str-Chaussée.png",
     "disponible": true,

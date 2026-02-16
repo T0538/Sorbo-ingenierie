@@ -129,7 +129,7 @@ function createLogicielCard(logiciel, index, total) {
      const catNorm = (categorie || '').trim().toLowerCase();
      let categorieFormatee = categorie.trim() ? (categorie.trim().charAt(0).toUpperCase() + categorie.trim().slice(1).toLowerCase()) : '';
      // Libellés d'affichage pour les catégories connues
-     if (catNorm === 'infrastructures et transports') categorieFormatee = 'Infrastructure et transport';
+     if (catNorm === 'infrastructures et transports' || catNorm === 'infrastructures et transport') categorieFormatee = 'Infrastructures et transport';
      if (catNorm === 'eau et assainissement') categorieFormatee = 'Eau et assainissement';
      
      // Déterminer si le logiciel est disponible au téléchargement
