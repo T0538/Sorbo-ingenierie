@@ -30,7 +30,7 @@
     ],
     "downloadFile": "OH-Route v1.1.rar",
     "downloadLabel": "Télécharger OH-Route v1.1.rar (27 MB)",
-    "ctaTitle": "Prêt à utiliser OH-Route v1 ?",
+    "ctaTitle": "Prêt à utiliser OH-Route v1.1 ?",
     "ctaText": "Téléchargez ce logiciel professionnel pour l'assainissement et le drainage routier"
   },
   "str-chaussee-v1": {
@@ -39,7 +39,7 @@
       {
         "title": "Introduction",
         "icon": "fa-info-circle",
-        "content": "<p>Le logiciel Str-Chaussée v1 est un outil innovant dédié au dimensionnement des structures de chaussées routières neuves et aux solutions de renforcement, en s’appuyant sur la méthode rationnelle française ainsi que sur plusieurs guides techniques en vigueur. Il permet de calculer de manière précise les épaisseurs optimales des différentes couches de chaussée, en tenant compte des caractéristiques des matériaux, du trafic prévu, des conditions climatiques et des propriétés du sol support.</p><p>Conçu pour les ingénieurs, techniciens et bureaux d’études en génie civil, Str-Chaussée offre un environnement interactif et convivial, permettant de réaliser des études fiables et rapides, tout en générant automatiquement des notes de calculs détaillées ou synthétiques.</p>"
+        "content": "<p>Le logiciel Str-Chaussée v1.1 est un outil innovant dédié au dimensionnement des structures de chaussées routières neuves et aux solutions de renforcement, en s’appuyant sur la méthode rationnelle française ainsi que sur plusieurs guides techniques en vigueur. Il permet de calculer de manière précise les épaisseurs optimales des différentes couches de chaussée, en tenant compte des caractéristiques des matériaux, du trafic prévu, des conditions climatiques et des propriétés du sol support.</p><p>Conçu pour les ingénieurs, techniciens et bureaux d’études en génie civil, Str-Chaussée offre un environnement interactif et convivial, permettant de réaliser des études fiables et rapides, tout en générant automatiquement des notes de calculs détaillées ou synthétiques.</p>"
       },
       {
         "title": "Principales fonctionnalités",
@@ -62,8 +62,8 @@
       { "src": "images/str2.png", "alt": "Chaussée routière" },
       { "src": "images/str3.png", "alt": "Hypothèse de calculs" }
     ],
-    "downloadFile": "Str-Chaussee v1.rar",
-    "downloadLabel": "Télécharger Str-Chaussée v1.1",
+    "downloadFile": "Str-Chaussée v1.rar",
+    "downloadLabel": "Télécharger Str-Chaussée v1.1 (33 MB)",
     "ctaTitle": "Prêt à utiliser Str-Chaussée v1.1 ?",
     "ctaText": "Téléchargez ce logiciel pour la conception des structures de chaussées"
   }

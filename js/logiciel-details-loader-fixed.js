@@ -37,9 +37,9 @@
         { "src": "images/Capture 3.png", "alt": "Module hydraulique" }
       ],
       "downloadFile": "OH-Route v1.1.rar",
-      "downloadLabel": "Telecharger OH-Route v1.1.rar (27 MB)",
-      "ctaTitle": "Pret a utiliser OH-Route v1.1 ?",
-      "ctaText": "Telechargez ce logiciel professionnel pour l'assainissement et le drainage routier"
+      "downloadLabel": "Télécharger OH-Route v1.1.rar (27 MB)",
+      "ctaTitle": "Prêt à utiliser OH-Route v1.1 ?",
+      "ctaText": "Téléchargez ce logiciel professionnel pour l'assainissement et le drainage routier"
     },
     "str-chaussee-v1": {
       "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
@@ -66,10 +66,10 @@
         }
       ],
       "images": [],
-      "downloadFile": "Str-Chaussee v1.rar",
-      "downloadLabel": "Telecharger Str-Chaussee v1.1.rar (33 MB)",
-      "ctaTitle": "Pret a utiliser Str-Chaussée v1 ?",
-      "ctaText": "Telechargez ce logiciel pour la conception des structures de chaussees"
+      "downloadFile": "Str-Chaussée v1.rar",
+      "downloadLabel": "Télécharger Str-Chaussée v1.1 (33 MB)",
+      "ctaTitle": "Prêt à utiliser Str-Chaussée v1.1 ?",
+      "ctaText": "Téléchargez ce logiciel pour la conception des structures de chaussées"
     }
   };
 
