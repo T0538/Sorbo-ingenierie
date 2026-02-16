@@ -280,7 +280,7 @@
     if (typeof baseInfo?.prix !== 'undefined') {
       metaItems.push({
         label: 'Prix',
-        value: Number(baseInfo.prix) === 0 ? 'Gratuit' : `${baseInfo.prix} FCFA`
+        value: Number(baseInfo.prix) === 0 ? 'Sur devis' : `${baseInfo.prix} FCFA`
       });
     }
 
