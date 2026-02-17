@@ -1,6 +1,6 @@
 {
   "oh-route-v1": {
-    "sousTitre": "Logiciel pour l'assainissement et le drainage routier",
+    "sousTitre": "Logiciel pour l'assainissement et le drainage routier.",
     "sections": [
       {
         "title": "Introduction",
@@ -34,7 +34,7 @@
     "ctaText": "Téléchargez ce logiciel professionnel pour l'assainissement et le drainage routier"
   },
   "str-chaussee-v1": {
-    "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
+    "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussées.",
     "sections": [
       {
         "title": "Introduction",

@@ -2,7 +2,7 @@
   {
     "nom": "OH-Route v1.1",
     "description": "Logiciel pour la conception et le dimensionnement des ouvrages d'assainissement et de drainage routier.",
-    "categorie": "Eau et Assainissement",
+    "categorie": "Eau et assainissement",
     "logo": "images/image1.png",
     "headerImage": "images/drainageroute.png",
     "disponible": true,
