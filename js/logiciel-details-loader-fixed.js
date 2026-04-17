@@ -13,7 +13,7 @@
         {
           "title": "Introduction",
           "icon": "fa-info-circle",
-          "content": "<p>OH-Route v1.1 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. Développé pour répondre aux défis des infrastructures routières africaines, il s’adresse aux bureaux d’études, ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p><p>OH-Route v1 s’appuie sur une architecture modulaire avec deux parties complémentaires :</p><ul><li>Un module hydrologie pour l’analyse des apports en eau</li><li>Un module hydraulique pour le dimensionnement des ouvrages d’évacuation</li></ul><p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>"
+          "content": "<p>OH-Route v1.2 est un outil spécialisé pour les études hydrologiques et hydrauliques en génie routier. Développé pour répondre aux défis des infrastructures routières africaines, il s’adresse aux bureaux d’études, ingénieurs et techniciens, offrant une interface complète, intuitive et performante.</p><p>OH-Route v1 s’appuie sur une architecture modulaire avec deux parties complémentaires :</p><ul><li>Un module hydrologie pour l’analyse des apports en eau</li><li>Un module hydraulique pour le dimensionnement des ouvrages d’évacuation</li></ul><p>Cette organisation assure une continuité logique et une cohérence technique entre les phases du projet.</p>"
         },
         {
           "title": "Module hydrologie pour l’estimation des débits projets",
@@ -37,8 +37,8 @@
         { "src": "images/Capture 3.png", "alt": "Module hydraulique" }
       ],
       "downloadFile": "OH-Route v1.1.rar",
-      "downloadLabel": "Télécharger OH-Route v1.1.rar (27 MB)",
-      "ctaTitle": "Prêt à utiliser OH-Route v1.1 ?",
+      "downloadLabel": "Télécharger OH-Route v1.2.rar (27 MB)",
+      "ctaTitle": "Prêt à utiliser OH-Route v1.2 ?",
       "ctaText": "Téléchargez ce logiciel professionnel pour l'assainissement et le drainage routier"
     },
     "str-chaussee-v1": {
@@ -67,15 +67,15 @@
       ],
       "images": [],
       "downloadFile": "Str-Chaussée v1.rar",
-      "downloadLabel": "Télécharger Str-Chaussée v1.1 (33 MB)",
-      "ctaTitle": "Prêt à utiliser Str-Chaussée v1.1 ?",
+      "downloadLabel": "Télécharger Str-Chaussée v1.2 (33 MB)",
+      "ctaTitle": "Prêt à utiliser Str-Chaussée v1.2 ?",
       "ctaText": "Téléchargez ce logiciel pour la conception des structures de chaussées"
     }
   };
 
   const FALLBACK_LIST = [
     {
-      "nom": "OH-Route v1",
+      "nom": "OH-Route v1.2",
       "description": "Logiciel pour la conception et le dimensionnement des ouvrages d'assainissement et de drainage routier.",
       "categorie": "Eau et Assainissement",
       "logo": "images/image1.png",
@@ -85,7 +85,7 @@
       "prix": 0
     },
     {
-      "nom": "Str-Chaussée v1",
+      "nom": "Str-Chaussée v1.2",
       "description": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
       "categorie": "Infrastructures et transport",
       "logo": "images/geopavetotal.jpg.jpeg",
