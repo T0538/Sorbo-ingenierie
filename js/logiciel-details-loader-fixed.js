@@ -238,8 +238,8 @@
 
   const renderDetails = (details, baseInfo, key) => {
     const fallbackNames = {
-      'oh-route-v1': 'OH-Route v1.1',
-      'str-chaussee-v1': 'Str-Chaussée v1.1'
+      'oh-route-v1': 'OH-Route v1.2',
+      'str-chaussee-v1': 'Str-Chaussée v1.2'
     };
 
     const displayName = baseInfo?.nom || nomParam || fallbackNames[key] || 'Logiciel';
