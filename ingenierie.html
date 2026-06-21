@@ -695,6 +695,13 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at 20% 40%, rgba(209, 0, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .resources-section .container {
+            position: relative;
+            z-index: 1;
         }
         
         .resources-container {
@@ -788,6 +795,9 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
         }
         
         .download-btn i {
@@ -1079,102 +1089,32 @@
         </div>
     </section>
 
-    <!-- <section class="resources-section">
+     <section class="resources-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Ressources techniques</h2>
-            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Téléchargez nos fiches techniques et études de cas pour en savoir plus sur nos méthodologies et réalisations</p>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Téléchargez nos fiches techniques et documents pour en savoir plus sur nos outils et réalisations</p>
             
             <div class="resources-container">
                 <div class="resource-card" data-aos="fade-up" data-aos-delay="150">
                     <div class="resource-icon">
-                        <i class="fas fa-building"></i>
+                        <i class="fas fa-laptop-code"></i>
                     </div>
                     <div class="resource-content">
-                        <h3>Bâtiments civils et aménagement urbain</h3>
-                        <p>Découvrez notre méthodologie de conception et nos approches innovantes pour les bâtiments et l'aménagement urbain.</p>
+                        <h3>Notice d'information - Oh Route</h3>
+                        <p>Document détaillé présentant les fonctionnalités et le guide d'utilisation du logiciel Oh Route.</p>
                         <div class="resource-footer">
-                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 2.4 Mo</span>
-                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="resource-icon">
-                        <i class="fas fa-road"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Infrastructures et transport</h3>
-                        <p>Analyse détaillée de notre méthodologie pour les projets d'infrastructures routières et ouvrages d'art.</p>
-                        <div class="resource-footer">
-                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 3.1 Mo</span>
-                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="250">
-                    <div class="resource-icon">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Ouvrages géotechniques</h3>
-                        <p>Fiche technique sur nos approches en matière d'études géotechniques et de stabilisation des sols.</p>
-                        <div class="resource-footer">
-                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 1.8 Mo</span>
-                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="resource-icon">
-                        <i class="fas fa-water"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Eau et assainissement</h3>
-                        <p>Documentation technique sur nos méthodes de conception et dimensionnement des réseaux hydrauliques.</p>
-                        <div class="resource-footer">
-                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 2.7 Mo</span>
-                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="350">
-                    <div class="resource-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Aménagement hydroagricole</h3>
-                        <p>Étude de cas et solutions techniques pour l'optimisation des aménagements hydroagricoles.</p>
-                        <div class="resource-footer">
-                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 3.4 Mo</span>
-                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="resource-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <div class="resource-content">
-                        <h3>Topographie et SIG</h3>
-                        <p>Présentation de nos méthodologies et outils pour les levés topographiques et l'analyse SIG.</p>
-                        <div class="resource-footer">
-                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF - 2.2 Mo</span>
-                            <a href="#" class="download-btn" download>Télécharger <i class="fas fa-download"></i></a>
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> PDF</span>
+                            <a href="documents/notice_oh_route.pdf" class="download-btn" target="_blank" download="notice_oh_route.pdf">Télécharger <i class="fas fa-download"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="resources-note" data-aos="fade-up" data-aos-delay="450">
+            <div class="resources-note" data-aos="fade-up" data-aos-delay="200">
                 <p><i class="fas fa-info-circle"></i> Ces ressources techniques sont régulièrement mises à jour pour refléter les derniers développements dans notre domaine. Pour accéder à d'autres documents techniques ou pour une documentation spécifique à votre projet, n'hésitez pas à nous contacter.</p>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <section class="service-pillars">
         <div class="container">
@@ -1384,42 +1324,7 @@
 
         // AOS explicit init supprimé (désactivé)
         
-        // Gestion des téléchargements de fiches techniques
-        document.addEventListener('DOMContentLoaded', function() {
-            const downloadButtons = document.querySelectorAll('.download-btn');
-            
-            downloadButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    // Dans un environnement de production, vous voudriez ici pointer vers de vrais fichiers PDF
-                    // Pour le moment, pour des raisons de démonstration, nous empêchons le téléchargement effectif
-                    e.preventDefault();
-                    
-                    // Récupération du titre de la ressource
-                    const resourceTitle = this.closest('.resource-content').querySelector('h3').textContent;
-                    
-                    // Simulation d'un suivi analytique du téléchargement
-                    console.log('Téléchargement: ' + resourceTitle);
-                    
-                    // En production, vous pourriez ajouter ici un code pour suivre les téléchargements
-                    // comme un appel à Google Analytics
-                    // ga('send', 'event', 'Downloads', 'Technical Resource', resourceTitle);
-                    
-                    // Message de confirmation
-                    const confirmation = confirm('Le téléchargement de "' + resourceTitle + '" va commencer. Souhaitez-vous recevoir d\'autres ressources techniques par email ?');
-                    
-                    if (confirmation) {
-                        // Redirection vers la page de contact avec pré-remplissage du sujet
-                        window.location.href = 'contact.html?subject=Demande de ressources techniques - ' + encodeURIComponent(resourceTitle);
-                    } else {
-                        // Simulation du téléchargement (pour une démo)
-                        alert('Votre téléchargement de "' + resourceTitle + '" est en cours. Merci de l\'intérêt que vous portez à nos services!');
-                        
-                        // Dans un environnement de production, vous laisseriez le téléchargement s'effectuer normalement
-                        // sans prévenir l'événement par défaut
-                    }
-                });
-            });
-        });
+
     </script>
         <script src="js/global-domain-handler.js"></script>
     <script src="js/environment-config.js"></script>
