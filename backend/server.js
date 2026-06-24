@@ -16,6 +16,7 @@ const formationRoutes = require('./routes/formation');
 const emploiRoutes = require('./routes/emploiRoutes');
 const projetRoutes = require('./routes/projetRoutes');
 const logicielRoutes = require('./routes/logicielRoutes');
+const publicationRoutes = require('./routes/publicationRoutes');
 
 // Initialisation de l'application Express
 const app = express();
@@ -97,6 +98,7 @@ app.use('/api/formations', formationRoutes);
 app.use('/api/emplois', emploiRoutes);
 app.use('/api/projets', projetRoutes);
 app.use('/api/logiciels', logicielRoutes);
+app.use('/api/publications', publicationRoutes);
 
 // Servir les fichiers statiques en production
 if (process.env.NODE_ENV === 'production') {

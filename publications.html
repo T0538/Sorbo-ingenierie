@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications | Sorbo-Ingénierie</title>
+    
+    <!-- Balises SEO essentielles -->
+    <meta name="description" content="Sorbo-Ingénierie, bureau d'études spécialisé en génie civil à Abidjan. Téléchargez nos publications, rapports techniques et documents professionnels.">
+    <meta name="keywords" content="sorbo-ingenierie, publications, téléchargements, rapports, génie civil, formations, logiciels, Abidjan, Côte d'Ivoire">
+    <meta name="author" content="Sorbo-Ingénierie">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr">
+    <meta name="geo.region" content="CI">
+    <meta name="geo.placename" content="Abidjan">
+    <meta name="geo.position" content="5.345478;-4.062455">
+    <meta name="ICBM" content="5.345478, -4.062455">
+    
+    <link rel="icon" type="image/png" href="images/logo.mr.png">
+    <link rel="shortcut icon" type="image/png" href="images/logo.mr.png">
+    <link rel="apple-touch-icon" href="images/logo.mr.png">
+    <link rel="preload" as="image" href="images/logo.mr.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/logo-fixes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS désactivé globalement -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+    
+    <style>
+
+         /* Loader Styles */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .loader-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .loader-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d10000;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: slideInFromLeft 1s ease-out 0.3s both;
+        }
+
+        .loader-subtitle {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: slideInFromRight 1s ease-out 0.6s both;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #d10000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .loader-progress {
+            width: 200px;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin: 2rem auto 0;
+            overflow: hidden;
+        }
+
+        .loader-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #d10000, #b30000);
+            border-radius: 2px;
+            animation: loadProgress 3s ease-out forwards;
+        }
+        
+        /* Animations pour le loader */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes loadProgress {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 60%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Styles pour la section des ressources techniques (même que page ingenierie) */
+        .resources-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .resources-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 40%, rgba(209, 0, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .resources-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resources-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .resource-card {
+            display: flex;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            padding: 20px;
+            background: linear-gradient(135deg, #d10000 0%, #ff4d4d 100%);
+            color: white;
+        }
+        
+        .resource-icon i {
+            font-size: 2.5rem;
+        }
+        
+        .resource-content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .resource-content h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-card:hover .resource-content h3 {
+            color: #d10000;
+        }
+        
+        .resource-content p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .resource-format {
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .resource-format i {
+            color: #d10000;
+            margin-right: 5px;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: rgba(209, 0, 0, 0.1);
+            color: #d10000;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .download-btn i {
+            margin-left: 8px;
+        }
+        
+        .download-btn:hover {
+            background-color: #d10000;
+            color: white;
+        }
+        
+        .resources-note {
+            margin-top: 40px;
+            padding: 15px 20px;
+            background-color: rgba(209, 0, 0, 0.05);
+            border-left: 4px solid #d10000;
+            border-radius: 4px;
+        }
+        
+        .resources-note p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .resources-note i {
+            color: #d10000;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-card {
+                flex-direction: column;
+            }
+            
+            .resource-icon {
+                width: 100%;
+                height: 100px;
+            }
+        }
+
+        .hero-publications {
+            background: linear-gradient(135deg, rgba(209, 0, 0, 0.9) 0%, rgba(139, 7, 7, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-publications h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-publications p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #333;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #d10000;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie - Bureau d'études génie civil Abidjan" class="loader-logo" width="120" height="120" loading="eager" decoding="async">
+            <h1 class="loader-title">Sorbo-Ingénierie</h1>
+            <p class="loader-subtitle">Bureau d'études en génie civil - Solutions d'ingénierie innovantes</p>
+            <div class="loader-spinner"></div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Bar moderne -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-contact">
+                <a href="mailto:contact@sorbo.ingenierie.ci"><i class="fas fa-envelope"></i> contact@sorbo.ingenierie.ci</a>
+                <a href="tel:+2250150123050"><i class="fas fa-phone"></i> +225 01 50 12 30 50</a>
+            </div>
+            <div class="top-bar-ticker">
+                <div class="ticker-wrapper">
+                    <div class="ticker-item"><i class="fas fa-star"></i> Disponibilité de Str-Chaussée demain !</div>
+                    <div class="ticker-item"><i class="fas fa-star"></i> Prochaines formations : Covadis, AutoCAD, Revit - Réservez votre place</div>
+                    <div class="ticker-item"><i class="fas fa-star"></i>  Nouvelle formation AutoCAD 2025 disponible - Inscriptions ouvertes</div>
+                    <div class="ticker-item"><i class="fas fa-star"></i> Nouveau logiciel de drainage OH-Route v1 disponible</div>
+                    <div class="ticker-item"><i class="fas fa-star"></i> Recrutement de stagiaire en cours : Étudiant en dernière année d'école d'ingénieur ou Master 2 en Hydrologie, Génie Civil ou Statistiques Appliquées.</div>
+                </div>
+            </div>
+            <div class="top-bar-links">
+                <a href="actualites.html">Actualités</a>
+                <a href="publications.html">Publications</a>
+                <a href="nos-projets.html">Projets</a>
+                <a href="nous-rejoindre.html">Recrutement</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.mr.png" alt="Logo Sorbo-Ingénierie - Bureau d'études génie civil Abidjan" id="logo" width="160" height="60" loading="eager" decoding="async">
+                </a>
+            </div>
+            <nav aria-label="Navigation principale">
+                <ul class="main-nav">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="notre-entreprise.html">Notre entreprise</a></li>
+                    <li><a href="ingenierie.html">Ingénierie</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Formations <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="nos-formations.html">Pédagogies & Méthodologies</a></li>
+                            <li><a href="formations-intra-entreprise.html">Formations intra-entreprises</a></li>
+                            <li><a href="formations-inter-entreprise.html">Formations inter-entreprises</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="nos-logiciels.html">Nos logiciels</a></li>
+                    <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false">Autres <i class="fas fa-chevron-down" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="actualites.html">Notre actualité</a></li>
+                            <li><a href="nos-projets.html">Nos projets</a></li>
+                            <li><a href="publications.html" class="active">Publications</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="contact-btn">Contactez-nous</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menu mobile" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-publications">
+        <div class="container">
+            <h1>Nos Publications</h1>
+            <p>Découvrez et téléchargez nos ressources, rapports techniques, brochures et documents professionnels.</p>
+        </div>
+    </section>
+
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Ressources techniques</h2>
+            <p class="section-subtitle">Téléchargez nos fiches techniques et documents pour en savoir plus sur nos outils et réalisations</p>
+            
+            <div class="resources-container" id="publicationsGrid">
+                <div class="loading-message" style="text-align: center; padding: 50px; color: #888;">
+                    <i class="fas fa-spinner fa-spin"></i> Chargement des publications...
+                </div>
+            </div>
+            
+            <div class="resources-note">
+                <p><i class="fas fa-info-circle"></i> Ces ressources techniques sont régulièrement mises à jour pour refléter les derniers développements dans notre domaine. Pour accéder à d'autres documents techniques ou pour une documentation spécifique à votre projet, n'hésitez pas à nous contacter.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-brand slide-up">
+                    <img src="images/logo.mr.png" alt="Sorbo-Ingénierie Logo" class="footer-logo">
+                    <h3>Sorbo-Ingénierie</h3>
+                    <p class="footer-description">Bureau d'études spécialisé en génie civil et ingénierie à Abidjan, Côte d'Ivoire</p>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Informations légales</h3>
+                    <ul class="company-info">
+                        <li><strong>Nom légal :</strong> Sorbo-Ingénierie</li>
+                        <li><strong>N° Compte contribuable :</strong> 2242797T</li>
+                        <li><strong>Forme juridique :</strong> SARL</li>
+                        <li><strong>Registre de commerce :</strong> CI-ABJ-03-2022-B12-03946</li>
+                        <li><strong>Capital social :</strong> 1 000 000 F CFA</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column slide-up">
+                    <h3>Nos contacts</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@sorbo.ingenierie.ci">contact@sorbo.ingenierie.ci</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:logiciels@sorbo-ingenierie.ci">logiciels@sorbo-ingenierie.ci</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2250150123050">(+225) 01 50 12 30 50</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+2252121802126">(+225) 21 21 80 21 26</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-newsletter fade-in">
+                    <h3>Newsletter</h3>
+                    <p>Restez informé de nos dernières actualités</p>
+                    <form class="footer-newsletter-form" onsubmit="return false;">
+                        <input type="email" name="email" placeholder="Votre email" required>
+                        <button type="button" onclick="handleNewsletterSubmit(this)"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sorbo.ingenierie" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/sorbo-ing-nierie/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © 2024 Sorbo-Ingénierie. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration API
+        const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:5000/api'
+            : '/api';
+
+        let allPublications = [];
+
+        // Fonction pour obtenir l'icône en fonction du type de fichier
+        function getFileIcon(type) {
+            switch(type) {
+                case 'pdf': return 'fa-file-pdf';
+                case 'doc':
+                case 'docx': return 'fa-file-word';
+                case 'xls':
+                case 'xlsx': return 'fa-file-excel';
+                case 'zip':
+                case 'rar': return 'fa-file-archive';
+                default: return 'fa-file';
+            }
+        }
+
+        // Afficher les publications avec le nouveau design
+        function renderPublications(publications) {
+            const grid = document.getElementById('publicationsGrid');
+            
+            if (publications.length === 0) {
+                grid.innerHTML = `
+                    <div style="text-align: center; padding: 80px 20px; color: #888; font-style: italic; width: 100%; grid-column: 1 / -1;">
+                        <i class="fas fa-folder-open" style="font-size: 4rem; margin-bottom: 20px; color: #ddd;"></i>
+                        <p>Aucune publication disponible pour le moment.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = publications.map(pub => `
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas ${getFileIcon(pub.typeFichier)}"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>${pub.titre}</h3>
+                        <p>${pub.description}</p>
+                        <div class="resource-footer">
+                            <span class="resource-format"><i class="far fa-file-pdf"></i> ${pub.typeFichier.toUpperCase()}</span>
+                            <a href="${pub.fichier}" class="download-btn" target="_blank" download onclick="incrementDownload('${pub._id}')">Télécharger <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Incrémenter le compteur de téléchargements
+        async function incrementDownload(id) {
+            try {
+                await fetch(`${API_BASE_URL}/publications/${id}/telecharger`, {
+                    method: 'PUT'
+                });
+            } catch (error) {
+                console.error('Erreur lors de l\'incrémentation:', error);
+            }
+        }
+
+        // Charger les publications depuis l'API
+        async function loadPublications() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/publications`);
+                const result = await response.json();
+                
+                if (result.success && result.data.length > 0) {
+                    allPublications = result.data;
+                    renderPublications(allPublications);
+                } else {
+                    loadStaticPublications();
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement:', error);
+                loadStaticPublications();
+            }
+        }
+
+        // Charger des publications statiques si l'API ne fonctionne pas
+        function loadStaticPublications() {
+            allPublications = [
+                {
+                    _id: '1',
+                    titre: 'Notice d\'information - Oh Route',
+                    description: 'Document détaillé présentant les fonctionnalités et le guide d\'utilisation du logiciel Oh Route.',
+                    fichier: 'documents/notice_oh_route.pdf',
+                    typeFichier: 'pdf',
+                    categorie: 'logiciel',
+                    taille: '1.8 MB',
+                    telechargements: 89,
+                    datePublication: '2024-02-20'
+                },
+                {
+                    _id: '2',
+                    titre: 'Catalogue Formations 2024',
+                    description: 'Découvrez notre catalogue complet de formations professionnelles en génie civil et topographie.',
+                    fichier: 'downloads/Catalogue_Formation_2025.pdf',
+                    typeFichier: 'pdf',
+                    categorie: 'formation',
+                    taille: '2.5 MB',
+                    telechargements: 145,
+                    datePublication: '2024-01-15'
+                }
+            ];
+            renderPublications(allPublications);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPublications();
+        });
+    </script>
+    <script src="js/global-domain-handler.js"></script>
+    <script src="js/environment-config.js"></script>
+    <script src="js/zoho-email-integration.js"></script>
+    <script src="js/script.js"></script>
+    
+    <!-- Code pour cacher le loader -->
+    <script>
+        const loader = document.getElementById('pageLoader');
+        const progressBar = document.querySelector('.loader-progress-bar');
+        const loaderLogo = document.querySelector('.loader-logo');
+
+        let loaderStartTime = performance.now();
+
+        const hideLoader = () => {
+            if (!loader) return;
+
+            const minDurationMs = 600;
+            const elapsed = performance.now() - loaderStartTime;
+            const remaining = Math.max(0, minDurationMs - elapsed);
+
+            window.setTimeout(() => {
+                loader.classList.add('hidden');
+                window.setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 350);
+            }, remaining);
+        };
+
+        if (progressBar) {
+            progressBar.style.width = '0%';
+            window.setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 80);
+        }
+
+        if (loader) {
+            loader.style.display = 'flex';
+        }
+
+        if (loaderLogo) {
+            if (loaderLogo.complete) {
+                hideLoader();
+            } else {
+                loaderLogo.addEventListener('load', hideLoader, { once: true });
+                loaderLogo.addEventListener('error', hideLoader, { once: true });
+            }
+        } else {
+            window.addEventListener('load', hideLoader, { once: true });
+        }
+
+        window.addEventListener('load', function() {
+            window.setTimeout(function() {
+                hideLoader();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
