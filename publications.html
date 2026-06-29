@@ -588,7 +588,7 @@
                         <p>${pub.description}</p>
                         <div class="resource-footer">
                             <span class="resource-format"><i class="far fa-file-pdf"></i> ${pub.typeFichier.toUpperCase()}</span>
-                            <a href="${pub.fichier}" class="download-btn" target="_blank" download onclick="incrementDownload('${pub._id}')">Télécharger <i class="fas fa-download"></i></a>
+                            <a href="${pub.fichier}" class="download-btn" target="_blank" onclick="incrementDownload('${pub._id}')">Télécharger <i class="fas fa-download"></i></a>
                         </div>
                     </div>
                 </div>
@@ -640,17 +640,50 @@
                 },
                 {
                     _id: '2',
-                    titre: 'Notes Techniques - STR-Chausée',
-                    description: 'Documentation technique approfondie sur les algorithmes et les méthodes de calcul utilisées dans STR-Chausée.',
-                    fichier: 'documents/notes_techniques_oh_route.pdf',
+                    titre: 'Note Technique n°1 - Généralités sur les chaussées routières',
+                    description: 'Introduction aux concepts fondamentaux des chaussées routières pour une bonne compréhension des méthodes de calcul.',
+                    fichier: 'documents/notes_techniques_oh_route/Note technique n°1 - Généralités sur les chaussées routières.pdf',
                     typeFichier: 'pdf',
                     categorie: 'rapport',
-                    taille: '3.2 MB',
-                    telechargements: 45,
-                    datePublication: '2024-03-15'
+                    taille: '2.1 MB',
+                    telechargements: 52,
+                    datePublication: '2024-03-01'
                 },
                 {
                     _id: '3',
+                    titre: 'Note Technique n°2 - Le trafic et son agressivité',
+                    description: 'Analyse du trafic routier et de son impact sur la conception et la durabilité des chaussées.',
+                    fichier: 'documents/notes_techniques_oh_route/Note technique n°2 - Le trafic et son agressivité.pdf',
+                    typeFichier: 'pdf',
+                    categorie: 'rapport',
+                    taille: '1.9 MB',
+                    telechargements: 48,
+                    datePublication: '2024-03-05'
+                },
+                {
+                    _id: '4',
+                    titre: 'Note Technique n°3 - Prédimensionnement des structures',
+                    description: 'Méthodes et outils pour le prédimensionnement des structures de chaussées routières.',
+                    fichier: 'documents/notes_techniques_oh_route/Note technique n°3 - Prédimensionnement des structures.pdf',
+                    typeFichier: 'pdf',
+                    categorie: 'rapport',
+                    taille: '2.4 MB',
+                    telechargements: 41,
+                    datePublication: '2024-03-10'
+                },
+                {
+                    _id: '5',
+                    titre: 'Note Technique n°4 - Principe de vérification structurelle',
+                    description: 'Principes et méthodes de vérification structurelle des chaussées avec OH-Route.',
+                    fichier: 'documents/notes_techniques_oh_route/Note technique n°4 - Principe de vérification structurelle.pdf',
+                    typeFichier: 'pdf',
+                    categorie: 'rapport',
+                    taille: '2.2 MB',
+                    telechargements: 37,
+                    datePublication: '2024-03-15'
+                },
+                {
+                    _id: '6',
                     titre: 'Catalogue Formations 2024',
                     description: 'Découvrez notre catalogue complet de formations professionnelles en génie civil et topographie.',
                     fichier: 'downloads/Catalogue_Formation_2025.pdf',
