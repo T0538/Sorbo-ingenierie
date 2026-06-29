@@ -36,19 +36,19 @@ class EnvironmentConfig {
             },
             // Développement local
             'localhost': {
-                apiUrl: 'https://sorbo-api-production.up.railway.app',
+                apiUrl: 'http://localhost:5000',
                 environment: 'development',
                 fallbackUrls: [
-                    'https://sorbo-api-production.up.railway.app',
-                    'http://localhost:3000'
+                    'http://localhost:5000',
+                    'https://sorbo-api-production.up.railway.app'
                 ]
             },
             '127.0.0.1': {
-                apiUrl: 'https://sorbo-api-production.up.railway.app',
+                apiUrl: 'http://localhost:5000',
                 environment: 'development',
                 fallbackUrls: [
-                    'https://sorbo-api-production.up.railway.app',
-                    'http://localhost:3000'
+                    'http://localhost:5000',
+                    'https://sorbo-api-production.up.railway.app'
                 ]
             }
         };
