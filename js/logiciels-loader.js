@@ -218,7 +218,7 @@ function addDownloadListeners() {
                 if (nameText.includes('str-chaussée') || nameText.includes('str chaussée')) {
                     // C'est Str-Chaussée, télécharger directement
                     // NOTE: Assurez-vous que le fichier "downloads/Str-Chaussée v1.rar" existe
-                    downloadLocalFile('downloads/Str-Chaussée v1.rar');
+                    downloadLocalFile('downloads/STR-Chaussée v1.rar');
                     return;
                 }
              }

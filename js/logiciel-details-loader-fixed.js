@@ -47,28 +47,28 @@
         {
           "title": "Introduction",
           "icon": "fa-info-circle",
-          "content": "<p>Le logiciel Str-Chaussée v1.2 est un outil innovant dédié au dimensionnement des structures de chaussées routières neuves et aux solutions de renforcement, en s’appuyant sur la méthode rationnelle française ainsi que sur plusieurs guides techniques en vigueur. Il permet de calculer de manière précise les épaisseurs optimales des différentes couches de chaussée, en tenant compte des caractéristiques des matériaux, du trafic prévu, des conditions climatiques et des propriétés du sol support.</p><p>Conçu pour les ingénieurs, techniciens et bureaux d’études en génie civil, Str-Chaussée offre un environnement interactif et convivial, permettant de réaliser des études fiables et rapides, tout en générant automatiquement des notes de calculs détaillées ou synthétiques.</p>"
+          "content": "<p>Le logiciel STR-Chaussée v1.2 est un outil innovant dédié au dimensionnement des structures de chaussées routières neuves et aux solutions de renforcement, en s’appuyant sur la méthode rationnelle française ainsi que sur plusieurs guides techniques en vigueur. Il permet de calculer de manière précise les épaisseurs optimales des différentes couches de chaussée, en tenant compte des caractéristiques des matériaux, du trafic prévu, des conditions climatiques et des propriétés du sol support.</p><p>Conçu pour les ingénieurs, techniciens et bureaux d’études en génie civil, Str-Chaussée offre un environnement interactif et convivial, permettant de réaliser des études fiables et rapides, tout en générant automatiquement des notes de calculs détaillées ou synthétiques.</p>"
         },
         {
           "title": "Principales fonctionnalités",
           "icon": "fa-list-ul",
-          "content": "<p>Str-Chaussée offre un large éventail de fonctionnalités :</p><ul><li>Gestion des données de trafic et de sol support ;</li><li>Sélection et caractérisation des matériaux (non traités, traités aux liants hydrauliques ou hydrocarbonés) ;</li><li>Calcul des contraintes et déformations dans les différentes couches de chaussée ;</li><li>Prédimensionnement des structures à l’aide de catalogues et guides techniques (Côte d’Ivoire, Sénégal, CEBTP, etc.) ;</li><li>Calcul et vérification automatique des structures ;</li><li>Génération automatique de notes de calcul détaillées et synthétiques.</li></ul>"
+          "content": "<p>STR-Chaussée offre un large éventail de fonctionnalités :</p><ul><li>Gestion des données de trafic et de sol support ;</li><li>Sélection et caractérisation des matériaux (non traités, traités aux liants hydrauliques ou hydrocarbonés) ;</li><li>Calcul des contraintes et déformations dans les différentes couches de chaussée ;</li><li>Prédimensionnement des structures à l’aide de catalogues et guides techniques (Côte d’Ivoire, Sénégal, CEBTP, etc.) ;</li><li>Calcul et vérification automatique des structures ;</li><li>Génération automatique de notes de calcul détaillées et synthétiques.</li></ul>"
         },
         {
           "title": "Modes de calcul disponibles",
           "icon": "fa-calculator",
-          "content": "<p>Str-Chaussée propose deux modes de calcul adaptés à tous les besoins :</p><ul><li><strong>Dimensionnement standard :</strong> ce mode permet de réaliser un dimensionnement classique, en laissant à l’utilisateur le soin de choisir la structure à vérifier et de définir les couches à analyser.</li><li><strong>Dimensionnement automatique :</strong> ce mode effectue, à partir des matériaux sélectionnés et des plages d’épaisseurs définies, des itérations automatiques afin de proposer des structures conformes, en intégrant l’ensemble des vérifications nécessaires.</li></ul>"
+          "content": "<p>STR-Chaussée propose deux modes de calcul adaptés à tous les besoins :</p><ul><li><strong>Dimensionnement standard :</strong> ce mode permet de réaliser un dimensionnement classique, en laissant à l’utilisateur le soin de choisir la structure à vérifier et de définir les couches à analyser.</li><li><strong>Dimensionnement automatique :</strong> ce mode effectue, à partir des matériaux sélectionnés et des plages d’épaisseurs définies, des itérations automatiques afin de proposer des structures conformes, en intégrant l’ensemble des vérifications nécessaires.</li></ul>"
         },
         {
           "title": "Environnement de travail",
           "icon": "fa-desktop",
-          "content": "<p>Str-Chaussée est conçu pour fonctionner sur un ordinateur Windows, avec une interface graphique intuitive. Il facilite la saisie interactive des données, la gestion des projets, et la production automatique de documents de synthèse, présentant clairement les hypothèses, résultats et conclusions de l’étude.</p><p>Cette sortie est immédiatement utilisable dans les dossiers techniques et facilite la communication avec les maîtres d’ouvrage ou services compétents.</p>"
+          "content": "<p>STR-Chaussée est conçu pour fonctionner sur un ordinateur Windows, avec une interface graphique intuitive. Il facilite la saisie interactive des données, la gestion des projets, et la production automatique de documents de synthèse, présentant clairement les hypothèses, résultats et conclusions de l’étude.</p><p>Cette sortie est immédiatement utilisable dans les dossiers techniques et facilite la communication avec les maîtres d’ouvrage ou services compétents.</p>"
         }
       ],
       "images": [],
-      "downloadFile": "Str-Chaussée v1.rar",
-      "downloadLabel": "Télécharger Str-Chaussée v1.2 (33 MB)",
-      "ctaTitle": "Prêt à utiliser Str-Chaussée v1.2 ?",
+      "downloadFile": "STR-Chaussée v1.rar",
+      "downloadLabel": "Télécharger STRChaussée v2.1 (33 MB)",
+      "ctaTitle": "Prêt à utiliser STR-Chaussée v2.1 ?",
       "ctaText": "Téléchargez ce logiciel pour la conception des structures de chaussées"
     }
   };
@@ -85,10 +85,10 @@
       "prix": 0
     },
     {
-      "nom": "Str-Chaussée v1.2",
+      "nom": "STR-Chaussée v2.1",
       "description": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
       "categorie": "Infrastructures et transport",
-      "logo": "images/geopavetotal.jpg.jpeg",
+      "logo": "images/geopavetotal.jpg.jpg",
       "headerImage": "images/Image PDG Str-Chaussée.png",
       "disponible": true,
       "version": "1.0",
