@@ -116,6 +116,7 @@ function createLogicielCard(logiciel, index, total) {
     if (nom.toLowerCase().includes('str-chaussée') || nom.toLowerCase().includes('str chaussée')) {
         image =  'images/geopavetotal.jpg.jpg'; // Nom corrigé
         headerImage =  'images/Image PDG Str-Chaussée (2).png';
+        logiciel.version = '2.1';
         // On force aussi la catégorie si besoin
         // categorie = 'Infrastructures et Transports'; 
     }

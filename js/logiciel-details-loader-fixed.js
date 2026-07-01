@@ -42,34 +42,48 @@
       "ctaText": "Téléchargez ce logiciel professionnel pour l'assainissement et le drainage routier"
     },
     "str-chaussee-v1": {
-      "sousTitre": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
+      "sousTitre": "Logiciel de dimensionnement et de diagnostic des structures de chaussées",
       "sections": [
         {
-          "title": "Introduction",
+          "title": "Présentation",
           "icon": "fa-info-circle",
-          "content": "<p>Le logiciel STR-Chaussée v1.2 est un outil innovant dédié au dimensionnement des structures de chaussées routières neuves et aux solutions de renforcement, en s’appuyant sur la méthode rationnelle française ainsi que sur plusieurs guides techniques en vigueur. Il permet de calculer de manière précise les épaisseurs optimales des différentes couches de chaussée, en tenant compte des caractéristiques des matériaux, du trafic prévu, des conditions climatiques et des propriétés du sol support.</p><p>Conçu pour les ingénieurs, techniciens et bureaux d’études en génie civil, Str-Chaussée offre un environnement interactif et convivial, permettant de réaliser des études fiables et rapides, tout en générant automatiquement des notes de calculs détaillées ou synthétiques.</p>"
+          "content": "<p>STR-Chaussée est une solution logicielle développée par Sorbo-Ingénierie pour le dimensionnement des structures de chaussées neuves, l'étude des solutions de renforcement et le diagnostic des chaussées existantes.</p><p>Conçu pour répondre aux réalités des pays africains, le logiciel s'appuie sur une approche conforme à la méthode rationnelle française et intègre les principaux référentiels techniques nationaux et internationaux.</p>"
         },
         {
-          "title": "Principales fonctionnalités",
-          "icon": "fa-list-ul",
-          "content": "<p>STR-Chaussée offre un large éventail de fonctionnalités :</p><ul><li>Gestion des données de trafic et de sol support ;</li><li>Sélection et caractérisation des matériaux (non traités, traités aux liants hydrauliques ou hydrocarbonés) ;</li><li>Calcul des contraintes et déformations dans les différentes couches de chaussée ;</li><li>Prédimensionnement des structures à l’aide de catalogues et guides techniques (Côte d’Ivoire, Sénégal, CEBTP, etc.) ;</li><li>Calcul et vérification automatique des structures ;</li><li>Génération automatique de notes de calcul détaillées et synthétiques.</li></ul>"
+          "title": "Référentiels techniques intégrés",
+          "icon": "fa-book",
+          "content": "<ul><li>Norme NF P 98-086 (mai 2019)</li><li>Catalogue de dimensionnement des chaussées de Côte d'Ivoire (avril 2024)</li><li>Catalogue de dimensionnement des chaussées du Sénégal (juin 2015)</li><li>Guide pour le renforcement des chaussées IDDRIM-CEREMA (mai 2016)</li><li>Autres guides et référentiels techniques applicables</li></ul>"
         },
         {
-          "title": "Modes de calcul disponibles",
-          "icon": "fa-calculator",
-          "content": "<p>STR-Chaussée propose deux modes de calcul adaptés à tous les besoins :</p><ul><li><strong>Dimensionnement standard :</strong> ce mode permet de réaliser un dimensionnement classique, en laissant à l’utilisateur le soin de choisir la structure à vérifier et de définir les couches à analyser.</li><li><strong>Dimensionnement automatique :</strong> ce mode effectue, à partir des matériaux sélectionnés et des plages d’épaisseurs définies, des itérations automatiques afin de proposer des structures conformes, en intégrant l’ensemble des vérifications nécessaires.</li></ul>"
+          "title": "Module « Chaussées Routières »",
+          "icon": "fa-road",
+          "content": "<p>Ce module est dédié à la conception et au dimensionnement des structures de chaussées neuves et des solutions de renforcement. Il propose deux modes de calcul complémentaires.</p><h4>Dimensionnement standard</h4><p>Ce mode permet de réaliser les études de manière classique tout en conservant un contrôle total sur les choix techniques. L'utilisateur définit la structure à analyser, sélectionne les matériaux et paramètre librement les différentes couches de chaussée pour une approche maîtrisée et conforme aux pratiques d'ingénierie.</p><p>Le module intègre également :</p><ul><li>Des fiches de structures types pour le prédimensionnement</li><li>Une bibliothèque de matériaux</li><li>Un assistant de conception guidée permettant de proposer des configurations optimisées en fonction du trafic, des matériaux disponibles et des référentiels techniques en vigueur</li></ul><p>Cette approche permet de sécuriser les choix de conception, de réduire les incertitudes et d'optimiser les coûts de réalisation.</p>"
         },
         {
-          "title": "Environnement de travail",
-          "icon": "fa-desktop",
-          "content": "<p>STR-Chaussée est conçu pour fonctionner sur un ordinateur Windows, avec une interface graphique intuitive. Il facilite la saisie interactive des données, la gestion des projets, et la production automatique de documents de synthèse, présentant clairement les hypothèses, résultats et conclusions de l’étude.</p><p>Cette sortie est immédiatement utilisable dans les dossiers techniques et facilite la communication avec les maîtres d’ouvrage ou services compétents.</p>"
+          "title": "Dimensionnement automatique",
+          "icon": "fa-cogs",
+          "content": "<p>Le mode automatique repose sur un moteur de recherche intelligent de solutions. À partir des matériaux sélectionnés et des plages d'épaisseurs définies, STR-Chaussée explore automatiquement différentes combinaisons de structures et propose des solutions optimisées et conformes aux exigences mécaniques et réglementaires.</p><p>Cette fonctionnalité permet de réduire considérablement le temps d'étude tout en garantissant des conceptions fiables et économiquement pertinentes.</p>"
+        },
+        {
+          "title": "Analyse de l'agressivité du trafic",
+          "icon": "fa-truck",
+          "content": "<p>Le module « Chaussées Routières » intègre également un outil d'analyse du trafic permettant de convertir les flux de poids lourds en trafic équivalent en nombre d'essieux et d'évaluer :</p><ul><li>L'agressivité par essieu</li><li>La détection des essieux en surcharge</li><li>La répartition des charges</li><li>La dispersion des charges par essieu et par poids lourd</li></ul><p>Ces analyses constituent une aide précieuse pour une meilleure prise en compte de l'impact réel du trafic sur le comportement des chaussées.</p>"
+        },
+        {
+          "title": "Module « Diagnostic des Chaussées »",
+          "icon": "fa-search",
+          "content": "<p>Le second module est consacré au diagnostic des chaussées existantes. Il permet l'analyse et le traitement des données de déflexion afin d'identifier les zones homogènes optimales nécessaires à la caractérisation des performances résiduelles des structures de chaussées.</p><p>Le module offre notamment les fonctionnalités suivantes :</p><ul><li>Traitement statistique des données de déflexion</li><li>Détermination automatique des déflexions caractéristiques</li><li>Identification et délimitation des zones homogènes</li><li>Évaluation de l'état structurel des chaussées existantes</li><li>Assistance au diagnostic et à la définition des solutions de renforcement adaptées</li></ul><p>Grâce à son approche intégrée, STR-Chaussée constitue un outil complet d'aide à la décision pour les ingénieurs, bureaux d'études, administrations routières et entreprises de travaux publics, en offrant des solutions performantes et adaptées aux réalités des infrastructures routières africaines.</p>"
         }
       ],
-      "images": [],
-      "downloadFile": "STR-Chaussée v1.rar",
-      "downloadLabel": "Télécharger STRChaussée v2.1 (33 MB)",
+      "images": [
+        { "src": "images/str1.png", "alt": "Interface STR-Chaussée" },
+        { "src": "images/str2.png", "alt": "Chaussée routière" },
+        { "src": "images/str3.png", "alt": "Hypothèse de calculs" }
+      ],
+      "downloadFile": "STR-Chaussée v2.1.rar",
+      "downloadLabel": "Télécharger STR-Chaussée v2.1 (33 MB)",
       "ctaTitle": "Prêt à utiliser STR-Chaussée v2.1 ?",
-      "ctaText": "Téléchargez ce logiciel pour la conception des structures de chaussées"
+      "ctaText": "Téléchargez cette solution complète de dimensionnement et diagnostic de chaussées"
     }
   };
 
@@ -86,12 +100,12 @@
     },
     {
       "nom": "STR-Chaussée v2.1",
-      "description": "Logiciel pour la conception et le dimensionnement des structures de chaussées",
+      "description": "Logiciel de dimensionnement et de diagnostic des structures de chaussées",
       "categorie": "Infrastructures et transport",
       "logo": "images/geopavetotal.jpg.jpg",
-      "headerImage": "images/Image PDG Str-Chaussée.png",
+      "headerImage": "images/Image PDG Str-Chaussée (2).png",
       "disponible": true,
-      "version": "1.0",
+      "version": "2.1",
       "prix": 0
     }
   ];
@@ -239,7 +253,7 @@
   const renderDetails = (details, baseInfo, key) => {
     const fallbackNames = {
       'oh-route-v1': 'OH-Route v1.2',
-      'str-chaussee-v1': 'Str-Chaussée v1.2'
+      'str-chaussee-v1': 'Str-Chaussée v2.1'
     };
 
     const displayName = baseInfo?.nom || nomParam || fallbackNames[key] || 'Logiciel';
