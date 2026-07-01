@@ -76,9 +76,9 @@
         }
       ],
       "images": [
-        { "src": "images/str1.png", "alt": "Interface STR-Chaussée" },
-        { "src": "images/str2.png", "alt": "Chaussée routière" },
-        { "src": "images/str3.png", "alt": "Hypothèse de calculs" }
+        { "src": "images/Cap1.png", "alt": "Interface STR-Chaussée" },
+        { "src": "images/Cap4.png", "alt": "Chaussée routière" },
+        { "src": "images/Cap5.png", "alt": "Hypothèse de calculs" }
       ],
       "downloadFile": "STR-Chaussée v2.1.rar",
       "downloadLabel": "Télécharger STR-Chaussée v2.1 (33 MB)",
